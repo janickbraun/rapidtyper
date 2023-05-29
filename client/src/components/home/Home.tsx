@@ -6,7 +6,7 @@ export default function Home() {
         <div>
             <h2>Home</h2>
             <button>
-                <Link to="/account">Account</Link>
+                <Link className="test" to="/account">Account</Link>
             </button>
         </div>
     )
