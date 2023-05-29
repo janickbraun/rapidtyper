@@ -1,1 +1,25 @@
+@import url(https://baum21614-cdn.github.io/fonts/external/poppins/FONT__POPPINS.css);
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #202124;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+}
 
+button{
+    color: #fff;
+    background-color: #036666;
+    padding: 10px 22px;
+    border-radius: 0px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+button a, a button{
+    color: #fff;
+    text-decoration: none;
+}
