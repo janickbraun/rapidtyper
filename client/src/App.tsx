@@ -1,0 +1,29 @@
+import About from "./components/about/About"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Header from "./components/header/Header"
+import Footer from "./components/footer/Footer"
+import NotFound from "./components/notFound/NotFound"
+import Home from "./components/home/Home"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+function App() {
+    const queryClient = new QueryClient()
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <QueryClientProvider client={queryClient}>
+                    <Header>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                        <Footer />
+                    </Header>
+                </QueryClientProvider>
+            </BrowserRouter>
+        </div>
+    )
+}
+
+export default App
