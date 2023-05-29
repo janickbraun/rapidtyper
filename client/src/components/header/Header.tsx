@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth"
 import "./header.css"
 
 export default function Header({ children }: { children: React.ReactNode }) {
-    const [loggedin] = useAuth()
+    const [loggedin] = useAuth() // 
     return (
         <div>
             <nav className="rt_navigation default_nav">

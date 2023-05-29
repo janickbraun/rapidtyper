@@ -1,64 +1,41 @@
 import React from "react"
 import "./footer.css"
+import { Link } from "react-router-dom"
 
 export default function Footer() {
   return (
+    // footer
     <footer className="globalfooter rt-footer">
       <section className="innerfooter">
-        <div className="__ftsc listsc">
-          <ul className="ftlink-list">
-            <h2 className="ftcaller">Overview</h2>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="/about">About</a>
-                </li>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="/story">How it wokrs</a>
-                </li>
-          </ul>
-        </div>
-        <div className="__ftsc listsc">
-          <ul className="ftlink-list">
-            <h2 className="ftcaller">Legal</h2>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="//grovider.co/privacy-policy">Privacy Policy</a>
-                </li>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="./imprint.html">Imprint</a>
-                </li>
-            </ul>
-        </div>
-        <div className="__ftsc listsc">
-          <ul className="ftlink-list">
-            <h2 className="ftcaller">More</h2>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="/how-to-play.html">How to play</a>
-                </li>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="/contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <div className="__ftsc listsc">
-          <ul className="ftlink-list">
-            <h2 className="ftcaller">Others</h2>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="//jukevote.onrender.com">Jukevote</a>
-                </li>
-                <li className="ftlinkitem">
-                      <a className="ftlink" href="//grovider.co">Grovider</a>
-                </li>
-            </ul>
-        </div>
-        <div className="__ftsc copysc">
-          <div className="__logoftctcopy">
-            <img src="./img/rapidtyper-logo.png" alt="Logo" height={45} className="ftlogoimg" />
-          </div>
-          <div className="copytxtsect">
-            <p className="copyrighttxt">&copy;2023 RapidTyper</p>
-            <p className="copyby"><small>von Luis und Janick</small></p>
-          </div>
+        <ul className="linksfooter">
+          <li className="footeritem">
+            <Link to="/about">About</Link>
+          </li>
+          <span>•</span>
+          <li className="footeritem">
+            <a href="//grovider.co/privacy-policy">Privacy Policy</a>
+          </li>
+          <span>•</span>
+          <li className="footeritem">
+            <a href="./imprint.html">Imprint</a>
+          </li>
+        </ul>
+        <div className="copyright">
+          <p className="copyrighttxt">&copy;2023 RapidTyper - von Luis und Janick</p>
         </div>
       </section>
     </footer>
   )
 }
+
+
+
+/*
+
+About(incl. how it works)
+Privacy Policy
+Imprint
+How to play
+Copyright
+
+*/
