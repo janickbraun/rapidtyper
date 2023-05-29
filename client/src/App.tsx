@@ -1,3 +1,4 @@
+import React from "react"
 import About from "./components/about/About"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Header from "./components/header/Header"
