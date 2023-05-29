@@ -6,6 +6,7 @@ import NotFound from "./components/notFound/NotFound"
 import Home from "./components/home/Home"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import Account from "./components/account/Account"
+import Singleplayer from "./components/play/Singleplayer"
 
 function App() {
     const queryClient = new QueryClient()
@@ -18,6 +19,7 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/account" element={<Account />} />
+                            <Route path="/singleplayer" element={<Singleplayer />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
