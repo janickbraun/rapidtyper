@@ -14,7 +14,8 @@ footer{
     backdrop-filter: blur(15px);
     margin: 1rem 1.6rem;
     padding: 1.4rem 0;
-    border-radius: 10px;
+    border-radius: 15px;
+    border: 2px solid #cccccc08;
 }
 .ftcaller{
     font-size: 20px;

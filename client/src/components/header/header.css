@@ -11,7 +11,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    box-shadow: 2px 2px 20px rgb(0 0 0 / 20%);
+    border-bottom: 2px solid #cccccc08;
 }
 .src_logo{
     /* outline: 2px solid red; */
@@ -85,4 +85,28 @@ ul{
 }
 .logoContainer{
     color: #fff;
+}
+.nav-link-item{
+    position: relative;
+}
+.dropdown_container{
+    position: absolute;
+    background-color: rgba(26, 28, 33, 0.4);
+    top: 4.5em;
+    right: -0rem;
+    border: 2px solid #cccccc08;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+}
+.cnvsvg{
+    height: 24px;
+}
+.nv-groupsvg{
+    display: flex;
+}
+.nv-groupsvg{
+    width: 47px;
+    display: flex;
+    justify-content: center;
+    margin-right: 3px;
 }
