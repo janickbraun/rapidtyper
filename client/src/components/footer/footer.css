@@ -11,9 +11,10 @@ footer{
 }
 .globalfooter{
     background-color: #1a1c2166;
+    backdrop-filter: blur(15px);
     margin: 1rem 1.6rem;
     padding: 1.4rem 0;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 .ftcaller{
     font-size: 20px;
@@ -33,4 +34,7 @@ footer{
 }
 .__logoftctcopy{
     display: inline-flex;
+}
+.copyrighttxt,.copyby{
+    color: rgb(255 255 255 / 80%);
 }

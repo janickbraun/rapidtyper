@@ -29,12 +29,23 @@ export default function Footer() {
         </div>
         <div className="__ftsc listsc">
           <ul className="ftlink-list">
-            <h2 className="ftcaller">Help</h2>
+            <h2 className="ftcaller">More</h2>
                 <li className="ftlinkitem">
                       <a className="ftlink" href="/how-to-play.html">How to play</a>
                 </li>
                 <li className="ftlinkitem">
                       <a className="ftlink" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div className="__ftsc listsc">
+          <ul className="ftlink-list">
+            <h2 className="ftcaller">Others</h2>
+                <li className="ftlinkitem">
+                      <a className="ftlink" href="//jukevote.onrender.com">Jukevote</a>
+                </li>
+                <li className="ftlinkitem">
+                      <a className="ftlink" href="//grovider.co">Grovider</a>
                 </li>
             </ul>
         </div>
