@@ -9,7 +9,7 @@ export default function Account() {
     const [loggedin] = useAuth()
 
     return (
-        <div>
+        <main>
             <h2>Account</h2>
             {loggedin ? (
                 <>
@@ -22,6 +22,6 @@ export default function Account() {
                     <Login />
                 </>
             )}
-        </div>
+        </main>
     )
 }

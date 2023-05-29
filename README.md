@@ -15,12 +15,12 @@ RapidTyper is a web-based application designed to help users improve their typin
 
 The RapidTyper website is built using the following technologies:
 
-- **Front-end:**
+- **Frontend:**
   - HTML5
   - CSS3
   - TypeScript
   - React.js (JavaScript library)
-- **Back-end:**
+- **Backend:**
   - Node.js (JavaScript runtime environment)
   - Express.js (web application framework)
 - **Database:**
@@ -28,7 +28,7 @@ The RapidTyper website is built using the following technologies:
 - **Real-time Communication:**
   - WebSocket (for real-time race updates and messaging)
 - **Deployment:**
-  - Namecheap (for hosting the application)
+  - Namecheap Webhosting (for hosting the application)
 
 ## Getting Started
 
