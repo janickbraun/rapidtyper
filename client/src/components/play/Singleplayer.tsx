@@ -92,9 +92,9 @@ export default function Singleplayer() {
     }
 
     return (
-        <div>
+        <main>
             <h3>Singleplayer</h3>
             {listItems}
-        </div>
+        </main>
     )
 }
