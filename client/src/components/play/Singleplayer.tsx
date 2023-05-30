@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react"
+import ProgressBar from "./ProgressBar"
 
 export default function Singleplayer() {
     const [textArray, setTextArray] = useState([]) as any
     const [currentIndex, setCurrentIndex] = useState(0)
     const [startDateTime, setStartDateTime] = useState(0)
+    const [completed, setCompleted] = useState(0)
+    const [mistakes, setMistakes] = useState(0)
 
-    const text = "das ist ein test"
+    const text = "If you think that you are going to love something, give it a try. You're going to kick yourself in the butt for the rest of your life if you don't."
     const hasFired = useRef(false)
     const spitted = text.split("")
     let arr: any = []
@@ -37,6 +40,16 @@ export default function Singleplayer() {
             )}
         </div>
     ))
+
+    const handleRestart = (e: any) => {
+        setCurrentIndex(0)
+        let temp = textArray
+        for (let i = 0; i < spitted.length; i += 1) {
+            temp[i].correct = undefined
+        }
+        setTextArray(temp)
+        e.currentTarget.blur()
+    }
 
     document.onkeydown = (e) => {
         const noFire = ["Shift", "CapsLock", "Tab"]
@@ -71,6 +84,7 @@ export default function Singleplayer() {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             let temp = textArray
             temp[currentIndex].correct = false
+            setMistakes(mistakes + 1)
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
         }
@@ -85,16 +99,23 @@ export default function Singleplayer() {
             }
             if (allCorrect) {
                 let seconds = Math.abs((new Date().getTime() - startDateTime) / 1000)
-                console.log(seconds)
+                const wpm = spitted.length / 5 / (seconds / 60)
+                const accuracy = ((spitted.length - mistakes) / spitted.length) * 100
+
+                console.log("Time: " + seconds)
+                console.log("Wpm: " + wpm)
+                console.log("Accuracy: " + accuracy)
             }
         }
-        //console.log(e.key)
     }
 
     return (
         <main>
             <h3>Singleplayer</h3>
-            {listItems}
+            <ProgressBar bgcolor={"#6a1b9a"} completed={(currentIndex / spitted.length) * 100} />
+            <div style={{ position: "absolute", left: 10, top: 300 }}>{listItems}</div>
+
+            <button onClick={handleRestart}>Restart</button>
         </main>
     )
 }
