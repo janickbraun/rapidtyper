@@ -25,14 +25,14 @@ export default function Header({ children }: { children: React.ReactNode }) {
 
     return (
         <div>
-            <nav className="rt_navigation default_nav" ref={dropRef}>
+            <nav className="rt_navigation default_nav" >
                 <div className="navigation-logo container-nav">
                     <Link to="/" className="logoContainer">
                         <img src="./img/rapidtyper-logo.png" alt="Logo" className="src_logo" />
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
-                    <ul className="_linklisting">
+                    <ul className="_linklisting" ref={dropRef}>
                         <li className="nav-link-item">
                             <Link to="/about">
                                 <span className="link_call">About</span>
