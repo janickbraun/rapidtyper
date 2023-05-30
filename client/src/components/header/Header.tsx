@@ -42,7 +42,11 @@ export default function Header({ children }: { children: React.ReactNode }) {
                         <li className="nav-link-item">
                             <Link to="#" onClick={(e) => focus(open)}>
                                 <span className="link_call">Play</span>
-                                <span className="navicon"><svg className="d-svg " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></span>
+                                <span className="navicon">
+                                    <svg className="d-svg " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
+                                    </svg>
+                                </span>
                             </Link>
                             {open && (
                                 <ul className="dropdown_container">
@@ -92,7 +96,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                     />
                                                     <rect y="154" width="150" height="30" rx="15" fill="#fff" />
                                                     <rect y="265" width="150" height="30" rx="15" fill="#2563eb" />
-                                                    <g clip-path="url(#clip0_9_33)">
+                                                    <g clipPath="url(#clip0_9_33)">
                                                         <path
                                                             d="M572.029 393.072H519.971C470.844 393.072 431 432.911 431 482.043C431 491.869 438.968 499.842 448.794 499.842H643.216C653.042 499.857 661 491.9 661 482.043C661 432.911 621.161 393.072 572.029 393.072Z"
                                                             fill="#fff"
