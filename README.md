@@ -1,3 +1,5 @@
+![RapidTyper](https://favicon.grovider.co/rapidtyper/apple-touch-icon.png)
+
 # RapidTyper
 
 RapidTyper is a web-based application designed to help users improve their typing skills on the keyboard. The application offers interactive typing races against other players and friends, allowing users to measure their typing speed and accuracy. The website, located at [rapidtyper.com](https://www.rapidtyper.com), provides an engaging and competitive environment for users to track their progress and strive for better typing proficiency.
