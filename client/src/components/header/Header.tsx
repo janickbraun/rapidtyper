@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
@@ -11,11 +11,18 @@ export default function Header({ children }: { children: React.ReactNode }) {
     const focus = (state: boolean) => {
         setOpen(!state)
     }
-    const collapseOutside = (e: any) => {
-        // if(open && !dropRef.current?.contains(e.target as Node))  setOpen(false)
-        // ↑↑ warum funktioniert das nicht?? ↑↑
-    }
-    window.addEventListener("click", collapseOutside)
+
+    useEffect(() => {
+        const collapseOutside = (e: any) => {
+            if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
+        }
+
+        window.addEventListener("click", collapseOutside)
+
+        return () => {
+            window.removeEventListener("click", collapseOutside)
+        }
+    }, [open])
 
     return (
         <div>
