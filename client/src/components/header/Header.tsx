@@ -7,7 +7,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
     const [loggedin] = useAuth()
 
     const [open, setOpen] = useState<boolean>(false)
-    const dropRef = useRef<HTMLDivElement>(null)
+    const dropRef = useRef<HTMLUListElement>(null)
     const focus = (state: boolean) => {
         setOpen(!state)
     }
@@ -32,7 +32,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
-                    <ul className="_linklisting" ref={dropRef}>
+                    <ul className="_linklisting" >
                         <li className="nav-link-item">
                             <Link to="/about">
                                 <span className="link_call">About</span>
@@ -48,7 +48,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                 </span>
                             </Link>
                             {open && (
-                                <ul className="dropdown_container">
+                                <ul className="dropdown_container" ref={dropRef}>
                                     <li className="dropdown_item" style={{ marginBottom: 14 }}>
                                         <Link to="/singleplayer" className="noscale">
                                             <div className="nv-groupsvg">
