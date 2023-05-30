@@ -25,8 +25,8 @@ export default function Header({ children }: { children: React.ReactNode }) {
                             </Link>
                             {/*  */}
                             <ul className="dropdown_container">
-                                <li className="dropdown_item">
-                                    <Link to="/play/single">
+                                <li className="dropdown_item" style={{marginBottom: 14}}>
+                                    <Link to="/singleplayer" className="noscale">
                                         <div className="nv-groupsvg">
                                             <svg className="cnvsvg" viewBox="0 0 865 448" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M745 160L636.3 24.1C624.1 8.85 605.7 0 586.3 0H380.4C354.15 0 330.65 15.88 320.9 40.25L273 162.3C245.5 169.4 225 194.3 225 224V336C225 353.67 239.33 368 257 368C257 306.2 307.24 256 369 256C430.76 256 481 306.2 481 368H609C609 306.24 659.24 256 721 256C782.76 256 833 306.24 833 368C850.67 368 865 353.67 865 336V280C865 213.7 811.3 160 745 160ZM449 160H341.9L380.4 64H449V160ZM497 160V64H586.25L663 160H497Z" fill="#fff"/>
@@ -37,11 +37,14 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                 <rect y="265" width="150" height="30" rx="15" fill="#2563eb"/>
                                             </svg>
                                         </div>
-                                        <span className="link_call">Singleplayer</span>
+                                        <div className="nvt">
+                                            <h2 className="link_call large">Singleplayer</h2>
+                                            <p className="description_sd2">Practice your typing</p>
+                                        </div>
                                     </Link>
                                 </li>
                                 <li className="dropdown_item">
-                                    <Link to="/play/lobby">
+                                    <Link to="/multiplayer" className="noscale">
                                         <div className="nv-groupsvg">
                                         <svg className="cnvsvg" viewBox="0 0 1027 514" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M745 160L636.3 24.1C624.1 8.85 605.7 0 586.3 0H380.4C354.15 0 330.65 15.88 320.9 40.25L273 162.3C245.5 169.4 225 194.3 225 224V336C225 353.67 239.33 368 257 368C257 306.2 307.24 256 369 256C430.76 256 481 306.2 481 368H609C609 306.24 659.24 256 721 256C782.76 256 833 306.24 833 368C850.67 368 865 353.67 865 336V280C865 213.7 811.3 160 745 160ZM449 160H341.9L380.4 64H449V160ZM497 160V64H586.25L663 160H497Z" fill="#fff"/>
@@ -63,7 +66,10 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                             </defs>
                                         </svg>
                                         </div>
-                                        <span className="link_call">Mulitplayer</span>
+                                        <div className="nvt">
+                                            <h2 className="link_call large">Mulitplayer</h2>
+                                            <p className="description_sd2">Compete against others</p>
+                                        </div>
                                     </Link>
                                 </li>
                             </ul>
