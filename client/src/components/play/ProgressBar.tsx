@@ -1,5 +1,9 @@
 import React from "react"
 
+/*
+  --> RaceCar.tsx
+*/
+
 const ProgressBar = (props: any) => {
     const { bgcolor, completed } = props
 
@@ -7,7 +11,7 @@ const ProgressBar = (props: any) => {
         height: 20,
         width: "50%",
         backgroundColor: "#e0e0de",
-        borderRadius: 50,
+        borderRadius: "50rem",
         margin: 50,
     }
 
@@ -17,18 +21,31 @@ const ProgressBar = (props: any) => {
         backgroundColor: bgcolor,
         borderRadius: "inherit",
         textAlign: "right",
+        position: "relative",
     }
-
-    const labelStyles = {
+    
+    var color:string = "black"
+    
+    if(completed >= 2) {
+        color = "white"
+    }else{
+        color = "black"
+    }
+    
+    const labelStyles:object = { // type (object/any) weil sonst fehler wegen "position: absolute;"
         padding: 5,
-        color: "white",
+        color: color,
         fontWeight: "bold",
+        left: 5,
+        top: "50%",
+        transform: "translateY(-50%)",
+        position: "absolute",
     }
-
+    
     return (
         <div style={containerStyles}>
             <div style={fillerStyles}>
-                <span style={labelStyles}>{`${completed}%`}</span>
+                <span style={labelStyles}>{`${Math.round(completed)}%`}</span>
             </div>
         </div>
     )

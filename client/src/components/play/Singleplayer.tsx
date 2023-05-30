@@ -8,7 +8,7 @@ export default function Singleplayer() {
     const [completed, setCompleted] = useState(0)
     const [mistakes, setMistakes] = useState(0)
 
-    const text = "If you think that you are going to love something, give it a try. You're going to kick yourself in the butt for the rest of your life if you don't."
+    const text = "If you think that you are going to love something, give it a try. You're going to kick yourself in the butt for the rest of your life if you don't." //
     const hasFired = useRef(false)
     const spitted = text.split("")
     let arr: any = []
@@ -102,7 +102,7 @@ export default function Singleplayer() {
                 const wpm = spitted.length / 5 / (seconds / 60)
                 const accuracy = ((spitted.length - mistakes) / spitted.length) * 100
 
-                console.log("Time: " + seconds)
+                console.log("Time: " + Math.round(seconds))
                 console.log("Wpm: " + wpm)
                 console.log("Accuracy: " + accuracy)
             }
