@@ -15,8 +15,9 @@ export default function Singleplayer() {
     for (let i = 0; i < spitted.length; i += 1) {
         arr.push({ character: spitted[i], correct: undefined })
     }
-
+    
     useEffect(() => {
+        document.title = 'Singleplayer - RapidTyper'
         if (!hasFired.current) {
             hasFired.current = true
             setTextArray(arr)

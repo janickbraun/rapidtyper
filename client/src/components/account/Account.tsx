@@ -1,12 +1,12 @@
-import React from "react"
+import React, {useEffect} from "react"
 import SignUp from "./SignUp"
 import Login from "./Login"
 import Logout from "./Logout"
 import Delete from "./Delete"
 import useAuth from "../../hooks/useAuth"
-
+        
 export default function Account() {
-    const [loggedin] = useAuth()
+    const [loggedin] = useAuth()   
 
     return (
         <main>

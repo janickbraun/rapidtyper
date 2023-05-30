@@ -14,9 +14,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const collapseOutside = (e: any) => {
-            // if (open && !dropRef.current?.contains(e.target as Node)) {
-            //     setOpen(false)
-            // }
+            if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
         }
         window.addEventListener("click", collapseOutside)
         return () => {
