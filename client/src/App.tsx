@@ -12,7 +12,7 @@ import Singleplayer from "./components/play/Singleplayer"
 function App() {
     const queryClient = new QueryClient()
     return (
-        <div className="App">
+        <div className="rapidtyperApp">
             <BrowserRouter>
                 <QueryClientProvider client={queryClient}>
                     <Header>
