@@ -39,12 +39,14 @@ import signUpRouter from "./routes/account/signup"
 import loginRouter from "./routes/account/login"
 import isloggedinRouter from "./routes/account/isloggedin"
 import deleteaccountRouter from "./routes/account/delete"
+import createRaceRouter from "./routes/createrace"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
 app.use("/api/login", loginRouter)
 app.use("/api/isloggedin", isloggedinRouter)
 app.use("/api/deleteaccount", deleteaccountRouter)
+app.use("/api/createrace", createRaceRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))
