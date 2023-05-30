@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 
-export default function about() {
+export default function About() {
 
   useEffect(() => {
     document.title = 'Learn more about RapidTyper'
