@@ -68,13 +68,13 @@
 }
 .nav-link-item a:focus-visible{
     outline-offset: 2px;
-    outline: 3px solid #036666;
+    outline: 3px solid #2563eb;
 }
 ul{
     list-style: none;
 }
 .logoContainer:focus-visible{
-    outline: 4px solid #036666;
+    outline: 4px solid #2563eb;
     outline-offset: 3px;
 }
 .d-svg{
