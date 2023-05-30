@@ -5,13 +5,14 @@
     width: 100%;
     align-items: center;
     background-color: transparent;
-    background-color: rgb(28, 28, 28, .6);
+    background-color: #20212465;
     backdrop-filter: blur(15px);
     padding: .6rem 1.4rem;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
+    box-shadow: 0 0 20px rgba(185, 185, 185, 0.04);
 }
 .src_logo{
     /* outline: 2px solid red; */
