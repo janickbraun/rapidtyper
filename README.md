@@ -34,17 +34,17 @@ The RapidTyper website is built using the following technologies:
 
 To run RapidTyper locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/rapidtyper.git`
+1. Clone the repository: `git clone https://github.com/janickbraun/rapidtyper.git`
 2. Navigate to the project directory: `cd rapidtyper`
 3. Install the required dependencies and start the application: `cd server && npm install && npm start && cd ../client && npm install && npm start`
-5. Access the application in your browser at `http://localhost`
+5. Access the application in your browser at `http://localhost:3000`
 
 Please note that you may need to set up a local MongoDB instance or update the database configuration to connect to your MongoDB server.
 
 ## Contributing
 RapidTyper is being developed by Janick Braun and Luis Baumer
 
-Contributions to RapidTyper are always welcome! If you find a bug or have a suggestion for new features, please open an issue in the GitHub repository. If you'd like to contribute directly, feel free to fork the repository, make your changes, and submit a pull request.
+Contributions to RapidTyper are always welcome! If you find a bug or have a suggestion for new features, please open an issue in the GitHub repository or report the issue on [feedback.rapidtyper.com](https://feedback.rapidtyper.com). If you'd like to contribute directly, feel free to fork the repository, make your changes, and submit a pull request.
 
 Before submitting a pull request, please ensure that your code adheres to the existing code style and passes all the tests. Also, provide a clear and detailed description of the changes you've made.
 
@@ -54,4 +54,4 @@ RapidTyper is licensed under the [MIT License](https://opensource.org/licenses/M
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, please don't hesitate to contact the project maintainer at [rapidtyper@grovider.co](mailto:rapidtyper@grovider.co). We appreciate your interest in RapidTyper and look forward to hearing from you!
+If you have any questions, suggestions, or feedback, please don't hesitate to contact the project maintainers at [rapidtyper@grovider.co](mailto:rapidtyper@grovider.co). We appreciate your interest in RapidTyper and look forward to hearing from you!

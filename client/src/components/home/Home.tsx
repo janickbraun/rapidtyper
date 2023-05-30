@@ -8,6 +8,13 @@ export default function Home() {
             <Link className="test" to="/account">
                 Account
             </Link>
+            {
+                // Start game section | Singleplayer & Multiplayer
+                // // 
+                // Leaderboard
+                // //
+                // About / Learn
+            }
         </main>
     )
 }
