@@ -7,8 +7,10 @@ export default function about() {
   }, [])
 
   return (
-    
     <main>
+      {
+        // Anitmated components
+      }
       <h1>About</h1>
     </main>
   )
