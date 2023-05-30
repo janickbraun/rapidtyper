@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
@@ -12,8 +12,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
         setOpen(!state)
     }
     const collapseOutside = (e: any) => {
-        if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
-
+        // if(open && !dropRef.current?.contains(e.target as Node))  setOpen(false)
         // ↑↑ warum funktioniert das nicht?? ↑↑
     }
     window.addEventListener("click", collapseOutside)
@@ -90,7 +89,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                     />
                                                     <rect y="154" width="150" height="30" rx="15" fill="#fff" />
                                                     <rect y="265" width="150" height="30" rx="15" fill="#2563eb" />
-                                                    <g clipPath="url(#clip0_9_33)">
+                                                    <g clip-path="url(#clip0_9_33)">
                                                         <path
                                                             d="M572.029 393.072H519.971C470.844 393.072 431 432.911 431 482.043C431 491.869 438.968 499.842 448.794 499.842H643.216C653.042 499.857 661 491.9 661 482.043C661 432.911 621.161 393.072 572.029 393.072Z"
                                                             fill="#fff"
