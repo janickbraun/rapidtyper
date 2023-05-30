@@ -99,7 +99,7 @@ ul{
     position: absolute;
     background-color: rgba(26, 28, 33, 1);
     top: 4.5em;
-    right: -0rem;
+    right: -.1rem;
     padding: 1.2rem 1.5rem;
     border-radius: 14px;
 }
