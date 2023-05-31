@@ -14,8 +14,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const collapseOutside = (e: any) => {
-            // if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
-            
+            //if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
         }
         window.addEventListener("click", collapseOutside)
         return () => {
@@ -25,14 +24,14 @@ export default function Header({ children }: { children: React.ReactNode }) {
 
     return (
         <div>
-            <nav className="rt_navigation default_nav" >
+            <nav className="rt_navigation default_nav">
                 <div className="navigation-logo container-nav">
                     <Link to="/" className="logoContainer">
                         <img src="./img/rapidtyper-logo.png" alt="Logo" className="src_logo" />
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
-                    <ul className="_linklisting" >
+                    <ul className="_linklisting">
                         <li className="nav-link-item">
                             <Link to="/about">
                                 <span className="link_call">About</span>

@@ -13,9 +13,14 @@ export default function Multiplayer() {
         //site leave listener
     }, [])
 
+    const handleClipboard = () => {
+        navigator.clipboard.writeText(window.location.href)
+    }
+
     return (
         <main>
             <h2>Multiplayer</h2>
+            <button onClick={handleClipboard}>Copy to clipboard</button>
         </main>
     )
 }

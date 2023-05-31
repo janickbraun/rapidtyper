@@ -7,6 +7,10 @@ export default function Singleplayer() {
     const [startDateTime, setStartDateTime] = useState(0)
     const [completed, setCompleted] = useState(0)
     const [mistakes, setMistakes] = useState(0)
+    const [time, setTime] = useState<number>(0)
+    const [accuracy, setAccuracy] = useState<number>(0)
+    const [wpm, setWpm] = useState<number>(0)
+    const [done, setDone] = useState<boolean>(false)
 
     const text = "If you think that you are going to love something, give it a try. You're going to kick yourself in the butt for the rest of your life if you don't." //
     const hasFired = useRef(false)
@@ -15,9 +19,9 @@ export default function Singleplayer() {
     for (let i = 0; i < spitted.length; i += 1) {
         arr.push({ character: spitted[i], correct: undefined })
     }
-    
+
     useEffect(() => {
-        document.title = 'Singleplayer - RapidTyper'
+        document.title = "Singleplayer - RapidTyper"
         if (!hasFired.current) {
             hasFired.current = true
             setTextArray(arr)
@@ -43,7 +47,12 @@ export default function Singleplayer() {
     ))
 
     const handleRestart = (e: any) => {
+        setDone(false)
         setCurrentIndex(0)
+        setAccuracy(0)
+        setCompleted(0)
+        setTime(0)
+        setWpm(0)
         let temp = textArray
         for (let i = 0; i < spitted.length; i += 1) {
             temp[i].correct = undefined
@@ -56,6 +65,7 @@ export default function Singleplayer() {
         const noFire = ["Shift", "CapsLock", "Tab"]
 
         if (noFire.includes(e.key)) return
+        if (done) return
 
         if (e.key === spitted[currentIndex] && currentIndex < spitted.length) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
@@ -63,6 +73,15 @@ export default function Singleplayer() {
             temp[currentIndex].correct = true
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
+
+            let allCorrect = true
+            for (let i = 0; i < currentIndex + 1; i += 1) {
+                if (!textArray[i].correct) {
+                    allCorrect = false
+                    break
+                }
+            }
+            if (allCorrect) setCompleted(currentIndex)
         } else if (e.key === "Backspace" && e.ctrlKey) {
             if (currentIndex === 0) return
             let temp = textArray
@@ -99,13 +118,15 @@ export default function Singleplayer() {
                 }
             }
             if (allCorrect) {
-                let seconds = Math.abs((new Date().getTime() - startDateTime) / 1000)
-                const wpm = spitted.length / 5 / (seconds / 60)
-                const accuracy = ((spitted.length - mistakes) / spitted.length) * 100
+                const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
+                const wpm = Number((spitted.length / 5 / (seconds / 60)).toFixed(2))
+                const accuracy = Number((((spitted.length - mistakes) / spitted.length) * 100).toFixed(2))
 
-                console.log("Time: " + Math.round(seconds))
-                console.log("Wpm: " + wpm)
-                console.log("Accuracy: " + accuracy)
+                setTime(seconds)
+                setDone(true)
+                setCompleted(currentIndex + 1)
+                setWpm(wpm)
+                setAccuracy(accuracy)
             }
         }
     }
@@ -113,8 +134,17 @@ export default function Singleplayer() {
     return (
         <main>
             <h3>Singleplayer</h3>
-            <ProgressBar bgcolor={"#6a1b9a"} completed={(currentIndex / spitted.length) * 100} />
-            <div style={{ position: "absolute", left: 10, top: 300 }}>{listItems}</div>
+            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / spitted.length) * 100} />
+            <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
+            <br />
+            <br />
+            {wpm !== 0 && accuracy !== 0 && time !== 0 && (
+                <>
+                    <div>Speed: {wpm} wpm</div>
+                    <div>Accouracy: {accuracy}%</div>
+                    <div>Time: {time} seconds</div>
+                </>
+            )}
 
             <button onClick={handleRestart}>Restart</button>
         </main>
