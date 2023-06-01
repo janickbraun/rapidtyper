@@ -1,5 +1,5 @@
 /* copyright (c) 2023 RapidTyper by Janick & Luis */
-@import url(https://baum21614-cdn.github.io/fonts/external/poppins/FONT__POPPINS.css);
+@import url(https://cdn.grovider.co/fonts/poppins.css); /* load font from grovider */
 *{
     margin: 0;
     padding: 0;
