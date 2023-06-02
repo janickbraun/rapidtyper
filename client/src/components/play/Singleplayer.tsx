@@ -12,7 +12,7 @@ export default function Singleplayer() {
     const [wpm, setWpm] = useState<number>(0)
     const [done, setDone] = useState<boolean>(false)
 
-    const text = "If you think that you are going to love something, give it a try. You're going to kick yourself in the butt for the rest of your life if you don't." //
+    const text = "jjjjjjjjjj"
     const hasFired = useRef(false)
     const spitted = text.split("")
     let arr: any = []
@@ -50,6 +50,7 @@ export default function Singleplayer() {
         setDone(false)
         setCurrentIndex(0)
         setAccuracy(0)
+        setMistakes(0)
         setCompleted(0)
         setTime(0)
         setWpm(0)
@@ -138,7 +139,7 @@ export default function Singleplayer() {
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
             <br />
             <br />
-            {wpm !== 0 && accuracy !== 0 && time !== 0 && (
+            {done && (
                 <>
                     <div>Speed: {wpm} wpm</div>
                     <div>Accouracy: {accuracy}%</div>

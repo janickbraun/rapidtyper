@@ -36,6 +36,12 @@ export default function Home() {
     return (
         <main>
             <h2>Home</h2>
+            <Link className="test" to="/singleplayer">
+                Singleplayer
+            </Link>
+            <br />
+            <br />
+
             <Link className="test" to="/account">
                 Account
             </Link>
