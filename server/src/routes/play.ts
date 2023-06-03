@@ -8,21 +8,44 @@ dotenv.config()
 const router = Router()
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.body.token
-    const code = req.body.code
-    const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
-    const loggedin = await User.exists({ _id: temporaryUser.id })
+    try {
+        const token = req.body.token
+        const code = req.body.code
+        const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
+        const loggedin = await User.exists({ _id: temporaryUser.id })
 
-    const findLobby = await Lobby.findOne({
-        joinable: true,
-        code,
-    })
+        const findLobby = await Lobby.findOne({
+            joinable: true,
+            code,
+        })
 
-    if (!findLobby) return res.status(300).send("No joinable lobby found")
+        if (!findLobby) return res.status(300).send("No joinable lobby found")
 
-    const text = await Text.findById(findLobby.text)
+        if (!loggedin) return res.status(300).send("Invalid user")
 
-    return res.status(200).json({ participants: findLobby.participants, text })
+        const user = await User.findById(temporaryUser.id)
+
+        const username = user?.username
+
+        if (!findLobby.participants.includes(username)) {
+            await Lobby.updateOne(
+                {
+                    _id: findLobby._id,
+                },
+                {
+                    $push: {
+                        participants: username,
+                    },
+                }
+            )
+        }
+
+        const text = await Text.findById(findLobby.text)
+
+        return res.status(200).json({ participants: findLobby.participants, text, username })
+    } catch {
+        return res.status(300).send("Something went wrong")
+    }
 })
 
 export default router

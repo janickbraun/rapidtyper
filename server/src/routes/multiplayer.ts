@@ -34,8 +34,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         await Lobby.create({ code, text: text[0]._id })
         return res.status(200).json({ code })
-    } catch (e) {
-        console.log(e)
+    } catch {
         return res.status(400).send("Something went wrong")
     }
 })

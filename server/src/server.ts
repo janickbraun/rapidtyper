@@ -46,6 +46,12 @@ mongoose.connection.on("error", (err) => {
 let typists: any = []
 
 io.on("connection", (socket: any) => {
+    socket.on("typing", (data: any) => {
+        try {
+            socket.broadcast.to(String(data.code)).emit("typing", { username: data.username, completed: data.completed })
+        } catch {}
+    })
+
     socket.on("join", (data: any) => {
         socket.join(String(data.code))
         if (data.code.length === 4) {

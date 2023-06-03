@@ -43,9 +43,15 @@ export default function Home() {
             </Link>
             <br />
             <br />
-            <button onClick={handleMultiplayer}>Multiplayer</button>
-            {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
-            {!loggedin && <div>In order to safe your stats and appear on the leaderboard you need to have an account</div>}
+
+            {loggedin ? (
+                <>
+                    <button onClick={handleMultiplayer}>Multiplayer</button>
+                    {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
+                </>
+            ) : (
+                <div>For playing online you need to login</div>
+            )}
 
             {
                 // Start game section | Singleplayer & Multiplayer
