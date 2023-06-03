@@ -4,8 +4,11 @@ import React, { useEffect, useRef, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import io, { Socket } from "socket.io-client"
 import ProgressBar from "./ProgressBar"
+import Timer from "./Timer"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
 export default function Multiplayer() {
     const { code } = useParams()
@@ -25,10 +28,13 @@ export default function Multiplayer() {
     const [accuracy, setAccuracy] = useState<number>(0)
     const [wpm, setWpm] = useState<number>(0)
     const [done, setDone] = useState<boolean>(false)
+    const [hasStarted, setHasStarted] = useState(false)
+    const [waitingTitle, setWaitingTitle] = useState("")
+    const [winners, setWinners] = useState<any>([])
 
     const token = localStorage.getItem("token")
     let navigate = useNavigate()
-    const hasFired = useRef(false)
+    const hasFired = useRef(0)
 
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>
@@ -48,11 +54,20 @@ export default function Multiplayer() {
         </div>
     ))
 
+    const mutationMultiplayer: any = useMutation({
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/multiplayer", { token })
+        },
+        onSuccess: ({ data }) => {
+            window.location.replace("/multiplayer/" + data.code)
+        },
+    })
+
     const mutationPlay: any = useMutation({
         mutationFn: async () => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/play", { token, code })
         },
-        onSuccess: ({ data }) => {
+        onSuccess: async ({ data }) => {
             let temp = []
             for (let i = 0; i < data.participants.length; i += 1) {
                 temp.push({ username: data.participants[i], completed: 0 })
@@ -77,12 +92,16 @@ export default function Multiplayer() {
     })
 
     useEffect(() => {
-        if (mutationPlay.isIdle && !hasFired.current) {
-            hasFired.current = true
-
+        if (mutationPlay.isIdle && hasFired.current === 0) {
+            hasFired.current = 1
             mutationPlay.mutate()
         }
-        socket.emit("join", { code })
+
+        if (mutationPlay.isSuccess && hasFired.current === 1) {
+            hasFired.current = 2
+            socket.emit("join", { code })
+        }
+
         //does the lobby exist
         //who are the participants
         //has the race begun?
@@ -93,14 +112,6 @@ export default function Multiplayer() {
     }, [mutationPlay, code])
 
     useEffect(() => {
-        socket.on("join", (data) => {
-            //console.log(data.msg)
-        })
-
-        socket.on("leave", (data) => {
-            //console.log(data.msg)
-        })
-
         socket.on("typing", (data) => {
             // 1. Find the todo with the provided id
             const currentTodoIndex = participants.findIndex((item: any) => item.username === data.username)
@@ -114,20 +125,53 @@ export default function Multiplayer() {
         })
 
         return () => {
-            socket.off("join")
-            socket.off("leave")
             socket.off("typing")
         }
     }, [participants])
 
+    useEffect(() => {
+        socket.on("join", () => {
+            mutationPlay.mutate()
+        })
+
+        socket.on("waiting", async () => {
+            setWaitingTitle("Waiting for opponents")
+            await delay(20000)
+            socket.emit("starting", { code })
+        })
+
+        socket.on("starting", async () => {
+            setTimeout(async () => {
+                setWaitingTitle("Starting in")
+                await delay(10000)
+                socket.emit("start", { code })
+            }, 250)
+        })
+
+        socket.on("start", () => {
+            setHasStarted(true)
+            setStartDateTime(new Date().getTime())
+        })
+
+        socket.on("finish", (data) => {
+            setWinners([...winners, { username: data.username, wpm: data.wpm }])
+        })
+
+        return () => {
+            socket.off("join")
+            socket.off("finish")
+            socket.off("waiting")
+        }
+    }, [mutationPlay, code, winners])
+
     document.onkeydown = (e) => {
         const noFire = ["Shift", "CapsLock", "Tab"]
 
+        if (!hasStarted) return
         if (noFire.includes(e.key)) return
         if (done) return
 
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
-            if (currentIndex === 0) setStartDateTime(new Date().getTime())
             let temp: any = textArray
             temp[currentIndex].correct = true
             setTextArray(temp)
@@ -146,8 +190,6 @@ export default function Multiplayer() {
                 const now = Math.round((currentIndex / text.length) * 100)
 
                 if (temp !== now) socket.emit("typing", { completed, code, username })
-
-                //send other if roundend
             }
         } else if (e.key === "Backspace" && e.ctrlKey) {
             if (currentIndex === 0) return
@@ -189,6 +231,7 @@ export default function Multiplayer() {
                 const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
+                socket.emit("finish", { username, code, wpm })
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 
                 setTime(seconds)
@@ -220,11 +263,17 @@ export default function Multiplayer() {
                     <div>Speed: {wpm} wpm</div>
                     <div>Accouracy: {accuracy}%</div>
                     <div>Time: {time} seconds</div>
+                    <button onClick={() => mutationMultiplayer.mutate()}>Race again</button>
                 </>
             )}
 
             <br />
             <br />
+            {waitingTitle !== "" && !hasStarted && <Timer initialSeconds={30} title={waitingTitle} />}
+            {winners.map((item: any, key: any) => (
+                <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
+            ))}
+
             <br />
             <br />
             <br />

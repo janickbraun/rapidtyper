@@ -52,6 +52,32 @@ io.on("connection", (socket: any) => {
         } catch {}
     })
 
+    socket.on("starting", async (data: any) => {
+        try {
+            await Lobby.findOneAndUpdate(
+                { code: data.code },
+                {
+                    $set: {
+                        joinable: false,
+                    },
+                }
+            )
+            io.to(String(data.code)).emit("starting")
+        } catch {}
+    })
+
+    socket.on("start", (data: any) => {
+        try {
+            io.to(String(data.code)).emit("start")
+        } catch {}
+    })
+
+    socket.on("finish", (data: any) => {
+        try {
+            io.to(String(data.code)).emit("finish", { username: data.username, wpm: data.wpm })
+        } catch {}
+    })
+
     socket.on("join", (data: any) => {
         socket.join(String(data.code))
         if (data.code.length === 4) {
@@ -60,7 +86,8 @@ io.on("connection", (socket: any) => {
                 code: data.code,
             })
             try {
-                io.to(String(data.code)).emit("join", { msg: "new one", num: io.sockets.adapter.rooms.get(data.code).size })
+                socket.broadcast.to(String(data.code)).emit("join", { num: io.sockets.adapter.rooms.get(data.code).size })
+                //io.to(String(data.code)).emit("join", { username: data.username, num: io.sockets.adapter.rooms.get(data.code).size })
             } catch {}
         }
     })
@@ -101,6 +128,7 @@ import isloggedinRouter from "./routes/account/isloggedin"
 import deleteaccountRouter from "./routes/account/delete"
 import multiplayerRouter from "./routes/multiplayer"
 import playRouter from "./routes/play"
+import Lobby from "../models/Lobby"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
