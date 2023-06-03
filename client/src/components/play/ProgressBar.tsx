@@ -5,7 +5,7 @@ import React from "react"
 */
 
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed } = props
+    const { bgcolor, completed, name } = props
 
     const containerStyles = {
         height: 20,
@@ -23,16 +23,17 @@ const ProgressBar = (props: any) => {
         textAlign: "right",
         position: "relative",
     }
-    
-    var color:string = "black"
-    
-    if(completed >= 2) {
+
+    var color: string = "black"
+
+    if (completed >= 2) {
         color = "white"
-    }else{
+    } else {
         color = "black"
     }
-    
-    const labelStyles:object = { // type (object/any) weil sonst fehler wegen "position: absolute;"
+
+    const labelStyles: object = {
+        // type (object/any) weil sonst fehler wegen "position: absolute;"
         padding: 5,
         color: color,
         fontWeight: "bold",
@@ -41,11 +42,11 @@ const ProgressBar = (props: any) => {
         transform: "translateY(-50%)",
         position: "absolute",
     }
-    
+
     return (
         <div style={containerStyles}>
             <div style={fillerStyles}>
-                <span style={labelStyles}>{`${Math.round(completed)}%`}</span>
+                <span style={labelStyles}>{name + `${Math.round(completed)}%`}</span>
             </div>
         </div>
     )

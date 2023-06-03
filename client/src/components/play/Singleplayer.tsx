@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import ProgressBar from "./ProgressBar"
 
 export default function Singleplayer() {
@@ -15,7 +15,7 @@ export default function Singleplayer() {
     const text = "jjjjjjjjjj"
     const hasFired = useRef(false)
     const spitted = text.split("")
-    let arr: any = []
+    let arr: any = useMemo(() => [], [])
     for (let i = 0; i < spitted.length; i += 1) {
         arr.push({ character: spitted[i], correct: undefined })
     }

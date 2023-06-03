@@ -15,9 +15,18 @@ const LobbySchema = new mongoose.Schema(
             type: Date,
             default: Date.now,
         },
+        joinable: {
+            type: Boolean,
+            default: true,
+        },
+        text: {
+            type: mongoose.Types.ObjectId,
+            ref: "texts",
+            required: true,
+        },
     },
     {
-        collection: "lobby",
+        collection: "lobbys",
     }
 )
 

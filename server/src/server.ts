@@ -60,7 +60,7 @@ io.on("connection", (socket: any) => {
     })
 
     socket.on("disconnect", () => {
-        console.log("disconnect")
+        //console.log("disconnect")
         if (typists.some((e: any) => e.id === socket.id)) {
             for (let i = typists.length - 1; i >= 0; i--) {
                 if (typists[i].id === socket.id && typists[i].code.length === 4) {
@@ -76,7 +76,7 @@ io.on("connection", (socket: any) => {
     })
 
     socket.on("leave", () => {
-        console.log("leave")
+        //console.log("leave")
     })
 })
 
@@ -93,14 +93,16 @@ import signUpRouter from "./routes/account/signup"
 import loginRouter from "./routes/account/login"
 import isloggedinRouter from "./routes/account/isloggedin"
 import deleteaccountRouter from "./routes/account/delete"
-import createRaceRouter from "./routes/createrace"
+import multiplayerRouter from "./routes/multiplayer"
+import playRouter from "./routes/play"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
 app.use("/api/login", loginRouter)
 app.use("/api/isloggedin", isloggedinRouter)
 app.use("/api/deleteaccount", deleteaccountRouter)
-app.use("/api/createrace", createRaceRouter)
+app.use("/api/multiplayer", multiplayerRouter)
+app.use("/api/play", playRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))

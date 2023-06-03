@@ -1,12 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 
 export default function Home() {
     const [loggedin] = useAuth()
-    const [raceCode, setRaceCode] = useState("")
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -15,22 +14,19 @@ export default function Home() {
 
     const token = localStorage.getItem("token")
 
-    const mutation: any = useMutation({
+    const mutationMultiplayer: any = useMutation({
         mutationFn: async () => {
-            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/createrace", { token })
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/multiplayer", { token })
         },
         onSuccess: ({ data }) => {
             navigate("/multiplayer/" + data.code)
         },
     })
 
-    const handleCreateRace = () => {
-        mutation.mutate()
-    }
-
-    const handleJoinRace = () => {
-        console.log(raceCode)
-        //send request with code
+    const handleMultiplayer = () => {
+        mutationMultiplayer.mutate()
+        //is a lobby free
+        //otherwise create one
     }
 
     return (
@@ -47,17 +43,10 @@ export default function Home() {
             </Link>
             <br />
             <br />
-            {loggedin && (
-                <>
-                    <button onClick={handleCreateRace}>Create Race</button>
-                    {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
-                </>
-            )}
+            <button onClick={handleMultiplayer}>Multiplayer</button>
+            {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
+            {!loggedin && <div>In order to safe your stats and appear on the leaderboard you need to have an account</div>}
 
-            <br />
-            <br />
-            <input type="text" placeholder="Enter Code" maxLength={4} onChange={(e) => setRaceCode(e.target.value)} />
-            <button onClick={handleJoinRace}>Join Race</button>
             {
                 // Start game section | Singleplayer & Multiplayer
                 // //
