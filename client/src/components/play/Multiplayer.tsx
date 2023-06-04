@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import io, { Socket } from "socket.io-client"
 import ProgressBar from "./ProgressBar"
 import Timer from "./Timer"
+import useEventListener from "@use-it/event-listener"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -61,6 +62,7 @@ export default function Multiplayer() {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/multiplayer", { token })
         },
         onSuccess: ({ data }) => {
+            setStartDateTime(0)
             window.location.replace("/multiplayer/" + data.code)
         },
     })
@@ -160,7 +162,7 @@ export default function Multiplayer() {
         }
     }, [mutationPlay, code, winners])
 
-    document.onkeydown = (e) => {
+    const handler = (e: any) => {
         textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
@@ -238,6 +240,8 @@ export default function Multiplayer() {
             }
         }
     }
+
+    useEventListener("keydown", handler)
 
     return (
         <main>

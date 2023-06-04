@@ -201,6 +201,7 @@ import multiplayerRouter from "./routes/multiplayer"
 import playRouter from "./routes/play"
 import getTextRouter from "./routes/getText"
 import getStatsRouter from "./routes/stats"
+import changeUsernameRouter from "./routes/account/changeusername"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -211,6 +212,7 @@ app.use("/api/multiplayer", multiplayerRouter)
 app.use("/api/play", playRouter)
 app.use("/api/gettext", getTextRouter)
 app.use("/api/getstats", getStatsRouter)
+app.use("/api/changeusername", changeUsernameRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))

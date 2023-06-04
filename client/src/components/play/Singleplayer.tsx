@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import useEventListener from "@use-it/event-listener"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -96,7 +97,7 @@ export default function Singleplayer() {
         textInput.current.focus()
     }, [])
 
-    document.onkeydown = (e) => {
+    const handler = (e: any) => {
         textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
@@ -166,6 +167,8 @@ export default function Singleplayer() {
             }
         }
     }
+
+    useEventListener("keydown", handler)
 
     return (
         <main>

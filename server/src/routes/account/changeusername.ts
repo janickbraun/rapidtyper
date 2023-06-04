@@ -10,9 +10,10 @@ function isBlank(str: string) {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-    const confirmationText: string = req.body.confirmationText
+    const username: string = req.body.username.trim()
     const token: string = req.body.token
-    if (confirmationText !== "IRREVERSIBLE") return res.status(403).send("Invalid input")
+
+    if (isBlank(username)) return res.status(403).send("Invalid username")
 
     try {
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
@@ -20,8 +21,16 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             _id: temporaryUser.id,
         })
         if (!verifyUser) return res.status(400).send("Not authenticated")
-        await User.findByIdAndDelete(verifyUser._id)
-        res.status(200).send("Successfully deleted account")
+
+        const isUsernameTaken = await User.exists({ username })
+        if (isUsernameTaken) return res.status(403).send("Username is already in use")
+
+        await User.findByIdAndUpdate(verifyUser.id, {
+            $set: {
+                username,
+            },
+        })
+        res.status(200).send("Successfully changed username")
     } catch {
         return res.status(400).send("Something went wrong")
     }

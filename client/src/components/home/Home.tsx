@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 
 export default function Home() {
-    const [loggedin] = useAuth()
+    const [loggedin, username] = useAuth()
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -30,6 +30,13 @@ export default function Home() {
     return (
         <main>
             <h2>Home</h2>
+            {loggedin && (
+                <>
+                    <button>
+                        <Link to={"/user/" + username}>Profile</Link>
+                    </button>{" "}
+                </>
+            )}
             <button>
                 <Link to="/account">Account</Link>
             </button>
