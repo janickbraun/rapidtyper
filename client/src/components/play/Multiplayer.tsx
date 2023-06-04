@@ -32,6 +32,8 @@ export default function Multiplayer() {
     const [waitingTitle, setWaitingTitle] = useState("")
     const [winners, setWinners] = useState<any>([])
 
+    const textInput = useRef<any>(null)
+
     const token = localStorage.getItem("token")
     let navigate = useNavigate()
     const hasFired = useRef(0)
@@ -92,6 +94,10 @@ export default function Multiplayer() {
     })
 
     useEffect(() => {
+        textInput.current.focus()
+    }, [])
+
+    useEffect(() => {
         if (mutationPlay.isIdle && hasFired.current === 0) {
             hasFired.current = 1
             mutationPlay.mutate()
@@ -101,26 +107,15 @@ export default function Multiplayer() {
             hasFired.current = 2
             socket.emit("join", { code })
         }
-
-        //does the lobby exist
-        //who are the participants
-        //has the race begun?
-        //delete lobby when begin
-        //socket io for real time update
-        //site leave listener
-        //leaving not nessasay after timeout automatic kick
     }, [mutationPlay, code])
 
     useEffect(() => {
         socket.on("typing", (data) => {
-            // 1. Find the todo with the provided id
-            const currentTodoIndex = participants.findIndex((item: any) => item.username === data.username)
-            // 2. Mark the todo as complete
-            const updatedTodo = Object.assign({}, participants[currentTodoIndex])
-            updatedTodo.completed = data.completed + 1
-            // 3. Update the todo list with the updated todo
+            const currentIndex = participants.findIndex((item: any) => item.username === data.username)
+            const updated = Object.assign({}, participants[currentIndex])
+            updated.completed = data.completed + 1
             const newParticipants = participants.slice()
-            newParticipants[currentTodoIndex] = updatedTodo
+            newParticipants[currentIndex] = updated
             setParticipants(newParticipants)
         })
 
@@ -135,7 +130,7 @@ export default function Multiplayer() {
         })
 
         socket.on("waiting", async () => {
-            setWaitingTitle("Waiting for opponents")
+            setWaitingTitle("Waiting for opponents. Starting in ca: ")
             await delay(20000)
             socket.emit("starting", { code })
         })
@@ -165,6 +160,7 @@ export default function Multiplayer() {
     }, [mutationPlay, code, winners])
 
     document.onkeydown = (e) => {
+        textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
         if (!hasStarted) return
@@ -231,7 +227,7 @@ export default function Multiplayer() {
                 const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
-                socket.emit("finish", { username, code, wpm })
+                socket.emit("finish", { username, code, wpm, accuracy, token })
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 
                 setTime(seconds)
@@ -269,6 +265,7 @@ export default function Multiplayer() {
 
             <br />
             <br />
+            {waitingTitle === "" && !hasStarted && <div>Waiting for opponents...</div>}
             {waitingTitle !== "" && !hasStarted && <Timer initialSeconds={30} title={waitingTitle} />}
             {winners.map((item: any, key: any) => (
                 <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
@@ -276,6 +273,13 @@ export default function Multiplayer() {
 
             <br />
             <br />
+            <input
+                type="text"
+                autoComplete="off"
+                autoCapitalize="none"
+                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                ref={textInput}
+            />
             <br />
         </main>
     )

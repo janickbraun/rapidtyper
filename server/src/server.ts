@@ -5,8 +5,11 @@ import { Server } from "socket.io"
 import cors from "cors"
 import bodyParser from "body-parser"
 import path from "path"
+import jwt from "jsonwebtoken"
 import http from "http"
 import mongoose from "mongoose"
+import Lobby from "../models/Lobby"
+import User from "../models/User"
 
 dotenv.config()
 
@@ -72,9 +75,48 @@ io.on("connection", (socket: any) => {
         } catch {}
     })
 
-    socket.on("finish", (data: any) => {
+    socket.on("finish", async (data: any) => {
         try {
-            io.to(String(data.code)).emit("finish", { username: data.username, wpm: data.wpm })
+            const accuracy = data.accuracy
+            const username = data.username
+            const token = data.token
+            const wpm = data.wpm
+            const code = data.code
+
+            const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
+            const loggedin = await User.exists({ _id: temporaryUser.id })
+            io.to(String(code)).emit("finish", { username, wpm })
+            const lobby = await Lobby.findOne({ code })
+            const user = await User.findOne({ username })
+            if (!lobby || !user || !loggedin) return
+            let tempAcc = user.accuracy
+            let tempWpm = user.wpm
+            if (tempAcc.length >= 10) {
+                tempAcc.shift()
+                tempWpm.shift()
+            }
+
+            tempAcc.push(accuracy)
+            tempWpm.push(wpm)
+            if (lobby.finished) {
+                await User.findByIdAndUpdate(user.id, {
+                    $set: {
+                        racesTotal: user.racesTotal + 1,
+                        wpm: tempWpm,
+                        accuracy: tempAcc,
+                    },
+                })
+            } else {
+                await Lobby.findByIdAndUpdate(lobby.id, { $set: { finished: true } })
+                await User.findByIdAndUpdate(user.id, {
+                    $set: {
+                        racesTotal: user.racesTotal + 1,
+                        racesWon: user.racesWon + 1,
+                        wpm: tempWpm,
+                        accuracy: tempAcc,
+                    },
+                })
+            }
         } catch {}
     })
 
@@ -128,7 +170,6 @@ import isloggedinRouter from "./routes/account/isloggedin"
 import deleteaccountRouter from "./routes/account/delete"
 import multiplayerRouter from "./routes/multiplayer"
 import playRouter from "./routes/play"
-import Lobby from "../models/Lobby"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)

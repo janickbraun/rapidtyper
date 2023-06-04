@@ -20,6 +20,22 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        wpm: {
+            type: Array,
+            default: [],
+        },
+        accuracy: {
+            type: Array,
+            default: [],
+        },
+        racesWon: {
+            type: Number,
+            default: 0,
+        },
+        racesTotal: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         collection: "users",

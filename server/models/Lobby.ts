@@ -19,6 +19,10 @@ const LobbySchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
+        finished: {
+            type: Boolean,
+            default: false,
+        },
         text: {
             type: mongoose.Types.ObjectId,
             ref: "texts",

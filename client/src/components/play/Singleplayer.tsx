@@ -18,6 +18,8 @@ export default function Singleplayer() {
     const [author, setAuthor] = useState("")
     const [splitted, setSplitted] = useState<any>([])
 
+    const textInput = useRef<any>(null)
+
     const hasFired = useRef(false)
     let navigate = useNavigate()
 
@@ -90,7 +92,12 @@ export default function Singleplayer() {
         mutationPlay.mutate()
     }
 
+    useEffect(() => {
+        textInput.current.focus()
+    }, [])
+
     document.onkeydown = (e) => {
+        textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
         if (noFire.includes(e.key)) return
@@ -178,6 +185,13 @@ export default function Singleplayer() {
 
             <button onClick={handleRestart}>Restart</button>
             <button onClick={handleNewText}>New text</button>
+            <input
+                type="text"
+                autoComplete="off"
+                autoCapitalize="none"
+                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                ref={textInput}
+            />
         </main>
     )
 }

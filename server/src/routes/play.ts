@@ -52,6 +52,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         if (roomSize > 1) {
             io.to(String(finalLobby.code)).emit("waiting")
         }
+        if (roomSize === 5) {
+            io.to(String(finalLobby.code)).emit("starting")
+        }
 
         const text = await Text.findById(findLobby.text)
 
