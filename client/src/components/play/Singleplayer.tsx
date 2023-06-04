@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import ProgressBar from "./ProgressBar"
+import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function Singleplayer() {
-    const [textArray, setTextArray] = useState([]) as any
     const [currentIndex, setCurrentIndex] = useState(0)
     const [startDateTime, setStartDateTime] = useState(0)
     const [completed, setCompleted] = useState(0)
@@ -12,21 +14,41 @@ export default function Singleplayer() {
     const [wpm, setWpm] = useState<number>(0)
     const [done, setDone] = useState<boolean>(false)
 
-    const text = "jjjjjjjjjj"
+    const [textArray, setTextArray] = useState<any>([])
+    const [author, setAuthor] = useState("")
+    const [splitted, setSplitted] = useState<any>([])
+
     const hasFired = useRef(false)
-    const spitted = text.split("")
-    let arr: any = useMemo(() => [], [])
-    for (let i = 0; i < spitted.length; i += 1) {
-        arr.push({ character: spitted[i], correct: undefined })
-    }
+    let navigate = useNavigate()
+
+    const mutationPlay: any = useMutation({
+        mutationFn: async () => {
+            return await axios.get("https://stoic-quotes.com/api/quote")
+        },
+        onSuccess: async ({ data }) => {
+            setAuthor(data.author)
+
+            const splitt = data.text.split("")
+
+            setSplitted(splitt)
+            let arr: any = []
+            for (let i = 0; i < splitt.length; i += 1) {
+                arr.push({ character: splitt[i], correct: undefined })
+            }
+            setTextArray(arr)
+        },
+        onError: () => {
+            navigate("/")
+        },
+    })
 
     useEffect(() => {
         document.title = "Singleplayer - RapidTyper"
         if (!hasFired.current) {
             hasFired.current = true
-            setTextArray(arr)
+            mutationPlay.mutate()
         }
-    }, [setTextArray, text, arr])
+    }, [mutationPlay])
 
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>
@@ -55,11 +77,17 @@ export default function Singleplayer() {
         setTime(0)
         setWpm(0)
         let temp = textArray
-        for (let i = 0; i < spitted.length; i += 1) {
+        for (let i = 0; i < splitted.length; i += 1) {
             temp[i].correct = undefined
         }
         setTextArray(temp)
         e.currentTarget.blur()
+    }
+
+    const handleNewText = (e: any) => {
+        e.currentTarget.blur()
+        handleRestart(e)
+        mutationPlay.mutate()
     }
 
     document.onkeydown = (e) => {
@@ -68,7 +96,7 @@ export default function Singleplayer() {
         if (noFire.includes(e.key)) return
         if (done) return
 
-        if (e.key === spitted[currentIndex] && currentIndex < spitted.length) {
+        if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             let temp = textArray
             temp[currentIndex].correct = true
@@ -101,7 +129,7 @@ export default function Singleplayer() {
             temp[currentIndex - 1].correct = undefined
             setTextArray(temp)
             setCurrentIndex(currentIndex - 1)
-        } else if (currentIndex < spitted.length && !e.ctrlKey) {
+        } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             let temp = textArray
             temp[currentIndex].correct = false
@@ -110,9 +138,9 @@ export default function Singleplayer() {
             setCurrentIndex(currentIndex + 1)
         }
 
-        if (currentIndex === spitted.length - 1) {
+        if (currentIndex === splitted.length - 1) {
             let allCorrect = true
-            for (let i = 0; i < spitted.length; i += 1) {
+            for (let i = 0; i < splitted.length; i += 1) {
                 if (!textArray[i].correct) {
                     allCorrect = false
                     break
@@ -120,8 +148,8 @@ export default function Singleplayer() {
             }
             if (allCorrect) {
                 const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
-                const wpm = Number((spitted.length / 5 / (seconds / 60)).toFixed(2))
-                const accuracy = Number((((spitted.length - mistakes) / spitted.length) * 100).toFixed(2))
+                const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
+                const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
                 setTime(seconds)
                 setDone(true)
@@ -135,9 +163,10 @@ export default function Singleplayer() {
     return (
         <main>
             <h3>Singleplayer</h3>
-            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / spitted.length) * 100} />
+            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} />
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
             <br />
+            <div>~ {author}</div>
             <br />
             {done && (
                 <>
@@ -148,6 +177,7 @@ export default function Singleplayer() {
             )}
 
             <button onClick={handleRestart}>Restart</button>
+            <button onClick={handleNewText}>New text</button>
         </main>
     )
 }
