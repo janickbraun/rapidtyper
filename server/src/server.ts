@@ -170,6 +170,7 @@ import isloggedinRouter from "./routes/account/isloggedin"
 import deleteaccountRouter from "./routes/account/delete"
 import multiplayerRouter from "./routes/multiplayer"
 import playRouter from "./routes/play"
+import getTextRouter from "./routes/getText"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -178,6 +179,7 @@ app.use("/api/isloggedin", isloggedinRouter)
 app.use("/api/deleteaccount", deleteaccountRouter)
 app.use("/api/multiplayer", multiplayerRouter)
 app.use("/api/play", playRouter)
+app.use("/api/gettext", getTextRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))

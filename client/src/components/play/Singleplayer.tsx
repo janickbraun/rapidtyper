@@ -25,7 +25,7 @@ export default function Singleplayer() {
 
     const mutationPlay: any = useMutation({
         mutationFn: async () => {
-            return await axios.get("https://stoic-quotes.com/api/quote")
+            return await axios.get(process.env.REACT_APP_BACKEND_URL + "/api/gettext")
         },
         onSuccess: async ({ data }) => {
             setAuthor(data.author)
