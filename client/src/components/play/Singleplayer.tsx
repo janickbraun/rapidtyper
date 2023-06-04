@@ -45,7 +45,7 @@ export default function Singleplayer() {
     })
 
     useEffect(() => {
-        document.title = "Singleplayer - RapidTyper"
+        document.title = "Singleplayer | RapidTyper"
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
@@ -185,6 +185,7 @@ export default function Singleplayer() {
 
             <button onClick={handleRestart}>Restart</button>
             <button onClick={handleNewText}>New text</button>
+            <div>Playing in Singleplayer does not effect your stats</div>
             <input
                 type="text"
                 autoComplete="off"

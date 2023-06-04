@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 
 export default function useAuth() {
     const [loggedin, setLoggedin] = useState(false)
+    const [username, setUsername] = useState("")
 
     const token = localStorage.getItem("token")
 
@@ -15,6 +16,7 @@ export default function useAuth() {
         },
         onSuccess: ({ data }) => {
             setLoggedin(data.loggedin)
+            setUsername(data.username)
         },
     })
 
@@ -25,5 +27,5 @@ export default function useAuth() {
         }
     }, [token, mutate, isIdle])
 
-    return [loggedin]
+    return [loggedin, username]
 }

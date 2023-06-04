@@ -96,26 +96,55 @@ io.on("connection", (socket: any) => {
                 tempWpm.shift()
             }
 
+            let bestSpeed = false
+
+            if (wpm > user.bestRace) {
+                bestSpeed = true
+            }
+
             tempAcc.push(accuracy)
             tempWpm.push(wpm)
             if (lobby.finished) {
-                await User.findByIdAndUpdate(user.id, {
-                    $set: {
-                        racesTotal: user.racesTotal + 1,
-                        wpm: tempWpm,
-                        accuracy: tempAcc,
-                    },
-                })
+                if (bestSpeed) {
+                    await User.findByIdAndUpdate(user.id, {
+                        $set: {
+                            racesTotal: user.racesTotal + 1,
+                            wpm: tempWpm,
+                            accuracy: tempAcc,
+                            bestRace: wpm,
+                        },
+                    })
+                } else {
+                    await User.findByIdAndUpdate(user.id, {
+                        $set: {
+                            racesTotal: user.racesTotal + 1,
+                            wpm: tempWpm,
+                            accuracy: tempAcc,
+                        },
+                    })
+                }
             } else {
                 await Lobby.findByIdAndUpdate(lobby.id, { $set: { finished: true } })
-                await User.findByIdAndUpdate(user.id, {
-                    $set: {
-                        racesTotal: user.racesTotal + 1,
-                        racesWon: user.racesWon + 1,
-                        wpm: tempWpm,
-                        accuracy: tempAcc,
-                    },
-                })
+                if (bestSpeed) {
+                    await User.findByIdAndUpdate(user.id, {
+                        $set: {
+                            racesTotal: user.racesTotal + 1,
+                            racesWon: user.racesWon + 1,
+                            wpm: tempWpm,
+                            accuracy: tempAcc,
+                            bestRace: wpm,
+                        },
+                    })
+                } else {
+                    await User.findByIdAndUpdate(user.id, {
+                        $set: {
+                            racesTotal: user.racesTotal + 1,
+                            racesWon: user.racesWon + 1,
+                            wpm: tempWpm,
+                            accuracy: tempAcc,
+                        },
+                    })
+                }
             }
         } catch {}
     })
@@ -171,6 +200,7 @@ import deleteaccountRouter from "./routes/account/delete"
 import multiplayerRouter from "./routes/multiplayer"
 import playRouter from "./routes/play"
 import getTextRouter from "./routes/getText"
+import getStatsRouter from "./routes/stats"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -180,6 +210,7 @@ app.use("/api/deleteaccount", deleteaccountRouter)
 app.use("/api/multiplayer", multiplayerRouter)
 app.use("/api/play", playRouter)
 app.use("/api/gettext", getTextRouter)
+app.use("/api/getstats", getStatsRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))

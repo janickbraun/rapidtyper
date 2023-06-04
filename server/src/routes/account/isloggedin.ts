@@ -13,11 +13,11 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const verifyUser = await User.findOne({
             _id: temporaryUser.id,
         })
-        if (!verifyUser) return res.status(200).json({ loggedin: false })
+        if (!verifyUser) return res.status(200).json({ loggedin: false, username: "" })
 
-        return res.status(200).json({ loggedin: true })
+        return res.status(200).json({ loggedin: true, username: verifyUser.username })
     } catch {
-        return res.status(200).json({ loggedin: false })
+        return res.status(200).json({ loggedin: false, username: "" })
     }
 })
 

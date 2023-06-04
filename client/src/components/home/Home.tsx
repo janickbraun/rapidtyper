@@ -9,7 +9,7 @@ export default function Home() {
     let navigate = useNavigate()
 
     useEffect(() => {
-        document.title = "RapidTyper - Improve your typing skills, practice against yourself or play against others"
+        document.title = "RapidTyper"
     }, [])
 
     const token = localStorage.getItem("token")
@@ -25,25 +25,19 @@ export default function Home() {
 
     const handleMultiplayer = () => {
         mutationMultiplayer.mutate()
-        //is a lobby free
-        //otherwise create one
     }
 
     return (
         <main>
             <h2>Home</h2>
-            <Link className="test" to="/singleplayer">
-                Singleplayer
-            </Link>
+            <button>
+                <Link to="/account">Account</Link>
+            </button>
             <br />
             <br />
-
-            <Link className="test" to="/account">
-                Account
-            </Link>
-            <br />
-            <br />
-
+            <button>
+                <Link to="/singleplayer">Singleplayer</Link>
+            </button>{" "}
             {loggedin ? (
                 <>
                     <button onClick={handleMultiplayer}>Multiplayer</button>
@@ -52,7 +46,6 @@ export default function Home() {
             ) : (
                 <div>For playing online you need to login</div>
             )}
-
             {
                 // Start game section | Singleplayer & Multiplayer
                 // //

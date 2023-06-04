@@ -94,6 +94,7 @@ export default function Multiplayer() {
     })
 
     useEffect(() => {
+        document.title = "Multiplayer | RapidTyper"
         textInput.current.focus()
     }, [])
 
@@ -206,7 +207,6 @@ export default function Multiplayer() {
             setTextArray(temp)
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
-            if (currentIndex === 0) setStartDateTime(new Date().getTime())
             let temp = textArray
             temp[currentIndex].correct = false
             setMistakes(mistakes + 1)
