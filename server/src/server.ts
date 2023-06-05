@@ -46,7 +46,7 @@ mongoose.connection.on("error", (err) => {
     console.log(err)
 })
 
-let typists: any = []
+let typists: Array<any> = []
 
 io.on("connection", (socket: any) => {
     socket.on("typing", (data: any) => {
@@ -85,7 +85,7 @@ io.on("connection", (socket: any) => {
 
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
-            io.to(String(code)).emit("finish", { username, wpm })
+            io.sockets.in(String(code)).emit("finish", { username, wpm })
             const lobby = await Lobby.findOne({ code })
             const user = await User.findOne({ username })
             if (!lobby || !user || !loggedin) return
@@ -150,37 +150,68 @@ io.on("connection", (socket: any) => {
     })
 
     socket.on("join", (data: any) => {
+        if (typists.some((e: any) => e.username === data.username)) {
+            for (let i = 0; i < typists.length; i++) {
+                if (typists[i].username === data.username) {
+                    socket.leave(String(typists[i].code))
+                    break
+                }
+            }
+
+            typists = typists.filter((el: any) => {
+                return el.username !== data.username
+            })
+        }
         socket.join(String(data.code))
         if (data.code.length === 4) {
             typists.push({
                 id: socket.id,
+                username: data.username,
                 code: data.code,
             })
             try {
                 socket.broadcast.to(String(data.code)).emit("join", { num: io.sockets.adapter.rooms.get(data.code).size })
-                //io.to(String(data.code)).emit("join", { username: data.username, num: io.sockets.adapter.rooms.get(data.code).size })
             } catch {}
         }
     })
 
-    socket.on("disconnect", () => {
-        //console.log("disconnect")
+    socket.on("disconnect", async () => {
         if (typists.some((e: any) => e.id === socket.id)) {
-            for (let i = typists.length - 1; i >= 0; i--) {
+            for (let i = 0; i < typists.length; i++) {
                 if (typists[i].id === socket.id && typists[i].code.length === 4) {
                     try {
-                        io.to(String(typists[i].code)).emit("leave", { msg: "someone left", num: io.sockets.adapter.rooms.get(typists[i].code).size })
-                    } catch {}
+                        await Lobby.findOneAndUpdate(
+                            { code: typists[i].code },
+                            {
+                                $pull: {
+                                    participants: typists[i].username,
+                                },
+                            }
+                        )
+                        socket.leave(String(typists[i].code))
+                        if (io.sockets.adapter.rooms.get(String(typists[i].code))) {
+                            console.log("emit leave")
+                            io.to(String(typists[i].code)).emit("leave", { username: typists[i].username })
+                        } else {
+                            console.log("nobody in lobby now")
+                        }
+                    } catch (e) {
+                        console.log(e)
+                    }
 
-                    typists.splice(i, 1)
+                    typists = typists.filter((el: any) => {
+                        return el.id !== socket.id
+                    })
                     break
                 }
             }
         }
+        socket.removeAllListeners()
     })
 
-    socket.on("leave", () => {
-        //console.log("leave")
+    socket.on("error", function (err: any) {
+        if (err.description) throw err.description
+        else throw err // Or whatever you want to do
     })
 })
 

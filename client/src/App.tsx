@@ -13,6 +13,7 @@ import Profile from "./components/account/Profile"
 
 function App() {
     const queryClient = new QueryClient()
+
     return (
         <div className="rapidtyperApp">
             <BrowserRouter>

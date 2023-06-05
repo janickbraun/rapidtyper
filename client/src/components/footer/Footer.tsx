@@ -1,15 +1,20 @@
 import React from "react"
 import "./footer.css"
 import { Link } from "react-router-dom"
+import useIsInGame from "../../hooks/useIsInGame"
 
 export default function Footer() {
+    const [isInGame] = useIsInGame()
+
     return (
         // footer
         <footer className="globalfooter rt-footer">
             <section className="innerfooter">
                 <ul className="linksfooter">
                     <li className="footeritem">
-                        <Link to="/about">About</Link>
+                        <Link reloadDocument={isInGame} to="/about">
+                            About
+                        </Link>
                     </li>
                     <span>•</span>
                     <li className="footeritem">

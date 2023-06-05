@@ -2,9 +2,11 @@ import React, { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
+import useIsInGame from "../../hooks/useIsInGame"
 
 export default function Header({ children }: { children: React.ReactNode }) {
-    const [loggedin] = useAuth()
+    const [loggedin, username] = useAuth()
+    const [isInGame] = useIsInGame()
 
     const [open, setOpen] = useState<boolean>(false)
     const dropRef = useRef<HTMLUListElement>(null)
@@ -26,19 +28,19 @@ export default function Header({ children }: { children: React.ReactNode }) {
         <div>
             <nav className="rt_navigation default_nav">
                 <div className="navigation-logo container-nav">
-                    <Link to="/" className="logoContainer">
+                    <Link to="/" className="logoContainer" reloadDocument={isInGame}>
                         <img src="/img/rapidtyper-pm.png" alt="Logo" className="src_logo" />
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
                     <ul className="_linklisting">
                         <li className="nav-link-item">
-                            <Link to="/about">
+                            <Link to="/about" reloadDocument={isInGame}>
                                 <span className="link_call">About</span>
                             </Link>
                         </li>
                         <li className="nav-link-item">
-                            <Link to="#" onClick={(e) => focus(open)}>
+                            <Link to="#" onClick={(e) => focus(open)} reloadDocument={isInGame}>
                                 <span className="link_call">Play</span>
                                 <span className="navicon">
                                     <svg className="d-svg " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -49,7 +51,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                             {open && (
                                 <ul className="dropdown_container" ref={dropRef}>
                                     <li className="dropdown_item" style={{ marginBottom: 14 }}>
-                                        <Link to="/singleplayer" className="noscale">
+                                        <Link to="/singleplayer" className="noscale" reloadDocument={isInGame}>
                                             <div className="nv-groupsvg">
                                                 <svg className="cnvsvg" viewBox="0 0 865 448" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -76,7 +78,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                         </Link>
                                     </li>
                                     <li className="dropdown_item">
-                                        <Link to="/multiplayer" className="noscale">
+                                        <Link to="/multiplayer" reloadDocument={isInGame} className="noscale">
                                             <div className="nv-groupsvg">
                                                 <svg className="cnvsvg" viewBox="0 0 1027 514" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -129,7 +131,9 @@ export default function Header({ children }: { children: React.ReactNode }) {
                             )}
                         </li>
                         <li className="nav-link-item">
-                            <Link to="/account">{loggedin ? <span className="link_call">Account</span> : <span className="link_call">Login</span>}</Link>
+                            <Link reloadDocument={isInGame} to="/account">
+                                {loggedin ? <span className="link_call">{username}</span> : <span className="link_call">Login</span>}
+                            </Link>
                         </li>
                     </ul>
                 </div>

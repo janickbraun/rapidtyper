@@ -108,9 +108,9 @@ export default function Multiplayer() {
 
         if (mutationPlay.isSuccess && hasFired.current === 1) {
             hasFired.current = 2
-            socket.emit("join", { code })
+            socket.emit("join", { code, username })
         }
-    }, [mutationPlay, code])
+    }, [mutationPlay, code, username])
 
     useEffect(() => {
         socket.on("typing", (data) => {
@@ -130,6 +130,16 @@ export default function Multiplayer() {
     useEffect(() => {
         socket.on("join", () => {
             mutationPlay.mutate()
+        })
+
+        socket.on("leave", (data) => {
+            console.log(data.username + " left")
+
+            const temp = participants.filter((el: any) => {
+                return el.username !== data.username
+            })
+
+            setParticipants(temp)
         })
 
         socket.on("waiting", async () => {
@@ -159,8 +169,9 @@ export default function Multiplayer() {
             socket.off("join")
             socket.off("finish")
             socket.off("waiting")
+            socket.off("leave")
         }
-    }, [mutationPlay, code, winners])
+    }, [mutationPlay, code, winners, participants])
 
     const handler = (e: any) => {
         textInput.current.focus()

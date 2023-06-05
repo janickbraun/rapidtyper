@@ -33,6 +33,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const text = await Text.aggregate([{ $sample: { size: 1 } }])
 
         await Lobby.create({ code, text: text[0]._id })
+        const lobbysDelete = await Lobby.find({ joinable: false })
+        for (let i = 0; i < lobbysDelete.length; i++) {
+            if (Number(new Date()) - Number(lobbysDelete[i].creationDate) > 30 * 60 * 1000) {
+                await Lobby.findByIdAndDelete(lobbysDelete[i].id)
+            }
+        }
         return res.status(200).json({ code })
     } catch {
         return res.status(400).send("Something went wrong")
