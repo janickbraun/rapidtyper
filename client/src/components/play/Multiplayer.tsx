@@ -98,7 +98,8 @@ export default function Multiplayer() {
     useEffect(() => {
         document.title = "Multiplayer | RapidTyper"
         textInput.current.focus()
-    }, [])
+        window.history.pushState({ prevUrl: window.location.href }, "", "/multiplayer/" + code)
+    }, [code])
 
     useEffect(() => {
         if (mutationPlay.isIdle && hasFired.current === 0) {
@@ -133,8 +134,6 @@ export default function Multiplayer() {
         })
 
         socket.on("leave", (data) => {
-            console.log(data.username + " left")
-
             const temp = participants.filter((el: any) => {
                 return el.username !== data.username
             })
@@ -253,6 +252,17 @@ export default function Multiplayer() {
     }
 
     useEventListener("keydown", handler)
+
+    const handlePop = (e: any) => {
+        localStorage.setItem("back", "true")
+    }
+
+    useEffect(() => {
+        window.addEventListener("popstate", handlePop)
+        return () => {
+            window.removeEventListener("popstate", handlePop)
+        }
+    }, [])
 
     return (
         <main>

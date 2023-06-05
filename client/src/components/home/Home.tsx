@@ -10,7 +10,11 @@ export default function Home() {
 
     useEffect(() => {
         document.title = "RapidTyper"
-    }, [])
+        if (localStorage.getItem("back") === "true") {
+            localStorage.removeItem("back")
+            window.location.reload()
+        }
+    }, [navigate])
 
     const token = localStorage.getItem("token")
 

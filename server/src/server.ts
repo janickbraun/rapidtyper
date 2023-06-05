@@ -190,10 +190,7 @@ io.on("connection", (socket: any) => {
                         )
                         socket.leave(String(typists[i].code))
                         if (io.sockets.adapter.rooms.get(String(typists[i].code))) {
-                            console.log("emit leave")
                             io.to(String(typists[i].code)).emit("leave", { username: typists[i].username })
-                        } else {
-                            console.log("nobody in lobby now")
                         }
                     } catch (e) {
                         console.log(e)
