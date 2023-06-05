@@ -6,6 +6,9 @@ import io, { Socket } from "socket.io-client"
 import ProgressBar from "./ProgressBar"
 import Timer from "./Timer"
 import useEventListener from "@use-it/event-listener"
+import useWindowSize from "react-use/lib/useWindowSize"
+import Confetti from "react-confetti"
+import useSound from "use-sound"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -32,12 +35,19 @@ export default function Multiplayer() {
     const [hasStarted, setHasStarted] = useState(false)
     const [waitingTitle, setWaitingTitle] = useState("")
     const [winners, setWinners] = useState<any>([])
+    const [isCapsLocked, setIsCapsLocked] = useState(false)
 
     const textInput = useRef<any>(null)
+    const { width, height } = useWindowSize()
 
     const token = localStorage.getItem("token")
     let navigate = useNavigate()
     const hasFired = useRef(0)
+
+    const [audioActive, setAudioActive] = useState(true)
+
+    const [playTypeSound] = useSound("/mp3/type.mp3", { volume: 0.7 })
+    const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>
@@ -56,6 +66,11 @@ export default function Multiplayer() {
             )}
         </div>
     ))
+
+    const handleSoundControl = () => {
+        localStorage.setItem("audio", String(!audioActive))
+        setAudioActive(!audioActive)
+    }
 
     const mutationMultiplayer: any = useMutation({
         mutationFn: async () => {
@@ -105,6 +120,15 @@ export default function Multiplayer() {
         if (mutationPlay.isIdle && hasFired.current === 0) {
             hasFired.current = 1
             mutationPlay.mutate()
+            const tempAudio = localStorage.getItem("audio")
+            if (!tempAudio) {
+                localStorage.setItem("audio", "true")
+                setAudioActive(true)
+            } else if (tempAudio === "true") {
+                setAudioActive(true)
+            } else if (tempAudio === "false") {
+                setAudioActive(false)
+            }
         }
 
         if (mutationPlay.isSuccess && hasFired.current === 1) {
@@ -176,11 +200,14 @@ export default function Multiplayer() {
         textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
+        if (isCapsLocked !== e.getModifierState("CapsLock")) setIsCapsLocked(e.getModifierState("CapsLock"))
+
         if (!hasStarted) return
         if (noFire.includes(e.key)) return
         if (done) return
 
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
+            if (audioActive) playTypeSound()
             let temp: any = textArray
             temp[currentIndex].correct = true
             setTextArray(temp)
@@ -201,6 +228,7 @@ export default function Multiplayer() {
                 if (temp !== now) socket.emit("typing", { completed, code, username })
             }
         } else if (e.key === "Backspace" && e.ctrlKey) {
+            if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp: any = textArray
             let times = 1
@@ -213,12 +241,14 @@ export default function Multiplayer() {
             setCurrentIndex(currentIndex - times)
             setTextArray(temp)
         } else if (e.key === "Backspace") {
+            if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp = textArray
             temp[currentIndex - 1].correct = undefined
             setTextArray(temp)
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
+            if (audioActive) playErrorSound()
             let temp = textArray
             temp[currentIndex].correct = false
             setMistakes(mistakes + 1)
@@ -278,7 +308,8 @@ export default function Multiplayer() {
             <br />
             <br />
             <div>~ {author}</div>
-
+            {isCapsLocked && <div>WARNING: CapsLock is active</div>}
+            <Confetti width={width} height={height} run={winners[0]?.username === username} opacity={0.8} recycle={false} />
             {done && (
                 <>
                     <div>Speed: {wpm} wpm</div>
@@ -287,6 +318,8 @@ export default function Multiplayer() {
                     <button onClick={() => mutationMultiplayer.mutate()}>Race again</button>
                 </>
             )}
+
+            <button onClick={handleSoundControl}>{audioActive ? <>Mute</> : <>Unmute</>}</button>
 
             <br />
             <br />

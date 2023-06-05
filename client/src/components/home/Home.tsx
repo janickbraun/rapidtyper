@@ -36,19 +36,19 @@ export default function Home() {
             <h2>Home</h2>
             {loggedin && (
                 <>
-                    <button>
-                        <Link to={"/user/" + username}>Profile</Link>
-                    </button>{" "}
+                    <Link to={"/user/" + username}>
+                        <button>Profile</button>
+                    </Link>{" "}
                 </>
             )}
-            <button>
-                <Link to="/account">Account</Link>
-            </button>
+            <Link to="/account">
+                <button>Account</button>
+            </Link>
             <br />
             <br />
-            <button>
-                <Link to="/singleplayer">Singleplayer</Link>
-            </button>{" "}
+            <Link to="/singleplayer">
+                <button>Singleplayer</button>
+            </Link>{" "}
             {loggedin ? (
                 <>
                     <button onClick={handleMultiplayer}>Multiplayer</button>

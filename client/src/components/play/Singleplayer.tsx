@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import useEventListener from "@use-it/event-listener"
+import useSound from "use-sound"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -18,8 +19,14 @@ export default function Singleplayer() {
     const [textArray, setTextArray] = useState<any>([])
     const [author, setAuthor] = useState("")
     const [splitted, setSplitted] = useState<any>([])
+    const [isCapsLocked, setIsCapsLocked] = useState(false)
 
     const textInput = useRef<any>(null)
+
+    const [audioActive, setAudioActive] = useState(true)
+
+    const [playTypeSound] = useSound("/mp3/type.mp3", { volume: 0.7 })
+    const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
     const hasFired = useRef(false)
     let navigate = useNavigate()
@@ -45,11 +52,25 @@ export default function Singleplayer() {
         },
     })
 
+    const handleSoundControl = () => {
+        localStorage.setItem("audio", String(!audioActive))
+        setAudioActive(!audioActive)
+    }
+
     useEffect(() => {
         document.title = "Singleplayer | RapidTyper"
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
+            const tempAudio = localStorage.getItem("audio")
+            if (!tempAudio) {
+                localStorage.setItem("audio", "true")
+                setAudioActive(true)
+            } else if (tempAudio === "true") {
+                setAudioActive(true)
+            } else if (tempAudio === "false") {
+                setAudioActive(false)
+            }
         }
     }, [mutationPlay])
 
@@ -101,11 +122,14 @@ export default function Singleplayer() {
         textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
 
+        if (isCapsLocked !== e.getModifierState("CapsLock")) setIsCapsLocked(e.getModifierState("CapsLock"))
+
         if (noFire.includes(e.key)) return
         if (done) return
 
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
+            if (audioActive) playTypeSound()
             let temp = textArray
             temp[currentIndex].correct = true
             setTextArray(temp)
@@ -120,6 +144,7 @@ export default function Singleplayer() {
             }
             if (allCorrect) setCompleted(currentIndex)
         } else if (e.key === "Backspace" && e.ctrlKey) {
+            if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp = textArray
             let times = 1
@@ -132,6 +157,7 @@ export default function Singleplayer() {
             setCurrentIndex(currentIndex - times)
             setTextArray(temp)
         } else if (e.key === "Backspace") {
+            if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp = textArray
             temp[currentIndex - 1].correct = undefined
@@ -139,6 +165,7 @@ export default function Singleplayer() {
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
+            if (audioActive) playErrorSound()
             let temp = textArray
             temp[currentIndex].correct = false
             setMistakes(mistakes + 1)
@@ -176,7 +203,10 @@ export default function Singleplayer() {
             <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} />
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
             <br />
+            <br />
             <div>~ {author}</div>
+            {isCapsLocked && <div>WARNING: CapsLock is active</div>}
+            <br />
             <br />
             {done && (
                 <>
@@ -185,9 +215,10 @@ export default function Singleplayer() {
                     <div>Time: {time} seconds</div>
                 </>
             )}
-
-            <button onClick={handleRestart}>Restart</button>
-            <button onClick={handleNewText}>New text</button>
+            <button onClick={handleRestart}>Restart</button> <button onClick={handleNewText}>New text</button>
+            <br />
+            <br />
+            <button onClick={handleSoundControl}>{audioActive ? <>Mute</> : <>Unmute</>}</button>
             <div>Playing in Singleplayer does not effect your stats</div>
             <input
                 type="text"
