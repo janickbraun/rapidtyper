@@ -55,9 +55,10 @@ export default function Leaderboard() {
                                 <th></th>
                                 <th>Username</th>
                                 <th>Speed</th>
-                                <th>Accuracy</th>
                                 <th>Total races</th>
                                 <th>Races won</th>
+                                <th>Best race</th>
+                                <th>Accuracy</th>
                                 <th>Racing since</th>
                             </tr>
                             {data.map((val: any, key: number) => {
@@ -66,9 +67,11 @@ export default function Leaderboard() {
                                         <td>{key + 1 + "."}</td>
                                         <td>{val.username}</td>
                                         <td>{getAverage(val.wpm)}wpm</td>
-                                        <td>{getAverage(val.accuracy)}%</td>
+
                                         <td>{val.racesTotal}</td>
                                         <td>{val.racesWon}</td>
+                                        <td>{val.bestRace}wpm</td>
+                                        <td>{getAverage(val.accuracy)}%</td>
                                         <td>{new Date(val.creationDate).toLocaleDateString()}</td>
                                     </tr>
                                 )
