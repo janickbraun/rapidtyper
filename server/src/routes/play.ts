@@ -23,22 +23,22 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         if (!findLobby) return res.status(300).send("No joinable lobby found")
 
-        if (!loggedin) return res.status(300).send("Invalid user")
-
         const user = await User.findById(temporaryUser.id)
 
-        const username = user?.username
+        if (!loggedin || !user) return res.status(300).send("Invalid user")
+
+        const username = user.username
 
         if (findLobby.participants.length > 3) return res.status(300).send("Lobby is full")
 
-        if (!findLobby.participants.includes(username)) {
+        if (!findLobby.participants.some((e) => e.username === username)) {
             await Lobby.updateOne(
                 {
                     _id: findLobby._id,
                 },
                 {
                     $push: {
-                        participants: username,
+                        participants: { username, skin: user.skin },
                     },
                 }
             )
@@ -58,7 +58,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const text = await Text.findById(findLobby.text)
 
-        return res.status(200).json({ participants: findLobby.participants, text, username })
+        return res.status(200).json({ participants: finalLobby.participants, text, username })
     } catch {
         return res.status(300).send("Something went wrong")
     }

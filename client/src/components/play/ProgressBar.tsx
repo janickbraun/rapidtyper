@@ -1,11 +1,7 @@
 import React from "react"
 
-/*
-  --> RaceCar.tsx
-*/
-
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed, name } = props
+    const { bgcolor, completed, name, skin } = props
 
     const containerStyles = {
         height: 20,
@@ -24,29 +20,32 @@ const ProgressBar = (props: any) => {
         position: "relative",
     }
 
-    var color: string = "black"
+    let color: string = "black"
 
-    if (completed >= 2) {
+    if (completed >= 97) {
         color = "white"
     } else {
         color = "black"
     }
 
     const labelStyles: object = {
-        // type (object/any) weil sonst fehler wegen "position: absolute;"
         padding: 5,
         color: color,
         fontWeight: "bold",
-        left: 5,
-        top: "50%",
-        transform: "translateY(-50%)",
+        top: "200%",
+        transform: "translate(-0px, -138%)",
         position: "absolute",
+        width: 100,
+        textAlign: "left",
     }
 
     return (
         <div style={containerStyles}>
             <div style={fillerStyles}>
-                <span style={labelStyles}>{name + `${Math.round(completed)}%`}</span>
+                <span style={labelStyles}>
+                    {name + ` ${Math.round(completed)}%`}
+                    <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />
+                </span>
             </div>
         </div>
     )

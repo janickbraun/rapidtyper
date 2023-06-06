@@ -89,7 +89,7 @@ export default function Multiplayer() {
         onSuccess: async ({ data }) => {
             let temp = []
             for (let i = 0; i < data.participants.length; i += 1) {
-                temp.push({ username: data.participants[i], completed: 0 })
+                temp.push({ username: data.participants[i].username, completed: 0, skin: data.participants[i].skin })
             }
             setParticipants(temp)
             setText(data.text.text)
@@ -297,9 +297,19 @@ export default function Multiplayer() {
     return (
         <main>
             <h2>Multiplayer</h2>
-            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / text.length) * 100} name={username} />
+            <ProgressBar
+                bgcolor={"#6a1b9a"}
+                completed={(completed / text.length) * 100}
+                name={username}
+                skin={
+                    participants.filter((e: any) => {
+                        return e.username === username
+                    })[0]?.skin
+                }
+            />
             {participants.map(
-                (item: any, key: any) => item.username !== username && <ProgressBar key={key} bgcolor={"#6a1b9a"} completed={(item.completed / text.length) * 100} name={item.username} />
+                (item: any, key: any) =>
+                    item.username !== username && <ProgressBar key={key} bgcolor={"#6a1b9a"} completed={(item.completed / text.length) * 100} name={item.username} skin={item.skin} />
             )}
 
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
