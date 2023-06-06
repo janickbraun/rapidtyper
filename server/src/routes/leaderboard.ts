@@ -42,9 +42,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         } else {
             return res.status(300).send("Invalid leaderboard type")
         }
-    } catch (e) {
-        console.log(e)
-        //return res.status(400).send("Something went wrong")
+    } catch {
+        return res.status(400).send("Something went wrong")
     }
 })
 

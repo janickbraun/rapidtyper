@@ -3,6 +3,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import { useEffectOnce } from "react-use"
 import "./leaderboard.module.css"
+import { Link } from "react-router-dom"
 
 const getAverage = (arr: Array<number>) => {
     const sum = arr.reduce((a: number, b: number) => a + b, 0)
@@ -65,7 +66,9 @@ export default function Leaderboard() {
                                 return (
                                     <tr key={key}>
                                         <td>{key + 1 + "."}</td>
-                                        <td>{val.username}</td>
+                                        <td>
+                                            <Link to={"/user/" + val.username}>{val.username}</Link>
+                                        </td>
                                         <td>{getAverage(val.wpm)}wpm</td>
 
                                         <td>{val.racesTotal}</td>

@@ -40,6 +40,14 @@ const UserSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        skins: {
+            type: Array,
+            default: ["snail"],
+        },
+        skin: {
+            type: String,
+            default: "snail",
+        },
     },
     {
         collection: "users",

@@ -231,6 +231,7 @@ import getTextRouter from "./routes/getText"
 import getStatsRouter from "./routes/stats"
 import changeUsernameRouter from "./routes/account/changeusername"
 import leaderboardRouter from "./routes/leaderboard"
+import changeSkinRouter from "./routes/account/changeskin"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -243,6 +244,7 @@ app.use("/api/gettext", getTextRouter)
 app.use("/api/getstats", getStatsRouter)
 app.use("/api/changeusername", changeUsernameRouter)
 app.use("/api/leaderboard", leaderboardRouter)
+app.use("/api/changeskin", changeSkinRouter)
 
 const root = path.join(__dirname, "../../client/build")
 app.use(express.static(root))
