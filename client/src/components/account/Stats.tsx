@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 export default function Stats(props: any) {
     const [wpm, setWpm] = useState(0)
@@ -10,7 +9,6 @@ export default function Stats(props: any) {
     const [racesWon, setRacesWon] = useState(0)
     const [bestRace, setBestRace] = useState(0)
     const [date, setDate] = useState("")
-    let navigate = useNavigate()
 
     const hasFired = useRef(false)
 
@@ -26,9 +24,6 @@ export default function Stats(props: any) {
             setBestRace(data.bestRace)
             setDate(data.date)
         },
-        onError: () => {
-            navigate("/")
-        },
     })
 
     useEffect(() => {
@@ -40,9 +35,10 @@ export default function Stats(props: any) {
 
     return (
         <div>
-            <h3>Stats</h3>
+            {mutation.isError && <div>Profile was not found</div>}
             {mutation.isSuccess && (
                 <div>
+                    <h3>Stats</h3>
                     <div>Speed: {wpm}wpm</div>
                     <div>Accuracy: {accuracy}%</div>
                     <div>Races completed: {racesTotal}</div>

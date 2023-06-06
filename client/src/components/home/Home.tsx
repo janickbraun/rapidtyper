@@ -3,6 +3,7 @@ import axios from "axios"
 import React, { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
+import Leaderboard from "./Leaderboard"
 
 export default function Home() {
     const [loggedin, username] = useAuth()
@@ -33,7 +34,7 @@ export default function Home() {
 
     return (
         <main>
-            <h2>Home</h2>
+            <h1>Home</h1>
             {loggedin && (
                 <>
                     <Link to={"/user/" + username}>
@@ -57,13 +58,7 @@ export default function Home() {
             ) : (
                 <div>For playing online you need to login</div>
             )}
-            {
-                // Start game section | Singleplayer & Multiplayer
-                // //
-                // Leaderboard
-                // //
-                // About / Learn
-            }
+            <Leaderboard />
         </main>
     )
 }

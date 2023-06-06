@@ -18,11 +18,15 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <a href="//grovider.co/privacy-policy">Privacy Policy</a>
+                        <Link to="/privacy-policy" reloadDocument={isInGame}>
+                            Privacy Policy
+                        </Link>
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <a href="./imprint.html">Imprint</a>
+                        <Link to="/imprint" reloadDocument={isInGame}>
+                            Imprint
+                        </Link>
                     </li>
                 </ul>
                 <div className="copyright">
