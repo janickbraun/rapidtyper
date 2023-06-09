@@ -56,4 +56,4 @@ RapidTyper is licensed under the [MIT License](https://opensource.org/licenses/M
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, please don't hesitate to contact the project maintainers at [rapidtyper@grovider.co](mailto:rapidtyper@grovider.co). We appreciate your interest in RapidTyper and look forward to hearing from you!
+If you have any questions, suggestions, or feedback, please don't hesitate to contact us at [info@mail.rapidtyper.com](mailto:info@mail.rapidtyper.com). We appreciate your interest in RapidTyper and look forward to hearing from you!
