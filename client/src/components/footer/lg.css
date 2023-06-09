@@ -1,0 +1,41 @@
+.imprintReset .wstop{
+    margin-top: 7rem;
+}
+.imprintReset a.imprintLink{
+    color: #04adad;
+    text-decoration: 2px underline currentColor;
+}
+.imprintReset .wstop{
+    border-bottom: 3px solid #2f3031;
+    padding-bottom: 1rem;
+}
+.imprintReset .btn{
+    background-color: #494949;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+}
+.imprintReset .btn:hover{
+    background-color: #323232;
+}
+.imprintReset{
+    margin: 0 2rem;
+}
+.imprintReset h2{
+    margin: .6rem 0;
+}
+.imprintReset hr{
+    margin: 1.3rem 0;
+}
+a.imprintLink{
+    margin: .4rem 0;
+    display: inline-block;
+}
+.imprintReset a.imprintLink:hover{
+    text-decoration: none;
+}
+.imprintReset h1{
+    margin: 1rem 0;
+}

@@ -1,14 +1,11 @@
 /* copyright (c) 2023 RapidTyper by Janick & Luis */
-footer{
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-}
+
 .innerfooter{
     display: flex;
     justify-content: flex-end;
     align-items: center;
     column-gap: 1.2rem;
+    margin-top: 1.8rem;
 }
 .globalfooter{
     backdrop-filter: blur(15px);

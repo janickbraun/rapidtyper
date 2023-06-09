@@ -12,6 +12,12 @@ export default function Footer() {
             <section className="innerfooter">
                 <ul className="linksfooter">
                     <li className="footeritem">
+                        <Link reloadDocument={isInGame} to="//feedback.rapidtyper.com">
+                            Leave Feedback
+                        </Link>
+                    </li>
+                    <span>•</span>
+                    <li className="footeritem">
                         <Link reloadDocument={isInGame} to="/about">
                             About
                         </Link>
