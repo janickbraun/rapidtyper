@@ -16,7 +16,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const collapseOutside = (e: any) => {
-            //if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
+            if (open && !dropRef.current?.contains(e.target as Node)) setOpen(false)
         }
         window.addEventListener("click", collapseOutside)
         return () => {
@@ -29,7 +29,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
             <nav className="rt_navigation default_nav">
                 <div className="navigation-logo container-nav">
                     <Link to="/" className="logoContainer" reloadDocument={isInGame}>
-                        <img src="/img/rapidtyper-pm.png" alt="Logo" className="src_logo" />
+                        <img src="/img/rapidtyper-logo.png" alt="Logo" className="src_logo" />
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">

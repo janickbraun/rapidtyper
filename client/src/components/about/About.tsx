@@ -35,7 +35,7 @@ export default function About() {
             </p>
 
             <p>
-                If you have any questions, suggestions, or feedback, we'd love to hear from you! Contact us at <a href="mailto:support@rapidtyper.com">support@rapidtyper.com</a>. Thank you for
+                If you have any questions, suggestions, or feedback, we'd love to hear from you! Contact us at <a href="mailto:support@mail.rapidtyper.com">support@mail.rapidtyper.com</a>. Thank you for
                 choosing RapidTyper as your partner in improving your typing skills!
             </p>
         </main>
