@@ -37,17 +37,17 @@ export default function Home() {
             <h1>Home</h1>
             {loggedin && (
                 <>
-                    <Link to={"/user/" + username}>
+                    <Link tabIndex={-1} to={"/user/" + username}>
                         <button>Profile</button>
                     </Link>{" "}
                 </>
             )}
-            <Link to="/account">
+            <Link tabIndex={-1} to="/account">
                 <button>Account</button>
             </Link>
             <br />
             <br />
-            <Link to="/singleplayer">
+            <Link tabIndex={-1} to="/singleplayer">
                 <button>Singleplayer</button>
             </Link>{" "}
             {loggedin ? (

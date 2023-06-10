@@ -43,3 +43,6 @@ button a, a button{
 main{
     margin-top: 80px;
 }
+.flanimate{
+    position: static;
+}

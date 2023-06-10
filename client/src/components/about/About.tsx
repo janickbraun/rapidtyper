@@ -1,16 +1,44 @@
 import React, { useEffect } from "react"
+import { motion, Variants } from "framer-motion";
 
 export default function About() {
     useEffect(() => {
         document.title = "About | RapidTyper"
     }, [])
+
+    const cardVariants: Variants = {
+        offscreen: {
+          y: 100
+        },
+        onscreen: {
+          y: 50,
+          transition: {
+            type: "spring",
+            bounce: 0.2,
+            duration: 0.8
+          }
+        }
+    };
+
     return (
         <main>
             <h1>About</h1>
-            <p>
-                RapidTyper is a cutting-edge web application designed to help users enhance their typing skills and become proficient keyboard users. Whether you're a professional looking to increase
-                your productivity or a beginner aiming to improve your typing speed, RapidTyper provides a fun and interactive platform to achieve your goals.
-            </p>
+            <div>
+            <motion.div
+                className="flanimate aabout"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: false, amount: 0.8 }}
+            >
+                <motion.div className="card" variants={cardVariants}>
+                <p>
+                    RapidTyper is a cutting-edge web application designed to help users enhance their typing skills and become proficient keyboard users. Whether you're a professional looking to increase
+                    your productivity or a beginner aiming to improve your typing speed, RapidTyper provides a fun and interactive platform to achieve your goals.
+                </p>
+                </motion.div>
+                
+            </motion.div>
+            </div>
 
             <h2>Our Mission</h2>
             <p>
