@@ -37,7 +37,11 @@ export default function Footer() {
                 </ul>
                 <div className="copyright">
                     <p className="copyrighttxt">
-                        &copy;2023 RapidTyper - von Luis und{" "}
+                        &copy;2023 RapidTyper - von{" "}
+                        <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/">
+                            Luis
+                        </a> 
+                        {" "}und{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/">
                             Janick
                         </a>
