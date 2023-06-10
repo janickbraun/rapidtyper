@@ -24,7 +24,7 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <Link to="/privacy-policy" reloadDocument={isInGame}>
+                        <Link to="//grovider.co/privacy-policy" reloadDocument={isInGame}>
                             Privacy Policy
                         </Link>
                     </li>
