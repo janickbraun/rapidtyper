@@ -14,7 +14,7 @@ import User from "../models/User"
 dotenv.config()
 
 const PORT = process.env.PORT
-const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co", "http://rapidtyper.com", "https://rapidtyper.com"]
+const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co", "https://rapidtyper.com", "http://rapidtyper.com"]
 
 const app: Application = express()
 const server = http.createServer(app)
@@ -246,7 +246,7 @@ app.use("/api/changeusername", changeUsernameRouter)
 app.use("/api/leaderboard", leaderboardRouter)
 app.use("/api/changeskin", changeSkinRouter)
 
-const root = path.join(__dirname, "../../client/build")
+const root = path.join(__dirname, "../build")
 app.use(express.static(root))
 app.get("*", (req, res) => {
     res.sendFile("index.html", { root })
