@@ -39,3 +39,9 @@ button:hover .clgoicon{
 .clcionct{
     display: contents;
 }
+table{
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 2px solid #292b2f6a;
+}

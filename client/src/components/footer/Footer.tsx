@@ -41,10 +41,11 @@ export default function Footer() {
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/">
                             Luis
                         </a> 
-                        {" "}und{" "}
+                        {" "}&{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/">
                             Janick
-                        </a>
+                        </a>{", "}
+                        <span className="zns">under the authority of Grovider Ltda.</span>
                     </p>
                 </div>
             </section>

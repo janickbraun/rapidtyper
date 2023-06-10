@@ -51,7 +51,7 @@ export default function Leaderboard() {
                     <h2>Leaderboard</h2>
                     <button onClick={handleSortChange}>Sort by: {leaderboardType}</button>
                     <table>
-                        <tbody>
+                        <thead>
                             <tr>
                                 <th></th>
                                 <th>Username</th>
@@ -62,6 +62,8 @@ export default function Leaderboard() {
                                 <th>Accuracy</th>
                                 <th>Racing since</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             {data.map((val: any, key: number) => {
                                 return (
                                     <tr key={key}>
