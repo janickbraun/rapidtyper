@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec ts-node src/server.ts",
     "dev": "ts-node-dev --respawn src/server.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "prod": "node src/server.ts"
   },
   "keywords": [],
   "author": "",
