@@ -24,10 +24,17 @@ button, .test{
     text-decoration: none;
     font-family: inherit;
     transition: .15s ease;
-
+    border: 3px solid transparent;
     padding: 4px 10px;
     border-radius: 3px;
-    display: inline-block;
+    display: inline-flex;
+    align-items:center;
+    column-gap: .22rem;
+}
+.largebtn{
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 4px;
 }
 button:hover, .test:hover{
     background-color: #1d4ed8;
@@ -40,9 +47,23 @@ button a, a button{
     color: #fff;
     text-decoration: none;
 }
+button.secondary_action{
+    background-color: transparent;
+    border: 3px solid #2563eb;
+    border-radius: 5px;
+}
+button.secondary_action:hover{
+    background-color: #2564eb44;
+}
 main{
     margin-top: 80px;
 }
 .flanimate{
     position: static;
+}
+body{
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0idmlzdWFsIiB2aWV3Qm94PSIwIDAgOTAwIDYwMCIgd2lkdGg9IjkwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSI+PGcgZmlsbD0iIzA0QURBRDI2Ij48Y2lyY2xlIHI9IjQ2IiBjeD0iMzQ4IiBjeT0iNDM1Ij48L2NpcmNsZT48Y2lyY2xlIHI9IjMyIiBjeD0iNzY0IiBjeT0iNDA3Ij48L2NpcmNsZT48Y2lyY2xlIHI9IjM5IiBjeD0iNTE3IiBjeT0iNDc5Ij48L2NpcmNsZT48Y2lyY2xlIHI9IjM1IiBjeD0iNjQzIiBjeT0iMzU3Ij48L2NpcmNsZT48Y2lyY2xlIHI9IjQyIiBjeD0iMTMyIiBjeT0iMTMwIj48L2NpcmNsZT48L2c+PC9zdmc+");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

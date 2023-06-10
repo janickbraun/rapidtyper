@@ -1,0 +1,35 @@
+.login_hint{
+    display: flex;
+    justify-content: center;
+}
+.loginhint_inner{
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 1.4rem 2rem;
+    /* box-shadow: 2px 2px 20px rgb(0 0 0 / 5%); */
+    border: 2px solid #292b2f6a;
+}
+.buttons_callercontainer{
+    margin-top: .8rem;
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+.trcaller{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: .2rem;
+}
+.complete{
+    font-size: 18px;
+    color: #ffffffd6;
+}
+.clgoicon{
+    fill: currentColor;
+    height: 15px;
+    transition: .2s ease;
+}
+button:hover .clgoicon{
+    transform: translateX(3px);
+}
