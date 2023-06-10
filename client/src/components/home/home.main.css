@@ -33,3 +33,9 @@
 button:hover .clgoicon{
     transform: translateX(3px);
 }
+.loginhint_inner{
+    margin-top: 3.2rem;
+}
+.clcionct{
+    display: contents;
+}
