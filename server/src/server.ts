@@ -14,7 +14,7 @@ import User from "../models/User"
 dotenv.config()
 
 const PORT = process.env.PORT
-const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co"]
+const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co", "http://rapidtyper.com", "https://rapidtyper.com"]
 
 const app: Application = express()
 const server = http.createServer(app)
