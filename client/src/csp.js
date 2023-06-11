@@ -11,3 +11,4 @@ module.exports = {
         "connect-src": [ "'self'", "https://mybackend.com"]
     }
 }
+// JANICK !!!!! bitte >> cd client && npm install <<
