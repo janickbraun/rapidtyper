@@ -67,6 +67,7 @@ button:hover .clgoicon{
 .sortBtn{
     background-color: transparent;
     color: #2563eb;
+    font-weight: 500;
 }
 .sortBtn:hover{
     background-color: #2e2f30be;

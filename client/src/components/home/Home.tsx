@@ -60,12 +60,12 @@ export default function Home() {
                             <p className="complete">Unlock skins, play multiplayer, and discover other amazing features exclusively for registered users.</p>
                         </div>
                         <div className="buttons_callercontainer">
-                            <Link to={"/account#login"}>
+                            <Link to={"/account#login"} tabIndex={-1}>
                                 <button className="secondary_action largebtn">
                                     <span className="btninspan">Login</span>
                                 </button>
                             </Link>
-                            <Link to={"/account#signup"}>
+                            <Link to={"/account#signup"} tabIndex={-1}>
                                 <button className="primary_action largebtn">
                                     <span className="btninspan">Signup</span>
                                     <figure className="clcionct">
