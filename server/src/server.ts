@@ -220,6 +220,16 @@ app.use(helmet())
 
 app.set("io", io)
 
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "favicon.grovider.co", "https: data:"],
+            "content-src": ["'self'", "cdn.grovider.co", "https: data:"],
+        },
+    })
+)
+
 import indexRouter from "./routes/index"
 import signUpRouter from "./routes/account/signup"
 import loginRouter from "./routes/account/login"
