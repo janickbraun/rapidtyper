@@ -64,3 +64,6 @@ main{
 .zns{
     font-size: 12px;
 }
+a[tabindex="-1"]{
+    text-decoration: none !important;
+}
