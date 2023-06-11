@@ -12,17 +12,18 @@ function timeout(delay: number) {
 
 export default function Home() {
     const [loggedin, username] = useAuth()
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const [accountResponse, setAccountResponse] = useState("")
     let navigate = useNavigate()
 
-    const accMsg = async (msg: string) => {
-        setAccountResponse(msg)
-        await timeout(3000)
-        setAccountResponse("")
-    }
-
     useEffect(() => {
+        const accMsg = async (msg: string) => {
+            setAccountResponse(msg)
+            setSearchParams()
+            await timeout(3000)
+            setAccountResponse("")
+        }
+
         document.title = "RapidTyper"
         if (localStorage.getItem("back") === "true") {
             localStorage.removeItem("back")
@@ -38,7 +39,7 @@ export default function Home() {
         } else if (searchParams.get("logout")) {
             accMsg("Successfully logged out")
         }
-    }, [navigate, searchParams])
+    }, [navigate, searchParams, setSearchParams])
 
     const token = localStorage.getItem("token")
 
