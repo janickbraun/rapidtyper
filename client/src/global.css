@@ -57,7 +57,7 @@ button.secondary_action:hover{
 }
 main{
     margin-top: 80px;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px - (25px * 2));
 }
 .flanimate{
     position: static;
