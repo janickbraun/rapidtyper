@@ -1,14 +1,26 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import Leaderboard from "./Leaderboard"
 import "./home.main.css"
 
+function timeout(delay: number) {
+    return new Promise((res) => setTimeout(res, delay))
+}
+
 export default function Home() {
     const [loggedin, username] = useAuth()
+    const [searchParams] = useSearchParams()
+    const [accountResponse, setAccountResponse] = useState("")
     let navigate = useNavigate()
+
+    const accMsg = async (msg: string) => {
+        setAccountResponse(msg)
+        await timeout(3000)
+        setAccountResponse("")
+    }
 
     useEffect(() => {
         document.title = "RapidTyper"
@@ -16,7 +28,17 @@ export default function Home() {
             localStorage.removeItem("back")
             window.location.reload()
         }
-    }, [navigate])
+
+        if (searchParams.get("login")) {
+            accMsg("Successfully logged in")
+        } else if (searchParams.get("signup")) {
+            accMsg("Successfully signed up")
+        } else if (searchParams.get("delete")) {
+            accMsg("Successfully deleted account")
+        } else if (searchParams.get("logout")) {
+            accMsg("Successfully logged out")
+        }
+    }, [navigate, searchParams])
 
     const token = localStorage.getItem("token")
 
@@ -35,6 +57,7 @@ export default function Home() {
 
     return (
         <main>
+            {accountResponse !== "" && <div>{accountResponse}</div>}
             {loggedin && (
                 <>
                     <Link tabIndex={-1} to={"/user/" + username}>
@@ -51,7 +74,7 @@ export default function Home() {
                     {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
                 </>
             ) : (
-                <div className="login_hint hct takeover_trans2"> 
+                <div className="login_hint hct takeover_trans2">
                     <div className="loginhint_inner">
                         <div className="loginhintheader">
                             <h1 className="trcaller">Unlock more</h1>
@@ -69,7 +92,9 @@ export default function Home() {
                                 <button className="primary_action largebtn">
                                     <span className="btninspan">Signup</span>
                                     <figure className="clcionct">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="clgoicon" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="clgoicon" viewBox="0 0 320 512">
+                                            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                                        </svg>
                                     </figure>
                                 </button>
                             </Link>

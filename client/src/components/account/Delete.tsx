@@ -13,7 +13,7 @@ export default function Delete() {
         },
         onSuccess: () => {
             localStorage.removeItem("token")
-            window.location.href = "/?delete"
+            window.location.href = "/?delete=true"
         },
     })
 

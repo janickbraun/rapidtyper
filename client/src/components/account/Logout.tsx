@@ -3,7 +3,7 @@ import React from "react"
 export default function Logout() {
     const handleLogout = () => {
         localStorage.removeItem("token")
-        window.location.href = "/?logout"
+        window.location.href = "/?logout=true"
     }
     return (
         <div>
