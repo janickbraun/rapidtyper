@@ -11,9 +11,9 @@ export default function Footer() {
             <section className="innerfooter">
                 <ul className="linksfooter">
                     <li className="footeritem">
-                        <Link reloadDocument={isInGame} to="//feedback.rapidtyper.com">
+                        <a className="ftext" rel="noreferrer" href="//feedback.rapidtyper.com">
                             Leave Feedback
-                        </Link>
+                        </a>
                     </li>
                     <span>•</span>
                     <li className="footeritem">
@@ -23,7 +23,7 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <a target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper">
+                        <a className="ftext" target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper">
                             GitHub
                         </a>
                     </li>

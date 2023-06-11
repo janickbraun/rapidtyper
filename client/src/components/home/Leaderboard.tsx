@@ -45,7 +45,7 @@ export default function Leaderboard() {
     return (
         <div className="grid_ctpl leaderboard_container f4-only">
             {mutation.isLoading && <>Loading</>}
-            {mutation.error && <>Error: {mutation.error.message}</>}
+            {mutation.error && <><p style={{color:"#ff3333",fontWeight:500}}>Could not load Leaderboard</p>&nbsp;&nbsp;<p style={{fontWeight:400}}>Error: {mutation.error.message}</p></>}
             {mutation.isSuccess && (
                 <div className="innerLDB">
                     <div className="g_split-2">

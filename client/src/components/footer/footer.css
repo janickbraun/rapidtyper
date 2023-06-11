@@ -56,7 +56,7 @@ footer{
     color: rgb(255 255 255 / 80%);
     font-size: 16px;
 }
-.footeritem a::after{
+.footeritem a::before{
     content: '';
     display: block;
     width: 0;
@@ -74,3 +74,22 @@ footer{
 /* 
     footer background remove
 */
+.ftext{
+    display: inline-flex;
+    column-gap: .2rem;
+}
+.ftext::after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    display: block;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIiBmaWxsPSIjZmZmZmZmOTkiPjxwYXRoIGQ9Ik0zMjAgMTIwdjI0MGMwIDEzLjI1LTEwLjc1IDI0LTI0IDI0cy0yNC0xMC43NS0yNC0yNFYxNzcuOWwtMjMxIDIzMUMzNi4yOCA0MTMuNyAzMC4xNCA0MTYgMjQgNDE2cy0xMi4yOC0yLjM0NC0xNi45Ny03LjAzMWMtOS4zNzUtOS4zNzUtOS4zNzUtMjQuNTYgMC0zMy45NEwyMzguMSAxNDRINTZDNDIuNzUgMTQ0IDMyIDEzMy4zIDMyIDEyMFM0Mi43NSA5NiA1NiA5NmgyNDBDMzA5LjMgOTYgMzIwIDEwNi44IDMyMCAxMjB6Ii8+PC9zdmc+");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: translateY(2px);
+    transition: .2s ease;
+}
+.ftext:hover::after{
+    transform: translateY(0) translateX(2px);
+}
