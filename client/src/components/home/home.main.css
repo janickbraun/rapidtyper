@@ -56,3 +56,26 @@ button:hover .clgoicon{
     justify-content: space-between;
     align-items: center;
 }
+.btn_icon svg{
+    height: 18px;
+    fill: currentColor;
+}
+.btn_icon{
+    display: flex;
+}
+.sortBtn{
+    background-color: transparent;
+    color: #2563eb;
+}
+.sortBtn:hover{
+    background-color: #2e2f30be;
+}
+.user_origincounty{
+    border-radius: 50%;
+    height: 20px;
+}
+.userTd{
+    display: flex;
+    align-items: center;
+    column-gap: .4rem;
+}
