@@ -19,6 +19,7 @@ export default function SignUp() {
         onSuccess: ({ data }) => {
             queryClient.invalidateQueries({ queryKey: ["signup"] })
             localStorage.setItem("token", data.token)
+            window.location.href = "/?signup"
         },
     })
 
