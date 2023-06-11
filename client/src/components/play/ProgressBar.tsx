@@ -44,7 +44,7 @@ const ProgressBar = (props: any) => {
             <div style={fillerStyles}>
                 <span style={labelStyles}>
                     {name + ` ${Math.round(completed)}%`}
-                    <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />
+                    {skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                 </span>
             </div>
         </div>
