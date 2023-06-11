@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../server/csp.js"  ]
 }
