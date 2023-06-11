@@ -39,9 +39,20 @@ button:hover .clgoicon{
 .clcionct{
     display: contents;
 }
-table{
+.grid_ctpl{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.innerLDB{
+    width: max-content;
     background-color: #1c1d206a;
     backdrop-filter: blur(8px);
     border-radius: 16px;
     border: 2px solid #292b2f6a;
+}
+.g_split-2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

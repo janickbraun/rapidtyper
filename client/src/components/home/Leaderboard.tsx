@@ -43,13 +43,15 @@ export default function Leaderboard() {
     }
 
     return (
-        <div>
+        <div className="grid_ctpl leaderboard_container f4-only">
             {mutation.isLoading && <>Loading</>}
             {mutation.error && <>Error: {mutation.error.message}</>}
             {mutation.isSuccess && (
-                <>
-                    <h2>Leaderboard</h2>
-                    <button onClick={handleSortChange}>Sort by: {leaderboardType}</button>
+                <div className="innerLDB">
+                    <div className="g_split-2">
+                        <h2>Leaderboard</h2>
+                        <button onClick={handleSortChange}>Sort by: {leaderboardType}</button>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -83,7 +85,7 @@ export default function Leaderboard() {
                             })}
                         </tbody>
                     </table>
-                </>
+                </div>
             )}
         </div>
     )

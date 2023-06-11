@@ -7,7 +7,6 @@ export default function Footer() {
     const [isInGame] = useIsInGame()
 
     return (
-        // footer
         <footer className="globalfooter rt-footer">
             <section className="innerfooter">
                 <ul className="linksfooter">
@@ -44,21 +43,10 @@ export default function Footer() {
                         {" "}&{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/">
                             Janick
-                        </a>{", "}
-                        <span className="zns">under the authority of Grovider Ltda.</span>
+                        </a>
                     </p>
                 </div>
             </section>
         </footer>
     )
 }
-
-/*
-
-About(incl. how it works)
-Privacy Policy
-Imprint
-How to play
-Copyright
-
-*/
