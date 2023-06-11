@@ -1,5 +1,9 @@
 /* copyright (c) 2023 RapidTyper by Janick & Luis */
-
+footer{
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
+}
 .innerfooter{
     display: flex;
     justify-content: flex-end;
