@@ -23,6 +23,12 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
+                        <a target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper">
+                            GitHub
+                        </a>
+                    </li>
+                    <span>•</span>
+                    <li className="footeritem">
                         <Link to="//grovider.co/privacy-policy" reloadDocument={isInGame}>
                             Privacy Policy
                         </Link>
@@ -39,8 +45,8 @@ export default function Footer() {
                         &copy;2023 RapidTyper - von{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/">
                             Luis
-                        </a> 
-                        {" "}&{" "}
+                        </a>{" "}
+                        &{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/">
                             Janick
                         </a>
