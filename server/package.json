@@ -6,11 +6,11 @@
   "scripts": {
     "start": "nodemon --exec ts-node src/server.ts",
     "dev": "ts-node-dev --respawn src/server.ts",
-    "build": "tsc -p .",
-    "prod": "node src/server.ts"
+    "build": "npx tsc",
+    "prod": "node dist/src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "janick and luis",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
