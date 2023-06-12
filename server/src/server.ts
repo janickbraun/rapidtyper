@@ -224,8 +224,11 @@ app.use(
     helmet.contentSecurityPolicy({
         useDefaults: true,
         directives: {
-            "img-src": ["'self'", "favicon.grovider.co", "https: data:"],
-            "content-src": ["'self'", "cdn.grovider.co", "https: data:"],
+            "default-src": "'self'",
+            "style-src": ["'self'", "https://*.grovider.co"],
+            "img-src": ["'self'", "https://*.grovider.co", "https://flagicons.lipis.dev/"],
+            "object-src": ["'self'", "https://*.grovider.co"],
+            "connect-src": ["'self'", "https://*.grovider.co"],
         },
     })
 )
