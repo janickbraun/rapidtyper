@@ -14,6 +14,7 @@ import Imprint from "./components/footer/Imprint"
 import PrivacyPolicy from "./components/footer/PrivacyPolicy"
 import Disclaimer from "./components/footer/Disclaimer"
 import CookieModal from "./components/account/CookiesModal"
+import Terms from "./components/footer/Terms"
 
 function App() {
     const queryClient = new QueryClient()
@@ -34,6 +35,7 @@ function App() {
                             <Route path="/imprint" element={<Imprint />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                             <Route path="/disclaimer" element={<Disclaimer />} />
+                            <Route path="/terms" element={<Terms />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
