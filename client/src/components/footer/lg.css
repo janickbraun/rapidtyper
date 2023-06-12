@@ -1,7 +1,7 @@
 .imprintReset .wstop{
     margin-top: 7rem;
 }
-.imprintReset a.imprintLink{
+.imprintReset a.imprintLink, .terms____________csa a{
     color: #04adad;
     text-decoration: 2px underline currentColor;
 }
