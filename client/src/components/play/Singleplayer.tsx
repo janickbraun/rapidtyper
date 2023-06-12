@@ -76,7 +76,7 @@ export default function Singleplayer() {
                 setAudioActive(false)
             }
         }
-    }, [mutationPlay])
+    }, [mutationPlay, navigate])
 
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>

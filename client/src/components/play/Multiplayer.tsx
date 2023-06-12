@@ -49,13 +49,6 @@ export default function Multiplayer() {
     const [playTypeSound] = useSound("/mp3/type.mp3", { volume: 0.7 })
     const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
-    const isCookieAllowed = () => {
-        const store = JSON.parse(window.localStorage.getItem("cookies") as string)
-        if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
-            navigate("/")
-        }
-    }
-
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>
             {element.character === " " ? (
