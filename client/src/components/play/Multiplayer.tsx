@@ -36,6 +36,7 @@ export default function Multiplayer() {
     const [waitingTitle, setWaitingTitle] = useState("")
     const [winners, setWinners] = useState<any>([])
     const [isCapsLocked, setIsCapsLocked] = useState(false)
+    const [openTouchDisclaimer, setOpenTouchDisclaimer] = useState(false)
 
     const textInput = useRef<any>(null)
     const { width, height } = useWindowSize()
@@ -200,6 +201,19 @@ export default function Multiplayer() {
         }
     }, [mutationPlay, code, winners, participants])
 
+    const touchDisclaimer = (e: any) => {
+        const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+        if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
+            navigate("/")
+        }
+
+        const tempTouch = localStorage.getItem("touch")
+        if (!tempTouch) {
+            setOpenTouchDisclaimer(true)
+            localStorage.setItem("touch", "true")
+        }
+    }
+
     const handler = (e: any) => {
         textInput.current.focus()
         const noFire = ["Shift", "CapsLock", "Tab"]
@@ -286,6 +300,7 @@ export default function Multiplayer() {
     }
 
     useEventListener("keydown", handler)
+    useEventListener("touchstart", touchDisclaimer)
 
     const handlePop = (e: any) => {
         const store = JSON.parse(window.localStorage.getItem("cookies") as string)
@@ -325,6 +340,11 @@ export default function Multiplayer() {
             <br />
             <br />
             <div>~ {author}</div>
+            {openTouchDisclaimer && (
+                <div>
+                    In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
+                </div>
+            )}
             {isCapsLocked && <div>WARNING: CapsLock is active</div>}
             <Confetti width={width} height={height} run={winners[0]?.username === username} opacity={0.8} recycle={false} />
             {done && (

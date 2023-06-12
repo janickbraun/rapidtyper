@@ -20,6 +20,7 @@ export default function Singleplayer() {
     const [author, setAuthor] = useState("")
     const [splitted, setSplitted] = useState<any>([])
     const [isCapsLocked, setIsCapsLocked] = useState(false)
+    const [openTouchDisclaimer, setOpenTouchDisclaimer] = useState(false)
 
     const textInput = useRef<any>(null)
 
@@ -95,6 +96,19 @@ export default function Singleplayer() {
             )}
         </div>
     ))
+
+    const touchDisclaimer = (e: any) => {
+        const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+        if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
+            navigate("/")
+        }
+
+        const tempTouch = localStorage.getItem("touch")
+        if (!tempTouch) {
+            setOpenTouchDisclaimer(true)
+            localStorage.setItem("touch", "true")
+        }
+    }
 
     const handleRestart = (e: any) => {
         setDone(false)
@@ -200,6 +214,7 @@ export default function Singleplayer() {
     }
 
     useEventListener("keydown", handler)
+    useEventListener("touchstart", touchDisclaimer)
 
     return (
         <main>
@@ -209,6 +224,11 @@ export default function Singleplayer() {
             <br />
             <br />
             <div>~ {author}</div>
+            {openTouchDisclaimer && (
+                <div>
+                    In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
+                </div>
+            )}
             {isCapsLocked && <div>WARNING: CapsLock is active</div>}
             <br />
             <br />
