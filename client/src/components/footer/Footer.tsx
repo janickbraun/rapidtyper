@@ -35,6 +35,12 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
+                        <Link to="/terms-of-service" reloadDocument={isInGame}>
+                            Terms
+                        </Link>
+                    </li>
+                    <span>•</span>
+                    <li className="footeritem">
                         <Link to="/imprint" reloadDocument={isInGame}>
                             Imprint
                         </Link>
