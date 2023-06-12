@@ -66,9 +66,9 @@ export default function Home() {
                     </Link>
                 </>
             )}
-            {/* <Link tabIndex={-1} to="/singleplayer">
+            <Link tabIndex={-1} to="/singleplayer">
                 <button>Singleplayer</button>
-            </Link> */}
+            </Link>
             {loggedin ? (
                 <>
                     <button onClick={handleMultiplayer}>Multiplayer</button>

@@ -49,6 +49,13 @@ export default function Multiplayer() {
     const [playTypeSound] = useSound("/mp3/type.mp3", { volume: 0.7 })
     const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
+    const isCookieAllowed = () => {
+        const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+        if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
+            navigate("/")
+        }
+    }
+
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>
             {element.character === " " ? (
@@ -120,6 +127,10 @@ export default function Multiplayer() {
         if (mutationPlay.isIdle && hasFired.current === 0) {
             hasFired.current = 1
             mutationPlay.mutate()
+            const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+            if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
+                navigate("/")
+            }
             const tempAudio = localStorage.getItem("audio")
             if (!tempAudio) {
                 localStorage.setItem("audio", "true")
@@ -135,7 +146,7 @@ export default function Multiplayer() {
             hasFired.current = 2
             socket.emit("join", { code, username })
         }
-    }, [mutationPlay, code, username])
+    }, [mutationPlay, code, username, navigate])
 
     useEffect(() => {
         socket.on("typing", (data) => {
@@ -284,7 +295,10 @@ export default function Multiplayer() {
     useEventListener("keydown", handler)
 
     const handlePop = (e: any) => {
-        localStorage.setItem("back", "true")
+        const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+        if (store && store.allow === true && (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) < 1) {
+            localStorage.setItem("back", "true")
+        }
     }
 
     useEffect(() => {
