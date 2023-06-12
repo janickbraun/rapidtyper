@@ -12,6 +12,7 @@ import Multiplayer from "./components/play/Multiplayer"
 import Profile from "./components/account/Profile"
 import Imprint from "./components/footer/Imprint"
 import PrivacyPolicy from "./components/footer/PrivacyPolicy"
+import Disclaimer from "./components/footer/Disclaimer"
 
 function App() {
     const queryClient = new QueryClient()
@@ -30,6 +31,7 @@ function App() {
                             <Route path="/user/:username" element={<Profile />} />
                             <Route path="/imprint" element={<Imprint />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                            <Route path="/disclaimer" element={<Disclaimer />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
