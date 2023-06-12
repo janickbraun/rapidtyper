@@ -28,14 +28,14 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
-                            <Route path="/account" element={<Account />} />
-                            <Route path="/singleplayer" element={<Singleplayer />} />
-                            <Route path="/multiplayer/:code" element={<Multiplayer />} />
-                            <Route path="/user/:username" element={<Profile />} />
+                            <Route path="/account/" element={<Account />} />
+                            <Route path="/singleplayer/" element={<Singleplayer />} />
+                            <Route path="/multiplayer/:code/" element={<Multiplayer />} />
+                            <Route path="/user/:username/" element={<Profile />} />
                             <Route path="/imprint" element={<Imprint />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                             <Route path="/disclaimer" element={<Disclaimer />} />
-                            <Route path="/terms" element={<Terms />} />
+                            <Route path="/terms-of-service" element={<Terms />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
