@@ -1,15 +1,21 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
+import Select from "react-select"
+import countryList from "react-select-country-list"
 
 const initialValues = {
     username: "",
     email: "",
     password: "",
     passwordConfirm: "",
+    country: "",
 }
 
 export default function SignUp() {
+    const [country, setCountry] = useState("")
+    const options: any = useMemo(() => countryList().getData(), [])
+
     const queryClient = useQueryClient()
 
     const mutation: any = useMutation({
@@ -33,12 +39,21 @@ export default function SignUp() {
         })
     }
 
+    const changeHandler = (e: any) => {
+        setCountry(e)
+        setValues({
+            ...values,
+            country: e.value,
+        })
+    }
+
     return (
         <div>
             <h3>Sign up</h3>
             <form onSubmit={(e) => e.preventDefault()}>
                 <input type="text" placeholder="Username" value={values.username} onChange={handleInputChange} name="username" />
                 <input type="email" placeholder="Email" value={values.email} onChange={handleInputChange} name="email" />
+                <Select options={options} value={country} onChange={changeHandler} />
                 <input type="password" placeholder="Password" value={values.password} onChange={handleInputChange} name="password" />
                 <input type="password" placeholder="Confirm Password" value={values.passwordConfirm} onChange={handleInputChange} name="passwordConfirm" />
                 <input type="submit" value="Sign up" onClick={() => mutation.mutate()} />

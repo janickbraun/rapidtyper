@@ -48,6 +48,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             default: "snail",
         },
+        country: {
+            type: String,
+            required: true,
+        },
     },
     {
         collection: "users",

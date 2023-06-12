@@ -21,12 +21,13 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const email: string = req.body.email.trim()
     const password: string = req.body.password
     const passwordConfirm: string = req.body.passwordConfirm
-    if (isBlank(username) || isBlank(email) || isBlank(password) || isBlank(passwordConfirm)) return res.status(403).send("Invalid inputs")
+    const country: string = req.body.country.toLowerCase()
+    if (isBlank(username) || isBlank(email) || isBlank(password) || isBlank(passwordConfirm) || isBlank(country)) return res.status(403).send("Invalid inputs")
     if (password !== passwordConfirm) return res.status(400).send("Passwords do not match")
     if (!validateEmail(email)) return res.status(403).send("Invalid email")
     if (password.length < 6) return res.status(400).send("Password has to be at least 6 characters long")
 
-    const signedUpUser = new User({ username, email, password: await bcrypt.hash(password, 10) })
+    const signedUpUser = new User({ username, email, password: await bcrypt.hash(password, 10), country })
     let token = ""
     let isError = false
 
