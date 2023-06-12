@@ -62,6 +62,10 @@ export default function Singleplayer() {
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
+            const store = JSON.parse(window.localStorage.getItem("cookies") as string)
+            if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
+                navigate("/")
+            }
             const tempAudio = localStorage.getItem("audio")
             if (!tempAudio) {
                 localStorage.setItem("audio", "true")
@@ -72,7 +76,7 @@ export default function Singleplayer() {
                 setAudioActive(false)
             }
         }
-    }, [mutationPlay])
+    }, [mutationPlay, navigate])
 
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} key={i}>

@@ -13,6 +13,7 @@ import Profile from "./components/account/Profile"
 import Imprint from "./components/footer/Imprint"
 import PrivacyPolicy from "./components/footer/PrivacyPolicy"
 import Disclaimer from "./components/footer/Disclaimer"
+import CookieModal from "./components/account/CookiesModal"
 
 function App() {
     const queryClient = new QueryClient()
@@ -22,6 +23,7 @@ function App() {
             <BrowserRouter>
                 <QueryClientProvider client={queryClient}>
                     <Header>
+                        <CookieModal />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
