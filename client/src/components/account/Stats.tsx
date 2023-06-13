@@ -62,35 +62,39 @@ export default function Stats(props: any) {
             {mutation.isError && <div>Profile was not found</div>}
             {mutation.isSuccess && (
                 <div>
+                    <div className="user_pfd_container">
+                        {/* */}
+                        <h1>{username}</h1>
+                        <div>Racing since: {date}</div>
+                        <div>
+                            Skin: <img src={"/img/skins/" + skin + ".png"} alt="skin" className="user_default_skinimg" />
+                            {loggedin && username === props.username && <button onClick={() => setSkinsOpen(!skinsOpen)}>{skinsOpen ? <>Close</> : <>Change skin</>}</button>}
+                            {skinsOpen && (
+                                <div>
+                                    {skins.map((val, key) => {
+                                        return (
+                                            <div key={key}>
+                                                <img onClick={() => handleSkinChange(val)} src={"/img/skins/" + val + ".png"} alt="skin" className="user_default_skinimg skin_changeIMG" />
+                                            </div>
+                                        )
+                                    })}
+                                    <div>How to unlock more skins:</div>
+                                    <ul>
+                                        <li>Type faster</li>
+                                        <li>Complete and win more races</li>
+                                        <li>Improve your accuracy</li>
+                                        <li>Look for easter eggs 👀</li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                     <h3>Stats</h3>
                     <div>Speed: {wpm}wpm</div>
                     <div>Accuracy: {accuracy}%</div>
                     <div>Races completed: {racesTotal}</div>
                     <div>Races won: {racesWon}</div>
                     <div>Fastest race: {bestRace}wpm</div>
-                    <div>Racing since: {date}</div>
-                    <div>
-                        Skin: <img src={"/img/skins/" + skin + ".png"} alt="skin" />
-                        {loggedin && username === props.username && <button onClick={() => setSkinsOpen(!skinsOpen)}>{skinsOpen ? <>Close</> : <>Change skin</>}</button>}
-                        {skinsOpen && (
-                            <div>
-                                {skins.map((val, key) => {
-                                    return (
-                                        <div key={key}>
-                                            <img onClick={() => handleSkinChange(val)} src={"/img/skins/" + val + ".png"} alt="skin" />
-                                        </div>
-                                    )
-                                })}
-                                <div>How to unlock more skins:</div>
-                                <ul>
-                                    <li>Type faster</li>
-                                    <li>Complete and win more races</li>
-                                    <li>Improve your accuracy</li>
-                                    <li>Look for easter eggs 👀</li>
-                                </ul>
-                            </div>
-                        )}
-                    </div>
                 </div>
             )}
         </div>
