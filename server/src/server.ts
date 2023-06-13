@@ -216,22 +216,13 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(helmet())
-
-app.set("io", io)
-
 app.use(
-    helmet.contentSecurityPolicy({
-        useDefaults: true,
-        directives: {
-            "default-src": "'self'",
-            "style-src": ["'self'", "https://*.grovider.co"],
-            "img-src": ["'self'", "https://*.grovider.co", "https://flagicons.lipis.dev/"],
-            "object-src": ["'self'", "https://*.grovider.co"],
-            "connect-src": ["'self'", "https://*.grovider.co"],
-        },
+    helmet({
+        contentSecurityPolicy: false,
     })
 )
+
+app.set("io", io)
 
 import indexRouter from "./routes/index"
 import signUpRouter from "./routes/account/signup"
