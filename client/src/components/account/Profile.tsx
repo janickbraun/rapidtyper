@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Stats from "./Stats"
 import useAuth from "../../hooks/useAuth"
+import Overlay from "../modal/Overlay"
 
 export default function Profile() {
     const { username } = useParams()
@@ -38,7 +39,7 @@ export default function Profile() {
                 </button>
             </div>
             <div className="user_default_container">
-                <Stats username={username} />
+                <Stats username={username} dta />
             </div>
             <br />
             {username !== myusername && loggedin && (

@@ -80,14 +80,123 @@ a.imprintLink{
     border-radius: 8px;
     padding: 5px;
     position: relative;
+    user-select: none;
 }
 .skin_changeIMG:hover{
-    background-color: #323232;
+    background-color: #2e2e32;
     box-shadow: 2px 2px 20px rgb(0 0 0 / 5%);
 }
 .skin_changeIMG:hover::after{
     content: 'Select this skin';
     display: block;
     position: absolute;
-    
+
+}
+.skin_div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: .8rem 1.2rem;
+}
+
+.cf__imgc__flxc{
+    position: relative;
+}
+.user_pfd_container{
+    border: 2px solid red; /* narrow + center + background */
+}
+.user_pfd_container{
+    display: flex;
+    align-items: center;
+    column-gap: 1.5rem;
+}
+.user__skincontainer{
+    display: flex;
+    position: relative;
+}
+.cs_profilebtn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.cs_profilebtn{
+    background-color: #292b2f6a;
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    padding: 4px;
+}
+.cs_profilebtn::after{
+    display: inline-block;
+    width: max-content;
+    height: fit-content;
+    padding: 0px 8px;
+    border-radius: 3px;
+    position: absolute;
+    font-size: 12px;
+    color: #fff;
+    background-color: #494949;
+    pointer-events: none;
+    transition: .3s ease, inset 0s;
+    top: -1.8rem;
+    transform: translateX(50%);
+    opacity: 0;
+}
+.cpp_fg::after{
+    content: 'Change Skin';
+    left: -79px;
+}
+.cpp_cl::after{
+    content: 'Close';
+    left: -37px;
+}
+.cs_profilebtn:hover::after{
+    opacity: 1;
+}
+.csbi{
+    height: 18px;
+    width: 18px;
+    fill: currentColor;
+}
+.selector_container{
+    position: fixed;
+    background-color: #292b2fdf;
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    transform: translateY(10px);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2001;
+}
+.cscontent{
+    margin: 0 1.2rem;
+    margin-bottom: .9rem;
+    list-style: disc;
+    margin-left: 2.5rem;
+}
+.cscontent li{
+    font-size: 13px;
+}
+.wshinttext{
+    font-size: 15px;
+    margin: 0 1.2rem;
+}
+.skin_div{
+    margin-bottom: .6rem;
+    max-width: 28rem;
+    margin-top: 0;
+}
+.centerContainer__stat{
+    /* display: grid;
+    place-items: center; */
+}
+.modalCallerHeader{
+    margin: 1.2rem 2rem;
+}
+.close_container{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
 }
