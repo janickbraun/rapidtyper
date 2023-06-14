@@ -14,7 +14,7 @@ import User from "../models/User"
 dotenv.config()
 
 const PORT = process.env.PORT
-const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co", "https://rapidtyper.com", "http://rapidtyper.com", "http://localhost:3000"]
+const allowedOrigins = ["http://localhost", "http://localhost:5000", "https://grovider.co", "https://rapidtyper.com", "http://rapidtyper.com", "http://localhost:3000", "https://flagicons.lipis.dev"]
 
 const app: Application = express()
 const server = http.createServer(app)
@@ -218,13 +218,22 @@ io.on("connection", (socket: any) => {
 })
 
 app.use(cors())
+app.options("*", cors())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(
     helmet({
-        contentSecurityPolicy: false,
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                imgSrc: ["'self'", "https://*.grovider.co", "https://*.lipis.dev", "data:"],
+            },
+        },
+
+        crossOriginResourcePolicy: { policy: "cross-origin" },
+        crossOriginEmbedderPolicy: false,
     })
 )
 
