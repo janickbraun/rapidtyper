@@ -93,8 +93,32 @@ button:hover .clgoicon{
 }
 th{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 17px;
     width: max-content;
     word-break: keep-all;
     margin: 0 .3rem;
+}
+td:not(.not_right), th:not(.not_right){
+    text-align: right !important;
+    padding-right: .7rem;
+}
+table, tbody, tr{
+    border-collapse: separate; 
+    border-spacing: 0rem .5rem;
+}
+td.not_right, th.not_right{
+    padding: 0 15px;
+}
+tr{
+    padding: .2rem 0;
+}
+._userlink{
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+._userlink:hover{
+    background-color: #292b2f8d;
 }

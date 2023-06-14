@@ -67,11 +67,11 @@ export default function Leaderboard() {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Username</th>
+                                <th className="not_right">Username</th>
                                 <th>Speed</th>
-                                <th>Total races</th>
-                                <th>Races won</th>
-                                <th>Best race</th>
+                                <th>Total</th>
+                                <th>Won</th>
+                                <th>Best</th>
                                 <th>Accuracy</th>
                                 <th>Racing since</th>
                             </tr>
@@ -81,9 +81,9 @@ export default function Leaderboard() {
                                 return (
                                     <tr key={key}>
                                         <td>{key + 1 + "."}</td>
-                                        <td className="userTd">
+                                        <td className="userTd not_right">
                                             <img className="user_origincounty" src={"https://flagicons.lipis.dev/flags/1x1/" + val.country + ".svg"} loading="lazy" draggable="false" alt="" />
-                                            <Link to={"/user/" + val.username}>{val.username}</Link>
+                                            <Link className="_userlink" to={"/user/" + val.username}>{val.username}</Link>
                                         </td>
                                         <td>{getAverage(val.wpm)}wpm</td>
 
