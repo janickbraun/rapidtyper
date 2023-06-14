@@ -53,7 +53,7 @@ export default function Leaderboard() {
             {mutation.isSuccess && (
                 <div className="innerLDB">
                     <div className="g_split-2">
-                        <h2 className="trcaller">Leaderboard</h2>
+                        <h2 className="ldbcaller">Leaderboard</h2>
                         <button className="sortBtn" onClick={handleSortChange}>
                             <div className="btn_icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
