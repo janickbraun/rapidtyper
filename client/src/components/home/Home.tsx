@@ -59,11 +59,19 @@ export default function Home() {
     return (
         <main>
             {accountResponse !== "" && <div>{accountResponse}</div>}
-            {loggedin && (
+            {loggedin ? (
                 <>
                     <Link tabIndex={-1} to={"/user/" + username}>
                         <button>Profile</button>
                     </Link>
+                </>
+            ) : (
+                <>
+                    <div className="account_supercontainer">
+                        <div className="asc__inner">
+                            
+                        </div>
+                    </div>
                 </>
             )}
             <Link tabIndex={-1} to="/singleplayer">
