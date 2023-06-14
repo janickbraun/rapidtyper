@@ -67,9 +67,42 @@ export default function Stats(props: any) {
             {mutation.isError && <div>Profile was not found</div>}
             {mutation.isSuccess && (
                 <div className="centerContainer__stat">
+                    {skinsOpen ? <Overlay /> : ""}
+                        {skinsOpen && (
+                            <div className="selector_container">
+                                <h1 className="modalCallerHeader">Your Skins</h1>
+                                <div className="close_container">
+                                    <button className="close-modal-button" onClick={() => setSkinsOpen(!skinsOpen)}>
+                                        x
+                                    </button>
+                                </div>
+                                <div className="skin_div">
+                                    {skins.map((val, key) => {
+                                        return (
+                                            <div key={key}>
+                                                <img
+                                                    onClick={() => handleSkinChange(val)}
+                                                    src={"/img/skins/" + val + ".png"}
+                                                    alt="skin"
+                                                    tabIndex={0}
+                                                    draggable="false"
+                                                    className="user_default_skinimg skin_changeIMG"
+                                                />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="wshinttext">How to unlock skins:</div>
+                                <ul className="cscontent">
+                                    <li>Type faster</li>
+                                    <li>Complete and win more races</li>
+                                    <li>Improve your accuracy</li>
+                                    <li>Look for easter eggs 👀</li>
+                                </ul>
+                            </div>
+                        )}
                     <div className="user_pfd_container">
                         {/* */}
-                        {skinsOpen ? <Overlay /> : ""}
                         <div>
                             <div className="cf__imgc__flxc">
                                 <figure className="user__skincontainer">
@@ -93,39 +126,6 @@ export default function Stats(props: any) {
                                     </button>
                                 )}
                             </div>
-                            {skinsOpen && (
-                                <div className="selector_container">
-                                    <h1 className="modalCallerHeader">Your Skins</h1>
-                                    <div className="close_container">
-                                        <button className="close-modal-button" onClick={() => setSkinsOpen(!skinsOpen)}>
-                                            x
-                                        </button>
-                                    </div>
-                                    <div className="skin_div">
-                                        {skins.map((val, key) => {
-                                            return (
-                                                <div key={key}>
-                                                    <img
-                                                        onClick={() => handleSkinChange(val)}
-                                                        src={"/img/skins/" + val + ".png"}
-                                                        alt="skin"
-                                                        tabIndex={0}
-                                                        draggable="false"
-                                                        className="user_default_skinimg skin_changeIMG"
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <div className="wshinttext">How to unlock skins:</div>
-                                    <ul className="cscontent">
-                                        <li>Type faster</li>
-                                        <li>Complete and win more races</li>
-                                        <li>Improve your accuracy</li>
-                                        <li>Look for easter eggs 👀</li>
-                                    </ul>
-                                </div>
-                            )}
                         </div>
                         <div className="_usc">
                             <h1>

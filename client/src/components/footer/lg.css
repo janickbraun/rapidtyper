@@ -105,7 +105,11 @@ a.imprintLink{
     position: relative;
 }
 .user_pfd_container{
-    border: 2px solid red; /* narrow + center + background */
+    border: 2px solid #292b2f6a; /* narrow + center + background */
+    width: 75%;
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
 }
 .user_pfd_container{
     display: flex;
@@ -188,10 +192,6 @@ a.imprintLink{
     max-width: 28rem;
     margin-top: 0;
 }
-.centerContainer__stat{
-    /* display: grid;
-    place-items: center; */
-}
 .modalCallerHeader{
     margin: 1.2rem 2rem;
 }
@@ -199,4 +199,10 @@ a.imprintLink{
     position: absolute;
     right: 1rem;
     top: 1rem;
+}
+.centerContainer__stat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
