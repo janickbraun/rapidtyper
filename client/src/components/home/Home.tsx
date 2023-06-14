@@ -59,17 +59,15 @@ export default function Home() {
     return (
         <main>
             {accountResponse !== "" && <div>{accountResponse}</div>}
-            {loggedin ? (
-                <>
-                    <Link tabIndex={-1} to={"/user/" + username}>
-                        <button>Profile</button>
-                    </Link>
-                </>
-            ) : (
+            {loggedin && (
                 <>
                     <div className="account_supercontainer">
                         <div className="asc__inner">
-                            
+                            {/* dev */}
+                            <Link tabIndex={-1} to={"/user/" + username}>
+                                <button>Profile</button>
+                            </Link>
+                            {/* dev */}
                         </div>
                     </div>
                 </>
