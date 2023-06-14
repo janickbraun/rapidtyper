@@ -99,7 +99,11 @@ export default function Leaderboard() {
                             </tbody>
                         </>
                     ) : (
-                        <div>Loading...</div>
+                        <tbody>
+                            <tr>
+                                <td>Loading...</td>
+                            </tr>
+                        </tbody>
                     )}
                 </table>
             </div>
