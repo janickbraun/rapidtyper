@@ -6,6 +6,7 @@ import Delete from "./Delete"
 import useAuth from "../../hooks/useAuth"
 import { Link } from "react-router-dom"
 import ChangeName from "./ChangeName"
+import ChangeCountry from "./ChangeCountry"
 
 export default function Account() {
     const [loggedin, username] = useAuth()
@@ -25,6 +26,7 @@ export default function Account() {
 
                     <Logout />
                     <ChangeName />
+                    <ChangeCountry />
                     <Delete />
                 </>
             ) : (
