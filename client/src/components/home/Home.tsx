@@ -68,6 +68,16 @@ export default function Home() {
                                 <button>Profile</button>
                             </Link>
                             {/* dev */}
+                            <div className="profile_split">
+                                <div className="profile_information">
+                                    <div className="_profileinfinner">
+                                        
+                                    </div>
+                                </div>
+                                <div className="profile_actionset">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </>
