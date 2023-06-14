@@ -51,6 +51,7 @@ button:hover .clgoicon{
     backdrop-filter: blur(8px);
     border-radius: 16px;
     border: 2px solid #292b2f6a;
+    padding: 1rem 2rem;
 }
 .g_split-2{
     display: flex;
@@ -80,4 +81,9 @@ button:hover .clgoicon{
     display: flex;
     align-items: center;
     column-gap: .4rem;
+}
+.g_split-2{
+    margin-bottom: .9rem;
+    padding-bottom: .6rem;
+    border-bottom: 2px solid #292b2f6a;
 }
