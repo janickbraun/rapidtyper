@@ -209,3 +209,41 @@ a.imprintLink{
 .uoc_wbd{
     outline: 2px solid #292b2f6a;
 }
+.cookie__modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2002;
+    background-color: #1c1d20f3;
+    border: 2px solid #292b2f6a;
+    padding: 1rem 1.8rem;
+    border-radius: 16px;
+}
+.cookies__header{
+    font-size: 28px;
+    margin-bottom: .4rem;
+}
+.textcontent{
+    max-width: 500px;
+}
+.cmd_link{
+    color: #2563eb;
+    text-decoration: 2px underline;
+    font-weight: bold;
+}
+.cmd_link:hover{
+    text-decoration: none;
+}
+.cmdtxt{
+    margin: .4rem 0;
+}
+._c_buttonset{
+    display: inline-flex;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+._c_buttonset{
+    margin: .6rem 0;
+}

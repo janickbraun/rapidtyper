@@ -78,3 +78,6 @@ a[tabindex="-1"]{
     backdrop-filter: blur(4px);
     z-index: 2000;
 }
+.errtxt_clr{
+    color: #ff3333;
+}

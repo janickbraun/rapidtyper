@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
+import Overlay from "../modal/Overlay"
 
 export default function CookieModal() {
     const [open, setOpen] = useState(false)
@@ -7,7 +8,7 @@ export default function CookieModal() {
     let location = useLocation()
 
     const handleWrong = () => {
-        setErrMsg("In order to use rapidtyper.com you need to accept nessessary cookies.")
+        setErrMsg("In order to use RapidTyper you need to accept nessessary cookies.")
     }
 
     const handleAccept = () => {
@@ -30,23 +31,26 @@ export default function CookieModal() {
     return (
         <>
             {open && (
-                <div style={{ marginTop: 100 }}>
-                    <h2>Cookies</h2>
-                    We are only using nessessary cookies and data to deliver and maintain rapidtyper.com
-                    <br />
-                    <strong>
-                        By accepting the coockies you also comply with our terms of service <a href="https://grovider.co/privacy-policy">privacy policy</a> and our{" "}
-                        <Link to="/terms-of-service" onClick={() => setOpen(false)}>
-                            terms & conditions of use
+                <>
+                <Overlay/>
+                <div className="cookie__modal cm__float">
+                    <h2 className="cookies__header">Cookies</h2>
+                    <div className="textcontent">
+                    <p className="cmdtxt">We only use cookies and data that are necessary to provide and maintain RapidTyper.</p>
+                    <p className="cmdtxt">By accepting the cookies you also agree to comply with our terms of service <a className="cmd_link" href="https://grovider.co/privacy-policy">Privacy Policy</a> and our{" "}
+                        <Link className="cmd_link" to="/terms-of-service" onClick={() => setOpen(false)}>
+                            Terms of Service
                         </Link>
-                        .
-                    </strong>
-                    <br /> <br />
-                    Please accept all nessessary cookies to be able to use rapidtyper.com
-                    <p>{errMsg}</p>
-                    <button onClick={handleWrong}>I decline</button>
-                    <button onClick={handleAccept}>I accept all</button>
+                        .</p>
+                    <p className="cmdtxt">In order for RapidTyper to work, you must accept all cookies, as only necessary cookies are used.</p>
+                    <p className="errtxt_clr">{errMsg}</p>
+                    <div className="_c_buttonset">
+                        <button className="secondary_action" onClick={handleWrong}>I decline</button>
+                        <button onClick={handleAccept}>I accept all</button>
+                    </div>
+                    </div>
                 </div>
+                </>
             )}
         </>
     )
