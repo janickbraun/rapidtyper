@@ -217,9 +217,11 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(helmet({
-    contentSecurityPolicy: false,
-}))
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+    })
+)
 
 app.set("io", io)
 
@@ -235,6 +237,7 @@ import getStatsRouter from "./routes/stats"
 import changeUsernameRouter from "./routes/account/changeusername"
 import leaderboardRouter from "./routes/leaderboard"
 import changeSkinRouter from "./routes/account/changeskin"
+import changeCountryRouter from "./routes/account/changecountry"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -248,6 +251,7 @@ app.use("/api/getstats", getStatsRouter)
 app.use("/api/changeusername", changeUsernameRouter)
 app.use("/api/leaderboard", leaderboardRouter)
 app.use("/api/changeskin", changeSkinRouter)
+app.use("/api/changecountry", changeCountryRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
