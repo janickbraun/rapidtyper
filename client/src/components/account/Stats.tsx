@@ -128,7 +128,7 @@ export default function Stats(props: any) {
                         <div className="_usc">
                             <h1>
                                 {props.username} &nbsp;
-                                <img className="user_origincounty" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
+                                <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
                             </h1>
                             <div>Racing since: {date}</div>
                         </div>
