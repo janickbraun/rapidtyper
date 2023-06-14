@@ -82,6 +82,7 @@ io.on("connection", (socket: any) => {
             const token = data.token
             const wpm = data.wpm
             const code = data.code
+            const time = Number(data.time)
 
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
@@ -112,6 +113,7 @@ io.on("connection", (socket: any) => {
                             wpm: tempWpm,
                             accuracy: tempAcc,
                             bestRace: wpm,
+                            timeSpentRacing: user.timeSpentRacing + time,
                         },
                     })
                 } else {
@@ -120,6 +122,7 @@ io.on("connection", (socket: any) => {
                             racesTotal: user.racesTotal + 1,
                             wpm: tempWpm,
                             accuracy: tempAcc,
+                            timeSpentRacing: user.timeSpentRacing + time,
                         },
                     })
                 }
@@ -133,6 +136,7 @@ io.on("connection", (socket: any) => {
                             wpm: tempWpm,
                             accuracy: tempAcc,
                             bestRace: wpm,
+                            timeSpentRacing: user.timeSpentRacing + time,
                         },
                     })
                 } else {
@@ -142,6 +146,7 @@ io.on("connection", (socket: any) => {
                             racesWon: user.racesWon + 1,
                             wpm: tempWpm,
                             accuracy: tempAcc,
+                            timeSpentRacing: user.timeSpentRacing + time,
                         },
                     })
                 }

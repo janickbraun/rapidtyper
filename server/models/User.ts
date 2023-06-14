@@ -52,6 +52,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        timeSpentRacing: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         collection: "users",

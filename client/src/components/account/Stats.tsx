@@ -10,6 +10,7 @@ export default function Stats(props: any) {
     const [racesTotal, setRacesTotal] = useState(0)
     const [racesWon, setRacesWon] = useState(0)
     const [bestRace, setBestRace] = useState(0)
+    const [timeSpentRacing, setTimeSpentRacing] = useState(0)
     const [date, setDate] = useState("")
     const [country, setCountry] = useState("")
     const [skin, setSkin] = useState("snail")
@@ -36,6 +37,7 @@ export default function Stats(props: any) {
             setSkin(data.skin)
             setSkins(data.skins)
             setCountry(data.country)
+            setTimeSpentRacing(data.time)
         },
     })
 
@@ -139,6 +141,7 @@ export default function Stats(props: any) {
                     <div>Races completed: {racesTotal}</div>
                     <div>Races won: {racesWon}</div>
                     <div>Fastest race: {bestRace}wpm</div>
+                    <div>Time spent racing: {new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</div>
                 </div>
             )}
         </div>
