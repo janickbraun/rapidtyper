@@ -216,19 +216,10 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'"],
-            scriptSrcElem: '*',
-            styleSrc: '*',
-            connectSrc: "*",
-            imgSrc: "*",
-        },
-    })
-)
+
+app.use(helmet({
+    contentSecurityPolicy: false,
+}))
 
 app.set("io", io)
 
