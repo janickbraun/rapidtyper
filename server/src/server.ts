@@ -229,9 +229,6 @@ app.use(
         },
     })
 )
-app.use(helmet({
-    contentSecurityPolicy: false,
-}))
 
 app.set("io", io)
 
