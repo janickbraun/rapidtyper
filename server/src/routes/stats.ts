@@ -27,11 +27,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const skin = user.skin
         const skins = user.skins
         const country = user.country
+        const time = user.timeSpentRacing
 
         const tempDate = date.toLocaleDateString("de-DE", { weekday: "short", year: "numeric", month: "numeric", day: "numeric" })
         const finalDate = tempDate.split(" ")[1]
 
-        return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, skins, country })
+        return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, skins, country, time })
     } catch {
         return res.status(400).send("Something went wrong")
     }
