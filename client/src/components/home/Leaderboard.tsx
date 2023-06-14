@@ -44,7 +44,6 @@ export default function Leaderboard() {
 
     return (
         <div className="grid_ctpl leaderboard_container f4-only">
-            {mutation.isLoading && <>Loading</>}
             {mutation.error && (
                 <>
                     <p style={{ color: "#ff3333", fontWeight: 500 }}>Could not load Leaderboard</p>&nbsp;&nbsp;<p style={{ fontWeight: 400 }}>Error: {mutation.error.message}</p>
@@ -87,18 +86,25 @@ export default function Leaderboard() {
                                         </td>
                                         <td>{getAverage(val.wpm)}wpm</td>
 
-                                        <td>{val.racesTotal}</td>
-                                        <td>{val.racesWon}</td>
-                                        <td>{val.bestRace}wpm</td>
-                                        <td>{getAverage(val.accuracy)}%</td>
-                                        <td>{new Date(val.creationDate).toLocaleDateString()}</td>
-                                    </tr>
-                                )
-                            })}
+                                            <td>{val.racesTotal}</td>
+                                            <td>{val.racesWon}</td>
+                                            <td>{val.bestRace}wpm</td>
+                                            <td>{getAverage(val.accuracy)}%</td>
+                                            <td>{new Date(val.creationDate).toLocaleDateString()}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </>
+                    ) : (
+                        <tbody>
+                            <tr>
+                                <td>Loading...</td>
+                            </tr>
                         </tbody>
-                    </table>
-                </div>
-            )}
+                    )}
+                </table>
+            </div>
         </div>
     )
 }
