@@ -315,14 +315,14 @@ a.imprintLink{
     width: 20rem;
     display: inline-flex;
     justify-content: flex-start;
-    padding: .8rem 1.4rem;
+    padding: .8rem 1rem;
     border-radius: 12px;
     font-size: 18px;
     font-weight: 500;
 }
 .sndficon{
     position: absolute;
-    right: 1.4rem;
+    right: 1.2rem;
     height: 24px;
     top: 50%;
     transform: translateY(-50%);

@@ -48,6 +48,7 @@ footer{
     position: relative;
     outline: none;
     font-size: 14px;
+    width: max-content !important;
 }
 .footeritem a:hover{
     color: rgb(255 255 255 / 100%);
@@ -67,7 +68,7 @@ footer{
     background-color: #2563eb;
     transition: .3s ease;
 }
-.footeritem a:focus-visible:after{
+.footeritem a:focus-visible:before{
     width: 100%;
 }
 

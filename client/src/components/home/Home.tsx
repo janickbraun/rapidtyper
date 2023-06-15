@@ -5,7 +5,6 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import Leaderboard from "./Leaderboard"
 import "./home.main.css"
-import LearnMore from "../about/LearnMore"
 
 function timeout(delay: number) {
     return new Promise((res) => setTimeout(res, delay))
