@@ -3,7 +3,7 @@ import axios from "axios"
 import React, { useState } from "react"
 
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed, name, skin } = props
+    const { bgcolor, completed, name, skin, online } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const [wpm, setWpm] = useState(0)
@@ -68,11 +68,10 @@ const ProgressBar = (props: any) => {
     }
 
     const handleGetStats = () => {
-        if (country === "") {
+        if (country === "" && online) {
             mutation.mutate()
         }
-
-        setIsOpen(!isOpen)
+        if (online) setIsOpen(!isOpen)
     }
 
     return (
@@ -83,7 +82,7 @@ const ProgressBar = (props: any) => {
                         {name}
                     </div>
                     {Math.round(completed)}%{skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
-                    {isOpen && (
+                    {isOpen && online && (
                         <div style={{ position: "absolute", border: "4px solid red", width: "max-content" }}>
                             {name}
                             {mutation.isSuccess ? (

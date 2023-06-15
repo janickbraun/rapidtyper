@@ -219,7 +219,7 @@ export default function Singleplayer() {
     return (
         <main>
             <h3>Singleplayer</h3>
-            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} />
+            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} online={false} />
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
             <br />
             <br />
