@@ -4,16 +4,20 @@ import Login from "./Login"
 import Logout from "./Logout"
 import Delete from "./Delete"
 import useAuth from "../../hooks/useAuth"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ChangeName from "./ChangeName"
 import ChangeCountry from "./ChangeCountry"
 
 export default function Account() {
     const [loggedin, username] = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         document.title = "Account | RapidTyper"
-    }, [])
+        if (!loggedin) {
+            return navigate("/account/login", { replace: true })
+        }
+    }, [loggedin, navigate])
 
     return (
         <main>
