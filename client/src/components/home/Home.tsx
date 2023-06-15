@@ -84,7 +84,6 @@ export default function Home() {
                                             </Link>
                                         </div>
                                     </div>
-                                </div>
                                 <div className="profile_actionset">
                                     <div className="__buttonset">
                                         <>
@@ -116,6 +115,7 @@ export default function Home() {
                                             </button>
                                         </Link>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
