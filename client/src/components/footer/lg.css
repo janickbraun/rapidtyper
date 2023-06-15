@@ -328,3 +328,9 @@ a.imprintLink{
     transform: translateY(-50%);
     fill: currentColor;
 }
+.rt_navigation{
+    z-index: 1600;
+}
+.user_pfd_container{
+    padding: 0 0.5rem;
+}

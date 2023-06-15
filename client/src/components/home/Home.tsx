@@ -5,6 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import Leaderboard from "./Leaderboard"
 import "./home.main.css"
+import LearnMore from "../about/LearnMore"
 
 function timeout(delay: number) {
     return new Promise((res) => setTimeout(res, delay))
@@ -147,6 +148,12 @@ export default function Home() {
                                             <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                                         </svg>
                                     </figure>
+                                </button>
+                            </Link>
+                            <span>or</span>
+                            <Link tabIndex={-1} to="/singleplayer">
+                                <button className="secondary_action">
+                                    Singleplayer
                                 </button>
                             </Link>
                         </div>
