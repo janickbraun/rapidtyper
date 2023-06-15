@@ -81,6 +81,7 @@ a[tabindex="-1"]{
 .errtxt_clr{
     color: #ff3333;
 }
+/* SCROLLBAR - NO FIREFOX */
 ::-webkit-scrollbar{
     width: 10px;
     height: 10px;
