@@ -28,6 +28,7 @@ export default function CookieModal() {
                 setOpen(true)
             }
         }
+        window.scrollTo(0, 0)
     }, [location.pathname])
 
     const handler = (e: any) => {
