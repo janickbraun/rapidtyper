@@ -189,7 +189,7 @@ io.on("connection", (socket: any) => {
                             { code: typists[i].code },
                             {
                                 $pull: {
-                                    participants: typists[i].username,
+                                    participants: { username: typists[i].username },
                                 },
                             }
                         )

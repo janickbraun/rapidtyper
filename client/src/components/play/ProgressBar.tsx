@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed, name, skin, online, done } = props
+    const { bgcolor, completed, name, skin, online, done, connected } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const [wpm, setWpm] = useState(0)
@@ -110,6 +110,7 @@ const ProgressBar = (props: any) => {
                         </div>
                     )}
                 </span>
+                {!connected && <div>Disconnected</div>}
             </div>
         </div>
     )
