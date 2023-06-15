@@ -15,7 +15,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         })
         if (!verifyUser) return res.status(200).json({ loggedin: false, username: "" })
 
-        return res.status(200).json({ loggedin: true, username: verifyUser.username })
+        return res.status(200).json({ loggedin: true, username: verifyUser.username, skin: verifyUser.skin })
     } catch {
         return res.status(200).json({ loggedin: false, username: "" })
     }

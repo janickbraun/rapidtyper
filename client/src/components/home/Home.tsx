@@ -11,7 +11,7 @@ function timeout(delay: number) {
 }
 
 export default function Home() {
-    const [loggedin, username] = useAuth()
+    const [loggedin, username, skin] = useAuth()
     const [searchParams, setSearchParams] = useSearchParams()
     const [accountResponse, setAccountResponse] = useState("")
     let navigate = useNavigate()
@@ -56,8 +56,6 @@ export default function Home() {
         mutationMultiplayer.mutate()
     }
 
-    const skin:string = "ape" // dev
-
     return (
         <main>
             {accountResponse !== "" && <div>{accountResponse}</div>}
@@ -65,39 +63,38 @@ export default function Home() {
                 <>
                     <div className="account_supercontainer">
                         <div className="asc__inner">
-                            {/* dev */}
-                            
-                            {/* dev */}
                             <div className="profile_split">
                                 <div className="pscfix">
-                                <div className="profile_information">
-                                    <div className="_profileinfinner">
-                                        <Link tabIndex={-1} to={"/user/" + username} style={{display: "inherit",alignItems: "inherit", justifyContent: "inherit"}} className="userlink_ds">
-                                        <div className="_profile_skinct">
-                                            <figure className="__userhmskin">
-                                                <img src={"/img/skins/" + skin + ".png"} alt="skin" draggable="false" className="user_default_skinimg home_" />
-                                            </figure>
+                                    <div className="profile_information">
+                                        <div className="_profileinfinner">
+                                            <Link tabIndex={-1} to={"/user/" + username} style={{ display: "inherit", alignItems: "inherit", justifyContent: "inherit" }} className="userlink_ds">
+                                                <div className="_profile_skinct">
+                                                    <figure className="__userhmskin">
+                                                        <img src={"/img/skins/" + skin + ".png"} alt="skin" draggable="false" className="user_default_skinimg home_" />
+                                                    </figure>
+                                                </div>
+                                                <div className="_profile_nameset">
+                                                    <h1>Welcome, {username}</h1>
+                                                </div>
+                                                <div className="flicon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="ac__go" viewBox="0 0 448 512">
+                                                        <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+                                                    </svg>
+                                                </div>
+                                            </Link>
                                         </div>
-                                        <div className="_profile_nameset">
-                                            <h1>Welcome, {username}</h1>
-                                        </div>
-                                        <div className="flicon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="ac__go" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-                                        </div>
-                                        </Link>
                                     </div>
-                                </div>
-                                <div className="profile_actionset">
-                                    <div className="__buttonset">
-                                        <>
-                                            <button onClick={handleMultiplayer}>Play multiplayer</button>
-                                            {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
-                                        </>
-                                        <Link tabIndex={-1} to="/singleplayer">
-                                            <button>Singleplayer</button>
-                                        </Link>
+                                    <div className="profile_actionset">
+                                        <div className="__buttonset">
+                                            <>
+                                                <button onClick={handleMultiplayer}>Play multiplayer</button>
+                                                {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
+                                            </>
+                                            <Link tabIndex={-1} to="/singleplayer">
+                                                <button>Singleplayer</button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
