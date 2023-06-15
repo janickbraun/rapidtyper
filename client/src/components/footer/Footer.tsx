@@ -2,9 +2,15 @@ import React from "react"
 import "./footer.css"
 import { Link } from "react-router-dom"
 import useIsInGame from "../../hooks/useIsInGame"
+import useUnlockSkin from "../../hooks/useUnlockSkin"
 
 export default function Footer() {
     const [isInGame] = useIsInGame()
+    let unlock = useUnlockSkin()
+
+    const handleSkin = (skin: string) => {
+        console.log(skin)
+    }
 
     return (
         <footer className="globalfooter rt-footer">
@@ -49,11 +55,11 @@ export default function Footer() {
                 <div className="copyright">
                     <p className="copyrighttxt">
                         &copy;2023 RapidTyper - von{" "}
-                        <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/">
+                        <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/" onClick={() => handleSkin("capybara")}>
                             Luis
                         </a>{" "}
                         &{" "}
-                        <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/">
+                        <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/jan1ck.braun/" onClick={() => handleSkin("capybara")}>
                             Janick
                         </a>
                     </p>

@@ -252,6 +252,7 @@ import changeUsernameRouter from "./routes/account/changeusername"
 import leaderboardRouter from "./routes/leaderboard"
 import changeSkinRouter from "./routes/account/changeskin"
 import changeCountryRouter from "./routes/account/changecountry"
+import unlockSkinRouter from "./routes/unlockSkin"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -266,6 +267,7 @@ app.use("/api/changeusername", changeUsernameRouter)
 app.use("/api/leaderboard", leaderboardRouter)
 app.use("/api/changeskin", changeSkinRouter)
 app.use("/api/changecountry", changeCountryRouter)
+app.use("/api/unlockskin", unlockSkinRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
