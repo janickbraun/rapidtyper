@@ -24,12 +24,6 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <Link reloadDocument={isInGame} to="/about">
-                            About
-                        </Link>
-                    </li>
-                    <span>•</span>
-                    <li className="footeritem">
                         <a className="ftext" target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper">
                             GitHub
                         </a>
