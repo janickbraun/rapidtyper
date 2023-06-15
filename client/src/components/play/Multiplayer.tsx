@@ -329,10 +329,13 @@ export default function Multiplayer() {
                     })[0]?.skin
                 }
                 online={true}
+                done={done}
             />
             {participants.map(
                 (item: any, key: any) =>
-                    item.username !== username && <ProgressBar key={key} bgcolor={"#6a1b9a"} completed={(item.completed / text.length) * 100} name={item.username} skin={item.skin} online={true} />
+                    item.username !== username && (
+                        <ProgressBar key={key} bgcolor={"#6a1b9a"} completed={(item.completed / text.length) * 100} name={item.username} skin={item.skin} online={true} done={done} />
+                    )
             )}
 
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>

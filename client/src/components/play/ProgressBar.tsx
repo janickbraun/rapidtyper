@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed, name, skin, online } = props
+    const { bgcolor, completed, name, skin, online, done } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const [wpm, setWpm] = useState(0)
@@ -79,7 +80,13 @@ const ProgressBar = (props: any) => {
             <div style={fillerStyles}>
                 <span style={labelStyles}>
                     <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
-                        {name}
+                        {done && online ? (
+                            <Link to={"/user/" + name} reloadDocument={true}>
+                                {name}
+                            </Link>
+                        ) : (
+                            <>{name}</>
+                        )}
                     </div>
                     {Math.round(completed)}%{skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                     {isOpen && online && (
