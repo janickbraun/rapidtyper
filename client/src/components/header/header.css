@@ -34,7 +34,7 @@
 .logoContainer:hover{
     opacity: .6;
 }
-.nav-link-item a{
+.nav-link-item a,.noscale{
     display: inline-flex;
     align-items: center;
     padding: 6px 14px;
@@ -46,11 +46,12 @@
     z-index: 4;
     column-gap: .5rem;
     transition: .19s ease;
+    background-color: transparent;
 }
-.nav-link-item .noscale::before{
+.nav-link-item .noscale::before,.noscale::before{
     display: none;
 }
-.nav-link-item .noscale:hover{
+.nav-link-item .noscale:hover,.noscale:hover{
     background-color: #747a8866;
 }
 .nav-link-item a::before{
