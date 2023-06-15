@@ -299,3 +299,32 @@ a.imprintLink{
 .search__container{
     z-index: 999;
 }
+.pfm{
+    min-height: calc(100vh - 11rem - (2*30px)) !important;
+}
+.infopopup{
+    position: fixed;
+    bottom: 3.5rem;
+    right: 1.8rem;
+    color: #71c562;
+    background-color: #71c5622a;
+    /* border: 2px solid #71c562; */
+    /* color: #fff;
+    background-color: #1c1d206a; */
+    backdrop-filter: blur(6px);
+    width: 20rem;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .8rem 1.4rem;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.sndficon{
+    position: absolute;
+    right: 1.4rem;
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: currentColor;
+}
