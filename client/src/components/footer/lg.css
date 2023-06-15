@@ -299,3 +299,6 @@ a.imprintLink{
 .search__container{
     z-index: 999;
 }
+.pfm{
+    min-height: calc(100vh - 11rem - (2*30px)) !important;
+}
