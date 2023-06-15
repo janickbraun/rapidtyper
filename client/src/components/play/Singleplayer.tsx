@@ -5,6 +5,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import useEventListener from "@use-it/event-listener"
 import useSound from "use-sound"
+import { unlockSkin } from "../../helpers/skinHelper"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -76,6 +77,7 @@ export default function Singleplayer() {
             } else if (tempAudio === "false") {
                 setAudioActive(false)
             }
+            unlockSkin("fly")
         }
     }, [mutationPlay, navigate])
 

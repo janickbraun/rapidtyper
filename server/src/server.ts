@@ -10,6 +10,7 @@ import http from "http"
 import mongoose from "mongoose"
 import Lobby from "../models/Lobby"
 import User from "../models/User"
+import { unlock } from "./routes/unlockFun"
 
 dotenv.config()
 
@@ -106,7 +107,11 @@ io.on("connection", (socket: any) => {
             tempAcc.push(accuracy)
             tempWpm.push(wpm)
             if (lobby.finished) {
+                if (user.racesTotal === 99) {
+                    unlock("dino", user, 0)
+                }
                 if (bestSpeed) {
+                    unlock("wpm", user, wpm)
                     await User.findByIdAndUpdate(user.id, {
                         $set: {
                             racesTotal: user.racesTotal + 1,
@@ -128,6 +133,19 @@ io.on("connection", (socket: any) => {
                 }
             } else {
                 await Lobby.findByIdAndUpdate(lobby.id, { $set: { finished: true } })
+                if (accuracy === 100) {
+                    unlock("octopus", user, 0)
+                }
+                if (user.racesWon === 9) {
+                    unlock("ape", user, 0)
+                }
+                if (user.racesWon === 19) {
+                    unlock("ape", user, 0)
+                }
+                if (user.racesTotal === 99) {
+                    unlock("dino", user, 0)
+                }
+
                 if (bestSpeed) {
                     await User.findByIdAndUpdate(user.id, {
                         $set: {
