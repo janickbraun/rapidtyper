@@ -63,7 +63,7 @@ export default function Home() {
 
     return (
         <main>
-            <button onClick={() => handleSkin("bee")}>Share</button>
+            {/* <button onClick={() => handleSkin("bee")}>Share</button> */}
             {accountResponse !== "" && (
                 <div className="infopopup">
                     {accountResponse}
