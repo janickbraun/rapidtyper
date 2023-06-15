@@ -122,3 +122,63 @@ tr{
 ._userlink:hover{
     background-color: #292b2f8d;
 }
+.profile_split,._profileinfinner{
+    display: flex;
+    align-items: center;
+}
+.profile_split{
+    justify-content: center;
+    column-gap: 5rem;
+}
+.home_{
+    height: 78px !important;
+    margin-right: 1rem;
+}
+.pscfix{
+    border: 2px solid #292b2f6a;
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    margin-top: 3rem;
+    margin-bottom: 3.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: .8rem;
+}
+.userlink_ds:hover .ac__go{
+    transform: translateX(7px);
+}
+.userlink_ds:hover .user_default_skinimg.home_{
+    transform: scale(1.1);
+}
+.user_default_skinimg.home_{
+    transition: .3s ease;
+}
+.userlink_ds:hover{
+    background-color: #292b2f8d;
+    box-shadow: 2px 2px 20px rgb(0 0 0 / 9%);
+}
+.userlink_ds{
+    all: inherit;
+    cursor: pointer;
+    transition: .25s ease;
+    padding: 0.1rem 1rem;
+    border-radius: 10px;
+}
+svg.ac__go{
+    width: 24px;
+    margin-left: 1rem;
+    fill: #fff;
+    transition: .3s ease;
+}
+.flicon,.__userhmskin{
+    display: flex;
+}
+.__buttonset{
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
