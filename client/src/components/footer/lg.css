@@ -9,7 +9,7 @@
     border-bottom: 3px solid #2f3031;
     padding-bottom: 1rem;
 }
-.imprintReset .btn{
+.imprintReset .btn, .wws.btn{
     background-color: #494949;
     text-decoration: none;
     padding: 4px 10px;
@@ -17,7 +17,7 @@
     color: #fff;
     display: inline-block;
 }
-.imprintReset .btn:hover{
+.imprintReset .btn:hover, .wws.btn:hover{
     background-color: #323232;
 }
 .imprintReset{
@@ -67,12 +67,19 @@ a.imprintLink{
     /* outline: 3px  #2563eb solid; */
 }
 
-.user_default_container{
-    border: 4px solid green; /* !Content Border! */
-}
 
 .user_default_skinimg{
     height: 100px; /* -> set default */
+}
+.centerContainer__stat{
+    margin-top: 11rem;
+}
+.search__container{
+    position: fixed;
+    backdrop-filter: blur(8px);
+    top: .5rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .skin_changeIMG{
     cursor: pointer; /* b */
@@ -246,4 +253,44 @@ a.imprintLink{
 }
 ._c_buttonset{
     margin: .6rem 0;
+}
+.c_stats h3{
+    font-size: 32px;
+    margin-bottom: .5rem;
+}
+.c_stats h3::after{
+    content: '';
+    display: inline-block;
+}
+.c_stats{
+    width: 75%;
+    padding: 1.5rem 2rem;
+}
+.sttsvg{
+    height: 40px;
+    margin-right: 1rem;
+    vertical-align: baseline;
+}
+.stat_giver{
+    font-size: 18px;
+    font-weight: 400;
+    width: 170px;
+    display: inline-block;
+    margin-right: .6rem;
+}
+.stat_reader{
+    font-size: 20px;
+    font-weight: 500;
+    width: 170px;
+    display: inline-block;
+    text-align: right;
+}
+.c_stats div{
+    margin-bottom: .2rem;
+}
+.fa-secondary{
+    fill: #2564ebc6;
+}
+.fa-primary{
+    fill: #ccc;
 }
