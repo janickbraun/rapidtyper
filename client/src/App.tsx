@@ -15,6 +15,8 @@ import PrivacyPolicy from "./components/footer/PrivacyPolicy"
 import Disclaimer from "./components/footer/Disclaimer"
 import CookieModal from "./components/account/CookiesModal"
 import Terms from "./components/footer/Terms"
+import SignUp from "./components/account/SignUp"
+import Login from "./components/account/Login"
 
 function App() {
     const queryClient = new QueryClient()
@@ -29,6 +31,8 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/account/" element={<Account />} />
+                            <Route path="/account/login" element={<Login />} />
+                            <Route path="/account/signup" element={<SignUp />} />
                             <Route path="/singleplayer/" element={<Singleplayer />} />
                             <Route path="/multiplayer/:code/" element={<Multiplayer />} />
                             <Route path="/user/:username/" element={<Profile />} />

@@ -90,7 +90,7 @@ export default function Multiplayer() {
         onSuccess: async ({ data }) => {
             let temp = []
             for (let i = 0; i < data.participants.length; i += 1) {
-                temp.push({ username: data.participants[i].username, completed: 0, skin: data.participants[i].skin })
+                temp.push({ username: data.participants[i].username, completed: 0, skin: data.participants[i].skin, connected: true })
             }
             setParticipants(temp)
             setText(data.text.text)
@@ -163,11 +163,22 @@ export default function Multiplayer() {
         })
 
         socket.on("leave", (data) => {
-            const temp = participants.filter((el: any) => {
-                return el.username !== data.username
-            })
+            if (hasStarted) {
+                const temp = participants.map((obj: any) => {
+                    if (obj.username === data.username) {
+                        return { ...obj, connected: false }
+                    }
+                    return obj
+                })
 
-            setParticipants(temp)
+                setParticipants(temp)
+            } else {
+                const temp = participants.filter((el: any) => {
+                    return el.username !== data.username
+                })
+
+                setParticipants(temp)
+            }
         })
 
         socket.on("waiting", async () => {
@@ -199,7 +210,7 @@ export default function Multiplayer() {
             socket.off("waiting")
             socket.off("leave")
         }
-    }, [mutationPlay, code, winners, participants])
+    }, [mutationPlay, code, winners, participants, hasStarted])
 
     const touchDisclaimer = (e: any) => {
         const store = JSON.parse(window.localStorage.getItem("cookies") as string)
@@ -330,11 +341,21 @@ export default function Multiplayer() {
                 }
                 online={true}
                 done={done}
+                connected={true}
             />
             {participants.map(
                 (item: any, key: any) =>
                     item.username !== username && (
-                        <ProgressBar key={key} bgcolor={"#6a1b9a"} completed={(item.completed / text.length) * 100} name={item.username} skin={item.skin} online={true} done={done} />
+                        <ProgressBar
+                            key={key}
+                            bgcolor={"#6a1b9a"}
+                            completed={(item.completed / text.length) * 100}
+                            name={item.username}
+                            skin={item.skin}
+                            online={true}
+                            done={done}
+                            connected={item.connected}
+                        />
                     )
             )}
 
