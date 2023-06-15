@@ -296,3 +296,6 @@ a.imprintLink{
 .fa-primary{
     fill: #ccc;
 }
+.search__container{
+    z-index: 999;
+}

@@ -20,9 +20,14 @@ export default function Profile() {
     return (
         <main>
             <div className="search__container">
-                <Link to="/" tabIndex={-1} style={{marginRight: "1.2rem"}}>
+                <Link to="/" tabIndex={-1} style={{marginRight: "1rem"}}>
                     <button className="wws btn"><svg xmlns="http://www.w3.org/2000/svg" style={{ height: 16, paddingBottom: 2, marginLeft: 2, fill: "currentcolor" }} viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg><span>Back</span></button>
                 </Link>
+                {username !== myusername && loggedin && (
+                    <Link to={"/user/" + myusername} reloadDocument={true} tabIndex={-1} style={{marginRight: "1.4rem"}}>
+                        <button className="wws btn">Back to {myusername}</button>
+                    </Link>
+                )}
                 <input
                     className="rt__default_input"
                     type="text"
@@ -44,13 +49,6 @@ export default function Profile() {
             <div className="user_default_container">
                 <Stats username={username} dta />
             </div>
-            <br />
-            {username !== myusername && loggedin && (
-                <Link to={"/user/" + myusername} reloadDocument={true} tabIndex={-1}>
-                    <button>Back to {myusername}</button>
-                </Link>
-            )}
-            <br />
         </main>
     )
 }
