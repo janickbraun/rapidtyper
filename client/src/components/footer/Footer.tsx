@@ -2,15 +2,13 @@ import React from "react"
 import "./footer.css"
 import { Link } from "react-router-dom"
 import useIsInGame from "../../hooks/useIsInGame"
-import useUnlockSkin from "../../hooks/useUnlockSkin"
+import { unlockSkin } from "../../helpers/skinHelper"
 
 export default function Footer() {
     const [isInGame] = useIsInGame()
-    const run = useUnlockSkin()
 
     const handleSkin = (skin: string) => {
-        console.log(skin)
-        //fun()
+        unlockSkin(skin)
     }
 
     return (
@@ -18,7 +16,7 @@ export default function Footer() {
             <section className="innerfooter">
                 <ul className="linksfooter">
                     <li className="footeritem">
-                        <a className="ftext" rel="noreferrer" href="//feedback.rapidtyper.com">
+                        <a className="ftext" rel="noreferrer" href="//feedback.rapidtyper.com" onClick={() => handleSkin("bird")}>
                             Leave Feedback
                         </a>
                     </li>
@@ -30,7 +28,7 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <a className="ftext" target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper">
+                        <a className="ftext" target="_blank" rel="noreferrer" href="https://github.com/janickbraun/rapidtyper" onClick={() => handleSkin("cat")}>
                             GitHub
                         </a>
                     </li>
