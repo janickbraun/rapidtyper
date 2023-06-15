@@ -99,22 +99,30 @@ ul{
 }
 .dropdown_container{
     position: absolute;
-    background-color: rgba(26, 28, 33, 1);
+    background-color: #202124;
+    backdrop-filter: blur(15px);
     top: 4.5em;
     right: -.1rem;
     padding: 1.2rem 1.5rem;
     border-radius: 14px;
+    border: 2px solid #292b2f6a;
+    z-index: 2;
 }
-.dropdown_container::after{
+.dropdown_container::before{
     content: '';
-    background-color: rgba(26, 28, 33, 1);
+    background-color: #202124;
+    backdrop-filter: blur(15px);
     display: block;
     width: 15px;
     height: 15px;
     position: absolute;
-    top: -7px;
+    top: -9.5px;
     right: 1rem;
     transform: rotate(45deg);
+    border: 2px solid #292b2f6a;
+    z-index: -1;
+    border-bottom: none;
+    border-right: none;
 }
 .cnvsvg{
     width: 4rem;

@@ -317,7 +317,7 @@ a.imprintLink{
     justify-content: flex-start;
     padding: .8rem 1.4rem;
     border-radius: 12px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 }
 .sndficon{
@@ -327,4 +327,10 @@ a.imprintLink{
     top: 50%;
     transform: translateY(-50%);
     fill: currentColor;
+}
+.rt_navigation{
+    z-index: 1600;
+}
+.user_pfd_container{
+    padding: 0 0.5rem;
 }
