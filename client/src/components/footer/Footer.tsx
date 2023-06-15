@@ -6,10 +6,11 @@ import useUnlockSkin from "../../hooks/useUnlockSkin"
 
 export default function Footer() {
     const [isInGame] = useIsInGame()
-    let unlock = useUnlockSkin()
+    const run = useUnlockSkin()
 
     const handleSkin = (skin: string) => {
         console.log(skin)
+        //fun()
     }
 
     return (

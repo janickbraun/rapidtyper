@@ -1,9 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useState } from "react"
+import { useEffectOnce } from "react-use"
 
-export default function useIsInGame() {
+export default function useUnlockSkin() {
     const [unlocked, setUnlocked] = useState(false)
+    const [func, setFunk] = useState<any>()
     const token = window.localStorage.getItem("token")
 
     const mutation: any = useMutation({
@@ -23,5 +25,9 @@ export default function useIsInGame() {
         console.log(skin, token)
     }
 
-    return useIsInGame
+    useEffectOnce(() => {
+        setFunk(run)
+    })
+
+    return [run]
 }

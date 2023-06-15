@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import SignUp from "./SignUp"
 import Login from "./Login"
 import Logout from "./Logout"
@@ -14,10 +14,10 @@ export default function Account() {
 
     useEffect(() => {
         document.title = "Account | RapidTyper"
-        if (!loggedin) {
+        if (!localStorage.getItem("token")) {
             return navigate("/account/login", { replace: true })
         }
-    }, [loggedin, navigate])
+    }, [navigate])
 
     return (
         <main>
