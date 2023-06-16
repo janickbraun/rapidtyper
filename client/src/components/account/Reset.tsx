@@ -33,7 +33,7 @@ export default function Reset() {
             <input type="password" placeholder="New password" onChange={(e) => setPassword(e.target.value)} />
             <input type="password" placeholder="Confirm new password" onChange={(e) => setPasswordConfirm(e.target.value)} />
             <button onClick={() => mutation.mutate()}>Reset</button>
-            {mutation.isError && <div>{mutation.error.message}</div>}
+            {mutation.isError && <div>{mutation.error.response.data}</div>}
             {mutation.isSuccess && (
                 <div>
                     Password has been successfully reset. You can login now.{" "}
