@@ -69,7 +69,7 @@ export default function SignUp() {
                 </div>
                 <div className="_input_container">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" className="rt__default_input mwdt" placeholder="Password" value={values.password} onChange={handleInputChange} name="Enter your password" />
+                    <input type="password" id="password" className="rt__default_input mwdt" placeholder="Password" value={values.password} onChange={handleInputChange} name="password" />
                 </div>
                 <div className="_input_container">
                     <label htmlFor="confirmpwd">Confirm password</label>
