@@ -319,6 +319,7 @@ a.imprintLink{
     border-radius: 12px;
     font-size: 18px;
     font-weight: 500;
+    z-index: 1500;
 }
 .sndficon{
     position: absolute;

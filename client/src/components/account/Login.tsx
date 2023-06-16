@@ -32,9 +32,10 @@ export default function SignUp() {
     }
 
     return (
-        <div>
-            <h3>Login</h3>
-            <form onSubmit={(e) => e.preventDefault()} style={{ marginTop: 100 }}>
+        <>
+        <div className="footerfix"></div>
+        <div className="auth_form tsx_2">
+            <form onSubmit={(e) => e.preventDefault()}>
                 <input type="email" placeholder="Email" value={values.email} onChange={handleInputChange} name="email" />
                 <input type="password" placeholder="Password" value={values.password} onChange={handleInputChange} name="password" />
                 <input type="submit" value="Login" onClick={() => mutation.mutate()} />
@@ -42,5 +43,6 @@ export default function SignUp() {
                 {mutation.isSuccess && <div>Successfully logged in</div>}
             </form>
         </div>
+        </>
     )
 }
