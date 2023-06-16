@@ -7,12 +7,11 @@ import { useEffectOnce } from "react-use"
 export default function Reset() {
     let [searchParams, setSearchParams] = useSearchParams()
     let navigate = useNavigate()
-    const [code, setCode] = useState("")
     const [username, setUsername] = useState("")
 
     const mutation: any = useMutation({
-        mutationFn: async (test: string) => {
-            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verify", { username, code })
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verify", { username: searchParams.get("user"), code: searchParams.get("code") })
         },
     })
 
@@ -22,9 +21,9 @@ export default function Reset() {
 
         if (!user || !code) return navigate("/")
         setUsername(user)
-        setCode(code)
-        setSearchParams()
+
         mutation.mutate()
+        setSearchParams()
     })
 
     return (

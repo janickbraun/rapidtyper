@@ -6,6 +6,7 @@ export default function useAuth() {
     const [loggedin, setLoggedin] = useState(false)
     const [username, setUsername] = useState("")
     const [skin, setSkin] = useState("")
+    const [verified, setVerified] = useState(false)
 
     const token = localStorage.getItem("token")
 
@@ -19,6 +20,7 @@ export default function useAuth() {
             setLoggedin(data.loggedin)
             setUsername(data.username)
             setSkin(data.skin)
+            setVerified(data.verified)
         },
     })
 
@@ -29,5 +31,5 @@ export default function useAuth() {
         }
     }, [token, mutate, isIdle])
 
-    return [loggedin, username, skin]
+    return [loggedin, username, skin, verified]
 }

@@ -273,6 +273,8 @@ import changeCountryRouter from "./routes/account/changecountry"
 import unlockSkinRouter from "./routes/unlockSkin"
 import forgotRouter from "./routes/account/forgot"
 import resetRouter from "./routes/account/reset"
+import verifyRouter from "./routes/account/verify"
+import verifyAnotherRouter from "./routes/account/sendAnotherVerify"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -290,6 +292,8 @@ app.use("/api/changecountry", changeCountryRouter)
 app.use("/api/unlockskin", unlockSkinRouter)
 app.use("/api/account/forgot", forgotRouter)
 app.use("/api/account/reset", resetRouter)
+app.use("/api/account/verify", verifyRouter)
+app.use("/api/account/verifyanother", verifyAnotherRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))

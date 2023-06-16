@@ -17,7 +17,8 @@ export default function Stats(props: any) {
     const [skinsOpen, setSkinsOpen] = useState(false)
     const [skins, setSkins] = useState<Array<any>>([])
 
-    const [loggedin, username] = useAuth()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [loggedin, username, skin2, verified] = useAuth()
 
     const token = localStorage.getItem("token")
 
@@ -38,6 +39,15 @@ export default function Stats(props: any) {
             setSkins(data.skins)
             setCountry(data.country)
             setTimeSpentRacing(data.time)
+        },
+    })
+
+    const mutationAnother: any = useMutation({
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verifyanother", { token })
+        },
+        onSuccess: ({ data }) => {
+            console.log(data)
         },
     })
 
@@ -68,39 +78,39 @@ export default function Stats(props: any) {
             {mutation.isSuccess && (
                 <div className="centerContainer__stat">
                     {skinsOpen ? <Overlay /> : ""}
-                        {skinsOpen && (
-                            <div className="selector_container">
-                                <h1 className="modalCallerHeader">Your Skins</h1>
-                                <div className="close_container">
-                                    <button className="close-modal-button" onClick={() => setSkinsOpen(!skinsOpen)}>
-                                        x
-                                    </button>
-                                </div>
-                                <div className="skin_div">
-                                    {skins.map((val, key) => {
-                                        return (
-                                            <div key={key}>
-                                                <img
-                                                    onClick={() => handleSkinChange(val)}
-                                                    src={"/img/skins/" + val + ".png"}
-                                                    alt="skin"
-                                                    tabIndex={0}
-                                                    draggable="false"
-                                                    className="user_default_skinimg skin_changeIMG"
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                <div className="wshinttext">How to unlock skins:</div>
-                                <ul className="cscontent">
-                                    <li>Type faster</li>
-                                    <li>Complete and win more races</li>
-                                    <li>Improve your accuracy</li>
-                                    <li>Look for easter eggs 👀</li>
-                                </ul>
+                    {skinsOpen && (
+                        <div className="selector_container">
+                            <h1 className="modalCallerHeader">Your Skins</h1>
+                            <div className="close_container">
+                                <button className="close-modal-button" onClick={() => setSkinsOpen(!skinsOpen)}>
+                                    x
+                                </button>
                             </div>
-                        )}
+                            <div className="skin_div">
+                                {skins.map((val, key) => {
+                                    return (
+                                        <div key={key}>
+                                            <img
+                                                onClick={() => handleSkinChange(val)}
+                                                src={"/img/skins/" + val + ".png"}
+                                                alt="skin"
+                                                tabIndex={0}
+                                                draggable="false"
+                                                className="user_default_skinimg skin_changeIMG"
+                                            />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <div className="wshinttext">How to unlock skins:</div>
+                            <ul className="cscontent">
+                                <li>Type faster</li>
+                                <li>Complete and win more races</li>
+                                <li>Improve your accuracy</li>
+                                <li>Look for easter eggs 👀</li>
+                            </ul>
+                        </div>
+                    )}
                     <div className="user_pfd_container">
                         {/* */}
                         <div>
@@ -132,20 +142,47 @@ export default function Stats(props: any) {
                                 {props.username} &nbsp;
                                 <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
                             </h1>
+                            {loggedin && username === props.username && !verified && (
+                                <div>
+                                    Your email adress has not been verified. Please check your email inbox. <button onClick={() => mutationAnother.mutate()}>Send another one</button>
+                                </div>
+                            )}
                             <div>Racing since: {date}</div>
                         </div>
                     </div>
                     <div className="c_stats">
                         <h3>
-                            <svg className="sttsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><defs></defs><path className="fa-primary" d="M544 192h-32c-17.67 0-32 14.33-32 32v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C576 206.3 561.7 192 544 192zM224 192H192C174.3 192 160 206.3 160 224v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C256 206.3 241.7 192 224 192zM64 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-96C96 366.3 81.67 352 64 352zM384 320h-32c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-128C416 334.3 401.7 320 384 320z"/><path className="fa-secondary" d="M576 48C576 74.5 554.5 96 528 96c-6.125 0-12-1.25-17.38-3.375l-95.38 76.25C415.6 171.3 416 173.6 416 176C416 202.5 394.5 224 368 224S320 202.5 320 176c0-2.375 .375-4.75 .75-7.125L225.4 92.63C220 94.75 214.1 96 208 96C203.8 96 199.6 95.25 195.8 94.25L94.25 195.8C95.25 199.6 96 203.8 96 208C96 234.5 74.5 256 48 256S0 234.5 0 208S21.5 160 48 160c4.25 0 8.375 .75 12.25 1.75l101.5-101.5C160.8 56.37 160 52.25 160 48C160 21.5 181.5 0 208 0S256 21.5 256 48c0 2.375-.375 4.75-.75 7.125l95.38 76.25C356 129.3 361.9 128 368 128s12 1.25 17.38 3.375l95.38-76.25C480.4 52.75 480 50.38 480 48C480 21.5 501.5 0 528 0S576 21.5 576 48z"/></svg>
-                            Statistics 
+                            <svg className="sttsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <defs></defs>
+                                <path
+                                    className="fa-primary"
+                                    d="M544 192h-32c-17.67 0-32 14.33-32 32v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C576 206.3 561.7 192 544 192zM224 192H192C174.3 192 160 206.3 160 224v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C256 206.3 241.7 192 224 192zM64 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-96C96 366.3 81.67 352 64 352zM384 320h-32c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-128C416 334.3 401.7 320 384 320z"
+                                />
+                                <path
+                                    className="fa-secondary"
+                                    d="M576 48C576 74.5 554.5 96 528 96c-6.125 0-12-1.25-17.38-3.375l-95.38 76.25C415.6 171.3 416 173.6 416 176C416 202.5 394.5 224 368 224S320 202.5 320 176c0-2.375 .375-4.75 .75-7.125L225.4 92.63C220 94.75 214.1 96 208 96C203.8 96 199.6 95.25 195.8 94.25L94.25 195.8C95.25 199.6 96 203.8 96 208C96 234.5 74.5 256 48 256S0 234.5 0 208S21.5 160 48 160c4.25 0 8.375 .75 12.25 1.75l101.5-101.5C160.8 56.37 160 52.25 160 48C160 21.5 181.5 0 208 0S256 21.5 256 48c0 2.375-.375 4.75-.75 7.125l95.38 76.25C356 129.3 361.9 128 368 128s12 1.25 17.38 3.375l95.38-76.25C480.4 52.75 480 50.38 480 48C480 21.5 501.5 0 528 0S576 21.5 576 48z"
+                                />
+                            </svg>
+                            Statistics
                         </h3>
-                        <div><span className="stat_giver">Speed:</span> <span className="stat_reader">{wpm}wpm</span></div>
-                        <div><span className="stat_giver">Accuracy:</span> <span className="stat_reader">{accuracy}%</span></div>
-                        <div><span className="stat_giver">Races completed:</span> <span className="stat_reader">{racesTotal}</span></div>
-                        <div><span className="stat_giver">Races won:</span> <span className="stat_reader">{racesWon}</span></div>
-                        <div><span className="stat_giver">Fastest race:</span> <span className="stat_reader">{bestRace}wpm</span></div>
-                        <div><span className="stat_giver">Time spent racing:</span> <span className="stat_reader">{new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</span></div>
+                        <div>
+                            <span className="stat_giver">Speed:</span> <span className="stat_reader">{wpm}wpm</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Accuracy:</span> <span className="stat_reader">{accuracy}%</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Races completed:</span> <span className="stat_reader">{racesTotal}</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Races won:</span> <span className="stat_reader">{racesWon}</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Fastest race:</span> <span className="stat_reader">{bestRace}wpm</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Time spent racing:</span> <span className="stat_reader">{new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</span>
+                        </div>
                     </div>
                 </div>
             )}

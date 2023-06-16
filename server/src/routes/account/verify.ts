@@ -12,7 +12,7 @@ function isBlank(str: string) {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const username: string = req.body.username
-    const code: string = req.body.token
+    const code: string = req.body.code
 
     if (isBlank(username) || isBlank(code)) return res.status(403).send("Invalid username or code")
 

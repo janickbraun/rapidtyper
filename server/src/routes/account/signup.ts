@@ -65,7 +65,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
             const code = crypto.randomUUID()
 
-            const link = process.env.FRONTEND_URL + "/account/verify?code= " + code + "&user=" + signedUpUser.username
+            const link = process.env.FRONTEND_URL + "/account/verify?code=" + code + "&user=" + signedUpUser.username
 
             console.log(link)
 
