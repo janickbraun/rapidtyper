@@ -48,18 +48,40 @@ export default function SignUp() {
     }
 
     return (
-        <div>
-            <h3>Sign up</h3>
+        <>
+        <div className="footerfix"></div>
+        <div className="auth_form tsx_2">
+            <div className="h4_gr hdr">
+                <h2 className="lgh">Signup</h2>
+            </div>
             <form onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="Username" value={values.username} onChange={handleInputChange} name="username" />
-                <input type="email" placeholder="Email" value={values.email} onChange={handleInputChange} name="email" />
-                <Select options={options} value={country} onChange={changeHandler} />
-                <input type="password" placeholder="Password" value={values.password} onChange={handleInputChange} name="password" />
-                <input type="password" placeholder="Confirm Password" value={values.passwordConfirm} onChange={handleInputChange} name="passwordConfirm" />
-                <input type="submit" value="Sign up" onClick={() => mutation.mutate()} />
-                {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
-                {mutation.isSuccess && <div>Successfully signed up</div>}
+                <div className="_input_container">
+                    <label htmlFor="username">Username</label>
+                    <input type="text" id="username" className="rt__default_input mwdt" placeholder="Choose a username" value={values.username} onChange={handleInputChange} name="username" />
+                </div>
+                <div className="_input_container">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" className="rt__default_input mwdt" placeholder="Enter your email" value={values.email} onChange={handleInputChange} name="email" />
+                </div>
+                <div className="_input_container">
+                    <label htmlFor="password">Country</label>
+                    <Select options={options} placeholder="Select your country" value={country} onChange={changeHandler} />
+                </div>
+                <div className="_input_container">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" id="password" className="rt__default_input mwdt" placeholder="Password" value={values.password} onChange={handleInputChange} name="Enter your password" />
+                </div>
+                <div className="_input_container">
+                    <label htmlFor="confirmpwd">Confirm password</label>
+                    <input type="password" id="confirmpwd" className="rt__default_input mwdt" placeholder="Confirm your Password" value={values.passwordConfirm} onChange={handleInputChange} name="passwordConfirm" />
+                </div>
+                <div className="authbtncontainer">
+                    <button type="submit" className="authwidth" onClick={() => mutation.mutate()}>Sign up</button>
+                </div>
+                {mutation.isError && <div className="cserror">An error occurred: {mutation.error.response.data}</div>}
+                {mutation.isSuccess && <div className="cssuccess">Successfully signed up</div>}
             </form>
         </div>
+        </>
     )
 }

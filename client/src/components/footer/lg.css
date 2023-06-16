@@ -386,6 +386,11 @@ input.mwdt{
     min-width: 340px;
     margin-bottom: 1rem;
 }
+.css-b62m3t-container{
+    margin-bottom: 1rem;
+    color: #000;
+    max-width: 340px;
+}
 .authform{
     margin: 1rem 0 .4rem 0;
 }
