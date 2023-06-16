@@ -271,6 +271,8 @@ import leaderboardRouter from "./routes/leaderboard"
 import changeSkinRouter from "./routes/account/changeskin"
 import changeCountryRouter from "./routes/account/changecountry"
 import unlockSkinRouter from "./routes/unlockSkin"
+import forgotRouter from "./routes/account/forgot"
+import resetRouter from "./routes/account/reset"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -286,6 +288,8 @@ app.use("/api/leaderboard", leaderboardRouter)
 app.use("/api/changeskin", changeSkinRouter)
 app.use("/api/changecountry", changeCountryRouter)
 app.use("/api/unlockskin", unlockSkinRouter)
+app.use("/api/account/forgot", forgotRouter)
+app.use("/api/account/reset", resetRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
