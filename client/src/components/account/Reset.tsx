@@ -1,12 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { useEffectOnce } from "react-use"
 
 export default function Reset() {
     let [searchParams, setSearchParams] = useSearchParams()
-    let navigate = useNavigate()
     const [password, setPassword] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
     const [code, setCode] = useState("")
@@ -15,9 +14,6 @@ export default function Reset() {
     const mutation: any = useMutation({
         mutationFn: async () => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/reset", { username, code, password, passwordConfirm })
-        },
-        onSuccess: ({ data }) => {
-            navigate("/?reset=true")
         },
     })
 
@@ -38,6 +34,14 @@ export default function Reset() {
             <input type="password" placeholder="Confirm new password" onChange={(e) => setPasswordConfirm(e.target.value)} />
             <button onClick={() => mutation.mutate()}>Reset</button>
             {mutation.isError && <div>{mutation.error.message}</div>}
+            {mutation.isSuccess && (
+                <div>
+                    Password has been successfully reset. You can login now.{" "}
+                    <Link to="/account/login">
+                        <button>Login</button>
+                    </Link>
+                </div>
+            )}
         </main>
     )
 }

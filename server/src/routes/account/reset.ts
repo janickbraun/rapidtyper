@@ -33,7 +33,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         if (!verifyUser) return res.status(400).send("Invalid user")
 
-        await User.findByIdAndUpdate(verifyCode.id, {
+        await User.findByIdAndUpdate(verifyUser.id, {
             $set: {
                 password: await bcrypt.hash(password, 10),
             },
@@ -64,7 +64,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                 from: '"RapidTyper" <rapidtyper@grovider.co>',
                 to: verifyUser.email,
                 subject: "Password has been reset",
-                text: "Your password on rapidtyper.com hast been reset. If this was not you, please reply to this email immediately!",
+                text: "Hey " + verifyUser.username + "!\nYour password on rapidtyper.com hast been reset. If this was not you, please reply to this email immediately!.\nYour RapidTyper-Team", // plain text body
                 //html: "<div></div>", // html body
             })
         } catch {}

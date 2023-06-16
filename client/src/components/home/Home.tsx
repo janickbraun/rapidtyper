@@ -47,10 +47,6 @@ export default function Home() {
             accMsg("Successfully deleted account")
         } else if (searchParams.get("logout")) {
             accMsg("Successfully logged out")
-        } else if (searchParams.get("forgot")) {
-            accMsg("We sent you an email. Please check your inbox.")
-        } else if (searchParams.get("reset")) {
-            accMsg("Password has been successfully reset. You can login now.")
         }
     }, [navigate, searchParams, setSearchParams])
 

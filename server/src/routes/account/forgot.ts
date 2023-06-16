@@ -11,10 +11,16 @@ function isBlank(str: string) {
     return !str || /^\s*$/.test(str)
 }
 
+const validateEmail = (email: string) => {
+    return String(email)
+        .toLowerCase()
+        .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+}
+
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const email: string = req.body.email
 
-    if (isBlank(email)) return res.status(403).send("Invalid email")
+    if (isBlank(email) || !validateEmail(email)) return res.status(403).send("Invalid email")
 
     try {
         const verifyUser = await User.findOne({ email })
@@ -38,7 +44,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                 from: '"RapidTyper" <rapidtyper@grovider.co>',
                 to: verifyUser.email,
                 subject: "Password reset request",
-                text: "Reset your password with this link: " + link, // plain text body
+                text: "Hey " + verifyUser.username + "!\nReset your password with this link: " + link + " \nIf this was not you please just ignore this email.\nYour RapidTyper-Team", // plain text body
                 //html: "<div></div>", // html body
             })
         } catch {}
