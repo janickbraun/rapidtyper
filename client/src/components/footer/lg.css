@@ -359,3 +359,70 @@ a.imprintLink{
 .user_origincounty{
     position: relative;
 }
+.auth_form{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 1.4rem 2rem;
+    border: 2px solid #292b2f6a;
+}
+.footerfix{
+    height: calc(100vh - (2*30px));
+}
+.h4_gr{
+    text-align: center;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 2px solid #292b2f6a;
+}
+.lgh{
+    font-size: 36px;
+}
+input.mwdt{
+    min-width: 340px;
+    margin-bottom: 1rem;
+}
+.authform{
+    margin: 1rem 0 .4rem 0;
+}
+.authwidth{
+    width: 55%;
+    text-align: center;
+    justify-content: center;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.authbtncontainer{
+    display: flex;
+    justify-content: center;
+    margin-top: .8rem;
+}
+.cserror{
+    text-align: center;
+    transform: translateY(10px);
+    color: #ff3333;
+    font-weight: 500;
+}
+.fgp,.sgup{
+    text-align: center;
+}
+.fgp a,.sgup a{
+    color: #2563eb;
+    text-decoration: 2px solid underline;
+}
+.fgp a:hover,.sgup a:hover{
+    text-decoration: none;
+}
+.hint__container{
+    margin-top: 1.2rem;
+}
+label{
+    display: block;
+    margin-bottom: 4px;
+}
