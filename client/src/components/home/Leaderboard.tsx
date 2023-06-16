@@ -82,7 +82,7 @@ export default function Leaderboard() {
                                     <tr key={key}>
                                         <td>{key + 1 + "."}</td>
                                         <td className="userTd not_right">
-                                            <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + val.country + ".svg"} loading="lazy" draggable="false" alt="" />
+                                            <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + val.country + ".svg"} loading="lazy" draggable="false" alt="test" />
                                             <Link className="_userlink" to={"/user/" + val.username}>
                                                 {val.username}
                                             </Link>
