@@ -67,8 +67,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
             const link = process.env.FRONTEND_URL + "/account/verify?code=" + code + "&user=" + signedUpUser.username
 
-            console.log(link)
-
             await Verify.create({ user: signedUpUser.username, code })
 
             await transporter.sendMail({
