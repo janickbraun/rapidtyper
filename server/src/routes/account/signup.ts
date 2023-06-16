@@ -2,7 +2,11 @@ import { Router, Request, Response, NextFunction } from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import User from "../../../models/User"
+import Verify from "../../../models/Verify"
 import dotenv from "dotenv"
+import crypto from "crypto"
+import nodemailer from "nodemailer"
+
 dotenv.config()
 const router = Router()
 
@@ -47,6 +51,35 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                 }
             })
         if (token === "") return res.status(400).send("Something went wrong")
+
+        try {
+            let transporter = nodemailer.createTransport({
+                host: "smtp.hostinger.com",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: "rapidtyper@grovider.co",
+                    pass: process.env.EMAIL_PASSWORD,
+                },
+            })
+
+            const code = crypto.randomUUID()
+
+            const link = process.env.FRONTEND_URL + "/account/verify?code= " + code + "&user=" + signedUpUser.username
+
+            console.log(link)
+
+            await Verify.create({ user: signedUpUser.username, code })
+
+            await transporter.sendMail({
+                from: '"RapidTyper" <rapidtyper@grovider.co>',
+                to: signedUpUser.email,
+                subject: "Verify email",
+                text: "Hey " + signedUpUser.username + "!\nWelcome to RapidTyper. Please verify your email by clicking the following link: " + link + "\nYour RapidTyper-Team", // plain text body
+                //html: "<div></div>", // html body
+            })
+        } catch {}
+
         res.status(200).json({ token })
     } catch {
         if (!isError) return res.status(400).send("Something went wrong")

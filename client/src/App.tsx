@@ -19,6 +19,7 @@ import SignUp from "./components/account/SignUp"
 import Login from "./components/account/Login"
 import Forgot from "./components/account/Forgot"
 import Reset from "./components/account/Reset"
+import Verify from "./components/account/Verify"
 
 function App() {
     const queryClient = new QueryClient()
@@ -44,6 +45,7 @@ function App() {
                             <Route path="/terms-of-service" element={<Terms />} />
                             <Route path="/account/forgot" element={<Forgot />} />
                             <Route path="/account/reset" element={<Reset />} />
+                            <Route path="/account/verify" element={<Verify />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />

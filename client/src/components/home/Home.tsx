@@ -26,10 +26,15 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const accMsg = async (msg: string) => {
+        const accMsg = async (msg: string, time?: number) => {
             setAccountResponse(msg)
             setSearchParams()
-            await timeout(3000)
+            if (!time) {
+                await timeout(3000)
+            } else {
+                await timeout(time)
+            }
+
             setAccountResponse("")
         }
 
@@ -42,7 +47,7 @@ export default function Home() {
         if (searchParams.get("login")) {
             accMsg("Successfully logged in")
         } else if (searchParams.get("signup")) {
-            accMsg("Successfully signed up")
+            accMsg("We sent you an email to verify your email adress. Please check your inbox.", 10000)
         } else if (searchParams.get("delete")) {
             accMsg("Successfully deleted account")
         } else if (searchParams.get("logout")) {
