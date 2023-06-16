@@ -35,7 +35,7 @@
 .logoContainer:hover{
     opacity: .6;
 }
-.nav-link-item a,.noscale{
+.nav-link-item a,.noscale, .nav-link-item button{
     display: inline-flex;
     align-items: center;
     padding: 6px 14px;
@@ -55,7 +55,7 @@
 .nav-link-item .noscale:hover,.noscale:hover{
     background-color: #747a8866;
 }
-.nav-link-item a::before{
+.nav-link-item a::before, .nav-link-item button::before{
     content: '';
     background-color: #747a8866;
     width: 100%;
@@ -68,7 +68,7 @@
     transform: scale(0);
     transition: transform .19s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.nav-link-item a:hover::before, .nav-link-item a:focus-visible::before{
+.nav-link-item a:hover::before, .nav-link-item a:focus-visible::before, .nav-link-item button:hover::before{
     transform: scale(1);
 }
 .nav-link-item a:hover{
