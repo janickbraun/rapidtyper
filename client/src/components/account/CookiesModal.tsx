@@ -47,7 +47,7 @@ export default function CookieModal() {
                         <div className="textcontent">
                             <p className="cmdtxt">We only use cookies and data that are necessary to provide and maintain RapidTyper.</p>
                             <p className="cmdtxt">
-                                By accepting the cookies you also agree to comply with our terms of service{" "}
+                                By continuing to use this site, you accept all necessary cookies and also agree to comply with our terms of service{" "}
                                 <a className="cmd_link" href="https://grovider.co/privacy-policy">
                                     Privacy Policy
                                 </a>{" "}
@@ -57,14 +57,13 @@ export default function CookieModal() {
                                 </Link>
                                 .
                             </p>
-                            <p className="cmdtxt">In order for RapidTyper to work, you must accept all cookies, as only necessary cookies are used.</p>
                             <p className="errtxt_clr">{errMsg}</p>
                             <div className="_c_buttonset">
                                 <button className="secondary_action" onClick={handleWrong}>
                                     I decline
                                 </button>
                                 <button onClick={handleAccept} ref={tab}>
-                                    I accept all
+                                    I understand
                                 </button>
                             </div>
                         </div>
