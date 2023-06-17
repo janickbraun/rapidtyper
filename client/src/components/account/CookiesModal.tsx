@@ -10,7 +10,7 @@ export default function CookieModal() {
     let location = useLocation()
 
     const handleWrong = () => {
-        setErrMsg("In order to use RapidTyper you need to accept nessessary cookies.")
+        setErrMsg("We are sorry, but in order to use RapidTyper you need to accept nessessary cookies.")
     }
 
     const handleAccept = () => {
@@ -43,11 +43,11 @@ export default function CookieModal() {
                 <>
                     <Overlay />
                     <div className="cookie__modal cm__float">
-                        <h2 className="cookies__header">Cookies</h2>
+                        <h2 className="cookies__header">Cookie Consent</h2>
                         <div className="textcontent">
-                            <p className="cmdtxt">We only use cookies and data that are necessary to provide and maintain RapidTyper.</p>
+                            <p className="cmdtxt">We only use cookies and data that are required to provide and maintain RapidTyper.</p>
                             <p className="cmdtxt">
-                                By accepting the cookies you also agree to comply with our terms of service{" "}
+                                By accepting the cookies you also agree to comply with our{" "}
                                 <a className="cmd_link" href="https://grovider.co/privacy-policy">
                                     Privacy Policy
                                 </a>{" "}
@@ -57,7 +57,7 @@ export default function CookieModal() {
                                 </Link>
                                 .
                             </p>
-                            <p className="cmdtxt">In order for RapidTyper to work, you must accept all cookies, as only necessary cookies are used.</p>
+                            <p className="cmdtxt">In order for RapidTyper to work, you must accept all required cookies</p>
                             <p className="errtxt_clr">{errMsg}</p>
                             <div className="_c_buttonset">
                                 <button className="secondary_action" onClick={handleWrong}>
