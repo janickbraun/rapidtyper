@@ -147,6 +147,7 @@ io.on("connection", (socket: any) => {
                 }
 
                 if (bestSpeed) {
+                    unlock("wpm", user, wpm)
                     await User.findByIdAndUpdate(user.id, {
                         $set: {
                             racesTotal: user.racesTotal + 1,

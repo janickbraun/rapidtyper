@@ -43,10 +43,21 @@ export const unlock = async (skin: string, user: any, speed: any) => {
 
         if (skins.includes(skin)) return
 
-        console.log("thfe ", speed)
-
         if (skin === "wpm") {
-            console.log(speed)
+            if (speed >= 20) unlock("sloth", user, speed)
+            if (speed >= 25) unlock("turtle", user, speed)
+            if (speed >= 30) unlock("frog", user, speed)
+            if (speed >= 35) unlock("chicken", user, speed)
+            if (speed >= 40) unlock("pig", user, speed)
+            if (speed >= 42) unlock("elephant", user, speed)
+            if (speed >= 45) unlock("human", user, speed)
+            if (speed >= 49) unlock("kangaroo", user, speed)
+            if (speed >= 55) unlock("rabbit", user, speed)
+            if (speed >= 60) unlock("dog", user, speed)
+            if (speed >= 70) unlock("horse", user, speed)
+            if (speed >= 80) unlock("shark", user, speed)
+            if (speed >= 100) unlock("cheetah", user, speed)
+            if (speed >= 200) unlock("falcon", user, speed)
         } else {
             await User.findByIdAndUpdate(user.id, {
                 $push: {
