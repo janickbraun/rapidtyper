@@ -5,7 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { useEffectOnce } from "react-use"
 
 export default function Reset() {
-    let [searchParams, setSearchParams] = useSearchParams()
+    let [searchParams] = useSearchParams()
     let navigate = useNavigate()
     const [username, setUsername] = useState("")
 
@@ -23,7 +23,6 @@ export default function Reset() {
         setUsername(user)
 
         mutation.mutate()
-        setSearchParams()
     })
 
     return (
