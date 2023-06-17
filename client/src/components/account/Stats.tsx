@@ -142,13 +142,13 @@ export default function Stats(props: any) {
                                 {props.username} &nbsp;
                                 <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
                             </h1>
-                            {loggedin && username === props.username && !verified && (
-                                <div>
-                                    Your email adress has not been verified. Please check your email inbox. <button onClick={() => mutationAnother.mutate()}>Send another one</button>
-                                </div>
-                            )}
                             <div>Racing since: {date}</div>
                         </div>
+                        {loggedin && username === props.username && !verified && (
+                            <div style={{marginLeft: "30%", textAlign: "right"}}>
+                                Your email adress has not been verified. Please check your email inbox.<br/><button onClick={() => mutationAnother.mutate()}>Resend email</button>
+                            </div>
+                        )}
                     </div>
                     <div className="c_stats">
                         <h3>
