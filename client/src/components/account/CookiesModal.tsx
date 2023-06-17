@@ -9,10 +9,6 @@ export default function CookieModal() {
     const tab = useRef<any>(null)
     let location = useLocation()
 
-    const handleWrong = () => {
-        setErrMsg("In order to use RapidTyper you need to accept nessessary cookies.")
-    }
-
     const handleAccept = () => {
         let date = new Date()
         date.setFullYear(date.getFullYear() + 1)
@@ -58,11 +54,7 @@ export default function CookieModal() {
                                 .
                             </p>
                             <p className="cmdtxt">In order for RapidTyper to work, you must accept all cookies, as only necessary cookies are used.</p>
-                            <p className="errtxt_clr">{errMsg}</p>
                             <div className="_c_buttonset">
-                                <button className="secondary_action" onClick={handleWrong}>
-                                    I decline
-                                </button>
                                 <button onClick={handleAccept} ref={tab}>
                                     I accept all
                                 </button>
