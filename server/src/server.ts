@@ -277,6 +277,8 @@ import resetRouter from "./routes/account/reset"
 import verifyRouter from "./routes/account/verify"
 import verifyAnotherRouter from "./routes/account/sendAnotherVerify"
 import changePasswordRouter from "./routes/account/changepassword"
+import buyRouter from "./routes/shop/buy"
+import buySuccessRouter from "./routes/shop/success"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -297,6 +299,8 @@ app.use("/api/account/reset", resetRouter)
 app.use("/api/account/verify", verifyRouter)
 app.use("/api/account/verifyanother", verifyAnotherRouter)
 app.use("/api/account/changepassword", changePasswordRouter)
+app.use("/api/shop/buy", buyRouter)
+app.use("/api/shop/success", buySuccessRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
