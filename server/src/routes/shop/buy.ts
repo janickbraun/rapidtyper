@@ -39,7 +39,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         })
 
         const create_payment_json = {
-            intent: "sale",
+            intent: "order",
             payer: {
                 payment_method: "paypal",
             },

@@ -218,6 +218,12 @@ export default function Home() {
                     <button onClick={() => setShareOpen(false)}>Close</button>
                 </div>
             )}
+            <a href="https://www.buymeacoffee.com/rapidtyper" target="_blank" rel="noreferrer">
+                <img
+                    src="https://img.buymeacoffee.com/button-api/?text=Donate&emoji=&slug=rapidtyper&button_colour=2563eb&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"
+                    alt="Donation"
+                />
+            </a>
         </main>
     )
 }

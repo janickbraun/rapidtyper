@@ -5,6 +5,7 @@
   "description": "frontend of rapidtyper",
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.6",
+    "@paypal/react-paypal-js": "^8.0.0",
     "@tanstack/react-query": "^4.29.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
