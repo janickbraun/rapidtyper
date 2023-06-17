@@ -86,31 +86,6 @@ export default function Home() {
 
     return (
         <main>
-            <button onClick={() => handleSkin("bee")} onClickCapture={() => setShareOpen(true)}>
-                Share
-            </button>
-            {shareOpen && (
-                <div>
-                    <h3>Share rapidtyper</h3>
-                    <button onClick={() => handleShare("Successfully copied to clipboard")}>Copy to clipboard</button>
-                    <a
-                        href="https://twitter.com/intent/tweet?text=%F0%9F%9A%80%20Improve%20your%20typing%20skills%20and%20challenge%20friends%20with%20RapidTyper!%20%F0%9F%8E%AE%F0%9F%94%A5%20Enhance%20your%20speed,%20accuracy,%20and%20have%20fun%20racing%20against%20others.%20Check%20out%20rapidtyper.com%20and%20unlock%20your%20typing%20potential%20today!%20%F0%9F%92%AA%F0%9F%92%BB%20%23typing%20%23skills%20%23competition"
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        <button onClick={() => handleShare("Successfully opened Twitter")}>Tweet</button>
-                    </a>
-
-                    <a
-                        href="whatsapp://send?text=Hey!%20I'm%20using%20RapidTyper%20to%20improve%20my%20typing%20skills.%20It's%20a%20fun%20and%20competitive%20platform%20to%20race%20against%20others%20and%20track%20your%20progress.%20Join%20me%20on%20RapidTyper%20and%20let's%20become%20typing%20champions%20together!%20Check%20it%20out%20at%20rapidtyper.com.%20%F0%9F%9A%80%F0%9F%92%AA"
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        <button onClick={() => handleShare("Successfully opend WhatsApp")}>Whatsapp</button>
-                    </a>
-                    <button onClick={() => setShareOpen(false)}>Close</button>
-                </div>
-            )}
             {accountResponse !== "" && (
                 <div className="infopopup">
                     {accountResponse}
@@ -218,6 +193,31 @@ export default function Home() {
                 </div>
             )}
             <Leaderboard />
+            <button onClick={() => handleSkin("bee")} onClickCapture={() => setShareOpen(true)}>
+                Share
+            </button>
+            {shareOpen && (
+                <div>
+                    <h3>Share rapidtyper</h3>
+                    <button onClick={() => handleShare("Successfully copied to clipboard")}>Copy to clipboard</button>
+                    <a
+                        href="https://twitter.com/intent/tweet?text=%F0%9F%9A%80%20Improve%20your%20typing%20skills%20and%20challenge%20friends%20with%20RapidTyper!%20%F0%9F%8E%AE%F0%9F%94%A5%20Enhance%20your%20speed,%20accuracy,%20and%20have%20fun%20racing%20against%20others.%20Check%20out%20rapidtyper.com%20and%20unlock%20your%20typing%20potential%20today!%20%F0%9F%92%AA%F0%9F%92%BB%20%23typing%20%23skills%20%23competition"
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        <button onClick={() => handleShare("Successfully opened Twitter")}>Tweet</button>
+                    </a>
+
+                    <a
+                        href="whatsapp://send?text=Hey!%20I'm%20using%20RapidTyper%20to%20improve%20my%20typing%20skills.%20It's%20a%20fun%20and%20competitive%20platform%20to%20race%20against%20others%20and%20track%20your%20progress.%20Join%20me%20on%20RapidTyper%20and%20let's%20become%20typing%20champions%20together!%20Check%20it%20out%20at%20rapidtyper.com.%20%F0%9F%9A%80%F0%9F%92%AA"
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        <button onClick={() => handleShare("Successfully opend WhatsApp")}>Whatsapp</button>
+                    </a>
+                    <button onClick={() => setShareOpen(false)}>Close</button>
+                </div>
+            )}
         </main>
     )
 }
