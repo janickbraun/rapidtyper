@@ -41,7 +41,7 @@ const ProgressBar = (props: any) => {
     const fillerStyles: any = {
         height: "100%",
         width: `${completed}%`,
-        backgroundColor: bgcolor,
+        backgroundColor: "rgb(12 12 12 / 15%)",
         borderRadius: "inherit",
         textAlign: "right",
         position: "relative",
@@ -57,7 +57,7 @@ const ProgressBar = (props: any) => {
 
     const labelStyles: object = {
         padding: 5,
-        color: color,
+        color: "#fff",
         fontWeight: "bold",
         top: "200%",
         transform: "translate(-0px, -138%)",
@@ -79,14 +79,31 @@ const ProgressBar = (props: any) => {
                 <span style={labelStyles}>
                     <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
                         {done && online ? (
-                            <Link to={"/user/" + name} reloadDocument={true}>
+                            <Link to={"/user/" + name} reloadDocument={true} className="wnc">
+                                <span className="__namedisplay">
                                 {name}
+                                </span>
+                               &nbsp;{" -"}&nbsp;
+                                <span className="__percentdisplay">
+                                {Math.round(completed)}%
+                                </span>
+                                {skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                             </Link>
                         ) : (
-                            <>{name}</>
+                            <div className="wnc">
+                            <p style={{width: "max-content"}}>
+                                <span className="__namedisplay">
+                                    {name}
+                                </span>
+                                &nbsp;{" - "}&nbsp;
+                                <span className="__percentdisplay">
+                                    {Math.round(completed)}%
+                                </span>
+                            </p>
+                            {skin && <img style={{ width: 50, height: 50 }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
+                            </div>
                         )}
                     </div>
-                    {Math.round(completed)}%{skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
 
                     {/* onHover -> show player info. | Ignore */}
                     {isOpen && online && (
