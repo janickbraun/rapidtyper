@@ -59,6 +59,8 @@ export default function Singleplayer() {
         setAudioActive(!audioActive)
     }
 
+    const devC: any = "c"
+
     useEffect(() => {
         document.title = "Singleplayer | RapidTyper"
         if (!hasFired.current) {
@@ -82,18 +84,18 @@ export default function Singleplayer() {
     }, [mutationPlay, navigate])
 
     const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} key={i}>
+        <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }}>&nbsp;</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }}>&nbsp;</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }}>&nbsp;</div>}
+                    {element.correct === undefined && <div style={{ display: "inline" }} className="_sgchar _sgchar__space">&nbsp;</div>}
+                    {element.correct && <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__space">&nbsp;</div>}
+                    {element.correct === false && <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__space">&nbsp;</div>}
                 </>
             ) : (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }}>{element.character}</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }}>{element.character}</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }}>{element.character}</div>}
+                    {element.correct === undefined && <div style={{ display: "inline" }} className="_sgchar _sgchar__charR">{element.character}</div>}
+                    {element.correct && <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__charR">{element.character}</div>}
+                    {element.correct === false && <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__charR">{element.character}</div>}
                 </>
             )}
         </div>
@@ -222,10 +224,10 @@ export default function Singleplayer() {
         <main>
             <h3>Singleplayer</h3>
             <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
-            <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
+            <div style={{ position: "absolute", left: 10 }} className="cfw_textcontainer wsi listing conf csi monospace__important">{listItems}</div>
             <br />
             <br />
-            <div>~ {author}</div>
+            <div style={{marginTop: "6rem"}}>~ {author}</div>
             {openTouchDisclaimer && (
                 <div>
                     In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>

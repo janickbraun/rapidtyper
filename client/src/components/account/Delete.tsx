@@ -20,8 +20,11 @@ export default function Delete() {
     return (
         <div>
             <h3>Delete</h3>
-            Enter 'IRREVERSIBLE' to delete your account
-            <input type="text" onChange={(e) => setConfirmationText(e.target.value)} />
+            
+            <div className="_input_container">
+                <label htmlFor="irrev">Enter 'IRREVERSIBLE' to delete your account</label>
+                <input type="text" placeholder="Enter 'IRREVERSIBLE'" className="rt__default_input mwdt" id="irrev" onChange={(e) => setConfirmationText(e.target.value)} />
+            </div>
             <button onClick={() => mutation.mutate()}>Delete</button>
             {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
             {mutation.isSuccess && <div>Successfully deleted account</div>}

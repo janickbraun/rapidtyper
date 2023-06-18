@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import SignUp from "./SignUp"
-import Login from "./Login"
+// import SignUp from "./SignUp"
+// import Login from "./Login"
 import Logout from "./Logout"
 import Delete from "./Delete"
 import useAuth from "../../hooks/useAuth"
@@ -22,28 +22,58 @@ export default function Account() {
 
     return (
         <main>
-            <h2>Account</h2>
-            {loggedin ? (
-                <>
-                    <button>
-                        <Link to={"/user/" + username}>Profile</Link>
-                    </button>
-
+            <div className="__account__container">
+                <div className="__accheader g_split-2">
+                    <h2 className="csac">Your account</h2>
                     <Logout />
-                    <ChangeName />
-                    <ChangeCountry />
-                    <ChangePassword />
-                    <Delete />
-                </>
-            ) : (
-                <>
-                    <SignUp />
-                    <Login />
-                </>
-            )}
-            <button>
-                <Link to="/">Back</Link>
-            </button>
+                </div>
+                {loggedin ? (
+                    <>
+                        <div className="__contentbody__main">
+                            <div className="__info_singlecontainer">
+                                <h2 className="cshandler">Your username: </h2>
+                                <p className="cshandler"><span>{username}</span>&nbsp;&nbsp;<button className="inlinebutton">Change</button></p>
+                                <ChangeName />
+                            </div>
+                            {/*  */}
+
+                            {/*  */}
+                            <button>
+                                <Link to={"/user/" + username}>View your profile</Link>
+                            </button>
+                        </div>
+                        
+
+                        
+                        
+                        <ChangeCountry />
+                        {/* <ChangePassword /> */}
+                        <Delete />
+                    </>
+                ) : (
+                    <>
+                        <h1>Error 403 - You need to sign in!</h1>
+                    </>
+                )}
+                {/* {loggedin ? (
+                    <>
+                        <button>
+                            <Link to={"/user/" + username}>Profile</Link>
+                        </button>
+
+                        
+                        <ChangeName />
+                        <ChangeCountry />
+                        <ChangePassword />
+                        <Delete />
+                    </>
+                ) : (
+                    <>
+                        <SignUp />
+                        <Login />
+                    </>
+                )} */}
+            </div>
         </main>
     )
 }

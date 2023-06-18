@@ -89,6 +89,8 @@ const ProgressBar = (props: any) => {
                         )}
                     </div>
                     {Math.round(completed)}%{skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
+
+                    {/* onHover -> show player info. | Ignore */}
                     {isOpen && online && (
                         <div style={{ position: "absolute", border: "4px solid red", width: "max-content" }}>
                             {name}
@@ -109,6 +111,8 @@ const ProgressBar = (props: any) => {
                             )}
                         </div>
                     )}
+                    {/* end */}
+                    
                 </span>
                 {!connected && <div>Disconnected</div>}
             </div>

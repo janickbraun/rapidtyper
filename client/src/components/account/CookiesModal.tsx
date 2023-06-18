@@ -10,7 +10,7 @@ export default function CookieModal() {
     let location = useLocation()
 
     const handleWrong = () => {
-        setErrMsg("In order to use RapidTyper you need to accept nessessary cookies.")
+        setErrMsg("In order to use RapidTyper you need to accept required cookies.")
     }
 
     const handleAccept = () => {
@@ -47,7 +47,7 @@ export default function CookieModal() {
                         <div className="textcontent">
                             <p className="cmdtxt">We only use cookies and data that are necessary to provide and maintain RapidTyper.</p>
                             <p className="cmdtxt">
-                                By accepting the cookies you also agree to comply with our terms of service{" "}
+                                By accepting the cookies you also agree to comply with our{" "}
                                 <a className="cmd_link" href="https://grovider.co/privacy-policy">
                                     Privacy Policy
                                 </a>{" "}

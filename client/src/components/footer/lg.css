@@ -522,3 +522,44 @@ label{
 .authmain:where(:not(div,h1,h2,h3,h4,input,button,span,p,label)){
     all: initial;
 }
+.inlinebutton{
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: #2563eb;
+    display: inline-block;
+}
+.inlinebutton:hover{
+    background-color: #2e2e32;
+}
+.__account__container{
+    width: 60%;
+    margin: auto auto;
+    border: 2px solid #292b2f6a;
+    background-color: #1c1d206a;
+    backdrop-filter: blur(8px);
+    padding: 1rem 2rem;
+    border-radius: 16px;
+}
+.csac{
+    font-size: 32px;
+    font-weight: 600;
+}
+.monospace__important{
+    font-family: monospace;
+    font-size: 22px;
+}
+._sgchar{
+    /* background-color: red; */
+    padding: 2px .2px;
+    margin: 0;
+    border-radius: 2px;
+    margin: 1px;
+    background-color: #747a8866;
+    user-select: none;
+}
+._sgchar__space{
+    margin: 1px !important;
+    padding: 2px 0 !important;
+}

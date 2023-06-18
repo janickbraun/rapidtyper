@@ -27,11 +27,10 @@ export default function Reset() {
 
     return (
         <main>
-            <h1>Verify your email adress</h1>
-            {mutation.isError && <div>{mutation.error.message}</div>}
+            {mutation.isError && <div className="cserror">{mutation.error.message}</div>}
             {mutation.isSuccess && (
-                <div>
-                    Your email is now verified! Thank you for your efford. We are rewarding you with a new skin. Check it out:
+                <div className="cssuccess" style={{maxWidth: "max-content", marginLeft: "2rem"}}>
+                    Your email is now verified! Thank you for your efforts. We are going to reward you with a new skin. Check it out: {/* Bro Janick grammar frech */}
                     <Link to={"/user/" + username}>
                         <button>{username}'s profile</button>
                     </Link>

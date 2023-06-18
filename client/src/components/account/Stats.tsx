@@ -145,8 +145,8 @@ export default function Stats(props: any) {
                             <div>Racing since: {date}</div>
                         </div>
                         {loggedin && username === props.username && !verified && (
-                            <div style={{marginLeft: "30%", textAlign: "right"}}>
-                                Your email adress has not been verified. Please check your email inbox.<br/><button onClick={() => mutationAnother.mutate()}>Resend email</button>
+                            <div style={{textAlign: "right"}}>
+                                <p><span>Your email address has not been verified. Please check your email.</span><span>&nbsp;</span>{" "}<button className="inlinebutton" onClick={() => mutationAnother.mutate()}>Resend email</button></p>
                             </div>
                         )}
                     </div>
