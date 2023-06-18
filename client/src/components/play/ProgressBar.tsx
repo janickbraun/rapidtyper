@@ -34,8 +34,6 @@ const ProgressBar = (props: any) => {
 
     const containerStyles = {
         height: 20,
-        width: "50%",
-        backgroundColor: "#e0e0de",
         borderRadius: "50rem",
         margin: 50,
     }
@@ -76,7 +74,7 @@ const ProgressBar = (props: any) => {
     }
 
     return (
-        <div style={containerStyles}>
+        <div style={containerStyles} className="default_PGBAR">
             <div style={fillerStyles}>
                 <span style={labelStyles}>
                     <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
@@ -112,7 +110,7 @@ const ProgressBar = (props: any) => {
                         </div>
                     )}
                     {/* end */}
-                    
+
                 </span>
                 {!connected && <div>Disconnected</div>}
             </div>

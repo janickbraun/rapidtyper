@@ -32,8 +32,10 @@ export default function Account() {
                         <div className="__contentbody__main">
                             <div className="__info_singlecontainer">
                                 <h2 className="cshandler">Your username: </h2>
-                                <p className="cshandler"><span>{username}</span>&nbsp;&nbsp;<button className="inlinebutton">Change</button></p>
+                                <p className="cshandler"><span>{username}</span></p>
                                 <ChangeName />
+                                <ChangeCountry />
+                                <Delete />
                             </div>
                             {/*  */}
 
@@ -46,7 +48,7 @@ export default function Account() {
 
                         
                         
-                        <ChangeCountry />
+                        
                         {/* <ChangePassword /> */}
                         <Delete />
                     </>

@@ -534,7 +534,7 @@ label{
     background-color: #2e2e32;
 }
 .__account__container{
-    width: 60%;
+    width: 70%;
     margin: auto auto;
     border: 2px solid #292b2f6a;
     background-color: #1c1d206a;
@@ -562,4 +562,33 @@ label{
 ._sgchar__space{
     margin: 1px !important;
     padding: 2px 0 !important;
+    background-color: #565a6466;
+}
+.__nbflex{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    column-gap: 1rem;
+    margin-bottom: 1.4rem;
+}
+.__nbflex .mwdt{
+    margin-bottom: 0 ;
+}
+.__info_singlecontainer .cshandler, .__info_singlecontainer h3{
+    font-weight: 500;
+}
+.default_PGBAR{
+    width: calc(100% - (2*50px));
+    /* background-image: url("/img/floor.png"); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.__quote{
+    display: flex;
+    align-items: center;
+}
+.__quotetext_{
+    font-size: 40px;
+    font-weight: 600;
 }

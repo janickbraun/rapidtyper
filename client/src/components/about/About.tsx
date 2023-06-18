@@ -9,10 +9,17 @@ export default function About() {
         <main className="abt_">
             <div className="contentloaded-main">
                 <h1 className="about__ht">About</h1>
-                <div>
+                <div className="__quote">
                     <figure className="__fndimg">
                         <img src="/img/about/founder.jpeg" alt="Janick & Luis" className="_frg_founders" loading="lazy"/>
                     </figure>
+                    <div className="__quotetext_continer">
+                        <small>A quote from the founders:</small>
+                        <p className="__quotetext_">This image is loading lazily 🍻</p>
+                    </div>
+                </div>
+                <div>
+                    
                     <p className="about__text">
                         RapidTyper is a cutting-edge web application designed to help users enhance their typing skills and become proficient keyboard users. Whether you're a professional looking to increase
                         your productivity or a beginner aiming to improve your typing speed, RapidTyper provides a fun and interactive platform to achieve your goals.
