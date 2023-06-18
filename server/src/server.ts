@@ -247,7 +247,7 @@ app.use(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
-                imgSrc: ["'self'", "https://*.grovider.co", "https://*.lipis.dev", "data:"],
+                imgSrc: ["'self'", "https://*.grovider.co", "https://*.lipis.dev", "data:", "*.buymeacoffee.com", "*.paypal.com"],
             },
         },
 
