@@ -100,7 +100,7 @@ ul{
 }
 .dropdown_container{
     position: absolute;
-    background-color: #202124;
+    background-color: #1c1d206a;
     backdrop-filter: blur(15px);
     top: 4.5em;
     right: -.1rem;
@@ -111,7 +111,7 @@ ul{
 }
 .dropdown_container::before{
     content: '';
-    background-color: #202124;
+    background-color: #1c1d206a;
     backdrop-filter: blur(15px);
     display: block;
     width: 15px;

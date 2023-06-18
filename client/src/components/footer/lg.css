@@ -415,6 +415,13 @@ input.mwdt{
     font-weight: 500;
     max-width: 340px;
 }
+.cssuccess{
+    text-align: center;
+    transform: translateY(10px);
+    color: #007f00;
+    font-weight: 500;
+    max-width: 340px;
+}
 .fgp,.sgup{
     text-align: center;
 }
@@ -431,4 +438,87 @@ input.mwdt{
 label{
     display: block;
     margin-bottom: 4px;
+}
+._frg_founders{
+    height: 260px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px rgb(0 0 0 / 10%);
+}
+.abt_{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 6.2rem;
+}
+.dsf_x{
+    display: inline-flex;
+}
+.__dmf_btst{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.4rem;
+    margin-top: 3.5rem;
+}
+.share__modal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2010;
+}
+.csvg{
+    height: 22px;
+    width: 22px;
+    fill: white;
+}
+.close-modal-button{
+    background-color: #292b2f6a;
+    backdrop-filter: blur(8px);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px;
+}
+.close-modal-button:hover{
+    background-color: #393b3cbe;
+}
+.__btnscontainer{
+    margin: 1.2rem 2rem;
+    display: flex;
+    row-gap: .8rem;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.kpbb{
+    margin-right: 4rem;
+}
+.refwidth{
+    max-width: max-content;
+}
+.btbsvg{
+    height: 16px;
+    padding-bottom: 2px;
+    margin-left: 2px;
+    fill: currentcolor;
+}
+.nhg{
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.twbtn{
+    background-color: #1DA1F2 !important;
+}
+.twbtn:hover{
+    background-color: #1774ad !important;
+}
+.wabtn{
+    background-color: #25D366 !important;
+}
+.wabtn:hover{
+    background-color: #1da950 !important;
+}
+.authmain:where(:not(div,h1,h2,h3,h4,input,button,span,p,label)){
+    all: initial;
 }

@@ -41,6 +41,11 @@ export default function Header({ children }: { children: React.ReactNode }) {
                 <div className="navigation-link container-nav">
                     <ul className="_linklisting">
                         <li className="nav-link-item">
+                            <Link to="/shop" reloadDocument={isInGame} onClick={() => setOpen(false)}>
+                                <span className="link_call">Shop</span>
+                            </Link>
+                        </li>
+                        <li className="nav-link-item">
                             <Link to="/about" reloadDocument={isInGame} onClick={() => setOpen(false)}>
                                 <span className="link_call">About</span>
                             </Link>
