@@ -5,6 +5,7 @@ import React, { useState } from "react"
 export default function Shop() {
     const [skin, setSkin] = useState("")
     const [name, setName] = useState("")
+    const [price, setPrice] = useState<number>()
     const [confirmOpen, setConfirmOpen] = useState(false)
 
     const token = localStorage.getItem("token")
@@ -21,9 +22,10 @@ export default function Shop() {
         mutation.mutate()
     }
 
-    const handleClick = (skin: string) => {
+    const handleClick = (skin: string, cost: number) => {
         setSkin("dog-poop")
         setName("Pooping dog")
+        setPrice(cost)
         setConfirmOpen(true)
     }
 
@@ -35,7 +37,43 @@ export default function Shop() {
     return (
         <main>
             <h1>Shop</h1>
-            <div onClick={() => handleClick("dog-poop")}>
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
+                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
+                <div>Pooping dog</div>
+                <div>2 US $</div>
+            </div>
+
+            <div onClick={() => handleClick("dog-poop", 2)}>
                 <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
                 <div>Pooping dog</div>
                 <div>2 US $</div>
