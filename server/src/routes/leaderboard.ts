@@ -22,22 +22,22 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             }
             if (type === "wpm") {
                 const wpm = temp.sort((a, b) => b.wpm[0] - a.wpm[0])
-                return res.status(200).json({ data: wpm })
+                return res.status(200).json({ data: wpm.slice(0, 15) })
             } else if (type === "accuracy") {
                 const accuracy = temp.sort((a, b) => b.accuracy[0] - a.accuracy[0])
-                return res.status(200).json({ data: accuracy })
+                return res.status(200).json({ data: accuracy.slice(0, 15) })
             }
         } else if (type === "totalraces") {
-            const total = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 10, sort: { racesTotal: -1 } })
+            const total = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 15, sort: { racesTotal: -1 } })
             return res.status(200).json({ data: total })
         } else if (type === "raceswon") {
-            const won = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 10, sort: { racesWon: -1 } })
+            const won = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 15, sort: { racesWon: -1 } })
             return res.status(200).json({ data: won })
         } else if (type === "bestrace") {
-            const best = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 10, sort: { bestRace: -1 } })
+            const best = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 15, sort: { bestRace: -1 } })
             return res.status(200).json({ data: best })
         } else if (type === "age") {
-            const date = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 10, sort: { creationDate: 1 } })
+            const date = await User.find({}, ["username", "racesWon", "racesTotal", "creationDate", "bestRace", "wpm", "accuracy", "country"], { limit: 15, sort: { creationDate: 1 } })
             return res.status(200).json({ data: date })
         } else {
             return res.status(300).send("Invalid leaderboard type")
