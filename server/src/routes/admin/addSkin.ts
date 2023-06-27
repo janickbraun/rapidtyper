@@ -18,7 +18,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const description = req.body.description
         const price = req.body.price
 
-        if (isBlank(token) || isBlank(name) || isBlank(filename) || isBlank(description) || isBlank(price)) return res.status(400).send("Invalid inputs")
+        if (isBlank(token) || isBlank(name) || isBlank(filename) || isBlank(description)) return res.status(400).send("Invalid inputs")
+        if (typeof price !== "number") return res.status(400).send("Invalid price")
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
         const verifyUser = await User.findOne({
             _id: temporaryUser.id,
