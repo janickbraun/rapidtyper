@@ -5,7 +5,7 @@ import React, { useState } from "react"
 export default function Shop() {
     const [skin, setSkin] = useState("")
     const [name, setName] = useState("")
-    const [price, setPrice] = useState<number>()
+    const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
     const token = localStorage.getItem("token")
@@ -31,6 +31,7 @@ export default function Shop() {
 
     const handleClose = () => {
         setSkin("")
+        setPrice(0)
         setConfirmOpen(false)
     }
 
