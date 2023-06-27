@@ -13,9 +13,9 @@ export default function About() {
                     <figure className="__fndimg">
                         <div className="flipimages">
                             <div className="flipimg_1">
-                            <img src="/img/about/founder.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
+                                <img src="/img/about/founder.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
                             </div>
-                            <div className="flipimg_1">
+                            <div className="flipimg_2">
                             <img src="/img/about/rich.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
                             </div>
                         </div>

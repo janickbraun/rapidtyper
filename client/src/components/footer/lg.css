@@ -733,3 +733,38 @@ a.c:hover{
 .__ffcmemecontainer{
     width: inherit;
 }
+.flipimg_1,.flipimg_2{
+    display: inline-flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.flipimg_1{
+    z-index: 5;
+}
+.flipimg_2{
+    transform: rotateY(180deg);
+    z-index: 4;
+}
+._frg_founders{
+    height: 240px !important;
+    width: 220px;
+    object-fit: cover;
+}
+figure.__fndimg:hover .flipimages{
+    transform: rotateY(180deg);
+}
+figure.__fndimg{
+    perspective: 800px;
+    width: 240px;
+    height: 220px;
+}
+.flipimages{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    width: auto;
+    transition: transform .6s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
