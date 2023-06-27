@@ -25,7 +25,6 @@ export default function Multiplayer() {
     const [splitted, setSplitted] = useState<any>([])
 
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [startDateTime, setStartDateTime] = useState(0)
     const [mistakes, setMistakes] = useState(0)
     const [completed, setCompleted] = useState(0)
     const [time, setTime] = useState<number>(0)
@@ -78,7 +77,6 @@ export default function Multiplayer() {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/multiplayer", { token })
         },
         onSuccess: ({ data }) => {
-            setStartDateTime(0)
             window.location.replace("/multiplayer/" + data.code)
         },
     })
@@ -197,10 +195,14 @@ export default function Multiplayer() {
 
         socket.on("start", () => {
             setHasStarted(true)
-            setStartDateTime(new Date().getTime())
         })
 
         socket.on("finish", (data) => {
+            if (data.username === username) {
+                setTime(data.time)
+                setWpm(data.wpm)
+            }
+
             setWinners([...winners, { username: data.username, wpm: data.wpm }])
         })
 
@@ -210,7 +212,7 @@ export default function Multiplayer() {
             socket.off("waiting")
             socket.off("leave")
         }
-    }, [mutationPlay, code, winners, participants, hasStarted])
+    }, [mutationPlay, code, winners, participants, hasStarted, username])
 
     const touchDisclaimer = (e: any) => {
         const store = JSON.parse(window.localStorage.getItem("cookies") as string)
@@ -294,17 +296,18 @@ export default function Multiplayer() {
                 }
             }
             if (allCorrect) {
-                const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
-                const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
+                // const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
+                // const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
-                socket.emit("finish", { username, code, wpm, accuracy, token, time: seconds })
+                socket.emit("finish", { username, code, accuracy, token })
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 
-                setTime(seconds)
+                // setTime(seconds)
+                // setWpm(wpm)
+
                 setDone(true)
                 setCompleted(currentIndex + 1)
-                setWpm(wpm)
                 setAccuracy(accuracy)
             }
         }

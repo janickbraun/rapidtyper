@@ -28,6 +28,9 @@ const LobbySchema = new mongoose.Schema(
             ref: "texts",
             required: true,
         },
+        startTime: {
+            type: Date,
+        },
     },
     {
         collection: "lobbys",
