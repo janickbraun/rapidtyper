@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
 const ProgressBar = (props: any) => {
-    const { bgcolor, completed, name, skin, online, done, connected } = props
+    const { completed, name, skin, online, done, connected } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const [wpm, setWpm] = useState(0)
@@ -41,18 +41,9 @@ const ProgressBar = (props: any) => {
     const fillerStyles: any = {
         height: "100%",
         width: `${completed}%`,
-        backgroundColor: "rgb(12 12 12 / 15%)",
         borderRadius: "inherit",
         textAlign: "right",
         position: "relative",
-    }
-
-    let color: string = "black"
-
-    if (completed >= 97) {
-        color = "white"
-    } else {
-        color = "black"
     }
 
     const labelStyles: object = {
@@ -80,27 +71,19 @@ const ProgressBar = (props: any) => {
                     <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
                         {done && online ? (
                             <Link to={"/user/" + name} reloadDocument={true} className="wnc">
-                                <span className="__namedisplay">
-                                {name}
-                                </span>
-                               &nbsp;{" -"}&nbsp;
-                                <span className="__percentdisplay">
-                                {Math.round(completed)}%
-                                </span>
+                                <span className="__namedisplay">{name}</span>
+                                &nbsp;{" -"}&nbsp;
+                                <span className="__percentdisplay">{Math.round(completed)}%</span>
                                 {skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                             </Link>
                         ) : (
                             <div className="wnc">
-                            <p style={{width: "max-content"}}>
-                                <span className="__namedisplay">
-                                    {name}
-                                </span>
-                                &nbsp;{" - "}&nbsp;
-                                <span className="__percentdisplay">
-                                    {Math.round(completed)}%
-                                </span>
-                            </p>
-                            {skin && <img style={{ width: 50, height: 50 }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
+                                <p style={{ width: "max-content" }}>
+                                    <span className="__namedisplay">{name}</span>
+                                    &nbsp;{" - "}&nbsp;
+                                    <span className="__percentdisplay">{Math.round(completed)}%</span>
+                                </p>
+                                {skin && <img style={{ width: 50, height: 50 }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                             </div>
                         )}
                     </div>
@@ -127,7 +110,6 @@ const ProgressBar = (props: any) => {
                         </div>
                     )}
                     {/* end */}
-
                 </span>
                 {!connected && <div>Disconnected</div>}
             </div>

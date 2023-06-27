@@ -30,8 +30,11 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     if (password !== passwordConfirm) return res.status(400).send("Passwords do not match")
     if (!validateEmail(email)) return res.status(403).send("Invalid email")
     if (password.length < 6) return res.status(400).send("Password has to be at least 6 characters long")
-    if (username.length > 10) return res.status(400).send("Username can not be longer than 10 characters")
+    if (username.length > 20) return res.status(400).send("Username can not be longer than 20 characters")
     if (username.length < 3) return res.status(400).send("Username has to be at least 3 characters long")
+
+    const usernameRegex = /^[a-zA-Z0-9_-]+$/
+    if (!usernameRegex.test(username)) return res.status(400).send("Username is not allowed to have any other special characters than - and _")
 
     const signedUpUser = new User({ username, email, password: await bcrypt.hash(password, 10), country })
     let token = ""

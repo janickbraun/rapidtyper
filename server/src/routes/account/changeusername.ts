@@ -14,8 +14,11 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const token: string = req.body.token
 
     if (isBlank(username)) return res.status(403).send("Invalid username")
-    if (username.length > 10) return res.status(400).send("Username can not be longer than 10 characters")
+    if (username.length > 20) return res.status(400).send("Username can not be longer than 20 characters")
     if (username.length < 3) return res.status(400).send("Username has to be at least 3 characters long")
+
+    const usernameRegex = /^[a-zA-Z0-9_-]+$/
+    if (!usernameRegex.test(username)) return res.status(400).send("Username is not allowed to have any other special characters than - and _")
 
     try {
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
