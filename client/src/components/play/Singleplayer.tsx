@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import useEventListener from "@use-it/event-listener"
 import useSound from "use-sound"
 import { unlockSkin } from "../../helpers/skinHelper"
+import useAuth from "../../hooks/useAuth"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -29,6 +30,8 @@ export default function Singleplayer() {
 
     const [playTypeSound] = useSound("/mp3/type.mp3", { volume: 0.7 })
     const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
+
+    const [loggedin, username, skin] = useAuth()
 
     const hasFired = useRef(false)
     let navigate = useNavigate()
@@ -59,8 +62,6 @@ export default function Singleplayer() {
         setAudioActive(!audioActive)
     }
 
-    const devC: any = "c"
-
     useEffect(() => {
         document.title = "Singleplayer | RapidTyper"
         if (!hasFired.current) {
@@ -87,15 +88,39 @@ export default function Singleplayer() {
         <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }} className="_sgchar _sgchar__space">&nbsp;</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__space">&nbsp;</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__space">&nbsp;</div>}
+                    {element.correct === undefined && (
+                        <div style={{ display: "inline" }} className="_sgchar _sgchar__space">
+                            &nbsp;
+                        </div>
+                    )}
+                    {element.correct && (
+                        <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__space">
+                            &nbsp;
+                        </div>
+                    )}
+                    {element.correct === false && (
+                        <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__space">
+                            &nbsp;
+                        </div>
+                    )}
                 </>
             ) : (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }} className="_sgchar _sgchar__charR">{element.character}</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__charR">{element.character}</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__charR">{element.character}</div>}
+                    {element.correct === undefined && (
+                        <div style={{ display: "inline" }} className="_sgchar _sgchar__charR">
+                            {element.character}
+                        </div>
+                    )}
+                    {element.correct && (
+                        <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__charR">
+                            {element.character}
+                        </div>
+                    )}
+                    {element.correct === false && (
+                        <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__charR">
+                            {element.character}
+                        </div>
+                    )}
                 </>
             )}
         </div>
@@ -127,6 +152,7 @@ export default function Singleplayer() {
             temp[i].correct = undefined
         }
         setTextArray(temp)
+
         e.currentTarget.blur()
     }
 
@@ -142,7 +168,11 @@ export default function Singleplayer() {
 
     const handler = (e: any) => {
         textInput.current.focus()
-        const noFire = ["Shift", "CapsLock", "Tab"]
+        const noFire = ["Shift", "CapsLock", "Tab", "Enter"]
+
+        if (e.key === "Enter" && e.shiftKey) return handleNewText(e)
+
+        if (e.key === "Enter") return handleRestart(e)
 
         if (isCapsLocked !== e.getModifierState("CapsLock")) setIsCapsLocked(e.getModifierState("CapsLock"))
 
@@ -223,11 +253,24 @@ export default function Singleplayer() {
     return (
         <main>
             <h3>Singleplayer</h3>
-            <ProgressBar bgcolor={"#6a1b9a"} completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
-            <div style={{ position: "absolute", left: 10 }} className="cfw_textcontainer wsi listing conf csi monospace__important">{listItems}</div>
+            {loggedin ? (
+                <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} />
+            ) : (
+                <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
+            )}
+            <input
+                type="text"
+                autoComplete="off"
+                autoCapitalize="none"
+                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                ref={textInput}
+            />
+            <div style={{ position: "absolute", left: 10 }} className="cfw_textcontainer wsi listing conf csi monospace__important">
+                {listItems}
+            </div>
             <br />
             <br />
-            <div style={{marginTop: "6rem"}}>~ {author}</div>
+            <div style={{ marginTop: "6rem" }}>~ {author}</div>
             {openTouchDisclaimer && (
                 <div>
                     In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
@@ -248,13 +291,6 @@ export default function Singleplayer() {
             <br />
             <button onClick={handleSoundControl}>{audioActive ? <>Mute</> : <>Unmute</>}</button>
             <div>Playing in Singleplayer does not effect your stats</div>
-            <input
-                type="text"
-                autoComplete="off"
-                autoCapitalize="none"
-                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
-                ref={textInput}
-            />
         </main>
     )
 }

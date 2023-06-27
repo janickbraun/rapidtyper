@@ -358,7 +358,13 @@ export default function Multiplayer() {
                         />
                     )
             )}
-
+            <input
+                type="text"
+                autoComplete="off"
+                autoCapitalize="none"
+                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                ref={textInput}
+            />
             <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
             <br />
             <br />
@@ -391,15 +397,6 @@ export default function Multiplayer() {
                 <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
             ))}
 
-            <br />
-            <br />
-            <input
-                type="text"
-                autoComplete="off"
-                autoCapitalize="none"
-                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
-                ref={textInput}
-            />
             <br />
         </main>
     )
