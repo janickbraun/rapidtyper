@@ -53,7 +53,7 @@ export default function Footer() {
                 </ul>
                 <div className="copyright">
                     <p className="copyrighttxt">
-                        &copy;2023 RapidTyper - von{" "}
+                        &copy;2023 RapidTyper - by{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/" onClick={() => handleSkin("capybara")}>
                             Luis
                         </a>{" "}

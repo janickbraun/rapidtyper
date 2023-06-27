@@ -1,6 +1,4 @@
 import React, { useEffect } from "react"
-// import SignUp from "./SignUp"
-// import Login from "./Login"
 import Logout from "./Logout"
 import Delete from "./Delete"
 import useAuth from "../../hooks/useAuth"
@@ -8,10 +6,24 @@ import { Link, useNavigate } from "react-router-dom"
 import ChangeName from "./ChangeName"
 import ChangeCountry from "./ChangeCountry"
 import ChangePassword from "./ChangePassword"
+import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
 
 export default function Account() {
-    const [loggedin, username] = useAuth()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [loggedin, username, skin, verified, email] = useAuth()
     const navigate = useNavigate()
+
+    const token = localStorage.getItem("token")
+
+    const mutationAnother: any = useMutation({
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verifyanother", { token })
+        },
+        onSuccess: ({ data }) => {
+            console.log(data)
+        },
+    })
 
     useEffect(() => {
         document.title = "Account | RapidTyper"
@@ -25,6 +37,20 @@ export default function Account() {
             <div className="__account__container">
                 <div className="__accheader g_split-2">
                     <h2 className="csac">Your account</h2>
+                    {!verified && (
+                        <div style={{ textAlign: "right" }}>
+                            <p>
+                                <span>Your email address has not been verified. Please check your email.</span>
+                                <span>&nbsp;</span>{" "}
+                                <button className="inlinebutton" onClick={() => mutationAnother.mutate()}>
+                                    Resend email
+                                </button>
+                            </p>
+                        </div>
+                    )}
+                    <button>
+                        <Link to={"/user/" + username}>View your profile</Link>
+                    </button>
                     <Logout />
                 </div>
                 {loggedin ? (
@@ -32,24 +58,19 @@ export default function Account() {
                         <div className="__contentbody__main">
                             <div className="__info_singlecontainer">
                                 <h2 className="cshandler">Your username: </h2>
-                                <p className="cshandler"><span>{username}</span></p>
+                                <p className="cshandler">
+                                    <span>{username}</span>
+                                </p>
                                 <ChangeName />
+                                <h3 className="cshandler">Your email: </h3>
+                                <p className="cshandler">
+                                    <span>{email}</span>
+                                </p>
                                 <ChangeCountry />
-                                <Delete />
                             </div>
-                            {/*  */}
-
-                            {/*  */}
-                            <button>
-                                <Link to={"/user/" + username}>View your profile</Link>
-                            </button>
                         </div>
-                        
 
-                        
-                        
-                        
-                        {/* <ChangePassword /> */}
+                        <ChangePassword />
                         <Delete />
                     </>
                 ) : (
@@ -57,24 +78,6 @@ export default function Account() {
                         <h1>Error 403 - You need to sign in!</h1>
                     </>
                 )}
-                {/* {loggedin ? (
-                    <>
-                        <button>
-                            <Link to={"/user/" + username}>Profile</Link>
-                        </button>
-
-                        
-                        <ChangeName />
-                        <ChangeCountry />
-                        <ChangePassword />
-                        <Delete />
-                    </>
-                ) : (
-                    <>
-                        <SignUp />
-                        <Login />
-                    </>
-                )} */}
             </div>
         </main>
     )

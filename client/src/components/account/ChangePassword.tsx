@@ -20,11 +20,10 @@ export default function ChangePassword() {
     }
     return (
         <div>
-            Change password
             <h3>Chage password</h3>
             <input type="password" placeholder="Old password" onChange={(e) => setoldPassword(e.target.value)} />
-            <input type="password" placeholder="New password" onChange={(e) => setNewPassword(e.target.value)} />
-            <input type="password" placeholder="Confirm new password" onChange={(e) => setConfirmPassword(e.target.value)} />
+            <input type="password" placeholder="New password" autoComplete="new-password" onChange={(e) => setNewPassword(e.target.value)} />
+            <input type="password" placeholder="Confirm new password" autoComplete="new-password" onChange={(e) => setConfirmPassword(e.target.value)} />
             <button onClick={handleChange}>Change password</button>
             {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
             {mutation.isSuccess && <div>Successfully changed password</div>}
