@@ -10,6 +10,7 @@ import http from "http"
 import mongoose from "mongoose"
 import Lobby from "../models/Lobby"
 import User from "../models/User"
+import Text from "../models/Text"
 import { unlock } from "./routes/unlockFun"
 
 dotenv.config()
@@ -70,8 +71,20 @@ io.on("connection", (socket: any) => {
         } catch {}
     })
 
-    socket.on("start", (data: any) => {
+    socket.on("start", async (data: any) => {
         try {
+            const tempLobby = await Lobby.findOne({ code: data.code })
+            if (!tempLobby?.startTime) {
+                await Lobby.findOneAndUpdate(
+                    { code: data.code },
+                    {
+                        $set: {
+                            startTime: new Date(),
+                        },
+                    }
+                )
+            }
+
             io.to(String(data.code)).emit("start")
         } catch {}
     })
@@ -81,16 +94,20 @@ io.on("connection", (socket: any) => {
             const accuracy = data.accuracy
             const username = data.username
             const token = data.token
-            const wpm = data.wpm
             const code = data.code
-            const time = Number(data.time)
 
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
-            io.sockets.in(String(code)).emit("finish", { username, wpm })
+
             const lobby = await Lobby.findOne({ code })
             const user = await User.findOne({ username })
             if (!lobby || !user || !loggedin) return
+            const text = await Text.findById(lobby.text)
+            if (!text) return
+            const textLength = text.text.length
+            const time = Number(Math.abs((Number(new Date().getTime()) - Number(lobby.startTime)) / 1000).toFixed(2))
+            const wpm = Number((textLength / 5 / (time / 60)).toFixed(2))
+            io.sockets.in(String(code)).emit("finish", { username, wpm, time })
             let tempAcc = user.accuracy
             let tempWpm = user.wpm
             if (tempAcc.length >= 10) {
