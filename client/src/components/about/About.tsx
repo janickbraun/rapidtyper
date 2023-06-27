@@ -11,7 +11,14 @@ export default function About() {
                 <h1 className="about__ht">About RapidTyper</h1>
                 <div className="__quote">
                     <figure className="__fndimg">
-                        <img src="/img/about/founder.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
+                        <div className="flipimages">
+                            <div className="flipimg_1">
+                                <img src="/img/about/founder.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
+                            </div>
+                            <div className="flipimg_2">
+                            <img src="/img/about/rich.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
+                            </div>
+                        </div>
                         <span className="img_subtxt" hidden></span>
                     </figure>
                     <div className="__quotetext_continer">
