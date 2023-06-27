@@ -23,6 +23,7 @@ import Verify from "./components/account/Verify"
 import Shop from "./components/shop/Shop"
 import Success from "./components/shop/Success"
 import Cancel from "./components/shop/Cancel"
+import Admin from "./components/admin/Admin"
 
 function App() {
     const queryClient = new QueryClient()
@@ -52,6 +53,7 @@ function App() {
                             <Route path="/shop" element={<Shop />} />
                             <Route path="/shop/success" element={<Success />} />
                             <Route path="/shop/cancel" element={<Cancel />} />
+                            <Route path="/admin" element={<Admin />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
