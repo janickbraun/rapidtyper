@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import User from "../../../models/User"
 import dotenv from "dotenv"
 import paypal from "paypal-rest-sdk"
+import Skin from "../../../models/Skin"
 dotenv.config()
 const router = Router()
 
@@ -19,13 +20,17 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         if (!verifyUser) return res.status(400).send("Not authenticated")
         if (!verifyUser.verified) return res.status(400).send("Please verify your email adress first")
 
-        const validSkins = ["dog-poop", "whale"]
+        const validSkins = await Skin.find({ price: { $gt: 0 } })
 
-        if (!validSkins.includes(skin)) return res.status(400).send("Skin is not valid")
+        if (!validSkins.some((e) => e.filename === skin)) return res.status(400).send("Skin is not valid")
 
         const skins = verifyUser.skins
 
         if (skins.includes(skin)) return res.status(400).send("You already own this skin")
+
+        const buyingSkin = await Skin.findOne({ filename: skin })
+
+        if (!buyingSkin) return res.status(400).send("Skin was not found")
 
         const clientId = process.env.CLIENT_ID_PAYPAL
         const clientSecret = process.env.CLIENT_SECRET_PAYPAL
@@ -44,7 +49,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                 payment_method: "paypal",
             },
             redirect_urls: {
-                return_url: process.env.FRONTEND_URL + "/shop/success",
+                return_url: process.env.FRONTEND_URL + "/shop/success?skin=" + skin,
                 cancel_url: process.env.FRONTEND_URL + "/shop/cancel",
             },
             transactions: [
@@ -54,7 +59,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                             {
                                 name: skin,
                                 sku: "001",
-                                price: "2.00",
+                                price: String(buyingSkin.price) + ".00",
                                 currency: "USD",
                                 quantity: 1,
                             },
@@ -62,9 +67,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                     },
                     amount: {
                         currency: "USD",
-                        total: "2.00",
+                        total: String(buyingSkin.price) + ".00",
                     },
-                    description: "Wonderful looking skin",
+                    description: String(buyingSkin.description),
                 },
             ],
         }

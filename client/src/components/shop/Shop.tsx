@@ -7,7 +7,6 @@ export default function Shop() {
     const [skin, setSkin] = useState("")
     const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
-    const [filename, setFilename] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -42,14 +41,12 @@ export default function Shop() {
         setSkin(skin)
         setName(name)
         setPrice(cost)
-        setFilename(filename)
         setConfirmOpen(true)
     }
 
     const handleClose = () => {
         setSkin("")
         setPrice(0)
-        setFilename("")
         setConfirmOpen(false)
     }
 
@@ -71,7 +68,7 @@ export default function Shop() {
 
             {confirmOpen && (
                 <div>
-                    <img src={"/img/skins/" + filename + ".png"} alt={name} />
+                    <img src={"/img/skins/" + skin + ".png"} alt={name} />
                     Do your really want to buy "{name}" for {price} US $?
                     <button onClick={handlePurchase}>Confirm</button>
                     <button onClick={handleClose}>Cancel</button>
