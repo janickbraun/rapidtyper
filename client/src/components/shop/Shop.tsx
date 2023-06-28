@@ -32,8 +32,8 @@ export default function Shop() {
     })
 
     const handlePurchase = () => {
-        setLoading("loading")
         mutationBuy.mutate()
+        setLoading("loading")
     }
 
     useEffectOnce(() => {
@@ -61,15 +61,29 @@ export default function Shop() {
         <main>
             <h1>Shop</h1>
 
+            <div className="contentflex">
+            <div className="shopitemcontai">
             {skins.map((item: any) => (
-                <div onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                    <img src={"/img/skins/" + item.filename + ".png"} alt={item.name} width={100} height={100} />
-                    <div>{item.name}</div>
-                    <i>{item.description}</i>
-                    <div>{item.price} US $</div>
+                <div className="shopsingleitem" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                    <div className="imagecontainer">
+                        <div className="glowparent">
+                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} />
+                        </div>
+                    </div>
+                    <div className="textcontainer">
+                        <p className="skin_namecaller">
+                            {item.name}
+                        </p>
+                    </div>
+                    <div className="itemdescriptioncontainer">
+                        <p className="itemdsc">{item.description}</p>
+                    </div>
+                    <div className="itemprice">${item.price}</div>
                     <br />
                 </div>
             ))}
+            </div>
+            </div>
             <br />
             <br />
             {confirmOpen ? <Overlay /> : ""}
@@ -85,16 +99,18 @@ export default function Shop() {
                     </div>
                     <div className="contentdisplay">
                         <div className="mask_contentparent" style={glowAssist}>
-                            <img src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
+                            <img loading="eager" src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>
-                        Do your really want to buy "{name}" for {price} US $?
+                        <p className="conftext">Are you sure you want to buy "{name}" for ${price}?</p>
                     </div>
-                    <button className={loading} onClick={handlePurchase}>
-                        Confirm
-                    </button>
+                    <div className="copconfirmset">
+                        <button className={loading} onClick={handlePurchase}>
+                            Confirm
+                        </button>
+                        {mutationBuy.isError && <div className="cserror">{mutationBuy.error?.response?.data}</div>}
+                    </div>
                 </div>
             )}
-            {mutationBuy.isError && <div>{mutationBuy.error?.response?.data}</div>}
         </main>
     )
 }

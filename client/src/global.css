@@ -36,6 +36,7 @@ button.loading, .test.loading{
     color: transparent;
     pointer-events: none;
     opacity: .8;
+    user-select: none;
 }
 button.loading::after, .test.loading::after{
     position: absolute;
