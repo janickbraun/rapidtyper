@@ -7,6 +7,7 @@ export default function Shop() {
     const [skin, setSkin] = useState("")
     const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
+    const [filename, setFilename] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -37,16 +38,18 @@ export default function Shop() {
         mutation.mutate()
     })
 
-    const handleClick = (skin: string, cost: number, name: string) => {
+    const handleClick = (skin: string, cost: number, name: string, filename: string) => {
         setSkin(skin)
         setName(name)
         setPrice(cost)
+        setFilename(filename)
         setConfirmOpen(true)
     }
 
     const handleClose = () => {
         setSkin("")
         setPrice(0)
+        setFilename("")
         setConfirmOpen(false)
     }
 
@@ -55,10 +58,12 @@ export default function Shop() {
             <h1>Shop</h1>
 
             {skins.map((item: any) => (
-                <div onClick={() => handleClick(item.filename, item.price, item.name)} key={item.name}>
-                    <img src={"/img/skins/" + item.filename} alt={item.name} />
+                <div onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                    <img src={"/img/skins/" + item.filename + ".png"} alt={item.name} width={100} height={100} />
                     <div>{item.name}</div>
+                    <i>{item.description}</i>
                     <div>{item.price} US $</div>
+                    <br />
                 </div>
             ))}
             <br />
@@ -66,6 +71,7 @@ export default function Shop() {
 
             {confirmOpen && (
                 <div>
+                    <img src={"/img/skins/" + filename + ".png"} alt={name} />
                     Do your really want to buy "{name}" for {price} US $?
                     <button onClick={handlePurchase}>Confirm</button>
                     <button onClick={handleClose}>Cancel</button>
