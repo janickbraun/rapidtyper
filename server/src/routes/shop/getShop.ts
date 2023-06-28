@@ -1,12 +1,12 @@
 import { Router, Request, Response, NextFunction } from "express"
 const router = Router()
-import Text from "../../models/Text"
+import Skin from "../../../models/Skin"
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.body.token
-        const text: any = await Text.aggregate([{ $sample: { size: 1 } }])
-        res.status(200).send({ text: text[0].text, author: text[0].author })
+        let skins = await Skin.find({ price: { $gt: 0 } }, ["name", "filename", "description", "price"])
+        skins.push(Object(await Skin.findOne({ filename: "jesus" })))
+        res.status(200).send({ skins })
     } catch {
         res.status(300).send("Something went wrong")
     }
