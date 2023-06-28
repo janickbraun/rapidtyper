@@ -1,15 +1,17 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useState } from "react"
+import { useEffectOnce } from "react-use"
 
 export default function Shop() {
     const [skin, setSkin] = useState("")
+    const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
     const token = localStorage.getItem("token")
-    const mutation: any = useMutation({
+    const mutationBuy: any = useMutation({
         mutationFn: async () => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/shop/buy", { token, skin })
         },
@@ -18,13 +20,26 @@ export default function Shop() {
         },
     })
 
+    const mutation: any = useMutation({
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/shop/getShop", { token })
+        },
+        onSuccess: ({ data }) => {
+            setSkins(data.skins)
+        },
+    })
+
     const handlePurchase = () => {
-        mutation.mutate()
+        mutationBuy.mutate()
     }
 
-    const handleClick = (skin: string, cost: number) => {
-        setSkin("dog-poop")
-        setName("Pooping dog")
+    useEffectOnce(() => {
+        mutation.mutate()
+    })
+
+    const handleClick = (skin: string, cost: number, name: string, filename: string) => {
+        setSkin(skin)
+        setName(name)
         setPrice(cost)
         setConfirmOpen(true)
     }
@@ -38,60 +53,28 @@ export default function Shop() {
     return (
         <main>
             <h1>Shop</h1>
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
 
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <div onClick={() => handleClick("dog-poop", 2)}>
-                <img src="/img/skins/dog-poop.png" alt="Pooping dog skin" />
-                <div>Pooping dog</div>
-                <div>2 US $</div>
-            </div>
-
-            <br />
+            {skins.map((item: any) => (
+                <div onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                    <img src={"/img/skins/" + item.filename + ".png"} alt={item.name} width={100} height={100} />
+                    <div>{item.name}</div>
+                    <i>{item.description}</i>
+                    <div>{item.price} US $</div>
+                    <br />
+                </div>
+            ))}
             <br />
             <br />
 
             {confirmOpen && (
                 <div>
-                    Do your really want to buy "{name}" for 2 US $?
+                    <img src={"/img/skins/" + skin + ".png"} alt={name} />
+                    Do your really want to buy "{name}" for {price} US $?
                     <button onClick={handlePurchase}>Confirm</button>
                     <button onClick={handleClose}>Cancel</button>
                 </div>
             )}
-            {mutation.isError && <div>{mutation.error?.response?.data}</div>}
+            {mutationBuy.isError && <div>{mutationBuy.error?.response?.data}</div>}
         </main>
     )
 }
