@@ -2,8 +2,11 @@
     margin-top: 7rem;
 }
 .imprintReset a.imprintLink, .terms____________csa a{
-    color: #04adad;
+    color: #2563eb;
     text-decoration: 2px underline currentColor;
+}
+.imprintReset a:hover.imprintLink, .terms____________csa a:hover{
+    text-decoration: none;
 }
 .imprintReset .wstop{
     border-bottom: 3px solid #2f3031;
@@ -198,9 +201,37 @@ a.imprintLink{
 }
 .skin_div{
     margin-bottom: .6rem;
-    max-width: 42.5rem;
+    max-width: 29rem;
     margin-top: 0;
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-scrolling: touch;
+    border-radius: 10px;
+    background:
+        linear-gradient(#27292d 30%,rgba(255, 255, 255, 0)) center top,
+        linear-gradient(rgba(255, 255, 255, 0), #27292d 70%) center bottom,
+        radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)) center top,
+        radial-gradient(farthest-side at 50% 100%,rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)) center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+  
 }
+.skin_div::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+}
+.skin_div::-webkit-scrollbar-track {
+    background: transparent;
+}
+.skin_div::-webkit-scrollbar-thumb {
+    background: #494949;
+    border-radius: 25rem;
+}
+.skin_div::-webkit-scrollbar-thumb:hover {
+    background: #323232;
+}
+
 .modalCallerHeader{
     margin: 1.2rem 2rem;
 }
@@ -767,4 +798,9 @@ figure.__fndimg{
     transition: transform .6s;
     transform-style: preserve-3d;
     backface-visibility: hidden;
+}
+@media screen and (max-width: 750px) {
+    .src_logo{
+        height: 46px;
+    }
 }

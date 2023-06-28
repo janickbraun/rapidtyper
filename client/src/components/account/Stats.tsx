@@ -127,6 +127,7 @@ export default function Stats(props: any) {
                                 <li>Complete and win more races</li>
                                 <li>Improve your accuracy</li>
                                 <li>Look for easter eggs 👀</li>
+                                <li>Buy</li>
                             </ul>
                         </div>
                     )}

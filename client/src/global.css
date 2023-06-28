@@ -83,16 +83,16 @@ a[tabindex="-1"]{
 }
 /* SCROLLBAR - NO FIREFOX */
 ::-webkit-scrollbar{
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 ::-webkit-scrollbar-track {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: #2563eb;
+    background: #494949;
     border-radius: 25rem;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8;
+    background: #323232;
 }
