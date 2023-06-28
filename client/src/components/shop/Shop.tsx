@@ -8,6 +8,7 @@ export default function Shop() {
     const [skin, setSkin] = useState("")
     const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
+    const [loading, setLoading] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -31,6 +32,7 @@ export default function Shop() {
     })
 
     const handlePurchase = () => {
+        setLoading("loading")
         mutationBuy.mutate()
     }
 
@@ -51,8 +53,8 @@ export default function Shop() {
         setConfirmOpen(false)
     }
 
-    const glowAssist:any = {
-        backgroundImage: `/img/skins/baum.png`
+    const glowAssist: any = {
+        backgroundImage: `/img/skins/baum.png`,
     }
 
     return (
@@ -83,11 +85,13 @@ export default function Shop() {
                     </div>
                     <div className="contentdisplay">
                         <div className="mask_contentparent" style={glowAssist}>
-                            <img src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false"/>
+                            <img src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>
                         Do your really want to buy "{name}" for {price} US $?
                     </div>
-                    <button onClick={handlePurchase}>Confirm</button>
+                    <button className={loading} onClick={handlePurchase}>
+                        Confirm
+                    </button>
                 </div>
             )}
             {mutationBuy.isError && <div>{mutationBuy.error?.response?.data}</div>}
