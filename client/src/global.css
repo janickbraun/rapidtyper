@@ -34,6 +34,8 @@ button, .test{
 }
 button.loading, .test.loading{
     color: transparent;
+    pointer-events: none;
+    opacity: .8;
 }
 button.loading::after, .test.loading::after{
     position: absolute;
