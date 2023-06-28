@@ -756,8 +756,8 @@ figure.__fndimg:hover .flipimages{
 }
 figure.__fndimg{
     perspective: 800px;
-    width: 240px;
-    height: 220px;
+    width: 215px;
+    height: 240px;
 }
 .flipimages{
     position: relative;
