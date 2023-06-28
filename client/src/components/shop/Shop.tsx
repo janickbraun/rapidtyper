@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useState } from "react"
 import { useEffectOnce } from "react-use"
+import Overlay from "../modal/Overlay"
 
 export default function Shop() {
     const [skin, setSkin] = useState("")
@@ -65,7 +66,7 @@ export default function Shop() {
             ))}
             <br />
             <br />
-
+            {confirmOpen ? <Overlay /> : ""}
             {confirmOpen && (
                 <div>
                     <img src={"/img/skins/" + skin + ".png"} alt={name} />

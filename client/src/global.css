@@ -30,6 +30,31 @@ button, .test{
     display: inline-flex;
     align-items:center;
     column-gap: .22rem;
+    position: relative;
+}
+button.loading, .test.loading{
+    color: transparent;
+}
+button.loading::after, .test.loading::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    content: '';
+    display: inline-block;
+    border: 3.5px solid #fff;
+    border-top-color: transparent;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    animation: rotate 1.5s infinite forwards;
+}
+@keyframes rotate {
+    from{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }to{
+        transform: translate(-50%,-50%) rotate(358deg);
+    }
 }
 .largebtn{
     font-size: 1.1rem;
@@ -76,7 +101,7 @@ a[tabindex="-1"]{
     height: 100vh;
     background-color: #00000020;
     backdrop-filter: blur(4px);
-    z-index: 2000;
+    z-index: 2800;
 }
 .errtxt_clr{
     color: #ff3333;

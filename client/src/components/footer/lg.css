@@ -804,3 +804,6 @@ figure.__fndimg{
         height: 46px;
     }
 }
+.comwidth{
+    width: max-content;
+}

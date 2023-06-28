@@ -25,7 +25,7 @@ export default function Profile() {
                 </Link>
                 {username !== myusername && loggedin && (
                     <Link to={"/user/" + myusername} reloadDocument={true} tabIndex={-1} style={{marginRight: "1rem"}}>
-                        <button className="wws btn">Back to {myusername}</button>
+                        <button className="wws btn comwidth">Back to {myusername}</button>
                     </Link>
                 )}
                 <input
