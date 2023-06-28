@@ -71,7 +71,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                     },
                 })
 
-                res.status(200).send({ name: buyingSkin.name, filename: buyingSkin.filename, pice: buyingSkin.price })
+                res.status(200).send({ name: buyingSkin.name, filename: buyingSkin.filename, price: buyingSkin.price })
             }
         })
     } catch {
