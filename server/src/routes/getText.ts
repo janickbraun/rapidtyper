@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from "express"
 const router = Router()
 import Text from "../../models/Text"
 
-router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.body.token
         const text: any = await Text.aggregate([{ $sample: { size: 1 } }])
