@@ -54,7 +54,7 @@ export default function Shop() {
     }
 
     const glowAssist: any = {
-        backgroundImage: `/img/skins/baum.png`,
+        backgroundImage: `url(/img/skins/${skin}.png)`,
     }
 
     return (

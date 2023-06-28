@@ -813,7 +813,7 @@ figure.__fndimg{
     border-radius: 16px;
     pointer-events: none;
     box-shadow: 1px 1px 20px rgb(0 0 0 / 10%);
-    backdrop-filter: blur(15px) saturate(3);
+    backdrop-filter: blur(10px) opacity(70%);
 }
 .contentdisplay{
     display: flex;
@@ -823,7 +823,9 @@ figure.__fndimg{
 .mask_contentparent{
     background-repeat: no-repeat;
     background-position: center;
+    backface-visibility: hidden;
     display: inline-flex;
+    background-size: 100%;
     width: 120px;
     height: 120px;
     border-radius: 16px;
