@@ -111,10 +111,10 @@ export default function Stats(props: any) {
                             <div className="skin_div">
                                 {skins.map((val) => {
                                     return (
-                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
+                                        <div className="cpos" key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
                                             <img src={"/img/skins/" + val.filename + ".png"} alt={val.name} tabIndex={0} draggable="false" className="user_default_skinimg skin_changeIMG" />
                                             {hover === val.filename && (
-                                                <div>
+                                                <div className="extended_tooltip down">
                                                     <div>{val.name}</div>
                                                     <div>{val.description}</div>
                                                 </div>
@@ -125,17 +125,17 @@ export default function Stats(props: any) {
 
                                 {toBeUnlocked.map((val) => {
                                     return (
-                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
+                                        <div className="cpos" key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
                                             <img
                                                 src={"/img/skins/" + val.filename + ".png"}
-                                                style={{ filter: "grayscale(1)" }}
+                                                style={{ filter: "grayscale(1)", opacity: ".7", pointerEvents: "none" }}
                                                 alt={val.name}
                                                 tabIndex={0}
                                                 draggable="false"
                                                 className="user_default_skinimg skin_changeIMG"
                                             />
                                             {hover === val.filename && (
-                                                <div>
+                                                <div className="extended_tooltip">
                                                     <div>{val.name}</div>
                                                     <div>{val.description}</div>
                                                 </div>

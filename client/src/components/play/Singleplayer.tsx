@@ -251,8 +251,7 @@ export default function Singleplayer() {
     useEventListener("touchstart", touchDisclaimer)
 
     return (
-        <main>
-            <h3>Singleplayer</h3>
+        <main className="usergame__comtop">
             {loggedin ? (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} />
             ) : (

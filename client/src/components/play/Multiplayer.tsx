@@ -9,6 +9,7 @@ import useEventListener from "@use-it/event-listener"
 import useWindowSize from "react-use/lib/useWindowSize"
 import Confetti from "react-confetti"
 import useSound from "use-sound"
+import UserRaceContentOverlay from "../modal/UserRaceContentOverlay"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -50,18 +51,18 @@ export default function Multiplayer() {
     const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
     const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} key={i}>
+        <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }}>&nbsp;</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }}>&nbsp;</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }}>&nbsp;</div>}
+                    {element.correct === undefined && <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>&nbsp;</div>}
+                    {element.correct && <div className="_sgchar _sgchar__space" style={{ display: "inline", background: "limegreen" }}>&nbsp;</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__space" style={{ display: "inline", background: "red" }}>&nbsp;</div>}
                 </>
             ) : (
                 <>
-                    {element.correct === undefined && <div style={{ display: "inline" }}>{element.character}</div>}
-                    {element.correct && <div style={{ display: "inline", background: "limegreen" }}>{element.character}</div>}
-                    {element.correct === false && <div style={{ display: "inline", background: "red" }}>{element.character}</div>}
+                    {element.correct === undefined && <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>{element.character}</div>}
+                    {element.correct && <div className="_sgchar _sgchar__charR" style={{ display: "inline", background: "limegreen" }}>{element.character}</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__charR" style={{ display: "inline", background: "red" }}>{element.character}</div>}
                 </>
             )}
         </div>
@@ -330,9 +331,29 @@ export default function Multiplayer() {
         }
     }, [])
 
+    const routeChange = () =>{
+        navigate("/")
+    }
+    
     return (
-        <main>
-            <h2>Multiplayer</h2>
+        <main className="usergame__comtop">
+            <div className="rt__buttonset__inrace_actionsbtns">
+                <button className="sortBtn cs_profilebtn muterswitch" onClick={handleSoundControl} data-mutetool={audioActive ? "Mute" : "Unmute"}>
+                    {audioActive ? 
+                        <>
+                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M813-56 681-188q-28 20-60.5 34.5T553-131v-62q23-7 44.5-15.5T638-231L473-397v237L273-360H113v-240h156L49-820l43-43 764 763-43 44Zm-36-232-43-43q20-34 29.5-72t9.5-78q0-103-60-184.5T553-769v-62q124 28 202 125.5T833-481q0 51-14 100t-42 93ZM643-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T643-422ZM473-592 369-696l104-104v208Z"/></svg>
+                        </> 
+                        : 
+                        <>
+                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M560-131v-62q97-28 158.5-107.5T780-481q0-101-61-181T560-769v-62q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm420 48v-337q55 17 87.5 64T660-480q0 57-33 104t-87 64Z"/></svg>
+                        </>
+                    }
+                </button>
+                <button className="sortBtn cs_profilebtn muterswitch newleft" onClick={routeChange} data-mutetool={"Leave game"}>
+                    <svg className="fwsvg redcolorsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M180-120q-24 0-42-18t-18-42v-210h60v210h600v-602H180v212h-60v-212q0-24 18-42t42-18h600q24 0 42 18t18 42v602q0 24-18 42t-42 18H180Zm233-167-45-45 118-118H120v-60h366L368-628l45-45 193 193-193 193Z"/></svg>
+                </button>
+            </div>
+            <div className="cfw_textcontainer wsi listing conf csi monospace__important">{listItems} <br/><span>~ {author}</span></div>
             <ProgressBar
                 bgcolor={"#6a1b9a"}
                 completed={(completed / text.length) * 100}
@@ -361,41 +382,38 @@ export default function Multiplayer() {
                         />
                     )
             )}
-            <input
-                type="text"
-                autoComplete="off"
-                autoCapitalize="none"
-                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
-                ref={textInput}
-            />
-            <div style={{ position: "absolute", left: 10 }}>{listItems}</div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <div>~ {author}</div>
+            <div className="helper_hidden texthelper" hidden></div>
+                <input
+                    type="text"
+                    autoComplete="off"
+                    autoCapitalize="none"
+                    style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                    ref={textInput}
+                />
             {openTouchDisclaimer && (
                 <div>
                     In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
                 </div>
             )}
-            {isCapsLocked && <div>WARNING: CapsLock is active</div>}
+            {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
             <Confetti width={width} height={height} run={winners[0]?.username === username} opacity={0.8} recycle={false} />
             {done && (
                 <>
                     <div>Speed: {wpm} wpm</div>
-                    <div>Accouracy: {accuracy}%</div>
+                    <div>Accuracy: {accuracy}%</div>
                     <div>Time: {time} seconds</div>
                     <button onClick={() => mutationMultiplayer.mutate()}>Race again</button>
                 </>
             )}
 
-            <button onClick={handleSoundControl}>{audioActive ? <>Mute</> : <>Unmute</>}</button>
+            
 
             <br />
             <br />
-            {waitingTitle === "" && !hasStarted && <div>Waiting for opponents...</div>}
-            {waitingTitle !== "" && !hasStarted && <Timer initialSeconds={30} title={waitingTitle} />}
+            {/* {waitingTitle === "" && !hasStarted && <UserRaceContentOverlay/>} */}
+            {/* {waitingTitle !== "" && !hasStarted && <UserRaceContentOverlay/>} */}
+            {/* {waitingTitle === "" && !hasStarted && <><div className="__completemodal"><p className="WFOP">Waiting for opponents...</p></div></>} */}
+            {/* {waitingTitle !== "" && !hasStarted && <div className="__completemodal"><p className="WFOP"><Timer initialSeconds={30} title={waitingTitle} /></p></div>} */}
             {winners.map((item: any, key: any) => (
                 <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
             ))}

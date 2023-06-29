@@ -35,7 +35,7 @@ const ProgressBar = (props: any) => {
     const containerStyles = {
         height: 20,
         borderRadius: "50rem",
-        margin: 50,
+        margin: "6rem 50px 2rem",
     }
 
     const fillerStyles: any = {
@@ -55,6 +55,7 @@ const ProgressBar = (props: any) => {
         position: "absolute",
         width: 100,
         textAlign: "left",
+        left: "auto",
     }
 
     const handleGetStats = () => {
@@ -72,7 +73,6 @@ const ProgressBar = (props: any) => {
                         {done && online ? (
                             <Link to={"/user/" + name} reloadDocument={true} className="wnc">
                                 <span className="__namedisplay">{name}</span>
-                                &nbsp;{" -"}&nbsp;
                                 <span className="__percentdisplay">{Math.round(completed)}%</span>
                                 {skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
                             </Link>
@@ -80,10 +80,9 @@ const ProgressBar = (props: any) => {
                             <div className="wnc">
                                 <p style={{ width: "max-content" }}>
                                     <span className="__namedisplay">{name}</span>
-                                    &nbsp;{" - "}&nbsp;
                                     <span className="__percentdisplay">{Math.round(completed)}%</span>
                                 </p>
-                                {skin && <img style={{ width: 50, height: 50 }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
+                                {skin && <img style={{ width: 60, height: 60, transform: "translateY(6px)" }} src={"/img/skins/" + skin + ".png"} alt="skin" className="cupimg" />}
                             </div>
                         )}
                     </div>
@@ -111,7 +110,13 @@ const ProgressBar = (props: any) => {
                     )}
                     {/* end */}
                 </span>
-                {!connected && <div>Disconnected</div>}
+                {!connected && 
+                    <div className="disconnectHint">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="disconnectSVG" viewBox="0 -960 960 960">
+                            <path d="M382-120v-118L240-394v-215q0-25 17-42.5t41-17.5v84L67-816l42-42 750 750-42 42-207-207-32 35v118H382Zm310-240L342-710v-130h60v171h156v-171h60v201l-30-30h72q25 0 42.5 17.5T720-609v217l-28 32Z"/>
+                        </svg>Disconnected
+                    </div>
+                }
             </div>
         </div>
     )
