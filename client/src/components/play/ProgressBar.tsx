@@ -40,7 +40,8 @@ const ProgressBar = (props: any) => {
 
     const fillerStyles: any = {
         height: "100%",
-        width: `${completed}%`,
+        width: `calc(${completed}% + 6%)`,
+        minWidth: "inherit",
         borderRadius: "inherit",
         textAlign: "right",
         position: "relative",
@@ -51,11 +52,11 @@ const ProgressBar = (props: any) => {
         color: "#fff",
         fontWeight: "bold",
         top: "200%",
-        transform: "translate(-0px, -138%)",
-        position: "absolute",
-        width: 100,
+        transform: "translate(-0px, -75%)",
+        width: "100px",
         textAlign: "left",
         left: "auto",
+        display: "inline-block",
     }
 
     const handleGetStats = () => {
@@ -68,13 +69,15 @@ const ProgressBar = (props: any) => {
     return (
         <div style={containerStyles} className="default_PGBAR">
             <div style={fillerStyles}>
-                <span style={labelStyles}>
+                <div style={labelStyles}>
                     <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
                         {done && online ? (
-                            <Link to={"/user/" + name} reloadDocument={true} className="wnc">
-                                <span className="__namedisplay">{name}</span>
-                                <span className="__percentdisplay">{Math.round(completed)}%</span>
-                                {skin && <img style={{ width: 50, height: 50, position: "absolute" }} src={"/img/skins/" + skin + ".png"} alt="skin" />}
+                            <Link className="wnc" to={"/user/" + name} reloadDocument={true} style={{display: "flex"}}>
+                                <p style={{ width: "max-content" }}>
+                                    <span className="__namedisplay">{name}</span>
+                                    <span className="__percentdisplay">{Math.round(completed)}%</span>
+                                </p>
+                                {skin && <img style={{ width: 60, height: 60, transform: "translateY(6px)" }} src={"/img/skins/" + skin + ".png"} alt="skin" className="cupimg"/>}
                             </Link>
                         ) : (
                             <div className="wnc">
@@ -109,12 +112,11 @@ const ProgressBar = (props: any) => {
                         </div>
                     )}
                     {/* end */}
-                </span>
+                </div>
                 {!connected && 
                     <div className="disconnectHint">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="disconnectSVG" viewBox="0 -960 960 960">
-                            <path d="M382-120v-118L240-394v-215q0-25 17-42.5t41-17.5v84L67-816l42-42 750 750-42 42-207-207-32 35v118H382Zm310-240L342-710v-130h60v171h156v-171h60v201l-30-30h72q25 0 42.5 17.5T720-609v217l-28 32Z"/>
-                        </svg>Disconnected
+                        <svg className="disconnectSVG" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M897-526q-88-84-192.5-134T480-710q-37 0-71 4.5T352-693l-73-73q44-16 95.5-25t105.5-9q140 0 263.5 58T960-589l-63 63ZM728-357q-33-32-60-51.5T599-447L486-560q95 2 167.5 39T791-420l-63 63Zm77 288L411-463q-54 13-99.5 42T232-357l-63-63q37-37 76.5-65t94.5-50L229-646q-47 23-89 54.5T63-526L0-589q36-37 77-69t84-55l-92-92 43-43 736 736-43 43Zm-325-40L332-258q29-29 66.5-45.5T480-320q44 0 81.5 16.5T628-258L480-109Z"/></svg>
+                        <p>Disconnected</p>
                     </div>
                 }
             </div>

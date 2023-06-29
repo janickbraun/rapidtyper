@@ -10,6 +10,7 @@ import useWindowSize from "react-use/lib/useWindowSize"
 import Confetti from "react-confetti"
 import useSound from "use-sound"
 import UserRaceContentOverlay from "../modal/UserRaceContentOverlay"
+import Overlay from "../modal/Overlay"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -55,14 +56,14 @@ export default function Multiplayer() {
             {element.character === " " ? (
                 <>
                     {element.correct === undefined && <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>&nbsp;</div>}
-                    {element.correct && <div className="_sgchar _sgchar__space" style={{ display: "inline", background: "limegreen" }}>&nbsp;</div>}
-                    {element.correct === false && <div className="_sgchar _sgchar__space" style={{ display: "inline", background: "red" }}>&nbsp;</div>}
+                    {element.correct && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom"}}>&nbsp;</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom"}}>&nbsp;</div>}
                 </>
             ) : (
                 <>
                     {element.correct === undefined && <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>{element.character}</div>}
-                    {element.correct && <div className="_sgchar _sgchar__charR" style={{ display: "inline", background: "limegreen" }}>{element.character}</div>}
-                    {element.correct === false && <div className="_sgchar _sgchar__charR" style={{ display: "inline", background: "red" }}>{element.character}</div>}
+                    {element.correct && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>{element.character}</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>{element.character}</div>}
                 </>
             )}
         </div>
@@ -353,7 +354,28 @@ export default function Multiplayer() {
                     <svg className="fwsvg redcolorsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M180-120q-24 0-42-18t-18-42v-210h60v210h600v-602H180v212h-60v-212q0-24 18-42t42-18h600q24 0 42 18t18 42v602q0 24-18 42t-42 18H180Zm233-167-45-45 118-118H120v-60h366L368-628l45-45 193 193-193 193Z"/></svg>
                 </button>
             </div>
-            <div className="cfw_textcontainer wsi listing conf csi monospace__important">{listItems} <br/><span>~ {author}</span></div>
+            <div className={done ? "cfw_textcontainer wsi listing conf csi monospace__important bottomjoin" : "cfw_textcontainer wsi listing conf csi monospace__important"}>{listItems} <br/><span className="authorS">~ {author}</span></div>
+            {done && (
+                <div className="fullrescontainer">
+                    <div className="cfw_textcontainer spctopjoin" >
+                        <div className="doublemr">
+                            <div className="result__left">
+                                <h1 className="resultheading">Results</h1>
+                                <div><span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span></div>
+                                <div><span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span></div>
+                                <div><span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span></div>
+                            </div>
+                            <div className="leaderboard__right">
+                                <h1 className="resultheading">Leaderboard</h1>
+                                {winners.map((item: any, key: any) => (
+                                    <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
+                                ))}
+                            </div>
+                        </div>
+                        <button className="absolutebottom" onClick={() => mutationMultiplayer.mutate()}>Race again</button>
+                    </div>
+                </div>
+            )}
             <ProgressBar
                 bgcolor={"#6a1b9a"}
                 completed={(completed / text.length) * 100}
@@ -382,7 +404,7 @@ export default function Multiplayer() {
                         />
                     )
             )}
-            <div className="helper_hidden texthelper" hidden></div>
+            <div className="helper_hidden texthelper" hidden>
                 <input
                     type="text"
                     autoComplete="off"
@@ -390,33 +412,33 @@ export default function Multiplayer() {
                     style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
                     ref={textInput}
                 />
+            </div>
             {openTouchDisclaimer && (
-                <div>
-                    In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
+                <>                
+                <Overlay />
+                <div className="share__modal selector_container">
+                    <h1 className="modalCallerHeader kpbb">Notice</h1>
+                    <div className="close_container">
+                        <button className="close-modal-button" onClick={() => setOpenTouchDisclaimer(false)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
+                                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p style={{margin: "1.2rem 2rem"}}>In order to play you need to use a physical keyboard!</p>
                 </div>
+                </>
+
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
             <Confetti width={width} height={height} run={winners[0]?.username === username} opacity={0.8} recycle={false} />
-            {done && (
-                <>
-                    <div>Speed: {wpm} wpm</div>
-                    <div>Accuracy: {accuracy}%</div>
-                    <div>Time: {time} seconds</div>
-                    <button onClick={() => mutationMultiplayer.mutate()}>Race again</button>
-                </>
-            )}
-
+            {waitingTitle === "" && !hasStarted && <UserRaceContentOverlay/>}
+            {waitingTitle !== "" && !hasStarted && <UserRaceContentOverlay/>}
+            {waitingTitle === "" && !hasStarted && <><div className="__completemodal"><p className="WFOP">Waiting for opponents...</p></div></>}
+            {waitingTitle !== "" && !hasStarted && <div className="__completemodal"><p className="WFOP"><Timer initialSeconds={30} title={waitingTitle} /></p></div>}
             
-
-            <br />
-            <br />
-            {/* {waitingTitle === "" && !hasStarted && <UserRaceContentOverlay/>} */}
-            {/* {waitingTitle !== "" && !hasStarted && <UserRaceContentOverlay/>} */}
-            {/* {waitingTitle === "" && !hasStarted && <><div className="__completemodal"><p className="WFOP">Waiting for opponents...</p></div></>} */}
-            {/* {waitingTitle !== "" && !hasStarted && <div className="__completemodal"><p className="WFOP"><Timer initialSeconds={30} title={waitingTitle} /></p></div>} */}
-            {winners.map((item: any, key: any) => (
-                <div key={key}>{key + 1 + ". " + item.username + " | " + item.wpm + "wpm"}</div>
-            ))}
+            {/* !!!! */}
+            
 
             <br />
         </main>

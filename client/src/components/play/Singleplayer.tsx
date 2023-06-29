@@ -88,39 +88,15 @@ export default function Singleplayer() {
         <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
                 <>
-                    {element.correct === undefined && (
-                        <div style={{ display: "inline" }} className="_sgchar _sgchar__space">
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct && (
-                        <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__space">
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__space">
-                            &nbsp;
-                        </div>
-                    )}
+                    {element.correct === undefined && <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>&nbsp;</div>}
+                    {element.correct && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom"}}>&nbsp;</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom"}}>&nbsp;</div>}
                 </>
             ) : (
                 <>
-                    {element.correct === undefined && (
-                        <div style={{ display: "inline" }} className="_sgchar _sgchar__charR">
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct && (
-                        <div style={{ display: "inline", background: "limegreen" }} className="_sgchar _sgchar__charR">
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div style={{ display: "inline", background: "red" }} className="_sgchar _sgchar__charR">
-                            {element.character}
-                        </div>
-                    )}
+                    {element.correct === undefined && <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>{element.character}</div>}
+                    {element.correct && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>{element.character}</div>}
+                    {element.correct === false && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>{element.character}</div>}
                 </>
             )}
         </div>
@@ -250,46 +226,74 @@ export default function Singleplayer() {
     useEventListener("keydown", handler)
     useEventListener("touchstart", touchDisclaimer)
 
+    const routeChange = () =>{
+        navigate("/")
+    }
+
     return (
         <main className="usergame__comtop">
+            <div className="rt__buttonset__inrace_actionsbtns">
+                <p className="hinttext">Playing in Singleplayer does not effect your stats</p>
+                <button className="sortBtn cs_profilebtn muterswitch restart" onClick={handleRestart}>
+                    materialicon_reload  // RapidTyper SVG Kit Material-Reload
+                </button>
+                <button className="sortBtn cs_profilebtn muterswitch newtext" onClick={handleNewText}>
+                    <svg className="fwsvg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M24.5 40V13H14V8H40V13H29.5V40H24.5ZM6.5 40V23H0V18H18V23H11.5V40H6.5Z"/><path d="M39 48C36.81 48 34.8975 47.3175 33.2625 45.9525C31.6275 44.5875 30.6 42.87 30.18 40.8H32.97C33.36 42.12 34.1025 43.2 35.1975 44.04C36.2925 44.88 37.56 45.3 39 45.3C40.74 45.3 42.225 44.685 43.455 43.455C44.685 42.225 45.3 40.74 45.3 39C45.3 37.26 44.685 35.775 43.455 34.545C42.225 33.315 40.74 32.7 39 32.7C38.13 32.7 37.32 32.8575 36.57 33.1725C35.82 33.4875 35.16 33.93 34.59 34.5H37.2V37.2H30V30H32.7V32.565C33.51 31.785 34.455 31.1625 35.535 30.6975C36.615 30.2325 37.77 30 39 30C41.49 30 43.6125 30.8775 45.3675 32.6325C47.1225 34.3875 48 36.51 48 39C48 41.49 47.1225 43.6125 45.3675 45.3675C43.6125 47.1225 41.49 48 39 48Z"/></svg>
+                </button>
+                <button className="sortBtn cs_profilebtn muterswitch" onClick={handleSoundControl} data-mutetool={audioActive ? "Mute" : "Unmute"}>
+                    {audioActive ? 
+                        <>
+                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M813-56 681-188q-28 20-60.5 34.5T553-131v-62q23-7 44.5-15.5T638-231L473-397v237L273-360H113v-240h156L49-820l43-43 764 763-43 44Zm-36-232-43-43q20-34 29.5-72t9.5-78q0-103-60-184.5T553-769v-62q124 28 202 125.5T833-481q0 51-14 100t-42 93ZM643-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T643-422ZM473-592 369-696l104-104v208Z"/></svg>
+                        </> 
+                        : 
+                        <>
+                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M560-131v-62q97-28 158.5-107.5T780-481q0-101-61-181T560-769v-62q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm420 48v-337q55 17 87.5 64T660-480q0 57-33 104t-87 64Z"/></svg>
+                        </>
+                    }
+                </button>
+                <button className="sortBtn cs_profilebtn muterswitch newleft" onClick={routeChange} data-mutetool={"Leave game"}>
+                    <svg className="fwsvg redcolorsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M180-120q-24 0-42-18t-18-42v-210h60v210h600v-602H180v212h-60v-212q0-24 18-42t42-18h600q24 0 42 18t18 42v602q0 24-18 42t-42 18H180Zm233-167-45-45 118-118H120v-60h366L368-628l45-45 193 193-193 193Z"/></svg>
+                </button>
+            </div>
+            <div className={done ? "cfw_textcontainer wsi listing conf csi monospace__important bottomjoin" : "cfw_textcontainer wsi listing conf csi monospace__important"}>
+                {listItems}
+                <br/><span className="authorS">~ {author}</span>
+            </div>
+            {done && (
+                <div className="fullrescontainer">
+                <div className="cfw_textcontainer spctopjoin" >
+                    <div className="doublemr">
+                        <div className="result__left" style={{borderRight: "none"}}>
+                            <h1 className="resultheading">Results</h1>
+                            <div><span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span></div>
+                            <div><span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span></div>
+                            <div><span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span></div>
+                        </div>
+                    </div>
+                    <button className="absolutebottom" onClick={handleNewText}>New text</button>
+                </div>
+            </div>
+            )}
             {loggedin ? (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} />
             ) : (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
             )}
-            <input
-                type="text"
-                autoComplete="off"
-                autoCapitalize="none"
-                style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
-                ref={textInput}
-            />
-            <div style={{ position: "absolute", left: 10 }} className="cfw_textcontainer wsi listing conf csi monospace__important">
-                {listItems}
+            <div className="helper_hidden texthelper" hidden>
+                <input
+                    type="text"
+                    autoComplete="off"
+                    autoCapitalize="none"
+                    style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                    ref={textInput}
+                />
             </div>
-            <br />
-            <br />
-            <div style={{ marginTop: "6rem" }}>~ {author}</div>
             {openTouchDisclaimer && (
                 <div>
                     In order to play you need to use a physical keyboard <button onClick={() => setOpenTouchDisclaimer(false)}>Close</button>
                 </div>
             )}
-            {isCapsLocked && <div>WARNING: CapsLock is active</div>}
-            <br />
-            <br />
-            {done && (
-                <>
-                    <div>Speed: {wpm} wpm</div>
-                    <div>Accouracy: {accuracy}%</div>
-                    <div>Time: {time} seconds</div>
-                </>
-            )}
-            <button onClick={handleRestart}>Restart</button> <button onClick={handleNewText}>New text</button>
-            <br />
-            <br />
-            <button onClick={handleSoundControl}>{audioActive ? <>Mute</> : <>Unmute</>}</button>
-            <div>Playing in Singleplayer does not effect your stats</div>
+            {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
         </main>
     )
 }
