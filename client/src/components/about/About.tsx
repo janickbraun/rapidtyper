@@ -16,7 +16,7 @@ export default function About() {
                                 <img src="/img/about/founder.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
                             </div>
                             <div className="flipimg_2">
-                            <img src="/img/about/rich.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
+                                <img src="/img/about/rich.png" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
                             </div>
                         </div>
                         <span className="img_subtxt" hidden></span>
@@ -81,8 +81,8 @@ export default function About() {
                     <div className="__dcflexcontent">
                         <p className="about__text">
                             If you have any questions, suggestions, or feedback, we'd love to hear from you! Contact us at{" "}
-                            <a className="c" href="mailto:support@mail.rapidtyper.com">
-                                support@mail.rapidtyper.com
+                            <a className="c" href="mailto:rapidtyper@grovider.co">
+                                rapidtyper@grovider.co
                             </a>
                             . Thank you for choosing RapidTyper as your partner in improving your typing skills!
                         </p>

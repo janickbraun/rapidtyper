@@ -29,7 +29,7 @@ export default function Stats(props: any) {
 
     const mutation: any = useMutation({
         mutationFn: async () => {
-            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/getstats", { username: props.username })
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/getstats", { username: props.username, token })
         },
         onSuccess: ({ data }) => {
             setWpm(data.wpm)
