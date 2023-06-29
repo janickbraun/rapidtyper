@@ -43,7 +43,7 @@ export default function Success() {
         let payerId = searchParams.get("PayerID")
         let skin = searchParams.get("skin")
 
-        // if (!paymentId || !token || !payerId || !skin) return navigate("/")
+        if (!paymentId || !token || !payerId || !skin) return navigate("/")
 
         mutation.mutate()
     })
