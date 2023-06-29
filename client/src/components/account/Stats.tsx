@@ -15,6 +15,7 @@ export default function Stats(props: any) {
     const [country, setCountry] = useState("")
     const [skin, setSkin] = useState("snail")
     const [skinsOpen, setSkinsOpen] = useState(false)
+    const [hover, setHover] = useState("")
     const [skins, setSkins] = useState<Array<any>>([])
     const [toBeUnlocked, setToBeUnlocked] = useState<Array<any>>([])
     const [shareOpen, setShareOpen] = useState(false)
@@ -110,17 +111,21 @@ export default function Stats(props: any) {
                             <div className="skin_div">
                                 {skins.map((val) => {
                                     return (
-                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)}>
+                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
                                             <img src={"/img/skins/" + val.filename + ".png"} alt={val.name} tabIndex={0} draggable="false" className="user_default_skinimg skin_changeIMG" />
-                                            <div>{val.name}</div>
-                                            <div>{val.description}</div>
+                                            {hover === val.filename && (
+                                                <div>
+                                                    <div>{val.name}</div>
+                                                    <div>{val.description}</div>
+                                                </div>
+                                            )}
                                         </div>
                                     )
                                 })}
 
                                 {toBeUnlocked.map((val) => {
                                     return (
-                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)}>
+                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
                                             <img
                                                 src={"/img/skins/" + val.filename + ".png"}
                                                 style={{ filter: "grayscale(1)" }}
@@ -129,8 +134,12 @@ export default function Stats(props: any) {
                                                 draggable="false"
                                                 className="user_default_skinimg skin_changeIMG"
                                             />
-                                            <div>{val.name}</div>
-                                            <div>{val.description}</div>
+                                            {hover === val.filename && (
+                                                <div>
+                                                    <div>{val.name}</div>
+                                                    <div>{val.description}</div>
+                                                </div>
+                                            )}
                                         </div>
                                     )
                                 })}
