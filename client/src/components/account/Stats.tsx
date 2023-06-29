@@ -16,6 +16,7 @@ export default function Stats(props: any) {
     const [skin, setSkin] = useState("snail")
     const [skinsOpen, setSkinsOpen] = useState(false)
     const [skins, setSkins] = useState<Array<any>>([])
+    const [toBeUnlocked, setToBeUnlocked] = useState<Array<any>>([])
     const [shareOpen, setShareOpen] = useState(false)
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,6 +41,7 @@ export default function Stats(props: any) {
             setSkins(data.skins)
             setCountry(data.country)
             setTimeSpentRacing(data.time)
+            setToBeUnlocked(data.toBeUnlocked)
         },
     })
 
@@ -106,17 +108,29 @@ export default function Stats(props: any) {
                                 </button>
                             </div>
                             <div className="skin_div">
-                                {skins.map((val, key) => {
+                                {skins.map((val) => {
                                     return (
-                                        <div key={key}>
+                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)}>
+                                            <img src={"/img/skins/" + val.filename + ".png"} alt={val.name} tabIndex={0} draggable="false" className="user_default_skinimg skin_changeIMG" />
+                                            <div>{val.name}</div>
+                                            <div>{val.description}</div>
+                                        </div>
+                                    )
+                                })}
+
+                                {toBeUnlocked.map((val) => {
+                                    return (
+                                        <div key={val.filename} onClick={() => handleSkinChange(val.filename)}>
                                             <img
-                                                onClick={() => handleSkinChange(val)}
-                                                src={"/img/skins/" + val + ".png" || ".gif"}
-                                                alt="skin"
+                                                src={"/img/skins/" + val.filename + ".png"}
+                                                style={{ filter: "grayscale(1)" }}
+                                                alt={val.name}
                                                 tabIndex={0}
                                                 draggable="false"
                                                 className="user_default_skinimg skin_changeIMG"
                                             />
+                                            <div>{val.name}</div>
+                                            <div>{val.description}</div>
                                         </div>
                                     )
                                 })}
