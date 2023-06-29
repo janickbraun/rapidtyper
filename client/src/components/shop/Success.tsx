@@ -43,22 +43,25 @@ export default function Success() {
         let payerId = searchParams.get("PayerID")
         let skin = searchParams.get("skin")
 
-        if (!paymentId || !token || !payerId || !skin) return navigate("/")
+        // if (!paymentId || !token || !payerId || !skin) return navigate("/")
 
         mutation.mutate()
     })
 
     return (
-        <main>
-            <h1>Success</h1>
-            {mutation.isError && <div>{mutation.error?.response?.data}</div>}
+        <main style={{marginTop: "8rem"}}>
+            <h1 style={{textAlign: "center"}}>{mutation.isSuccess ? "Payment successful" : "Awaiting payment..."}</h1>
+            <div className="cfl">
+            <div className={mutation.isSuccess ? "" : "loader"}>{mutation.isSuccess ? "" : "loading..."}</div>
+            </div>
+            {mutation.isError && <div className="cserror" style={{textAlign: "center", width: "100%", maxWidth: "100%", marginTop: ".6rem"}}>{mutation.error?.response?.data}</div>}
             {mutation.isSuccess && (
-                <div>
-                    <img src={"/img/skins/" + filename + ".png"} alt={name} />
-                    Successfully bought "{name}" for {price} US $. Check it out:
-                    <Link to={"/user/" + username}>
-                        <button>{username}'s profile</button>
-                    </Link>
+                <div className="centerboughtitem">
+                    <img src={"/img/skins/" + filename + ".png"} alt={name} className="boughtimg"/>
+                    <p className="successtext">Successfully bought <strong>"{name}"</strong> for <strong>${price}</strong>. Check it out:
+                    <Link to={"/user/" + username} className="_userlink">
+                        {username}'s profile
+                    </Link></p>
                 </div>
             )}
         </main>

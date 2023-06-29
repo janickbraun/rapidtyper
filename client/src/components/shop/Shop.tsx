@@ -67,7 +67,7 @@ export default function Shop() {
                 <div className="shopsingleitem" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
                     <div className="imagecontainer">
                         <div className="glowparent">
-                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} />
+                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
                         </div>
                     </div>
                     <div className="textcontainer">
@@ -88,7 +88,7 @@ export default function Shop() {
             <br />
             {confirmOpen ? <Overlay /> : ""}
             {confirmOpen && (
-                <div className="selector_container">
+                <div className="selector_container" style={{backgroundColor: "#292b2e"}}>
                     <h1 className="modalCallerHeader">Confirm purchase</h1>
                     <div className="close_container">
                         <button className="close-modal-button" onClick={handleClose}>
@@ -99,9 +99,10 @@ export default function Shop() {
                     </div>
                     <div className="contentdisplay">
                         <div className="mask_contentparent" style={glowAssist}>
+                            <div className="glowLayerassist"></div>
                             <img loading="eager" src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>
-                        <p className="conftext">Are you sure you want to buy "{name}" for ${price}?</p>
+                        <p className="conftext">Are you sure you want to buy "{name}" for ${price}?<br/>You will be redirected to PayPal to complete your purchase.</p>
                     </div>
                     <div className="copconfirmset">
                         <button className={loading} onClick={handlePurchase}>
