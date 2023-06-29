@@ -9,6 +9,7 @@ export default function Shop() {
     const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
     const [loading, setLoading] = useState("")
+    const [error, setError] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -19,6 +20,10 @@ export default function Shop() {
         },
         onSuccess: ({ data }) => {
             window.location.href = data.link
+        },
+        onError: (err: any) => {
+            setLoading("")
+            setError(err?.response?.data)
         },
     })
 
@@ -49,6 +54,7 @@ export default function Shop() {
 
     const handleClose = () => {
         setSkin("")
+        setError("")
         setPrice(0)
         setConfirmOpen(false)
     }
@@ -62,33 +68,31 @@ export default function Shop() {
             <h1>Shop</h1>
 
             <div className="contentflex">
-            <div className="shopitemcontai">
-            {skins.map((item: any) => (
-                <div className="shopsingleitem" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                    <div className="imagecontainer">
-                        <div className="glowparent">
-                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                <div className="shopitemcontai">
+                    {skins.map((item: any) => (
+                        <div className="shopsingleitem" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller">{item.name}</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc">{item.description}</p>
+                            </div>
+                            <div className="itemprice">${item.price}</div>
+                            <br />
                         </div>
-                    </div>
-                    <div className="textcontainer">
-                        <p className="skin_namecaller">
-                            {item.name}
-                        </p>
-                    </div>
-                    <div className="itemdescriptioncontainer">
-                        <p className="itemdsc">{item.description}</p>
-                    </div>
-                    <div className="itemprice">${item.price}</div>
-                    <br />
+                    ))}
                 </div>
-            ))}
-            </div>
             </div>
             <br />
             <br />
             {confirmOpen ? <Overlay /> : ""}
             {confirmOpen && (
-                <div className="selector_container" style={{backgroundColor: "#292b2e"}}>
+                <div className="selector_container" style={{ backgroundColor: "#292b2e" }}>
                     <h1 className="modalCallerHeader">Confirm purchase</h1>
                     <div className="close_container">
                         <button className="close-modal-button" onClick={handleClose}>
@@ -102,13 +106,16 @@ export default function Shop() {
                             <div className="glowLayerassist"></div>
                             <img loading="eager" src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>
-                        <p className="conftext">Are you sure you want to buy "{name}" for ${price}?<br/>You will be redirected to PayPal to complete your purchase.</p>
+                        <p className="conftext">
+                            Are you sure you want to buy "{name}" for ${price}?<br />
+                            You will be redirected to PayPal to complete your purchase.
+                        </p>
                     </div>
                     <div className="copconfirmset">
                         <button className={loading} onClick={handlePurchase}>
                             Confirm
                         </button>
-                        {mutationBuy.isError && <div className="cserror">{mutationBuy.error?.response?.data}</div>}
+                        {error !== "" && <div className="cserror">{error}</div>}
                     </div>
                 </div>
             )}
