@@ -1286,3 +1286,14 @@ a.wnc{
     top: 50%;
     transform: translateY(-50%);
 }
+.cfw_textcontainer{
+    user-select: none !important;
+    pointer-events: none !important;
+}
+nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame__comtop{
+    user-select: none;
+}
+.paypal4{
+    user-select: none;
+    clear: initial !important;
+}
