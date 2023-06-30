@@ -65,9 +65,9 @@ export default function Shop() {
 
     return (
         <main>
-            <h1>Shop</h1>
 
             <div className="contentflex">
+                <h1 style={{marginTop: "1rem", marginBottom: ".6rem"}}>Shop</h1>
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
                         <div className="shopsingleitem" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
