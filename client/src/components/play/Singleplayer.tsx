@@ -105,7 +105,7 @@ export default function Singleplayer() {
                         </div>
                     )}
                     {element.correct === null && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#333", verticalAlign: "text-bottom", textDecoration: "underline 5px #2563eb" }}>
+                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
                             &nbsp;
                         </div>
                     )}
@@ -128,7 +128,7 @@ export default function Singleplayer() {
                         </div>
                     )}
                     {element.correct === null && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#333", verticalAlign: "text-bottom", textDecoration: "underline 5px #2563eb" }}>
+                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
                             {element.character}
                         </div>
                     )}
