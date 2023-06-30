@@ -37,6 +37,7 @@ export default function AddSkin() {
             <input type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} />
             <input type="number" placeholder="Price" onChange={(e) => setPrice(Number(e.target.value))} value={price} />
             <button onClick={handleSubmit}>Add skin</button>
+            {isSuccess && <div>Successfully added skin</div>}
         </div>
     )
 }
