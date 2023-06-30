@@ -190,6 +190,8 @@ export default function Singleplayer() {
         if (noFire.includes(e.key)) return
         if (done) return
 
+        if (e.keyCode === 32 && e.target === document.body) e.preventDefault()
+
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             if (audioActive) playTypeSound()
