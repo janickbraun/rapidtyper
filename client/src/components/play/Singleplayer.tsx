@@ -51,7 +51,21 @@ export default function Singleplayer() {
                 arr.push({ character: splitt[i], correct: undefined })
             }
             arr[0].correct = null
-            setTextArray(arr)
+
+            let words = []
+            let word = []
+            for (let i = 0; i < splitt.length; i++) {
+                if (arr[i].character !== " ") {
+                    word.push(arr[i])
+                } else {
+                    word.push(arr[i])
+                    words.push(word)
+                    word = []
+                }
+            }
+            words.push(word)
+            console.log(words)
+            setTextArray(words)
         },
         onError: () => {
             navigate("/")
@@ -85,55 +99,60 @@ export default function Singleplayer() {
         }
     }, [mutationPlay, navigate])
 
-    const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
-            {element.character === " " ? (
-                <>
-                    {element.correct === undefined && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct === null && (
-                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                </>
-            ) : (
-                <>
-                    {element.correct === undefined && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct === null && (
-                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
-                            {element.character}
-                        </div>
-                    )}
-                </>
-            )}
+    const listItems = textArray.map((word: any, j: number) => (
+        <div key={j}>
+            {textArray.length > 0 &&
+                word.map((element: any, i: number) => (
+                    <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
+                        {element.character === " " ? (
+                            <>
+                                {element.correct === undefined && (
+                                    <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>
+                                        &nbsp;
+                                    </div>
+                                )}
+                                {element.correct && (
+                                    <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom" }}>
+                                        &nbsp;
+                                    </div>
+                                )}
+                                {element.correct === false && (
+                                    <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom" }}>
+                                        &nbsp;
+                                    </div>
+                                )}
+                                {element.correct === null && (
+                                    <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
+                                        &nbsp;
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {element.correct === undefined && (
+                                    <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>
+                                        {element.character}
+                                    </div>
+                                )}
+                                {element.correct && (
+                                    <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>
+                                        {element.character}
+                                    </div>
+                                )}
+                                {element.correct === false && (
+                                    <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>
+                                        {element.character}
+                                    </div>
+                                )}
+                                {element.correct === null && (
+                                    <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
+                                        {element.character}
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                ))}
         </div>
     ))
 
@@ -159,8 +178,8 @@ export default function Singleplayer() {
         setTime(0)
         setWpm(0)
         let temp = textArray
-        for (let i = 0; i < splitted.length; i += 1) {
-            temp[i].correct = undefined
+        for (let i = 0; i < splitted.length; i++) {
+            temp[convertIndex(i)[0]][convertIndex(i)[1]].correct = undefined
         }
         setTextArray(temp)
 
@@ -176,6 +195,17 @@ export default function Singleplayer() {
     useEffect(() => {
         textInput.current.focus()
     }, [])
+
+    const convertIndex = (ind: number) => {
+        let count = 0
+        for (let k = 0; k < textArray.length; k++) {
+            for (let l = 0; l < textArray[k].length; l++) {
+                if (count === ind) return [k, l]
+                count++
+            }
+        }
+        return [0, 0]
+    }
 
     const handler = (e: any) => {
         textInput.current.focus()
@@ -196,16 +226,22 @@ export default function Singleplayer() {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             if (audioActive) playTypeSound()
             let temp = textArray
-            temp[currentIndex].correct = true
-            if (currentIndex < splitted.length - 1) temp[currentIndex + 1].correct = null
+
+            temp[convertIndex(currentIndex)[0]][convertIndex(currentIndex)[1]].correct = true
+            if (currentIndex < splitted.length - 1) temp[convertIndex(currentIndex + 1)[0]][convertIndex(currentIndex + 1)[1]].correct = null
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
 
             let allCorrect = true
-            for (let i = 0; i < currentIndex + 1; i += 1) {
-                if (!textArray[i].correct) {
-                    allCorrect = false
-                    break
+            let count = 0
+            for (let i = 0; i < textArray; i++) {
+                for (let k = 0; k < textArray[i]; k++) {
+                    if (count >= currentIndex) break
+                    if (textArray[i][k].correct === false && count < currentIndex) {
+                        allCorrect = false
+                        break
+                    }
+                    count++
                 }
             }
             if (allCorrect) setCompleted(currentIndex)
@@ -214,14 +250,16 @@ export default function Singleplayer() {
             if (currentIndex === 0) return
             let temp = textArray
             let times = 1
-            temp[currentIndex - 1].correct = undefined
-            if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
+            temp[convertIndex(currentIndex - 1)[0]][convertIndex(currentIndex - 1)[1]].correct = undefined
+
+            if (currentIndex < splitted.length) temp[convertIndex(currentIndex)[0]][convertIndex(currentIndex)[1]].correct = undefined
             for (let i = currentIndex - 1; i > 0; i -= 1) {
-                if (temp[i - 1].character === " ") break
-                temp[i - 1].correct = undefined
+                if (temp[convertIndex(i - 1)[0]][convertIndex(i - 1)[1]].character === " ") break
+
+                temp[convertIndex(i - 1)[0]][convertIndex(i - 1)[1]].correct = undefined
                 times += 1
             }
-            temp[currentIndex - times].correct = null
+            temp[convertIndex(currentIndex - times)[0]][convertIndex(currentIndex - times)[1]].correct = null
             setCurrentIndex(currentIndex - times)
             setCompleted(currentIndex - 1 - times)
             setTextArray(temp)
@@ -229,8 +267,9 @@ export default function Singleplayer() {
             if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp = textArray
-            if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
-            temp[currentIndex - 1].correct = null
+
+            if (currentIndex < splitted.length) temp[convertIndex(currentIndex)[0]][convertIndex(currentIndex)[1]].correct = undefined
+            temp[convertIndex(currentIndex - 1)[0]][convertIndex(currentIndex - 1)[1]].correct = null
             setCompleted(currentIndex - 1)
 
             setTextArray(temp)
@@ -239,8 +278,9 @@ export default function Singleplayer() {
             if (currentIndex === 0) setStartDateTime(new Date().getTime())
             if (audioActive) playErrorSound()
             let temp = textArray
-            temp[currentIndex].correct = false
-            if (currentIndex < splitted.length - 1) temp[currentIndex + 1].correct = null
+            temp[convertIndex(currentIndex)[0]][convertIndex(currentIndex)[1]].correct = false
+            if (currentIndex < splitted.length - 1) temp[convertIndex(currentIndex + 1)[0]][convertIndex(currentIndex + 1)[1]].correct = null
+
             setMistakes(mistakes + 1)
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
@@ -248,10 +288,15 @@ export default function Singleplayer() {
 
         if (currentIndex === splitted.length - 1) {
             let allCorrect = true
-            for (let i = 0; i < splitted.length; i += 1) {
-                if (!textArray[i].correct) {
-                    allCorrect = false
-                    break
+            let count = 0
+            for (let i = 0; i < textArray; i++) {
+                for (let k = 0; k < textArray[i]; k++) {
+                    if (count >= currentIndex) break
+                    if (textArray[i][k].correct === false && count < currentIndex) {
+                        allCorrect = false
+                        break
+                    }
+                    count++
                 }
             }
             if (allCorrect) {
