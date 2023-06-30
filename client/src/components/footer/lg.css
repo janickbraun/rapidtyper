@@ -1128,7 +1128,9 @@ figure.__fndimg{
     color: #ff3333;
     width: max-content;
     font-weight: 500;
-    transform: translateY(6px);
+    position: absolute;
+    left: 0;
+    top: 10px;
 }
 .redcolorsvg{
     color: #ff3333;
@@ -1192,4 +1194,54 @@ a.wnc{
 .hinttext{
     font-size: 14px;
     color: #ffffff8b;
+}
+.onHoverContainer{
+    position: absolute;
+    border-radius: 10px;
+    background-color: #1f1f22;
+    padding: .8rem 1.1rem;
+    border: 2px solid #292b2f6a;
+    width: max-content;
+    left: -75%;
+    bottom: -350%;
+    z-index: 20000;
+}
+.onHoverContainer::before{
+    content: '';
+    background-color: #1f1f22;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -9.5px;
+    right: 50%;
+    transform: rotate(45deg);
+    border: 2px solid #292b2f6a;
+    z-index: 2;
+    border-bottom: none;
+    border-right: none;
+}
+.username_d{
+    font-size: 18px;
+    font-weight: 500;
+}
+.flxd34{
+    vertical-align: middle;
+    margin-left:8px;
+}
+.username_d{
+    padding-bottom: 2px;
+    border-bottom: 2px solid #292b2f6a;
+    margin-bottom: 6px;
+}
+.small_caller{
+    font-size: 15px;
+    font-weight: 400;
+    margin-right: .4px;
+}
+.small_namer{
+    font-size: 16px;
+    font-weight: 400;
 }

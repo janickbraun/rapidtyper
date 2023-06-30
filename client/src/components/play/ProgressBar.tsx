@@ -57,6 +57,7 @@ const ProgressBar = (props: any) => {
         textAlign: "left",
         left: "auto",
         display: "inline-block",
+        zIndex :"20"
     }
 
     const handleGetStats = () => {
@@ -70,7 +71,7 @@ const ProgressBar = (props: any) => {
         <div style={containerStyles} className="default_PGBAR">
             <div style={fillerStyles}>
                 <div style={labelStyles}>
-                    <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)}>
+                    <div onMouseEnter={handleGetStats} onMouseLeave={() => setIsOpen(!isOpen)} style={{zIndex: "400"}}>
                         {done && online ? (
                             <Link className="wnc" to={"/user/" + name} reloadDocument={true} style={{display: "flex"}}>
                                 <p style={{ width: "max-content" }}>
@@ -91,26 +92,28 @@ const ProgressBar = (props: any) => {
                     </div>
 
                     {/* onHover -> show player info. | Ignore */}
-                    {isOpen && online && (
-                        <div style={{ position: "absolute", border: "4px solid red", width: "max-content" }}>
-                            {name}
+                    {/* {isOpen && online && ( */}
+                        <div className="onHoverContainer usercontentcontainer">
                             {mutation.isSuccess ? (
                                 <>
-                                    <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
+                                    <p className="username_d">
+                                    {name}
+                                    <img className="user_origincounty uoc_wbd flxd34" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt={country} />
+                                    </p>
 
-                                    <div>Speed: {wpm}wpm</div>
-                                    <div>Accuracy: {accuracy}%</div>
-                                    <div>Races completed: {racesTotal}</div>
-                                    <div>Races won: {racesWon}</div>
-                                    <div>Fastest race: {bestRace}wpm</div>
-                                    <div>Time spent racing: {new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</div>
-                                    <div>Racing since: {date}</div>
+                                    <div><span className="small_caller">Speed:</span>&nbsp;&nbsp;<span className="small_namer">{wpm}wpm</span></div>
+                                    <div><span className="small_caller">Accuracy:</span>&nbsp;&nbsp;<span className="small_namer">{accuracy}%</span></div>
+                                    <div><span className="small_caller">Races completed:</span>&nbsp;&nbsp;<span className="small_namer">{racesTotal}</span></div>
+                                    <div><span className="small_caller">Races won:</span>&nbsp;&nbsp;<span className="small_namer">{racesWon}</span></div>
+                                    <div><span className="small_caller">Fastest race:</span>&nbsp;&nbsp;<span className="small_namer">{bestRace}wpm</span></div>
+                                    <div><span className="small_caller">Time spent racing:</span>&nbsp;&nbsp;<span className="small_namer">{new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</span></div>
+                                    <div><span className="small_caller">Racing since:</span>&nbsp;&nbsp;<span className="small_namer">{date}</span></div>
                                 </>
                             ) : (
                                 <div>Loading...</div>
                             )}
                         </div>
-                    )}
+                    {/* )} */}
                     {/* end */}
                 </div>
                 {!connected && 
