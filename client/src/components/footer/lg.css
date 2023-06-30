@@ -165,6 +165,41 @@ a.imprintLink{
 .extended_tooltip.down{
     bottom: -2.1rem !important;
 }
+.shareprofilebtn{
+    background-color: #494949;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease;
+}
+.shareprofilebtn:hover{
+    background-color: #323232;
+}
+.shareprofilebtn::after{
+    display: inline-block;
+    width: max-content;
+    height: fit-content;
+    padding: 0px 8px;
+    border-radius: 3px;
+    position: absolute;
+    font-size: 12px;
+    color: #fff;
+    background-color: #494949;
+    pointer-events: none;
+    transition: .3s ease, inset 0s;
+    top: -2rem;
+    transform: translateX(50%);
+    opacity: 0;
+    content: 'Share this profile';
+    left: -100px;
+}
+.shareprofilebtn:hover::after{
+    opacity: 1;
+}
 .cs_profilebtn::after{
     display: inline-block;
     width: max-content;
@@ -1244,4 +1279,10 @@ a.wnc{
 .small_namer{
     font-size: 16px;
     font-weight: 400;
+}
+.shareprofilebtn{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
