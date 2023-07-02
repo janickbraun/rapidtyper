@@ -12,7 +12,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
         const user = await User.findById(temporaryUser.id)
 
-        const validSkins = ["fly", "bee", "bird", "cat", "capybara"]
+        const validSkins = ["fly", "bee", "cat", "capybara", "jesus"]
 
         if (!validSkins.includes(skin)) return res.status(400).send("Skin is not valid")
         if (!user) return res.status(200).json({ new: false })

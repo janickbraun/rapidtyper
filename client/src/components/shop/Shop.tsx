@@ -3,12 +3,14 @@ import axios from "axios"
 import React, { useState } from "react"
 import { useEffectOnce } from "react-use"
 import Overlay from "../modal/Overlay"
+import { unlockSkin } from "../../helpers/skinHelper"
 
 export default function Shop() {
     const [skin, setSkin] = useState("")
     const [skins, setSkins] = useState([])
     const [name, setName] = useState("")
     const [loading, setLoading] = useState("")
+    const [msg, setMsg] = useState("")
     const [error, setError] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
@@ -37,6 +39,11 @@ export default function Shop() {
     })
 
     const handlePurchase = () => {
+        if (skin === "jesus") {
+            unlockSkin("jesus")
+            setMsg("Succsessfully unlocked Jesus skin. God bless you!")
+            return
+        }
         mutationBuy.mutate()
         setLoading("loading")
     }
@@ -70,41 +77,21 @@ export default function Shop() {
                 <h1 style={{ marginTop: "1rem", marginBottom: ".6rem" }}>Shop</h1>
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
-                        <>
-                            {item.filename === "jesus" ? (
-                                <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                                    <div className="imagecontainer">
-                                        <div className="glowparent">
-                                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
-                                        </div>
-                                    </div>
-                                    <div className="textcontainer">
-                                        <p className="skin_namecaller">{item.name}</p>
-                                    </div>
-                                    <div className="itemdescriptioncontainer">
-                                        <p className="itemdsc">{item.description}</p>
-                                    </div>
-                                    <div className="itemprice">${item.price}</div>
-                                    <br />
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
                                 </div>
-                            ) : (
-                                <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                                    <div className="imagecontainer">
-                                        <div className="glowparent">
-                                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
-                                        </div>
-                                    </div>
-                                    <div className="textcontainer">
-                                        <p className="skin_namecaller">{item.name}</p>
-                                    </div>
-                                    <div className="itemdescriptioncontainer">
-                                        <p className="itemdsc">{item.description}</p>
-                                    </div>
-                                    <div className="itemprice">${item.price}</div>
-                                    <br />
-                                </div>
-                            )}
-                        </>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller">{item.name}</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc">{item.description}</p>
+                            </div>
+                            <div className="itemprice">${item.price}</div>
+                            <br />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -113,7 +100,7 @@ export default function Shop() {
             {confirmOpen ? <Overlay /> : ""}
             {confirmOpen && (
                 <div className="selector_container" style={{ backgroundColor: "#292b2e" }}>
-                    <h1 className="modalCallerHeader">Confirm purchase</h1>
+                    <h1 className="modalCallerHeader">{skin === "jesus" ? <>Get Jesus</> : <>Confirm purchase</>}</h1>
                     <div className="close_container">
                         <button className="close-modal-button" onClick={handleClose}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
@@ -127,15 +114,34 @@ export default function Shop() {
                             <img loading="eager" src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>
                         <p className="conftext">
-                            Are you sure you want to buy "{name}" for ${price}?<br />
-                            You will be redirected to PayPal to complete your purchase.
+                            {skin === "jesus" ? (
+                                <>
+                                    In order to unlock the Jesus skin you need to praise the lord:
+                                    <br />
+                                    <br />
+                                    Our Father, Who is in heaven, holy is Your Name; <br />
+                                    Your kingdom come, your will be done, <br />
+                                    on earth as it is in heaven. <br />
+                                    Give us this day our daily bread and forgive us our sins, <br />
+                                    as we forgive those who sin against us; <br />
+                                    and lead us not into temptation, but deliver us from evil. <br />
+                                    For thine is the kingdom, and the power, and the glory, for ever and ever. <br />
+                                    Amen.
+                                </>
+                            ) : (
+                                <>
+                                    Are you sure you want to buy "{name}" for ${price}?<br />
+                                    You will be redirected to PayPal to complete your purchase.
+                                </>
+                            )}
                         </p>
                     </div>
                     <div className="copconfirmset">
                         <button className={loading} onClick={handlePurchase}>
-                            Confirm
+                            {skin === "jesus" ? <>Amen 🙏</> : <>Confirm</>}
                         </button>
                         {error !== "" && <div className="cserror">{error}</div>}
+                        {msg !== "" && skin === "jesus" && <>{msg}</>}
                     </div>
                 </div>
             )}
