@@ -7,6 +7,7 @@ import useEventListener from "@use-it/event-listener"
 import useSound from "use-sound"
 import { unlockSkin } from "../../helpers/skinHelper"
 import useAuth from "../../hooks/useAuth"
+import Stopwatch from "./Stopwatch"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -14,9 +15,12 @@ export default function Singleplayer() {
     const [completed, setCompleted] = useState(0)
     const [mistakes, setMistakes] = useState(0)
     const [time, setTime] = useState<number>(0)
+    const [currentWpm, setCurrentWpm] = useState<number>(0)
     const [accuracy, setAccuracy] = useState<number>(0)
     const [wpm, setWpm] = useState<number>(0)
     const [done, setDone] = useState<boolean>(false)
+    const [startStopwatch, setStopwatch] = useState<boolean>(false)
+    const [resetStopwatch, setResetStopwatch] = useState<boolean>(false)
 
     const [textArray, setTextArray] = useState<any>([])
     const [author, setAuthor] = useState("")
@@ -85,6 +89,15 @@ export default function Singleplayer() {
         }
     }, [mutationPlay, navigate])
 
+    useEffect(() => {
+        if (!done && startStopwatch && currentIndex > 0) {
+            const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
+            const wpm = Number((currentIndex / 5 / (seconds / 60)).toFixed(2))
+
+            if (wpm < 1000) setCurrentWpm(wpm)
+        }
+    }, [done, startStopwatch, startDateTime, currentIndex])
+
     const listItems = textArray.map((element: any, i: number) => (
         <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
@@ -113,7 +126,7 @@ export default function Singleplayer() {
             ) : (
                 <>
                     {element.correct === undefined && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>
+                        <div className="_sgchar _sgchar__charR" style={{ display: "inline-block" }}>
                             {element.character}
                         </div>
                     )}
@@ -158,10 +171,14 @@ export default function Singleplayer() {
         setCompleted(0)
         setTime(0)
         setWpm(0)
+        setResetStopwatch(true)
+        setStopwatch(false)
+        setCurrentWpm(0)
         let temp = textArray
         for (let i = 0; i < splitted.length; i += 1) {
             temp[i].correct = undefined
         }
+        temp[0].correct = null
         setTextArray(temp)
 
         e.currentTarget.blur()
@@ -193,7 +210,11 @@ export default function Singleplayer() {
         if (e.keyCode === 32 && e.target === document.body) e.preventDefault()
 
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
-            if (currentIndex === 0) setStartDateTime(new Date().getTime())
+            if (currentIndex === 0) {
+                setStartDateTime(new Date().getTime())
+                setResetStopwatch(false)
+                setStopwatch(true)
+            }
             if (audioActive) playTypeSound()
             let temp = textArray
             temp[currentIndex].correct = true
@@ -211,7 +232,7 @@ export default function Singleplayer() {
             if (allCorrect) setCompleted(currentIndex)
         } else if (e.key === "Backspace" && e.ctrlKey) {
             if (audioActive) playTypeSound()
-            if (currentIndex === 0) return
+            if (currentIndex === 0) return handleRestart(e)
             let temp = textArray
             let times = 1
             temp[currentIndex - 1].correct = undefined
@@ -221,13 +242,15 @@ export default function Singleplayer() {
                 temp[i - 1].correct = undefined
                 times += 1
             }
+
             temp[currentIndex - times].correct = null
             setCurrentIndex(currentIndex - times)
             setCompleted(currentIndex - times)
             setTextArray(temp)
+            if (currentIndex - times === 0) handleRestart(e)
         } else if (e.key === "Backspace") {
             if (audioActive) playTypeSound()
-            if (currentIndex === 0) return
+            if (currentIndex === 0 || currentIndex === 1) return handleRestart(e)
             let temp = textArray
             if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
             temp[currentIndex - 1].correct = null
@@ -236,7 +259,11 @@ export default function Singleplayer() {
             setTextArray(temp)
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
-            if (currentIndex === 0) setStartDateTime(new Date().getTime())
+            if (currentIndex === 0) {
+                setStartDateTime(new Date().getTime())
+                setResetStopwatch(false)
+                setStopwatch(true)
+            }
             if (audioActive) playErrorSound()
             let temp = textArray
             temp[currentIndex].correct = false
@@ -259,6 +286,7 @@ export default function Singleplayer() {
                 const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
+                setStopwatch(false)
                 setTime(seconds)
                 setDone(true)
                 setCompleted(currentIndex + 1)
@@ -359,6 +387,12 @@ export default function Singleplayer() {
                 </div>
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
+            {!done && (
+                <div>
+                    <Stopwatch start={startStopwatch} reset={resetStopwatch} />
+                    Speed: {currentWpm}wpm
+                </div>
+            )}
         </main>
     )
 }
