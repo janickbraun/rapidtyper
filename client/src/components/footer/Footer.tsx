@@ -16,9 +16,9 @@ export default function Footer() {
             <section className="innerfooter">
                 <ul className="linksfooter">
                     <li className="footeritem">
-                        <a className="ftext" rel="noreferrer" href="//feedback.rapidtyper.com" onClick={() => handleSkin("bird")}>
+                        <Link reloadDocument={isInGame} to="/feedback">
                             Leave Feedback
-                        </a>
+                        </Link>
                     </li>
                     <span>•</span>
                     <li className="footeritem">
