@@ -299,6 +299,7 @@ import buySuccessRouter from "./routes/shop/success"
 import adminRouter from "./routes/admin/admin"
 import addSkinRouter from "./routes/admin/addSkin"
 import getShopRouter from "./routes/shop/getShop"
+import feedbackRouter from "./routes/feedback"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -324,6 +325,7 @@ app.use("/api/shop/success", buySuccessRouter)
 app.use("/api/admin", adminRouter)
 app.use("/api/admin/addskin", addSkinRouter)
 app.use("/api/shop/getshop", getShopRouter)
+app.use("/api/feedback", feedbackRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))

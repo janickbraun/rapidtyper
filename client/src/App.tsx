@@ -11,7 +11,6 @@ import Singleplayer from "./components/play/Singleplayer"
 import Multiplayer from "./components/play/Multiplayer"
 import Profile from "./components/account/Profile"
 import Imprint from "./components/footer/Imprint"
-import PrivacyPolicy from "./components/footer/PrivacyPolicy"
 import Disclaimer from "./components/footer/Disclaimer"
 import CookieModal from "./components/account/CookiesModal"
 import Terms from "./components/footer/Terms"
@@ -24,6 +23,7 @@ import Shop from "./components/shop/Shop"
 import Success from "./components/shop/Success"
 import Cancel from "./components/shop/Cancel"
 import Admin from "./components/admin/Admin"
+import Feedback from "./components/feedback/Feedback"
 
 function App() {
     const queryClient = new QueryClient()
@@ -44,7 +44,6 @@ function App() {
                             <Route path="/multiplayer/:code/" element={<Multiplayer />} />
                             <Route path="/user/:username/" element={<Profile />} />
                             <Route path="/imprint" element={<Imprint />} />
-                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                             <Route path="/disclaimer" element={<Disclaimer />} />
                             <Route path="/terms-of-service" element={<Terms />} />
                             <Route path="/account/forgot" element={<Forgot />} />
@@ -54,6 +53,7 @@ function App() {
                             <Route path="/shop/success" element={<Success />} />
                             <Route path="/shop/cancel" element={<Cancel />} />
                             <Route path="/admin" element={<Admin />} />
+                            <Route path="/feedback" element={<Feedback />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />

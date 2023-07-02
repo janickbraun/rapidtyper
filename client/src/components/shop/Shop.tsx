@@ -42,6 +42,7 @@ export default function Shop() {
     }
 
     useEffectOnce(() => {
+        document.title = "Shop | RapidTyper"
         mutation.mutate()
     })
 
@@ -65,9 +66,8 @@ export default function Shop() {
 
     return (
         <main>
-
             <div className="contentflex">
-                <h1 style={{marginTop: "1rem", marginBottom: ".6rem"}}>Shop</h1>
+                <h1 style={{ marginTop: "1rem", marginBottom: ".6rem" }}>Shop</h1>
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
