@@ -70,21 +70,41 @@ export default function Shop() {
                 <h1 style={{ marginTop: "1rem", marginBottom: ".6rem" }}>Shop</h1>
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
-                        <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                            <div className="imagecontainer">
-                                <div className="glowparent">
-                                    <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                        <>
+                            {item.filename === "jesus" ? (
+                                <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                                    <div className="imagecontainer">
+                                        <div className="glowparent">
+                                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                                        </div>
+                                    </div>
+                                    <div className="textcontainer">
+                                        <p className="skin_namecaller">{item.name}</p>
+                                    </div>
+                                    <div className="itemdescriptioncontainer">
+                                        <p className="itemdsc">{item.description}</p>
+                                    </div>
+                                    <div className="itemprice">${item.price}</div>
+                                    <br />
                                 </div>
-                            </div>
-                            <div className="textcontainer">
-                                <p className="skin_namecaller">{item.name}</p>
-                            </div>
-                            <div className="itemdescriptioncontainer">
-                                <p className="itemdsc">{item.description}</p>
-                            </div>
-                            <div className="itemprice">${item.price}</div>
-                            <br />
-                        </div>
+                            ) : (
+                                <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                                    <div className="imagecontainer">
+                                        <div className="glowparent">
+                                            <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                                        </div>
+                                    </div>
+                                    <div className="textcontainer">
+                                        <p className="skin_namecaller">{item.name}</p>
+                                    </div>
+                                    <div className="itemdescriptioncontainer">
+                                        <p className="itemdsc">{item.description}</p>
+                                    </div>
+                                    <div className="itemprice">${item.price}</div>
+                                    <br />
+                                </div>
+                            )}
+                        </>
                     ))}
                 </div>
             </div>
