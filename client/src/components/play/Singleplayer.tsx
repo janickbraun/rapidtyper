@@ -86,7 +86,8 @@ export default function Singleplayer() {
     }, [mutationPlay, navigate])
 
     const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
+        // <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
+        <>
             {element.character === " " ? (
                 <>
                     {element.correct === undefined && (
@@ -134,7 +135,8 @@ export default function Singleplayer() {
                     )}
                 </>
             )}
-        </div>
+        {/* </div> */}
+        </>
     ))
 
     const touchDisclaimer = (e: any) => {
