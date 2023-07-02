@@ -1309,3 +1309,22 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
     height: 3px;
     background-color: #1864bc;
 }
+.rt__default_input.textarea{
+    resize: vertical;
+    transition: .22s linear, height 0s ;
+    min-width: 30%;
+    min-height: 10rem;
+}
+.cos_center{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.dd_cflx{
+    display: flex;
+    margin-right: auto;
+    margin-left: 9rem;
+    font-size: 18px;
+    color: #ffffffa7;
+    transform: translateY(5px);
+}

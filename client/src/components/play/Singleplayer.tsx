@@ -92,7 +92,7 @@ export default function Singleplayer() {
     useEffect(() => {
         if (!done && startStopwatch && currentIndex > 0) {
             const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
-            const wpm = Number((currentIndex / 5 / (seconds / 60)).toFixed(2))
+            const wpm = Math.floor(Number((currentIndex / 5 / (seconds / 60))))
 
             if (wpm < 1000) setCurrentWpm(wpm)
         }
@@ -306,6 +306,11 @@ export default function Singleplayer() {
     return (
         <main className="usergame__comtop">
             <div className="rt__buttonset__inrace_actionsbtns">
+                {!done && (
+                    <div className="dd_cflx">
+                        <Stopwatch start={startStopwatch} reset={resetStopwatch} />&nbsp;|{" "}{currentWpm}wpm
+                    </div>
+                )}
                 <p className="hinttext">Playing in Singleplayer does not affect your stats</p>
                 <button className="sortBtn cs_profilebtn muterswitch restart" onClick={handleRestart}>
                     <svg className="fwsvg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -387,12 +392,6 @@ export default function Singleplayer() {
                 </div>
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
-            {!done && (
-                <div>
-                    <Stopwatch start={startStopwatch} reset={resetStopwatch} />
-                    Speed: {currentWpm}wpm
-                </div>
-            )}
         </main>
     )
 }
