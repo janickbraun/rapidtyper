@@ -11,6 +11,7 @@ import Confetti from "react-confetti"
 import useSound from "use-sound"
 import UserRaceContentOverlay from "../modal/UserRaceContentOverlay"
 import Overlay from "../modal/Overlay"
+import Stopwatch from "./Stopwatch"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -39,6 +40,11 @@ export default function Multiplayer() {
     const [isCapsLocked, setIsCapsLocked] = useState(false)
     const [openTouchDisclaimer, setOpenTouchDisclaimer] = useState(false)
 
+    const [currentWpm, setCurrentWpm] = useState<number>(0)
+    const [startStopwatch, setStopwatch] = useState<boolean>(false)
+    const [resetStopwatch, setResetStopwatch] = useState<boolean>(false)
+    const [startDateTime, setStartDateTime] = useState(0)
+
     const textInput = useRef<any>(null)
     const { width, height } = useWindowSize()
 
@@ -55,15 +61,49 @@ export default function Multiplayer() {
         <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
             {element.character === " " ? (
                 <>
-                    {element.correct === undefined && <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>&nbsp;</div>}
-                    {element.correct && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom"}}>&nbsp;</div>}
-                    {element.correct === false && <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom"}}>&nbsp;</div>}
+                    {element.correct === undefined && (
+                        <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>
+                            &nbsp;
+                        </div>
+                    )}
+                    {element.correct && (
+                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom" }}>
+                            &nbsp;
+                        </div>
+                    )}
+                    {element.correct === false && (
+                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom" }}>
+                            &nbsp;
+                        </div>
+                    )}
+                    {element.correct === null && (
+                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
+                            &nbsp;
+                        </div>
+                    )}
                 </>
             ) : (
                 <>
-                    {element.correct === undefined && <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>{element.character}</div>}
-                    {element.correct && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>{element.character}</div>}
-                    {element.correct === false && <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>{element.character}</div>}
+                    {element.correct === undefined && (
+                        <div className="_sgchar _sgchar__charR" style={{ display: "inline" }}>
+                            {element.character}
+                        </div>
+                    )}
+                    {element.correct && (
+                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>
+                            {element.character}
+                        </div>
+                    )}
+                    {element.correct === false && (
+                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>
+                            {element.character}
+                        </div>
+                    )}
+                    {element.correct === null && (
+                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
+                            {element.character}
+                        </div>
+                    )}
                 </>
             )}
         </div>
@@ -104,6 +144,7 @@ export default function Multiplayer() {
             for (let i = 0; i < splitt.length; i += 1) {
                 arr.push({ character: splitt[i], correct: undefined })
             }
+            arr[0].correct = null
             setTextArray(arr)
         },
         onError: () => {
@@ -116,7 +157,6 @@ export default function Multiplayer() {
         textInput.current.focus()
         window.history.pushState({ prevUrl: window.location.href }, "", "/multiplayer/" + code)
     }, [code])
-
     useEffect(() => {
         if (mutationPlay.isIdle && hasFired.current === 0) {
             hasFired.current = 1
@@ -158,6 +198,15 @@ export default function Multiplayer() {
     }, [participants])
 
     useEffect(() => {
+        if (!done && startStopwatch && currentIndex > 0) {
+            const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
+            const wpm = Math.floor(Number(currentIndex / 5 / (seconds / 60)))
+
+            if (wpm < 1000) setCurrentWpm(wpm)
+        }
+    }, [done, startStopwatch, startDateTime, currentIndex])
+
+    useEffect(() => {
         socket.on("join", () => {
             mutationPlay.mutate()
         })
@@ -197,6 +246,9 @@ export default function Multiplayer() {
 
         socket.on("start", () => {
             setHasStarted(true)
+            setStartDateTime(new Date().getTime())
+            setResetStopwatch(false)
+            setStopwatch(true)
         })
 
         socket.on("finish", (data) => {
@@ -239,10 +291,13 @@ export default function Multiplayer() {
         if (noFire.includes(e.key)) return
         if (done) return
 
+        if (e.keyCode === 32 && e.target === document.body) e.preventDefault()
+
         if (e.key === splitted[currentIndex] && currentIndex < splitted.length) {
             if (audioActive) playTypeSound()
             let temp: any = textArray
             temp[currentIndex].correct = true
+            if (currentIndex < splitted.length - 1) temp[currentIndex + 1].correct = null
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
 
@@ -266,24 +321,30 @@ export default function Multiplayer() {
             let temp: any = textArray
             let times = 1
             temp[currentIndex - 1].correct = undefined
+            if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
             for (let i = currentIndex - 1; i > 0; i -= 1) {
                 if (temp[i - 1].character === " ") break
                 temp[i - 1].correct = undefined
                 times += 1
             }
+            temp[currentIndex - times].correct = null
             setCurrentIndex(currentIndex - times)
+            setCompleted(currentIndex - times)
             setTextArray(temp)
         } else if (e.key === "Backspace") {
             if (audioActive) playTypeSound()
             if (currentIndex === 0) return
             let temp = textArray
-            temp[currentIndex - 1].correct = undefined
+            if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
+            temp[currentIndex - 1].correct = null
             setTextArray(temp)
+            setCompleted(currentIndex - 1)
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (audioActive) playErrorSound()
             let temp = textArray
             temp[currentIndex].correct = false
+            if (currentIndex < splitted.length - 1) temp[currentIndex + 1].correct = null
             setMistakes(mistakes + 1)
             setTextArray(temp)
             setCurrentIndex(currentIndex + 1)
@@ -308,6 +369,7 @@ export default function Multiplayer() {
                 // setTime(seconds)
                 // setWpm(wpm)
 
+                setStopwatch(false)
                 setDone(true)
                 setCompleted(currentIndex + 1)
                 setAccuracy(accuracy)
@@ -332,38 +394,68 @@ export default function Multiplayer() {
         }
     }, [])
 
-    const routeChange = () =>{
+    const routeChange = () => {
         navigate("/")
     }
-    
+
     return (
         <main className="usergame__comtop">
             <div className="rt__buttonset__inrace_actionsbtns">
+                {!done && (
+                    <div className="dd_cflx">
+                        <Stopwatch start={startStopwatch} reset={resetStopwatch} />
+                        &nbsp;| {currentWpm}wpm
+                    </div>
+                )}
                 <button className="sortBtn cs_profilebtn muterswitch" onClick={handleSoundControl} data-mutetool={audioActive ? "Mute" : "Unmute"}>
-                    {audioActive ? 
+                    {audioActive ? (
                         <>
-                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M813-56 681-188q-28 20-60.5 34.5T553-131v-62q23-7 44.5-15.5T638-231L473-397v237L273-360H113v-240h156L49-820l43-43 764 763-43 44Zm-36-232-43-43q20-34 29.5-72t9.5-78q0-103-60-184.5T553-769v-62q124 28 202 125.5T833-481q0 51-14 100t-42 93ZM643-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T643-422ZM473-592 369-696l104-104v208Z"/></svg>
-                        </> 
-                        : 
-                        <>
-                        <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M560-131v-62q97-28 158.5-107.5T780-481q0-101-61-181T560-769v-62q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm420 48v-337q55 17 87.5 64T660-480q0 57-33 104t-87 64Z"/></svg>
+                            <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="M813-56 681-188q-28 20-60.5 34.5T553-131v-62q23-7 44.5-15.5T638-231L473-397v237L273-360H113v-240h156L49-820l43-43 764 763-43 44Zm-36-232-43-43q20-34 29.5-72t9.5-78q0-103-60-184.5T553-769v-62q124 28 202 125.5T833-481q0 51-14 100t-42 93ZM643-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T643-422ZM473-592 369-696l104-104v208Z" />
+                            </svg>
                         </>
-                    }
+                    ) : (
+                        <>
+                            <svg className="fwsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="M560-131v-62q97-28 158.5-107.5T780-481q0-101-61-181T560-769v-62q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm420 48v-337q55 17 87.5 64T660-480q0 57-33 104t-87 64Z" />
+                            </svg>
+                        </>
+                    )}
                 </button>
                 <button className="sortBtn cs_profilebtn muterswitch newleft" onClick={routeChange} data-mutetool={"Leave game"}>
-                    <svg className="fwsvg redcolorsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M180-120q-24 0-42-18t-18-42v-210h60v210h600v-602H180v212h-60v-212q0-24 18-42t42-18h600q24 0 42 18t18 42v602q0 24-18 42t-42 18H180Zm233-167-45-45 118-118H120v-60h366L368-628l45-45 193 193-193 193Z"/></svg>
+                    <svg className="fwsvg redcolorsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                        <path d="M180-120q-24 0-42-18t-18-42v-210h60v210h600v-602H180v212h-60v-212q0-24 18-42t42-18h600q24 0 42 18t18 42v602q0 24-18 42t-42 18H180Zm233-167-45-45 118-118H120v-60h366L368-628l45-45 193 193-193 193Z" />
+                    </svg>
                 </button>
             </div>
-            <div className={done ? "cfw_textcontainer wsi listing conf csi monospace__important bottomjoin" : "cfw_textcontainer wsi listing conf csi monospace__important"}>{listItems} <br/><span className="authorS">~ {author}</span></div>
+            <div className="helper_hidden texthelper">
+                <input
+                    type="text"
+                    autoComplete="off"
+                    autoCapitalize="none"
+                    style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
+                    ref={textInput}
+                />
+            </div>
+            <div className={done ? "cfw_textcontainer wsi listing conf csi monospace__important bottomjoin" : "cfw_textcontainer wsi listing conf csi monospace__important"}>
+                {listItems} <br />
+                <span className="authorS">~ {author}</span>
+            </div>
             {done && (
                 <div className="fullrescontainer">
-                    <div className="cfw_textcontainer spctopjoin" >
+                    <div className="cfw_textcontainer spctopjoin">
                         <div className="doublemr">
                             <div className="result__left">
                                 <h1 className="resultheading">Results</h1>
-                                <div><span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span></div>
-                                <div><span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span></div>
-                                <div><span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span></div>
+                                <div>
+                                    <span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span>
+                                </div>
+                                <div>
+                                    <span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span>
+                                </div>
+                                <div>
+                                    <span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span>
+                                </div>
                             </div>
                             <div className="leaderboard__right">
                                 <h1 className="resultheading">Leaderboard</h1>
@@ -372,7 +464,9 @@ export default function Multiplayer() {
                                 ))}
                             </div>
                         </div>
-                        <button className="absolutebottom" onClick={() => mutationMultiplayer.mutate()}>Race again</button>
+                        <button className="absolutebottom" onClick={() => mutationMultiplayer.mutate()}>
+                            Race again
+                        </button>
                     </div>
                 </div>
             )}
@@ -404,41 +498,43 @@ export default function Multiplayer() {
                         />
                     )
             )}
-            <div className="helper_hidden texthelper" hidden>
-                <input
-                    type="text"
-                    autoComplete="off"
-                    autoCapitalize="none"
-                    style={{ width: 0, height: 0, outline: "none", WebkitAppearance: "none", border: 0, padding: 0, content: "" }}
-                    ref={textInput}
-                />
-            </div>
-            {openTouchDisclaimer && (
-                <>                
-                <Overlay />
-                <div className="share__modal selector_container">
-                    <h1 className="modalCallerHeader kpbb">Notice</h1>
-                    <div className="close_container">
-                        <button className="close-modal-button" onClick={() => setOpenTouchDisclaimer(false)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
-                                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <p style={{margin: "1.2rem 2rem"}}>In order to play you need to use a physical keyboard!</p>
-                </div>
-                </>
 
+            {openTouchDisclaimer && (
+                <>
+                    <Overlay />
+                    <div className="share__modal selector_container">
+                        <h1 className="modalCallerHeader kpbb">Notice</h1>
+                        <div className="close_container">
+                            <button className="close-modal-button" onClick={() => setOpenTouchDisclaimer(false)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
+                                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <p style={{ margin: "1.2rem 2rem" }}>In order to play you need to use a physical keyboard!</p>
+                    </div>
+                </>
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
             <Confetti width={width} height={height} run={winners[0]?.username === username} opacity={0.8} recycle={false} />
-            {waitingTitle === "" && !hasStarted && <UserRaceContentOverlay/>}
-            {waitingTitle !== "" && !hasStarted && <UserRaceContentOverlay/>}
-            {waitingTitle === "" && !hasStarted && <><div className="__completemodal"><p className="WFOP">Waiting for opponents...</p></div></>}
-            {waitingTitle !== "" && !hasStarted && <div className="__completemodal"><p className="WFOP"><Timer initialSeconds={30} title={waitingTitle} /></p></div>}
-            
+            {waitingTitle === "" && !hasStarted && <UserRaceContentOverlay />}
+            {waitingTitle !== "" && !hasStarted && <UserRaceContentOverlay />}
+            {waitingTitle === "" && !hasStarted && (
+                <>
+                    <div className="__completemodal">
+                        <p className="WFOP">Waiting for opponents...</p>
+                    </div>
+                </>
+            )}
+            {waitingTitle !== "" && !hasStarted && (
+                <div className="__completemodal">
+                    <p className="WFOP">
+                        <Timer initialSeconds={30} title={waitingTitle} />
+                    </p>
+                </div>
+            )}
+
             {/* !!!! */}
-            
 
             <br />
         </main>

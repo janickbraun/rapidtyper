@@ -92,7 +92,7 @@ export default function Singleplayer() {
     useEffect(() => {
         if (!done && startStopwatch && currentIndex > 0) {
             const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
-            const wpm = Math.floor(Number((currentIndex / 5 / (seconds / 60))))
+            const wpm = Math.floor(Number(currentIndex / 5 / (seconds / 60)))
 
             if (wpm < 1000) setCurrentWpm(wpm)
         }
@@ -308,7 +308,8 @@ export default function Singleplayer() {
             <div className="rt__buttonset__inrace_actionsbtns">
                 {!done && (
                     <div className="dd_cflx">
-                        <Stopwatch start={startStopwatch} reset={resetStopwatch} />&nbsp;|{" "}{currentWpm}wpm
+                        <Stopwatch start={startStopwatch} reset={resetStopwatch} />
+                        &nbsp;| {currentWpm}wpm
                     </div>
                 )}
                 <p className="hinttext">Playing in Singleplayer does not affect your stats</p>
@@ -366,6 +367,9 @@ export default function Singleplayer() {
                                 </div>
                             </div>
                         </div>
+                        <button className="absolutebottom" onClick={handleRestart}>
+                            Try again
+                        </button>
                         <button className="absolutebottom" onClick={handleNewText}>
                             New text
                         </button>
@@ -377,7 +381,7 @@ export default function Singleplayer() {
             ) : (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
             )}
-            <div className="helper_hidden texthelper" hidden>
+            <div className="helper_hidden texthelper">
                 <input
                     type="text"
                     autoComplete="off"
