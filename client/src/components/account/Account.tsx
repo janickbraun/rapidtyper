@@ -70,8 +70,11 @@ export default function Account() {
                             </div>
                         </div>
 
-                        <ChangePassword />
-                        <Delete />
+                        <div className="dangerzone">
+                            <h2 className="dzh">Danger zone</h2>
+                            <ChangePassword />
+                            <Delete />
+                        </div>
                     </>
                 ) : (
                     <>

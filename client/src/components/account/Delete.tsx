@@ -19,7 +19,7 @@ export default function Delete() {
 
     return (
         <div>
-            <h3>Delete</h3>
+            <h3 className="redcolorheading">Delete</h3>
 
             <div className="_input_container">
                 <label htmlFor="irrev">Enter 'IRREVERSIBLE' to delete your account</label>

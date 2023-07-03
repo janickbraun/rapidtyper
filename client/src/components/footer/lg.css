@@ -1450,3 +1450,15 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
     width: max-content;
     word-wrap: nowrap;
 }
+.dangerzone{
+    border-top: 3px solid #ff3333;
+    margin-top: 1.2rem;
+    padding-top: .6rem;
+}
+.dzh{
+    color: #ff3333;
+    font-size: 26px;
+}
+.redcolorheading{
+    color: #ff3333;
+}
