@@ -22,6 +22,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
     const handleResize = () => {
         setWindowWidth(window.innerWidth)
     }
+    
     useEffect(() => {
         window.addEventListener('resize', handleResize)
     
@@ -29,9 +30,11 @@ export default function Header({ children }: { children: React.ReactNode }) {
           window.removeEventListener('resize', handleResize)
         }
     }, [])
+
     useEffect(() => {  
         setShowNav(windowWidth > 750)
     }, [windowWidth])
+
     const handleClick = () => {
         setShowNav(!showNav);
     }
