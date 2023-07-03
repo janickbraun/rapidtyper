@@ -94,3 +94,25 @@ footer{
 .ftext:hover::after{
     transform: translateY(0) translateX(2px);
 }
+@media screen and (max-width: 900px) {
+
+    .innerLDB{
+        display: none !important;
+    }
+
+    .copyrighttxt, .copyby, .footeritem a{
+        font-size: 12px;
+    }
+    .innerfooter{
+        flex-direction: initial;
+        align-items: center;
+    }
+    .ftext::after{
+        height: 13px;
+        width: 13px;
+    }
+    .linksfooter{
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}
