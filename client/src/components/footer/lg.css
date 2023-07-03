@@ -799,7 +799,13 @@ label{
     position: relative;
     width: max-content;
 }
-.ucv h2::after, .ucvdd h3::after{
+.shopheader{
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 38px; 
+}
+.ucv h2::after, .ucvdd h3::after, .shopheader::after{
     content: '';
     position: absolute;
     bottom: -1px;
@@ -808,6 +814,9 @@ label{
     height: 3.4px;
     display: inline-block;
     background: linear-gradient(45deg, hsla(190, 84%, 31%, 1) 0%, hsla(221, 83%, 53%, 1) 50%, hsla(245, 50%, 42%, 1) 100%);
+}
+.shopheader::after{
+    transform: translateY(-10px);
 }
 ._frg_founders:hover{
     box-shadow: 2px 2px 20px rgb(0 0 0 / 20%);
@@ -1327,4 +1336,9 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
     font-size: 18px;
     color: #ffffffa7;
     transform: translateY(5px);
+}
+.sharebtn__c{
+    border-radius: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
