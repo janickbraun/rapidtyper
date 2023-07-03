@@ -367,12 +367,14 @@ export default function Singleplayer() {
                                 </div>
                             </div>
                         </div>
-                        <button className="absolutebottom" onClick={handleRestart}>
-                            Try again
-                        </button>
-                        <button className="absolutebottom" onClick={handleNewText}>
-                            New text
-                        </button>
+                        <div className="restartbuttonimp care2">
+                            <button className="absolutebottom_v2 wws btn" onClick={handleRestart}>
+                                Try again
+                            </button>
+                            <button className="absolutebottom_v2" onClick={handleNewText}>
+                                New text
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

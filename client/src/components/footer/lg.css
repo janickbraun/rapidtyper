@@ -1329,6 +1329,18 @@ a.wnc{
     justify-content: center;
     margin: .4rem 0;
 }
+.absolutebottom_v2{
+    width: 20%;
+    border-radius: 20rem !important;
+    justify-content: center;
+    margin: .4rem 0;
+}
+.care2{
+    justify-content: center;
+    column-gap: 1.6rem;
+    margin-top: .4rem;
+    display: flex;
+}
 .hinttext{
     font-size: 14px;
     color: #ffffff8b;
