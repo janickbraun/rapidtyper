@@ -97,7 +97,11 @@ footer{
 @media screen and (max-width: 900px) {
 
     .innerLDB{
-        display: none !important;
+        max-width: 100%;
+        overflow: scroll;
+        border-radius: 0px !important;
+        border-left: none !important;
+        border-right: none !important;
     }
 
     .copyrighttxt, .copyby, .footeritem a{
@@ -114,5 +118,13 @@ footer{
     .linksfooter{
         flex-wrap: wrap;
         justify-content: flex-end;
+    }
+    .g_split-2{
+        position: sticky;
+        left: 0;
+    }
+    .ldbcaller{
+        font-size: 24px !important;
+        font-weight: 500 !important;
     }
 }

@@ -44,12 +44,6 @@ export default function Leaderboard() {
 
     return (
         <div className="grid_ctpl leaderboard_container f4-only">
-            {mutation.error && (
-                <>
-                    <p style={{ color: "#ff3333", fontWeight: 500 }}>Could not load Leaderboard</p>&nbsp;&nbsp;<p style={{ fontWeight: 400 }}>Error: {mutation.error.message}</p>
-                </>
-            )}
-
             <div className="innerLDB">
                 <div className="g_split-2">
                     <h2 className="ldbcaller">Leaderboard</h2>
@@ -103,7 +97,13 @@ export default function Leaderboard() {
                     <table>
                         <tbody>
                             <tr>
-                                <td>Loading...</td>
+                                {mutation.error ? (
+                                    <>
+                                        <p style={{ color: "#ff3333", fontWeight: 500, fontSize: 16 }}>Could not load Leaderboard</p><p style={{ fontWeight: 400, fontSize: 16 }}>{mutation.error.message}</p>
+                                    </>
+                                ): (
+                                    <div className="loader smaller"></div>
+                                )}
                             </tr>
                         </tbody>
                     </table>

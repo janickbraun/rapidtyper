@@ -1,17 +1,41 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
 import useIsInGame from "../../hooks/useIsInGame"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import {useWindowSize} from 'react-use';
 
 export default function Header({ children }: { children: React.ReactNode }) {
     const [loggedin, username] = useAuth()
     const [isInGame] = useIsInGame()
+    
+    const {width, height} = useWindowSize()
 
     const [open, setOpen] = useState<boolean>(false)
     const dropRef = useRef<HTMLUListElement>(null)
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [showNav, setShowNav] = useState(windowWidth > 750)
+    
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    
+        return () => {
+          window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+    useEffect(() => {  
+        setShowNav(windowWidth > 750)
+    }, [windowWidth])
+    const handleClick = () => {
+        setShowNav(!showNav);
+    }
+
     const focus = (state: boolean) => {
         setOpen(!state)
     }
@@ -39,6 +63,13 @@ export default function Header({ children }: { children: React.ReactNode }) {
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
+                    {/**/}
+                    {width <= 750 && (
+                        <button onClick={handleClick} className="specialbtn toggleNav">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="nvsvg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+                        </button>
+                    )}
+                    {windowWidth > 750 || showNav ? (
                     <ul className="_linklisting">
                         <li className="nav-link-item">
                             <Link to="/shop" reloadDocument={isInGame} onClick={() => setOpen(false)}>
@@ -102,6 +133,9 @@ export default function Header({ children }: { children: React.ReactNode }) {
                             </Link>
                         </li>
                     </ul>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </nav>
             {children}
