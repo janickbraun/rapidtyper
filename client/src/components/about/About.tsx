@@ -90,7 +90,7 @@ export default function About() {
                 </div>
                 <div className="ucv">
                     <h2>
-                        🗿🗣️🗣️🗣️🔥❗❗‼️⁉️🤣🤣💀💀😭😭
+                        🗿🗣️🗣️🔥❗‼️⁉️🤣💀😭
                         <img src="/img/skullrotate.gif" height={42} style={{ position: "absolute" }} alt="" />
                     </h2>
                     <div className="__dcflexcontent">
