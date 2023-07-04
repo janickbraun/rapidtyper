@@ -4,6 +4,10 @@ import React, { useEffect, useRef, useState } from "react"
 import useAuth from "../../hooks/useAuth"
 import Overlay from "../modal/Overlay"
 
+function timeout(delay: number) {
+    return new Promise((res) => setTimeout(res, delay))
+}
+
 export default function Stats(props: any) {
     const [wpm, setWpm] = useState(0)
     const [accuracy, setAccuracy] = useState(0)
@@ -19,6 +23,7 @@ export default function Stats(props: any) {
     const [skins, setSkins] = useState<Array<any>>([])
     const [toBeUnlocked, setToBeUnlocked] = useState<Array<any>>([])
     const [shareOpen, setShareOpen] = useState(false)
+    const [shareResponse, setShareResponse] = useState("")
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [loggedin, username, skin2, verified] = useAuth()
@@ -76,8 +81,15 @@ export default function Stats(props: any) {
         mutationSkin.mutate(s)
     }
 
+    const handleCopy = async () => {
+        setShareResponse("Successfully copied to clipboard")
+        await timeout(3000)
+        setShareResponse("")
+    }
+
     const handleShare = (msg: string) => {
         if (msg === "Successfully copied to clipboard") {
+            handleCopy()
             navigator.clipboard.writeText("https://rapidtyper.com/user/" + props.username)
         }
 
@@ -94,6 +106,14 @@ export default function Stats(props: any) {
 
     return (
         <div>
+            {shareResponse !== "" && (
+                <div className="infopopup">
+                    {shareResponse}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="sndficon" viewBox="0 0 512 512">
+                        <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM296 336h-16V248C280 234.8 269.3 224 256 224H224C210.8 224 200 234.8 200 248S210.8 272 224 272h8v64h-16C202.8 336 192 346.8 192 360S202.8 384 216 384h80c13.25 0 24-10.75 24-24S309.3 336 296 336zM256 192c17.67 0 32-14.33 32-32c0-17.67-14.33-32-32-32S224 142.3 224 160C224 177.7 238.3 192 256 192z" />
+                    </svg>
+                </div>
+            )}
             {mutation.isError && <div>Profile was not found</div>}
             {mutation.isSuccess && (
                 <div className="centerContainer__stat">
@@ -111,7 +131,13 @@ export default function Stats(props: any) {
                             <div className="skin_div">
                                 {skins.map((val) => {
                                     return (
-                                        <div className="cpos" key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
+                                        <div
+                                            className="cpos"
+                                            key={val.filename}
+                                            onClick={() => handleSkinChange(val.filename)}
+                                            onMouseEnter={() => setHover(val.filename)}
+                                            onMouseLeave={() => setHover("")}
+                                        >
                                             <img src={"/img/skins/" + val.filename + ".png"} alt={val.name} tabIndex={0} draggable="false" className="user_default_skinimg skin_changeIMG" />
                                             {hover === val.filename && (
                                                 <div className="extended_tooltip down">
@@ -125,7 +151,13 @@ export default function Stats(props: any) {
 
                                 {toBeUnlocked.map((val) => {
                                     return (
-                                        <div className="cpos" key={val.filename} onClick={() => handleSkinChange(val.filename)} onMouseEnter={() => setHover(val.filename)} onMouseLeave={() => setHover("")}>
+                                        <div
+                                            className="cpos"
+                                            key={val.filename}
+                                            onClick={() => handleSkinChange(val.filename)}
+                                            onMouseEnter={() => setHover(val.filename)}
+                                            onMouseLeave={() => setHover("")}
+                                        >
                                             <img
                                                 src={"/img/skins/" + val.filename + ".png"}
                                                 style={{ filter: "grayscale(1)", opacity: ".7", pointerEvents: "none" }}
@@ -199,7 +231,9 @@ export default function Stats(props: any) {
                             </div>
                         )}
                         <button className="shareprofilebtn" onClick={() => setShareOpen(true)}>
-                            <svg className="btbsvg" style={{height: 20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"></path></svg>
+                            <svg className="btbsvg" style={{ height: 20 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"></path>
+                            </svg>
                         </button>
                     </div>
                     <div className="c_stats">
