@@ -341,7 +341,13 @@ export default function Multiplayer() {
                     break
                 }
             }
-            if (allCorrect) setCompleted(currentIndex - times)
+            if (allCorrect) {
+                const temp = Math.round((completed / text.length) * 100)
+                setCompleted(currentIndex - times)
+                const now = Math.round((currentIndex - times / text.length) * 100)
+
+                if (temp !== now) socket.emit("typing", { completed, code, username })
+            }
             setCurrentIndex(currentIndex - times)
         } else if (e.key === "Backspace") {
             if (audioActive) playTypeSound()
@@ -357,7 +363,13 @@ export default function Multiplayer() {
                     break
                 }
             }
-            if (allCorrect) setCompleted(currentIndex - 1)
+            if (allCorrect) {
+                const temp = Math.round((completed / text.length) * 100)
+                setCompleted(currentIndex - 1)
+                const now = Math.round((currentIndex - 1 / text.length) * 100)
+
+                if (temp !== now) socket.emit("typing", { completed, code, username })
+            }
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (audioActive) playErrorSound()
@@ -414,7 +426,7 @@ export default function Multiplayer() {
     }, [])
 
     const routeChange = () => {
-        navigate("/")
+        window.location.href = "/"
     }
 
     return (
@@ -549,9 +561,9 @@ export default function Multiplayer() {
             )}
             {waitingTitle !== "" && !hasStarted && (
                 <div className="__completemodal">
-                    <p className="WFOP">
+                    <div className="WFOP">
                         <Timer initialSeconds={30} title={waitingTitle} />
-                    </p>
+                    </div>
                 </div>
             )}
 
