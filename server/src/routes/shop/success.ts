@@ -41,7 +41,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         if (!clientId || !clientSecret) return res.status(300).send("No valid client-id or client-secret")
 
         paypal.configure({
-            mode: "sandbox",
+            mode: "live",
             client_id: clientId,
             client_secret: clientSecret,
         })

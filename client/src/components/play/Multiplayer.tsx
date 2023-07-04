@@ -460,7 +460,9 @@ export default function Multiplayer() {
                             <div className="leaderboard__right">
                                 <h1 className="resultheading">Leaderboard</h1>
                                 {winners.map((item: any, key: any) => (
-                                    <div className={key == 0 ? "firstplace" : key == 1 ? "secondplace" : key == 2 ? "thirdplace" : ""} key={key}>{key + 1 + ". "} <span className="username">{item.username}</span> {" | " + item.wpm + "wpm"}</div>
+                                    <div className={key === 0 ? "firstplace" : key === 1 ? "secondplace" : key === 2 ? "thirdplace" : ""} key={key}>
+                                        {key + 1 + ". "} <span className="username">{item.username}</span> {" | " + item.wpm + "wpm"}
+                                    </div>
                                 ))}
                             </div>
                         </div>
