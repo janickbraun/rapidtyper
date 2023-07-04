@@ -151,8 +151,8 @@ export default function Multiplayer() {
             arr[0].correct = null
             setTextArray(arr)
         },
-        onError: () => {
-            navigate("/")
+        onError: ({ data }) => {
+            if (data.reason === "full" && data.username === username) navigate("/")
         },
     })
 

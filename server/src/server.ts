@@ -204,7 +204,7 @@ io.on("connection", (socket: any) => {
             })
         }
 
-        if (io.sockets.adapter.rooms.get(data.code)?.size > 2) return
+        //if (io.sockets.adapter.rooms.get(data.code)?.size > 2) return
         socket.join(String(data.code))
         if (data.code.length === 4) {
             typists.push({
