@@ -28,7 +28,7 @@ export default function Shop() {
         },
         onError: (err: any) => {
             setLoading("")
-            setError(err?.response?.data)
+            setError(err?.response?.data || "Unknown error set by dev")
         },
     })
 

@@ -8,7 +8,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         skins.push(Object(await Skin.findOne({ filename: "jesus" })))
         res.status(200).send({ skins })
     } catch {
-        res.status(300).send("Something went wrong")
+        res.status(400).send("Something went wrong")
     }
 })
 

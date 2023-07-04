@@ -332,7 +332,7 @@ app.use("/api/feedback", feedbackRouter)
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
 app.get("*", (req, res) => {
-    res.sendFile("index.html", { root })
+    res.send("<h1>RaipdTyper API - Page not found</h1>")
 })
 
 server.listen(PORT, () => console.log("Server starting on " + process.env.BACKEND_URL))
