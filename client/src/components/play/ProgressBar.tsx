@@ -86,7 +86,7 @@ const ProgressBar = (props: any) => {
                                     <span className="__namedisplay">{name}</span>
                                     <span className="__percentdisplay">{Math.round(completed)}%</span>
                                 </p>
-                                {skin && <img style={{ width: 60, height: 60, transform: "translateY(6px)" }} src={"/img/skins/" + skin + ".png"} alt="skin" className="cupimg" />}
+                                {skin && <img style={{ width: 60, height: 60, transform: "translateY(6px)" }} src={"/img/skins/" + skin + ".png"} alt={"Skin " + skin} className="cupimg" />}
                             </div>
                         )}
                     </div>
@@ -98,7 +98,6 @@ const ProgressBar = (props: any) => {
                             <p>Disconnected</p>
                         </div>
                     )}
-                    {/* onHover -> show player info. | Ignore */}
                     {isOpen && online && (
                         <div className="onHoverContainer usercontentcontainer" style={{order: 2, zIndex: 10000 + 1}}>
                             {mutation.isSuccess ? (
