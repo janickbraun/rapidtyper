@@ -1268,7 +1268,6 @@ figure.__fndimg{
     font-weight: 500;
     position: absolute;
     left: 0;
-    top: 10px;
 }
 .redcolorsvg{
     color: #ff3333;
@@ -1461,4 +1460,24 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
 }
 .redcolorheading{
     color: #ff3333;
+}
+.firstplace span.username{
+    font-size: 18px;
+    color: #D4AF37;
+}
+.firstplace span.username::before{
+    content: '🥇';
+}
+.secondplace span.username{
+    color: #c0c0c0;
+    font-size: 17.2px;
+}
+.secondplace span.username::before{
+    content: '🥈';
+}
+.thirdplace span.username{
+    color: #CD7F32;
+}
+.thirdplace span.username::before{
+    content: '🥉';
 }
