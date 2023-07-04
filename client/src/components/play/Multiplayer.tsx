@@ -12,6 +12,7 @@ import useSound from "use-sound"
 import UserRaceContentOverlay from "../modal/UserRaceContentOverlay"
 import Overlay from "../modal/Overlay"
 import Stopwatch from "./Stopwatch"
+import useAuth from "../../hooks/useAuth"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -27,6 +28,7 @@ export default function Multiplayer() {
     const [textArray, setTextArray] = useState<any>([])
     const [author, setAuthor] = useState("")
     const [username, setUsername] = useState("")
+    const [loggedin, checkUsername] = useAuth()
 
     const [participants, setParticipants] = useState<any>([])
     const [splitted, setSplitted] = useState<any>([])
@@ -152,7 +154,7 @@ export default function Multiplayer() {
             setTextArray(arr)
         },
         onError: ({ data }) => {
-            if (data.reason === "full" && data.username === username) navigate("/")
+            if (data.reason === "full" && data.username === checkUsername) window.location.href = "/"
         },
     })
 
