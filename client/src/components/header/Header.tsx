@@ -133,7 +133,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                 )}
                             </li>
                             <li className="nav-link-item">
-                                <Link reloadDocument={isInGame} to="/account" onClick={() => setOpen(false)}>
+                                <Link reloadDocument={isInGame} to={loggedin ? "/account" : "/account/login"} onClick={() => setOpen(false)}>
                                     {loggedin ? <span className="link_call">{username}</span> : <span className="link_call">Login</span>}
                                 </Link>
                             </li>

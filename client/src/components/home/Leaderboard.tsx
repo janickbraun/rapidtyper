@@ -11,6 +11,10 @@ const getAverage = (arr: Array<number>) => {
     return Number(avg.toFixed(2))
 }
 
+function addZeroes(num: number) {
+    return num.toLocaleString("en", { useGrouping: false, minimumFractionDigits: 2 })
+}
+
 export default function Leaderboard() {
     const [data, setData] = useState<any>([])
     const [leaderboardType, setLeaderboardType] = useState<"Wpm" | "Total races" | "Races won" | "Accuracy" | "Age" | "Best race">("Wpm")
@@ -87,12 +91,12 @@ export default function Leaderboard() {
                                                 {val.username}
                                             </Link>
                                         </td>
-                                        <td>{getAverage(val.wpm)}wpm</td>
+                                        <td>{addZeroes(getAverage(val.wpm))}wpm</td>
 
                                         <td>{val.racesTotal}</td>
                                         <td>{val.racesWon}</td>
-                                        <td>{val.bestRace}wpm</td>
-                                        <td>{getAverage(val.accuracy)}%</td>
+                                        <td>{addZeroes(val.bestRace)}wpm</td>
+                                        <td>{addZeroes(getAverage(val.accuracy))}%</td>
                                         <td>{new Date(val.creationDate).toLocaleDateString()}</td>
                                     </tr>
                                 )

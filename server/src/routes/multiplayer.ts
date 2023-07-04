@@ -23,6 +23,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
         const loggedin = await User.exists({ _id: temporaryUser.id })
 
+        if (!loggedin) return res.status(300).send("Not authenticated")
+
         const findLobby = await Lobby.findOne({
             joinable: true,
         })

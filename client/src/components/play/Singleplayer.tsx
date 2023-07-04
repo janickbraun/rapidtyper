@@ -244,9 +244,17 @@ export default function Singleplayer() {
             }
 
             temp[currentIndex - times].correct = null
-            setCurrentIndex(currentIndex - times)
-            setCompleted(currentIndex - times)
+
             setTextArray(temp)
+            let allCorrect = true
+            for (let i = 0; i < currentIndex - times; i += 1) {
+                if (!textArray[i].correct) {
+                    allCorrect = false
+                    break
+                }
+            }
+            if (allCorrect) setCompleted(currentIndex - times)
+            setCurrentIndex(currentIndex - times)
             if (currentIndex - times === 0) handleRestart(e)
         } else if (e.key === "Backspace") {
             if (audioActive) playTypeSound()
@@ -254,9 +262,16 @@ export default function Singleplayer() {
             let temp = textArray
             if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
             temp[currentIndex - 1].correct = null
-            setCompleted(currentIndex - 1)
-
             setTextArray(temp)
+
+            let allCorrect = true
+            for (let i = 0; i < currentIndex - 1; i += 1) {
+                if (!textArray[i].correct) {
+                    allCorrect = false
+                    break
+                }
+            }
+            if (allCorrect) setCompleted(currentIndex - 1)
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (currentIndex === 0) {

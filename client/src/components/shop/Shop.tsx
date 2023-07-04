@@ -4,6 +4,8 @@ import React, { useState } from "react"
 import { useEffectOnce } from "react-use"
 import Overlay from "../modal/Overlay"
 import { unlockSkin } from "../../helpers/skinHelper"
+import useAuth from "../../hooks/useAuth"
+import { Link } from "react-router-dom"
 
 export default function Shop() {
     const [skin, setSkin] = useState("")
@@ -14,6 +16,7 @@ export default function Shop() {
     const [error, setError] = useState("")
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
+    const [loggedin] = useAuth()
 
     const token = localStorage.getItem("token")
     const mutationBuy: any = useMutation({
@@ -74,7 +77,7 @@ export default function Shop() {
     return (
         <main>
             <div className="contentflex">
-                <h1 className="shopheader" >Shop</h1>
+                <h1 className="shopheader">Shop</h1>
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
@@ -137,9 +140,18 @@ export default function Shop() {
                         </p>
                     </div>
                     <div className="copconfirmset">
-                        <button className={loading} onClick={handlePurchase}>
-                            {skin === "jesus" ? <>Amen 🙏</> : <>Confirm</>}
-                        </button>
+                        {loggedin ? (
+                            <button className={loading} onClick={handlePurchase}>
+                                {skin === "jesus" ? <>Amen 🙏</> : <>Confirm</>}
+                            </button>
+                        ) : (
+                            <div>
+                                <p>
+                                    In order to purchase this skin you need to <Link to="/account/login">login</Link>
+                                </p>
+                            </div>
+                        )}
+
                         {error !== "" && <div className="cserror">{error}</div>}
                         {msg !== "" && skin === "jesus" && <>{msg}</>}
                     </div>

@@ -17,6 +17,10 @@ const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
+function addZeroes(num: number) {
+    return num.toLocaleString("en", { useGrouping: false, minimumFractionDigits: 2 })
+}
+
 export default function Multiplayer() {
     const { code } = useParams()
     const [text, setText] = useState("")
@@ -328,9 +332,23 @@ export default function Multiplayer() {
                 times += 1
             }
             temp[currentIndex - times].correct = null
-            setCurrentIndex(currentIndex - times)
-            setCompleted(currentIndex - times)
+
             setTextArray(temp)
+            let allCorrect = true
+            for (let i = 0; i < currentIndex - times; i += 1) {
+                if (!textArray[i].correct) {
+                    allCorrect = false
+                    break
+                }
+            }
+            if (allCorrect) {
+                const temp = Math.round((completed / text.length) * 100)
+                setCompleted(currentIndex - times)
+                const now = Math.round((currentIndex - times / text.length) * 100)
+
+                if (temp !== now) socket.emit("typing", { completed, code, username })
+            }
+            setCurrentIndex(currentIndex - times)
         } else if (e.key === "Backspace") {
             if (audioActive) playTypeSound()
             if (currentIndex === 0) return
@@ -338,7 +356,20 @@ export default function Multiplayer() {
             if (currentIndex < splitted.length) temp[currentIndex].correct = undefined
             temp[currentIndex - 1].correct = null
             setTextArray(temp)
-            setCompleted(currentIndex - 1)
+            let allCorrect = true
+            for (let i = 0; i < currentIndex - 1; i += 1) {
+                if (!textArray[i].correct) {
+                    allCorrect = false
+                    break
+                }
+            }
+            if (allCorrect) {
+                const temp = Math.round((completed / text.length) * 100)
+                setCompleted(currentIndex - 1)
+                const now = Math.round((currentIndex - 1 / text.length) * 100)
+
+                if (temp !== now) socket.emit("typing", { completed, code, username })
+            }
             setCurrentIndex(currentIndex - 1)
         } else if (currentIndex < splitted.length && !e.ctrlKey) {
             if (audioActive) playErrorSound()
@@ -395,7 +426,7 @@ export default function Multiplayer() {
     }, [])
 
     const routeChange = () => {
-        navigate("/")
+        window.location.href = "/"
     }
 
     return (
@@ -461,7 +492,7 @@ export default function Multiplayer() {
                                 <h1 className="resultheading">Leaderboard</h1>
                                 {winners.map((item: any, key: any) => (
                                     <div className={key === 0 ? "firstplace" : key === 1 ? "secondplace" : key === 2 ? "thirdplace" : ""} key={key}>
-                                        {key + 1 + ". "} <span className="username">{item.username}</span> {" | " + item.wpm + "wpm"}
+                                        {key + 1 + ". "} <span className="username">{item.username}</span> {" | " + addZeroes(item.wpm) + "wpm"}
                                     </div>
                                 ))}
                             </div>
@@ -530,9 +561,9 @@ export default function Multiplayer() {
             )}
             {waitingTitle !== "" && !hasStarted && (
                 <div className="__completemodal">
-                    <p className="WFOP">
+                    <div className="WFOP">
                         <Timer initialSeconds={30} title={waitingTitle} />
-                    </p>
+                    </div>
                 </div>
             )}
 

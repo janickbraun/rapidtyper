@@ -203,6 +203,8 @@ io.on("connection", (socket: any) => {
                 return el.username !== data.username
             })
         }
+
+        if (io.sockets.adapter.rooms.get(data.code)?.size > 2) return
         socket.join(String(data.code))
         if (data.code.length === 4) {
             typists.push({
@@ -264,7 +266,7 @@ app.use(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
-                imgSrc: ["'self'", "https://*.grovider.co", "https://*.lipis.dev", "data:", "*.buymeacoffee.com", "*.paypal.com"],
+                imgSrc: ["'self'", "https://*.grovider.co", "https://*.lipis.dev", "data:", "*.buymeacoffee.com", "*.paypal.com", "grovider.co"],
             },
         },
 
