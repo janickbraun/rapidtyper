@@ -20,7 +20,7 @@ export default function ChangePassword() {
     }
     return (
         <div>
-            <h3 className="redcolorheading">Chage password</h3>
+            <h3 className="redcolorheading">Change password</h3>
             <input type="password" className="rt__default_input mwdt" style={{display: "block"}} placeholder="Old password" onChange={(e) => setoldPassword(e.target.value)} />
             <input type="password" className="rt__default_input mwdt" style={{display: "block"}} placeholder="New password" autoComplete="new-password" onChange={(e) => setNewPassword(e.target.value)} />
             <input type="password" className="rt__default_input mwdt" style={{display: "block"}} placeholder="Confirm new password" autoComplete="new-password" onChange={(e) => setConfirmPassword(e.target.value)} />
