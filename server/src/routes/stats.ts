@@ -40,6 +40,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const skin = user.skin
         const country = user.country
         const time = user.timeSpentRacing
+        const streak = user.streak
 
         const tempDate = date.toLocaleDateString("de-DE", { weekday: "short", year: "numeric", month: "numeric", day: "numeric" })
         const finalDate = tempDate.split(" ")[1]
@@ -53,9 +54,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
             const toBeUnlocked = await Skin.find({ price: 0, filename: { $nin: tempSkins } })
 
-            return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, skins, country, time, toBeUnlocked })
+            return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, skins, country, time, toBeUnlocked, streak })
         } else {
-            return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, country, time })
+            return res.status(200).json({ wpm, accuracy, racesTotal, racesWon, bestRace, date: finalDate, skin, country, time, streak })
         }
     } catch {
         return res.status(400).send("Something went wrong")

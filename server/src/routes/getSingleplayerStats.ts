@@ -20,7 +20,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             _id: temporaryUser.id,
         })
 
-        if (!verifyUser) return res.status(300).send("Not authenticated")
+        if (!verifyUser) return res.status(200).send("Not authenticated")
 
         const wpm = getAverage(verifyUser.singleplayerWpm)
         const accuracy = getAverage(verifyUser.singleplayerAccuracy)
@@ -28,9 +28,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const bestRace = verifyUser.singleplayerBest
         const time = verifyUser.singleplayerTimeSpent
 
-        return res.status(200).json({ wpm, accuracy, racesTotal, bestRace, time })
+        return res.status(200).json({ wpm, accuracy, racesTotal, bestRace, time, status: "ok" })
     } catch {
-        return res.status(400).send("Something went wrong")
+        return res.status(200).send("Something went wrong")
     }
 })
 

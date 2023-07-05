@@ -28,6 +28,7 @@ export default function Multiplayer() {
     const [textArray, setTextArray] = useState<any>([])
     const [author, setAuthor] = useState("")
     const [username, setUsername] = useState("")
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [loggedin, checkUsername] = useAuth()
 
     const [participants, setParticipants] = useState<any>([])
@@ -517,6 +518,7 @@ export default function Multiplayer() {
                 online={true}
                 done={done}
                 connected={true}
+                zindexkey={0}
             />
             {participants.map(
                 (item: any, key: any) =>

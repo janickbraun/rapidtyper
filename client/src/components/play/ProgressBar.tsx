@@ -34,7 +34,7 @@ const ProgressBar = (props: any) => {
         },
         onError: () => {
             "Cannot load stats"
-        }
+        },
     })
 
     useEffectOnce(() => {
@@ -109,7 +109,7 @@ const ProgressBar = (props: any) => {
                         </div>
                     )}
                     {isOpen && online && (
-                        <div className="onHoverContainer usercontentcontainer" style={{order: 2, zIndex: 10000 + 1}}>
+                        <div className="onHoverContainer usercontentcontainer" style={{ order: 2, zIndex: 10000 + 1 }}>
                             {mutation.isSuccess ? (
                                 <>
                                     <p className="username_d">

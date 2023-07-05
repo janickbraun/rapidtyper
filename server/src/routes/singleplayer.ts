@@ -38,27 +38,31 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         tempAcc.push(accuracy)
         tempWpm.push(wpm)
-        if (bestSpeed) {
-            unlock("fly", user, 0)
-            await User.findByIdAndUpdate(user.id, {
-                $set: {
-                    singleplayerTotalRaces: user.singleplayerTotalRaces + 1,
-                    singleplayerWpm: tempWpm,
-                    singleplayerAccuracy: tempAcc,
-                    singleplayerBest: wpm,
-                    singleplayerTimeSpent: user.singleplayerTimeSpent + time,
-                },
-            })
-        } else {
-            await User.findByIdAndUpdate(user.id, {
-                $set: {
-                    singleplayerTotalRaces: user.singleplayerTotalRaces + 1,
-                    singleplayerWpm: tempWpm,
-                    singleplayerAccuracy: tempAcc,
-                    singleplayerTimeSpent: user.singleplayerTimeSpent + time,
-                },
-            })
+
+        const lastGame = user.lastGame
+
+        let streakUp = false
+
+        if (lastGame) {
+            const diff = new Date().getTime() - lastGame.getTime()
+            if (diff < 24 * 60 * 60 * 1000 * 2.2 && diff > 24 * 60 * 60 * 1000) {
+                streakUp = true
+            }
         }
+
+        if (bestSpeed) unlock("fly", user, 0)
+
+        await User.findByIdAndUpdate(user.id, {
+            $set: {
+                singleplayerTotalRaces: user.singleplayerTotalRaces + 1,
+                singleplayerWpm: tempWpm,
+                singleplayerAccuracy: tempAcc,
+                singleplayerBest: bestSpeed ? wpm : user.singleplayerBest,
+                singleplayerTimeSpent: user.singleplayerTimeSpent + time,
+                lastGame: new Date(),
+                streak: streakUp ? user.streak + 1 : 1,
+            },
+        })
 
         return res.sendStatus(200)
     } catch {

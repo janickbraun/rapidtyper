@@ -20,7 +20,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-
+        streak: {
+            type: Number,
+            default: 1,
+        },
         wpm: {
             type: Array,
             default: [],
@@ -76,6 +79,9 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String,
             required: true,
+        },
+        lastGame: {
+            type: Date,
         },
         creationDate: {
             type: Date,

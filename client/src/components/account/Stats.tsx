@@ -14,6 +14,7 @@ export default function Stats(props: any) {
     const [racesTotal, setRacesTotal] = useState(0)
     const [racesWon, setRacesWon] = useState(0)
     const [bestRace, setBestRace] = useState(0)
+    const [streak, setStreak] = useState(1)
     const [timeSpentRacing, setTimeSpentRacing] = useState(0)
     const [date, setDate] = useState("")
     const [country, setCountry] = useState("")
@@ -48,6 +49,7 @@ export default function Stats(props: any) {
             setCountry(data.country)
             setTimeSpentRacing(data.time)
             setToBeUnlocked(data.toBeUnlocked)
+            setStreak(data.streak)
         },
     })
 
@@ -265,6 +267,12 @@ export default function Stats(props: any) {
                         </div>
                         <div>
                             <span className="stat_giver">Fastest race:</span> <span className="stat_reader">{bestRace}wpm</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Daily streak:</span>{" "}
+                            <span className="stat_reader">
+                                {streak ? streak : 1} {streak > 1 ? <>days</> : <>day</>}
+                            </span>
                         </div>
                         <div>
                             <span className="stat_giver">Time spent racing:</span> <span className="stat_reader">{new Date(timeSpentRacing * 1000).toISOString().substring(11, 19)}</span>

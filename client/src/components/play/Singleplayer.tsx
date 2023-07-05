@@ -83,11 +83,13 @@ export default function Singleplayer() {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer/stats", { token })
         },
         onSuccess: async ({ data }) => {
-            setStatsWpm(data.wpm)
-            setStatsAccuracy(data.accuracy)
-            setStatsTimeSpent(data.time)
-            setStatsTotal(data.racesTotal)
-            setStatsBest(data.bestRace)
+            if (data.status === "ok") {
+                setStatsWpm(data.wpm)
+                setStatsAccuracy(data.accuracy)
+                setStatsTimeSpent(data.time)
+                setStatsTotal(data.racesTotal)
+                setStatsBest(data.bestRace)
+            }
         },
     })
 
@@ -101,7 +103,7 @@ export default function Singleplayer() {
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
-            if (loggedin) mutationStats.mutate()
+            mutationStats.mutate()
 
             const store = JSON.parse(window.localStorage.getItem("cookies") as string)
             if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
@@ -426,9 +428,9 @@ export default function Singleplayer() {
                 </div>
             )}
             {loggedin ? (
-                <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} />
+                <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} zindexkey={0} />
             ) : (
-                <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} skin={"snail"} />
+                <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} skin={"snail"} zindexkey={0} />
             )}
             <div className="helper_hidden texthelper">
                 <input

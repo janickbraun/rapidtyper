@@ -123,6 +123,18 @@ io.on("connection", (socket: any) => {
 
             tempAcc.push(accuracy)
             tempWpm.push(wpm)
+
+            const lastGame = user.lastGame
+
+            let streakUp = false
+
+            if (lastGame) {
+                const diff = new Date().getTime() - lastGame.getTime()
+                if (diff < 24 * 60 * 60 * 1000 * 2.2 && diff > 24 * 60 * 60 * 1000) {
+                    streakUp = true
+                }
+            }
+
             if (lobby.finished) {
                 if (user.racesTotal === 99) {
                     unlock("dino", user, 0)
@@ -136,6 +148,8 @@ io.on("connection", (socket: any) => {
                             accuracy: tempAcc,
                             bestRace: wpm,
                             timeSpentRacing: user.timeSpentRacing + time,
+                            lastGame: new Date(),
+                            streak: streakUp ? user.streak + 1 : 1,
                         },
                     })
                 } else {
@@ -145,6 +159,8 @@ io.on("connection", (socket: any) => {
                             wpm: tempWpm,
                             accuracy: tempAcc,
                             timeSpentRacing: user.timeSpentRacing + time,
+                            lastGame: new Date(),
+                            streak: streakUp ? user.streak + 1 : 1,
                         },
                     })
                 }
@@ -173,6 +189,8 @@ io.on("connection", (socket: any) => {
                             accuracy: tempAcc,
                             bestRace: wpm,
                             timeSpentRacing: user.timeSpentRacing + time,
+                            lastGame: new Date(),
+                            streak: streakUp ? user.streak + 1 : 1,
                         },
                     })
                 } else {
@@ -183,6 +201,8 @@ io.on("connection", (socket: any) => {
                             wpm: tempWpm,
                             accuracy: tempAcc,
                             timeSpentRacing: user.timeSpentRacing + time,
+                            lastGame: new Date(),
+                            streak: streakUp ? user.streak + 1 : 1,
                         },
                     })
                 }
