@@ -113,7 +113,11 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                         <li className="dropdown_item">
                                             <button
                                                 onClick={() => {
-                                                    mutationMultiplayer.mutate()
+                                                    if (loggedin) {
+                                                        mutationMultiplayer.mutate()
+                                                    } else {
+                                                        navigate("/account/login")
+                                                    }
                                                     setOpen(false)
                                                 }}
                                                 className="noscale"
@@ -124,8 +128,20 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                     </svg>
                                                 </div>
                                                 <div className="nvt">
-                                                    <h2 className="link_call large">Mulitplayer</h2>
-                                                    <p className="description_sd2">Compete against others</p>
+                                                    <h2 className="link_call large">Multiplayer</h2>
+                                                    <p className="description_sd2">
+                                                        {loggedin ? (
+                                                            <>Compete against others</>
+                                                        ) : (
+                                                            <>
+                                                                Please{" "}
+                                                                <Link to="/account/login" reloadDocument={isInGame}>
+                                                                    login
+                                                                </Link>{" "}
+                                                                to play
+                                                            </>
+                                                        )}
+                                                    </p>
                                                 </div>
                                             </button>
                                         </li>

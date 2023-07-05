@@ -302,6 +302,8 @@ import adminRouter from "./routes/admin/admin"
 import addSkinRouter from "./routes/admin/addSkin"
 import getShopRouter from "./routes/shop/getShop"
 import feedbackRouter from "./routes/feedback"
+import singleplayerRouter from "./routes/singleplayer"
+import singleplayerStatsRouter from "./routes/getSingleplayerStats"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -328,6 +330,8 @@ app.use("/api/admin", adminRouter)
 app.use("/api/admin/addskin", addSkinRouter)
 app.use("/api/shop/getshop", getShopRouter)
 app.use("/api/feedback", feedbackRouter)
+app.use("/api/singleplayer", singleplayerRouter)
+app.use("/api/singleplayer/stats", singleplayerStatsRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))

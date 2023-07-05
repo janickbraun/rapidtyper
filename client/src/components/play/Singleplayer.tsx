@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react"
 import ProgressBar from "./ProgressBar"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useEventListener from "@use-it/event-listener"
 import useSound from "use-sound"
-import { unlockSkin } from "../../helpers/skinHelper"
 import useAuth from "../../hooks/useAuth"
 import Stopwatch from "./Stopwatch"
 
@@ -22,6 +21,12 @@ export default function Singleplayer() {
     const [startStopwatch, setStopwatch] = useState<boolean>(false)
     const [resetStopwatch, setResetStopwatch] = useState<boolean>(false)
 
+    const [statsWpm, setStatsWpm] = useState(0)
+    const [statsAccuracy, setStatsAccuracy] = useState(0)
+    const [statsTimeSpent, setStatsTimeSpent] = useState(0)
+    const [statsBest, setStatsBest] = useState(0)
+    const [statsTotal, setStatsTotal] = useState(0)
+
     const [textArray, setTextArray] = useState<any>([])
     const [author, setAuthor] = useState("")
     const [splitted, setSplitted] = useState<any>([])
@@ -36,6 +41,8 @@ export default function Singleplayer() {
     const [playErrorSound] = useSound("/mp3/error.mp3", { volume: 0.7 })
 
     const [loggedin, username, skin] = useAuth()
+
+    const token = localStorage.getItem("token")
 
     const hasFired = useRef(false)
     let navigate = useNavigate()
@@ -62,6 +69,28 @@ export default function Singleplayer() {
         },
     })
 
+    const mutationFinish: any = useMutation({
+        mutationFn: async ({ wpm, time, accuracy }: any) => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer", { token, time, wpm, accuracy })
+        },
+        onSuccess: async () => {
+            mutationStats.mutate()
+        },
+    })
+
+    const mutationStats: any = useMutation({
+        mutationFn: async () => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer/stats", { token })
+        },
+        onSuccess: async ({ data }) => {
+            setStatsWpm(data.wpm)
+            setStatsAccuracy(data.accuracy)
+            setStatsTimeSpent(data.time)
+            setStatsTotal(data.racesTotal)
+            setStatsBest(data.bestRace)
+        },
+    })
+
     const handleSoundControl = () => {
         localStorage.setItem("audio", String(!audioActive))
         setAudioActive(!audioActive)
@@ -72,6 +101,8 @@ export default function Singleplayer() {
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
+            if (loggedin) mutationStats.mutate()
+
             const store = JSON.parse(window.localStorage.getItem("cookies") as string)
             if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
                 navigate("/")
@@ -85,9 +116,8 @@ export default function Singleplayer() {
             } else if (tempAudio === "false") {
                 setAudioActive(false)
             }
-            unlockSkin("fly")
         }
-    }, [mutationPlay, navigate])
+    }, [mutationPlay, navigate, mutationStats, loggedin])
 
     useEffect(() => {
         if (!done && startStopwatch && currentIndex > 0) {
@@ -307,6 +337,8 @@ export default function Singleplayer() {
                 setCompleted(currentIndex + 1)
                 setWpm(wpm)
                 setAccuracy(accuracy)
+
+                if (loggedin) mutationFinish.mutate({ time: seconds, wpm, accuracy })
             }
         }
     }
@@ -396,7 +428,7 @@ export default function Singleplayer() {
             {loggedin ? (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} />
             ) : (
-                <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} />
+                <ProgressBar completed={(completed / splitted.length) * 100} name={"You"} online={false} done={false} connected={true} skin={"snail"} />
             )}
             <div className="helper_hidden texthelper">
                 <input
@@ -413,6 +445,31 @@ export default function Singleplayer() {
                 </div>
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
+            {loggedin ? (
+                <div>
+                    <h3>Statistic in Singleplayer</h3>
+                    <p>Please note that these stats are not public and will not appear in the leaderboard. Singleplayer is ment for practice.</p>
+                    <div>
+                        <span className="stat_giver">Speed:</span> <span className="stat_reader">{statsWpm}wpm</span>
+                    </div>
+                    <div>
+                        <span className="stat_giver">Accuracy:</span> <span className="stat_reader">{statsAccuracy}%</span>
+                    </div>
+                    <div>
+                        <span className="stat_giver">Practices completed:</span> <span className="stat_reader">{statsTotal}</span>
+                    </div>
+                    <div>
+                        <span className="stat_giver">Fastest practice:</span> <span className="stat_reader">{statsBest}wpm</span>
+                    </div>
+                    <div>
+                        <span className="stat_giver">Time spent practicing:</span> <span className="stat_reader">{new Date(statsTimeSpent * 1000).toISOString().substring(11, 19)}</span>
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    If you want to safe your statistics, then please <Link to="/account/login">login</Link>.
+                </div>
+            )}
         </main>
     )
 }

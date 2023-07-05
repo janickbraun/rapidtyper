@@ -12,14 +12,15 @@ const UserSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        creationDate: {
-            type: Date,
-            default: Date.now,
+        verified: {
+            type: Boolean,
+            default: false,
         },
-        password: {
+        country: {
             type: String,
             required: true,
         },
+
         wpm: {
             type: Array,
             default: [],
@@ -40,6 +41,10 @@ const UserSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        timeSpentRacing: {
+            type: Number,
+            default: 0,
+        },
         skins: {
             type: Array,
             default: ["snail"],
@@ -48,17 +53,33 @@ const UserSchema = new mongoose.Schema(
             type: String,
             default: "snail",
         },
-        country: {
-            type: String,
-            required: true,
+        singleplayerWpm: {
+            type: Array,
+            default: [],
         },
-        timeSpentRacing: {
+        singleplayerAccuracy: {
+            type: Array,
+            default: [],
+        },
+        singleplayerTotalRaces: {
             type: Number,
             default: 0,
         },
-        verified: {
-            type: Boolean,
-            default: false,
+        singleplayerBest: {
+            type: Number,
+            default: 0,
+        },
+        singleplayerTimeSpent: {
+            type: Number,
+            default: 0,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        creationDate: {
+            type: Date,
+            default: Date.now,
         },
     },
     {
