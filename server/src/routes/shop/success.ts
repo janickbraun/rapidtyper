@@ -4,6 +4,10 @@ import User from "../../../models/User"
 import dotenv from "dotenv"
 import paypal from "paypal-rest-sdk"
 import Skin from "../../../models/Skin"
+import createInvoice from "./createInvoice"
+import path from "path"
+import fs from "fs"
+import nodemailer from "nodemailer"
 dotenv.config()
 const router = Router()
 
@@ -37,11 +41,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const clientId = process.env.CLIENT_ID_PAYPAL
         const clientSecret = process.env.CLIENT_SECRET_PAYPAL
+        const paypalStatus = process.env.PAYPAL_STATUS
 
-        if (!clientId || !clientSecret) return res.status(500).send("No valid client-id or client-secret")
+        if (!clientId || !clientSecret || !paypalStatus) return res.status(500).send("No valid client-id or client-secret")
 
         paypal.configure({
-            mode: "live",
+            mode: paypalStatus,
             client_id: clientId,
             client_secret: clientSecret,
         })
@@ -58,12 +63,76 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             ],
         }
 
-        paypal.payment.execute(paymentId, execute_payment_json, async (error, payment) => {
+        paypal.payment.execute(paymentId, execute_payment_json, async (error, payment: any) => {
             if (error) {
                 console.error(error.response)
                 res.status(400).send("Payment went wrong")
             } else {
-                console.log("succ payment")
+                console.log(JSON.stringify(payment, null, 2))
+
+                const invoice = {
+                    shipping: {
+                        name: payment.payer.payer_info.first_name + " " + payment.payer.payer_info.last_name,
+                        address: payment.payer.payer_info.shipping_address?.line2 + " " + payment.payer.payer_info.shipping_address?.line1,
+                        city: payment.payer.payer_info.shipping_address.city,
+                        state: payment.payer.payer_info.shipping_address.state,
+                        country: payment.payer.payer_info.shipping_address.country_code,
+                        postal_code: payment.payer.payer_info.shipping_address.postal_code,
+                    },
+                    items: [
+                        {
+                            item: buyingSkin.name,
+                            description: "RapidTyper skin",
+                            quantity: 1,
+                            amount: buyingSkin.price * 100,
+                        },
+                    ],
+                    subtotal: buyingSkin.price * 100,
+                    paid: buyingSkin.price * 100,
+                    invoice_nr: payment.id.split("-MSS")[1],
+                }
+
+                const pdfFilename = "Invoice-" + verifyUser.username + "-" + payment.id.split("-MSS")[1] + ".pdf"
+
+                createInvoice(invoice, pdfFilename)
+
+                const pdfPath = path.join(__filename, "..", pdfFilename)
+
+                try {
+                    let transporter = nodemailer.createTransport({
+                        host: "smtp.hostinger.com",
+                        port: 465,
+                        secure: true,
+                        auth: {
+                            user: "rapidtyper@grovider.co",
+                            pass: process.env.EMAIL_PASSWORD,
+                        },
+                    })
+
+                    let mailList = ["rapidtyper@grovider.co"]
+                    if (verifyUser.email !== payment.payer.payer_info.email) {
+                        mailList.push(verifyUser.email, payment.payer.payer_info.email)
+                    } else {
+                        verifyUser.email
+                    }
+
+                    await transporter.sendMail({
+                        from: '"RapidTyper" <rapidtyper@grovider.co>',
+                        to: mailList,
+                        subject: "Thank you for your purchase on RapidTyper!",
+                        text:
+                            "Hey " +
+                            verifyUser.username +
+                            "!\nThank you for your purchase on RapidTyper! We sent you an confirmation in form of an invoice. Please check the attachment." +
+                            "\n\nBest regards,\nYour RapidTyper-Team", // plain text body
+                        attachments: [{ filename: pdfFilename, path: pdfPath }],
+                        //html: "<div></div>", // html body
+                    })
+
+                    try {
+                        fs.unlinkSync(pdfPath)
+                    } catch {}
+                } catch {}
 
                 await User.findByIdAndUpdate(verifyUser.id, {
                     $push: {

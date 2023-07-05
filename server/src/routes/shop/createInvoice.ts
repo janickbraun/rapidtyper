@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import PDFDocument from "pdfkit"
 
-export default function createInvoice(invoice: any) {
+export default function createInvoice(invoice: any, filename: string) {
     let doc = new PDFDocument({ size: "A4", margin: 50 })
 
     generateHeader(doc)
@@ -11,13 +11,13 @@ export default function createInvoice(invoice: any) {
     generateFooter(doc)
 
     doc.end()
-    doc.pipe(fs.createWriteStream("test.pdf"))
+    doc.pipe(fs.createWriteStream(path.join(__filename, "..", filename)))
 }
 
 function generateHeader(doc: any) {
-    doc.image(path.join(__filename, "..", "..", "..", "..", "assets", "rapidtyper-logo.png"), 50, 45, { width: 120, height: 62 })
+    doc.image(path.join(__filename, "..", "..", "..", "..", "assets", "rapidtyper-logo.png"), 50, 45, { height: 45 })
         .fillColor("#444444")
-        .image(path.join(__filename, "..", "..", "..", "..", "assets", "grovider-logo.png"), 50, 70, { width: 100 })
+        .image(path.join(__filename, "..", "..", "..", "..", "assets", "grovider-logo.png"), 53, 97, { width: 100 })
         .fontSize(10)
         .text("Grovider Ltda.", 200, 50, { align: "right" })
         .text("Naranjal, 1km Al Sur De La Iglesia Catolica", 200, 65, { align: "right" })
@@ -33,7 +33,7 @@ function generateCustomerInformation(doc: any, invoice: any) {
     const customerInformationTop = 200
 
     doc.fontSize(10)
-        .text("Invoice Number:", 50, customerInformationTop)
+        .text("Invoice ID:", 50, customerInformationTop)
         .font("Helvetica-Bold")
         .text(invoice.invoice_nr, 150, customerInformationTop)
         .font("Helvetica")
@@ -82,7 +82,7 @@ function generateInvoiceTable(doc: any, invoice: any) {
 }
 
 function generateFooter(doc: any) {
-    doc.fontSize(10).text("Thank you for you purchase!", 50, 780, { align: "center", width: 500 })
+    doc.fontSize(10).text("Thank you for your purchase!", 50, 780, { align: "center", width: 500 })
 }
 
 function generateTableRow(doc: any, y: any, item: any, description: any, unitCost: any, quantity: any, lineTotal: any) {
