@@ -51,7 +51,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         if (roomSize > 1) {
             io.to(String(finalLobby.code)).emit("waiting")
         }
-        if (roomSize === 5) {
+        if (roomSize >= 3) {
             io.to(String(finalLobby.code)).emit("starting")
         }
 
