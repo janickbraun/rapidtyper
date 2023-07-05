@@ -38,7 +38,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const clientId = process.env.CLIENT_ID_PAYPAL
         const clientSecret = process.env.CLIENT_SECRET_PAYPAL
 
-        if (!clientId || !clientSecret) return res.status(300).send("No valid client-id or client-secret")
+        if (!clientId || !clientSecret) return res.status(500).send("No valid client-id or client-secret")
 
         paypal.configure({
             mode: "live",
