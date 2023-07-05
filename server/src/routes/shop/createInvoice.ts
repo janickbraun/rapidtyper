@@ -1,4 +1,5 @@
 import fs from "fs"
+import path from "path"
 import PDFDocument from "pdfkit"
 
 export default function createInvoice(invoice: any) {
@@ -14,10 +15,9 @@ export default function createInvoice(invoice: any) {
 }
 
 function generateHeader(doc: any) {
-    doc.image("../../../assets/logo.png", 50, 45, { width: 50 })
+    doc.image(path.join(__filename, "..", "..", "..", "..", "assets", "rapidtyper-logo.png"), 50, 45, { width: 120, height: 62 })
         .fillColor("#444444")
-        .fontSize(20)
-        .text("Grovider Ltda.", 110, 57)
+        .image(path.join(__filename, "..", "..", "..", "..", "assets", "grovider-logo.png"), 50, 70, { width: 100 })
         .fontSize(10)
         .text("Grovider Ltda.", 200, 50, { align: "right" })
         .text("Naranjal, 1km Al Sur De La Iglesia Catolica", 200, 65, { align: "right" })

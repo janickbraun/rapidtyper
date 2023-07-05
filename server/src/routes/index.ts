@@ -14,21 +14,15 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
         },
         items: [
             {
-                item: "TC 100",
-                description: "Toner Cartridge",
-                quantity: 2,
-                amount: 6000,
-            },
-            {
-                item: "USB_EXT",
-                description: "USB Cable Extender",
+                item: "Pooping dog",
+                description: "RapidTyper skin",
                 quantity: 1,
-                amount: 2000,
+                amount: 1,
             },
         ],
-        subtotal: 8000,
-        paid: 0,
-        invoice_nr: 1234,
+        subtotal: 10,
+        paid: 10,
+        invoice_nr: 1,
     }
 
     createInvoice(invoice)
