@@ -73,8 +73,7 @@ export default function Singleplayer() {
         mutationFn: async ({ wpm, time, accuracy }: any) => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer", { token, time, wpm, accuracy })
         },
-        onSuccess: async ({ data }) => {
-            console.log(data)
+        onSuccess: async () => {
             mutationStats.mutate()
         },
     })
@@ -102,7 +101,8 @@ export default function Singleplayer() {
         if (!hasFired.current) {
             hasFired.current = true
             mutationPlay.mutate()
-            mutationStats.mutate()
+            if (loggedin) mutationStats.mutate()
+
             const store = JSON.parse(window.localStorage.getItem("cookies") as string)
             if (!store || store.allow !== true || (Number(new Date()) - store.date) / (1000 * 3600 * 24 * 365) > 1) {
                 navigate("/")
@@ -117,7 +117,7 @@ export default function Singleplayer() {
                 setAudioActive(false)
             }
         }
-    }, [mutationPlay, navigate, mutationStats])
+    }, [mutationPlay, navigate, mutationStats, loggedin])
 
     useEffect(() => {
         if (!done && startStopwatch && currentIndex > 0) {

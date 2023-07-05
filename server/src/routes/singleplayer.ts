@@ -60,7 +60,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             })
         }
 
-        return res.status(200).json({ msg: "succ" })
+        return res.sendStatus(200)
     } catch {
         return res.status(400).send("Something went wrong")
     }
