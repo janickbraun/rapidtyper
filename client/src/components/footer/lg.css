@@ -1352,7 +1352,7 @@ a.wnc{
     border: 2px solid #292b2f6a;
     width: max-content;
     left: -75%;
-    bottom: -350%;
+    top: 80px;
     z-index: 20000;
 }
 .onHoverContainer::before{
@@ -1486,4 +1486,10 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
 }
 .buttonpaypalsvgcontainer svg{
     fill: currentColor;
+}
+.default_PGBAR{
+    position: relative !important;
+}
+.usergame__comtop{
+    overflow-x: hidden !important;
 }

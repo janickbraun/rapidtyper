@@ -2,9 +2,10 @@ import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import { useEffectOnce } from "react-use"
 
 const ProgressBar = (props: any) => {
-    const { completed, name, skin, online, done, connected } = props
+    const { completed, name, skin, online, done, connected, zindexkey } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const [wpm, setWpm] = useState(0)
@@ -15,6 +16,7 @@ const ProgressBar = (props: any) => {
     const [timeSpentRacing, setTimeSpentRacing] = useState(0)
     const [date, setDate] = useState("")
     const [country, setCountry] = useState("")
+    const [key, setKey] = useState(0)
 
     const mutation: any = useMutation({
         mutationFn: async () => {
@@ -30,12 +32,20 @@ const ProgressBar = (props: any) => {
             setCountry(data.country)
             setTimeSpentRacing(data.time)
         },
+        onError: () => {
+            "Cannot load stats"
+        }
+    })
+
+    useEffectOnce(() => {
+        setKey(zindexkey + 1)
     })
 
     const containerStyles = {
         height: 20,
         borderRadius: "50rem",
         margin: "6rem 50px 2rem",
+        zIndex: 45 - key,
     }
 
     const fillerStyles: any = {
