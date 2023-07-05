@@ -523,6 +523,7 @@ export default function Multiplayer() {
                     item.username !== username && (
                         <ProgressBar
                             key={key}
+                            zindexkey={key}
                             bgcolor={"#6a1b9a"}
                             completed={(item.completed / text.length) * 100}
                             name={item.username}

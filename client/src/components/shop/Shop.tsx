@@ -28,8 +28,11 @@ export default function Shop() {
         },
         onError: (err: any) => {
             setLoading("")
-            setError(err?.response?.data || "Unknown error set by dev")
+            setError(err?.response?.data)
         },
+        onSettled: () =>{
+            setError("Cannot get PayPal redirect link. Try again later!")
+        }
     })
 
     const mutation: any = useMutation({
