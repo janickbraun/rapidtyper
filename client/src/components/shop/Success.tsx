@@ -49,19 +49,27 @@ export default function Success() {
     })
 
     return (
-        <main style={{marginTop: "8rem"}}>
-            <h1 style={{textAlign: "center"}}>{mutation.isSuccess ? "Payment successful" : "Awaiting payment..."}</h1>
+        <main style={{ marginTop: "8rem" }}>
+            <h1 style={{ textAlign: "center" }}>{mutation.isSuccess ? "Payment successful" : "Awaiting payment..."}</h1>
             <div className="cfl">
-            <div className={mutation.isSuccess ? "" : "loader"}>{mutation.isSuccess ? "" : "loading..."}</div>
+                <div className={mutation.isSuccess ? "" : "loader"}>{mutation.isSuccess ? "" : "loading..."}</div>
             </div>
-            {mutation.isError && <div className="cserror" style={{textAlign: "center", width: "100%", maxWidth: "100%", marginTop: ".6rem"}}>{mutation.error?.response?.data}</div>}
+            {mutation.isError && (
+                <div className="cserror" style={{ textAlign: "center", width: "100%", maxWidth: "100%", marginTop: ".6rem" }}>
+                    {mutation.error?.response?.data}
+                </div>
+            )}
             {mutation.isSuccess && (
                 <div className="centerboughtitem">
-                    <img src={"/img/skins/" + filename + ".png"} alt={name} className="boughtimg"/>
-                    <p className="successtext">Successfully bought <strong>"{name}"</strong> for <strong>${price}</strong>. Check it out:
-                    <Link to={"/user/" + username} className="_userlink">
-                        {username}'s profile
-                    </Link></p>
+                    <img src={"/img/skins/" + filename + ".png"} alt={name} className="boughtimg" />
+                    <h2>Thank you for your purchase!</h2>
+                    <p className="successtext">
+                        Successfully bought <strong>"{name}"</strong> for <strong>${price}</strong>. Check it out:
+                        <Link to={"/user/" + username} className="_userlink">
+                            {username}'s profile
+                        </Link>
+                    </p>
+                    <p>We sent you a confirmation email in form of an invoice. Please check your inbox.</p>
                 </div>
             )}
         </main>

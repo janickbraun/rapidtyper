@@ -30,9 +30,6 @@ export default function Shop() {
             setLoading("")
             setError(err?.response?.data)
         },
-        onSettled: () =>{
-            setError("Cannot get PayPal redirect link. Try again later!")
-        }
     })
 
     const mutation: any = useMutation({
