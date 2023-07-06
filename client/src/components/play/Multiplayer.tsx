@@ -47,7 +47,6 @@ export default function Multiplayer() {
     const [isCapsLocked, setIsCapsLocked] = useState(false)
     const [openTouchDisclaimer, setOpenTouchDisclaimer] = useState(false)
 
-    const [currentWpm, setCurrentWpm] = useState<number>(0)
     const [startStopwatch, setStopwatch] = useState<boolean>(false)
     const [resetStopwatch, setResetStopwatch] = useState<boolean>(false)
     const [startDateTime, setStartDateTime] = useState(0)
@@ -207,15 +206,6 @@ export default function Multiplayer() {
             socket.off("typing")
         }
     }, [participants])
-
-    useEffect(() => {
-        if (!done && startStopwatch && currentIndex > 0) {
-            const seconds = Number(Math.abs((new Date().getTime() - startDateTime) / 1000).toFixed(2))
-            const wpm = Math.floor(Number(currentIndex / 5 / (seconds / 60)))
-
-            if (wpm < 1000) setCurrentWpm(wpm)
-        }
-    }, [done, startStopwatch, startDateTime, currentIndex])
 
     useEffect(() => {
         socket.on("join", () => {
@@ -402,6 +392,7 @@ export default function Multiplayer() {
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
                 socket.emit("finish", { username, code, accuracy, token })
+                console.log("finish emit ")
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 
                 // setTime(seconds)
@@ -442,7 +433,6 @@ export default function Multiplayer() {
                 {!done && (
                     <div className="dd_cflx">
                         <Stopwatch start={startStopwatch} reset={resetStopwatch} />
-                        &nbsp;| {currentWpm}wpm
                     </div>
                 )}
                 <button className="sortBtn cs_profilebtn muterswitch" onClick={handleSoundControl} data-mutetool={audioActive ? "Mute" : "Unmute"}>

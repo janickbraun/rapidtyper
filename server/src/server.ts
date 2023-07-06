@@ -91,6 +91,7 @@ io.on("connection", (socket: any) => {
 
     socket.on("finish", async (data: any) => {
         try {
+            console.log("server finsih1")
             const accuracy = data.accuracy
             const username = data.username
             const token = data.token
@@ -98,15 +99,15 @@ io.on("connection", (socket: any) => {
 
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
-
             const lobby = await Lobby.findOne({ code })
             const user = await User.findOne({ username })
-            if (!lobby || !user || !loggedin) return
-            const text = await Text.findById(lobby.text)
+            if (!lobby || !user || !loggedin) return console.log("deleted")
+            const text = await Text.findOne({ _id: lobby.text })
             if (!text) return
             const textLength = text.text.length
             const time = Number(Math.abs((Number(new Date().getTime()) - Number(lobby.startTime)) / 1000).toFixed(2))
             const wpm = Number((textLength / 5 / (time / 60)).toFixed(2))
+            console.log("server finsih2")
             io.sockets.in(String(code)).emit("finish", { username, wpm, time })
             let tempAcc = user.accuracy
             let tempWpm = user.wpm

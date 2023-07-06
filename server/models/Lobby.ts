@@ -6,6 +6,7 @@ const LobbySchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+            index: true,
         },
         participants: {
             type: Array,
