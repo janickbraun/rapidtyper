@@ -391,7 +391,7 @@ export default function Multiplayer() {
                 // const wpm = Number((splitted.length / 5 / (seconds / 60)).toFixed(2))
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
-                socket.emit("finish", { username, code, accuracy, token })
+                socket.emit("finish", { username, code, accuracy, token, date: new Date() })
                 console.log("finish emit ")
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 

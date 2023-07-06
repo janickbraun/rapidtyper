@@ -41,6 +41,7 @@ mongoose
         useUnifiedTopology: true,
         socketTimeoutMS: 0,
         connectTimeoutMS: 0,
+        autoIndex: true,
     } as object)
     .then(() => console.log("Connected to Database"))
 
@@ -49,6 +50,13 @@ mongoose.connection.on("error", (err) => {
 })
 
 let typists: Array<any> = []
+
+function isYesterday(dateNow: any, dateThen: any) {
+    const today = dateNow
+    today.setDate(today.getDate() - 1)
+
+    return today.getDate() === dateThen.getDate() && today.getMonth() === dateThen.getMonth() && today.getFullYear() === dateThen.getFullYear()
+}
 
 io.on("connection", (socket: any) => {
     socket.on("typing", (data: any) => {
@@ -96,6 +104,7 @@ io.on("connection", (socket: any) => {
             const username = data.username
             const token = data.token
             const code = data.code
+            const date = data.date
 
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
@@ -127,13 +136,22 @@ io.on("connection", (socket: any) => {
 
             const lastGame = user.lastGame
 
-            let streakUp = false
+            let streakVal = "same"
 
             if (lastGame) {
-                const diff = new Date().getTime() - lastGame.getTime()
-                if (diff < 24 * 60 * 60 * 1000 * 2.2 && diff > 24 * 60 * 60 * 1000) {
-                    streakUp = true
+                const wasYesterday = isYesterday(new Date(date), new Date(lastGame))
+                const diff = new Date(date).getTime() - Number(lastGame?.getTime())
+                if (wasYesterday) {
+                    streakVal = "up"
+                } else if (diff > 24 * 60 * 60 * 1000 && !wasYesterday) {
+                    streakVal = "down"
                 }
+            }
+
+            const setStreak = () => {
+                if (streakVal === "same") return user.streak
+                if (streakVal === "up") return user.streak + 1
+                if (streakVal === "down") return 1
             }
 
             if (lobby.finished) {
@@ -150,7 +168,7 @@ io.on("connection", (socket: any) => {
                             bestRace: wpm,
                             timeSpentRacing: user.timeSpentRacing + time,
                             lastGame: new Date(),
-                            streak: streakUp ? user.streak + 1 : 1,
+                            streak: setStreak(),
                         },
                     })
                 } else {
@@ -161,7 +179,7 @@ io.on("connection", (socket: any) => {
                             accuracy: tempAcc,
                             timeSpentRacing: user.timeSpentRacing + time,
                             lastGame: new Date(),
-                            streak: streakUp ? user.streak + 1 : 1,
+                            streak: setStreak(),
                         },
                     })
                 }
@@ -191,7 +209,7 @@ io.on("connection", (socket: any) => {
                             bestRace: wpm,
                             timeSpentRacing: user.timeSpentRacing + time,
                             lastGame: new Date(),
-                            streak: streakUp ? user.streak + 1 : 1,
+                            streak: setStreak(),
                         },
                     })
                 } else {
@@ -203,7 +221,7 @@ io.on("connection", (socket: any) => {
                             accuracy: tempAcc,
                             timeSpentRacing: user.timeSpentRacing + time,
                             lastGame: new Date(),
-                            streak: streakUp ? user.streak + 1 : 1,
+                            streak: setStreak(),
                         },
                     })
                 }

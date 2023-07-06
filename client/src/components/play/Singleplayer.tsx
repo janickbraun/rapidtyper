@@ -70,8 +70,8 @@ export default function Singleplayer() {
     })
 
     const mutationFinish: any = useMutation({
-        mutationFn: async ({ wpm, time, accuracy }: any) => {
-            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer", { token, time, wpm, accuracy })
+        mutationFn: async ({ wpm, time, accuracy, date }: any) => {
+            return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/singleplayer", { token, time, wpm, accuracy, date })
         },
         onSuccess: async () => {
             mutationStats.mutate()
@@ -340,7 +340,7 @@ export default function Singleplayer() {
                 setWpm(wpm)
                 setAccuracy(accuracy)
 
-                if (loggedin) mutationFinish.mutate({ time: seconds, wpm, accuracy })
+                if (loggedin) mutationFinish.mutate({ time: seconds, wpm, accuracy, date: new Date() })
             }
         }
     }
