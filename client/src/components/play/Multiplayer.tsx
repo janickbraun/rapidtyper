@@ -128,6 +128,9 @@ export default function Multiplayer() {
         onSuccess: ({ data }) => {
             window.location.replace("/multiplayer/" + data.code)
         },
+        onError: ({ data }) => {
+            console.log(data)
+        },
     })
 
     const mutationPlay: any = useMutation({
@@ -156,6 +159,7 @@ export default function Multiplayer() {
         },
         onError: ({ data }) => {
             if (data.reason === "full" && data.username === checkUsername) window.location.href = "/"
+            console.log(data)
         },
     })
 

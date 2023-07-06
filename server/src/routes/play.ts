@@ -16,7 +16,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const loggedin = await User.exists({ _id: temporaryUser.id })
 
         const findLobby = await Lobby.findOne({
-            joinable: true,
             code,
         })
 
@@ -52,6 +51,16 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             io.to(String(finalLobby.code)).emit("waiting")
         }
         if (roomSize >= 3) {
+            await Lobby.updateOne(
+                {
+                    _id: findLobby._id,
+                },
+                {
+                    $set: {
+                        joinable: false,
+                    },
+                }
+            )
             io.to(String(finalLobby.code)).emit("starting")
         }
 
