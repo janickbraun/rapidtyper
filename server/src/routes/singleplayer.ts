@@ -6,13 +6,6 @@ import { unlock } from "./unlockFun"
 dotenv.config()
 const router = Router()
 
-function isYesterday(dateNow: any, dateThen: any) {
-    const today = dateNow
-    today.setDate(today.getDate() - 1)
-
-    return today.getDate() === dateThen.getDate() && today.getMonth() === dateThen.getMonth() && today.getFullYear() === dateThen.getFullYear()
-}
-
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.body.token
@@ -47,26 +40,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         tempAcc.push(accuracy)
         tempWpm.push(wpm)
 
-        const lastGame = user.lastGame
-
-        let streakVal = "same"
-
-        if (lastGame) {
-            const wasYesterday = isYesterday(new Date(date), new Date(lastGame))
-            const diff = new Date(date).getTime() - Number(lastGame?.getTime())
-            if (wasYesterday) {
-                streakVal = "up"
-            } else if (diff > 24 * 60 * 60 * 1000 && !wasYesterday) {
-                streakVal = "down"
-            }
-        }
-
-        const setStreak = () => {
-            if (streakVal === "same") return user.streak
-            if (streakVal === "up") return user.streak + 1
-            if (streakVal === "down") return 1
-        }
-
         if (bestSpeed) unlock("fly", user, 0)
 
         await User.findByIdAndUpdate(user.id, {
@@ -76,8 +49,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                 singleplayerAccuracy: tempAcc,
                 singleplayerBest: bestSpeed ? wpm : user.singleplayerBest,
                 singleplayerTimeSpent: user.singleplayerTimeSpent + time,
-                lastGame: date,
-                streak: setStreak(),
+                lastGame: new Date(),
             },
         })
 

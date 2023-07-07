@@ -7,6 +7,8 @@ import useEventListener from "@use-it/event-listener"
 import useSound from "use-sound"
 import useAuth from "../../hooks/useAuth"
 import Stopwatch from "./Stopwatch"
+import Confetti from "react-confetti"
+import useWindowSize from "react-use/lib/useWindowSize"
 
 export default function Singleplayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -34,6 +36,7 @@ export default function Singleplayer() {
     const [openTouchDisclaimer, setOpenTouchDisclaimer] = useState(false)
 
     const textInput = useRef<any>(null)
+    const { width, height } = useWindowSize()
 
     const [audioActive, setAudioActive] = useState(true)
 
@@ -399,33 +402,37 @@ export default function Singleplayer() {
                 <br />
                 <span className="authorS">~ {author}</span>
             </div>
+
             {done && (
-                <div className="fullrescontainer">
-                    <div className="cfw_textcontainer spctopjoin">
-                        <div className="doublemr">
-                            <div className="result__left" style={{ borderRight: "none" }}>
-                                <h1 className="resultheading">Results</h1>
-                                <div>
-                                    <span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span>
-                                </div>
-                                <div>
-                                    <span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span>
-                                </div>
-                                <div>
-                                    <span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span>
+                <>
+                    <Confetti width={width} height={height} run={wpm >= statsBest && done && Boolean(loggedin)} opacity={0.8} recycle={false} />
+                    <div className="fullrescontainer">
+                        <div className="cfw_textcontainer spctopjoin">
+                            <div className="doublemr">
+                                <div className="result__left" style={{ borderRight: "none" }}>
+                                    <h1 className="resultheading">Results</h1>
+                                    <div>
+                                        <span className="stat_giver">Speed:</span> <span className="stat_reader_race">{wpm}wpm</span>
+                                    </div>
+                                    <div>
+                                        <span className="stat_giver">Accuracy:</span> <span className="stat_reader_race">{accuracy}%</span>
+                                    </div>
+                                    <div>
+                                        <span className="stat_giver">Time:</span> <span className="stat_reader_race">{time}s</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="restartbuttonimp care2">
-                            <button className="absolutebottom_v2 wws btn" onClick={handleRestart}>
-                                Try again
-                            </button>
-                            <button className="absolutebottom_v2" onClick={handleNewText}>
-                                New text
-                            </button>
+                            <div className="restartbuttonimp care2">
+                                <button className="absolutebottom_v2 wws btn" onClick={handleRestart}>
+                                    Try again
+                                </button>
+                                <button className="absolutebottom_v2" onClick={handleNewText}>
+                                    New text
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </>
             )}
             {loggedin ? (
                 <ProgressBar completed={(completed / splitted.length) * 100} name={username} online={true} done={false} connected={true} skin={skin} zindexkey={0} />
