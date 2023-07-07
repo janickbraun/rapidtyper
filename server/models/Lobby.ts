@@ -19,6 +19,7 @@ const LobbySchema = new mongoose.Schema(
         joinable: {
             type: Boolean,
             default: true,
+            index: true,
         },
         finished: {
             type: Boolean,

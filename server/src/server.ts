@@ -99,6 +99,8 @@ io.on("connection", (socket: any) => {
             const code = data.code
             const date = data.date
 
+            const now = Number(new Date().getTime())
+
             const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
             const loggedin = await User.exists({ _id: temporaryUser.id })
             const lobby = await Lobby.findOne({ code })
@@ -107,7 +109,7 @@ io.on("connection", (socket: any) => {
             const text = await Text.findOne({ _id: lobby.text })
             if (!text) return
             const textLength = text.text.length
-            const time = Number(Math.abs((Number(new Date().getTime()) - Number(lobby.startTime)) / 1000).toFixed(2))
+            const time = Number(Math.abs((now - Number(lobby.startTime)) / 1000).toFixed(2))
             const wpm = Number((textLength / 5 / (time / 60)).toFixed(2))
             console.log("server finsih2")
             io.sockets.in(String(code)).emit("finish", { username, wpm, time })
@@ -343,8 +345,6 @@ app.use("/api/singleplayer/stats", singleplayerStatsRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))
-app.get("*", (req, res) => {
-    res.send("<h1>RaipdTyper API - Page not found</h1>")
-})
+app.use("*", express.static(root))
 
 server.listen(PORT, () => console.log("Server starting on " + process.env.BACKEND_URL))
