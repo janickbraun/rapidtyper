@@ -9,10 +9,6 @@ export default function CookieModal() {
     const tab = useRef<any>(null)
     let location = useLocation()
 
-    const handleWrong = () => {
-        setErrMsg("In order to use RapidTyper you need to accept required cookies.")
-    }
-
     const handleAccept = () => {
         let date = new Date()
         date.setFullYear(date.getFullYear() + 1)
@@ -47,7 +43,7 @@ export default function CookieModal() {
                         <div className="textcontent">
                             <p className="cmdtxt">We only use cookies and data that are necessary to provide and maintain RapidTyper.</p>
                             <p className="cmdtxt">
-                                By accepting the cookies you also agree to comply with our{" "}
+                                By continuing to use this site, you accept all necessary cookies and agree to comply with our{" "}
                                 <a className="cmd_link" href="https://grovider.co/privacy-policy">
                                     Privacy Policy
                                 </a>{" "}
@@ -57,14 +53,9 @@ export default function CookieModal() {
                                 </Link>
                                 .
                             </p>
-                            <p className="cmdtxt">In order for RapidTyper to work, you must accept all cookies, as only necessary cookies are used.</p>
-                            <p className="errtxt_clr">{errMsg}</p>
                             <div className="_c_buttonset">
-                                <button className="secondary_action" onClick={handleWrong}>
-                                    I decline
-                                </button>
                                 <button onClick={handleAccept} ref={tab}>
-                                    I accept all
+                                    I understand
                                 </button>
                             </div>
                         </div>
