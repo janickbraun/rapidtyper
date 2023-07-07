@@ -454,7 +454,7 @@ export default function Singleplayer() {
                 </div>
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
-            {loggedin ? (
+            {loggedin && done && (
                 <div>
                     <h3>Statistic in Singleplayer</h3>
                     <p>Please note that these stats are not public and will not appear in the leaderboard. Singleplayer is ment for practice.</p>
@@ -474,7 +474,9 @@ export default function Singleplayer() {
                         <span className="stat_giver">Time spent practicing:</span> <span className="stat_reader">{new Date(statsTimeSpent * 1000).toISOString().substring(11, 19)}</span>
                     </div>
                 </div>
-            ) : (
+            )}
+
+            {!loggedin && (
                 <div>
                     If you want to safe your statistics, then please <Link to="/account/login">login</Link>.
                 </div>
