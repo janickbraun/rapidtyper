@@ -37,7 +37,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         await Lobby.create({ code, text: text[0]._id })
         const lobbysDelete = await Lobby.find({ joinable: false })
         for (let i = 0; i < lobbysDelete.length; i++) {
-            if (Number(new Date()) - Number(lobbysDelete[i].creationDate) > 30 * 60 * 1000) {
+            if (Number(new Date()) - Number(lobbysDelete[i].finishedDate) > 30 * 60 * 1000 || Number(new Date()) - Number(lobbysDelete[i].creationDate) > 3 * 24 * 60 * 60 * 1000) {
                 await Lobby.findByIdAndDelete(lobbysDelete[i].id)
             }
         }

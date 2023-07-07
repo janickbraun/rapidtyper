@@ -19,7 +19,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const temporaryUser = await User.findOne({
             email: email,
         })
-        if (!temporaryUser) return res.status(400).send("Invalid email or password")
+
+        if (!temporaryUser) return res.status(401).send("Invalid email or password")
 
         if (await bcrypt.compare(password, temporaryUser.password)) {
             const token = jwt.sign(
@@ -30,7 +31,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             )
             return res.status(200).json({ token })
         } else {
-            return res.status(400).send("Invalid email or password")
+            return res.status(401).send("Invalid email or password")
         }
     } catch {
         return res.status(400).send("Something went wrong")

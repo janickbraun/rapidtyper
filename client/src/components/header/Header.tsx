@@ -135,9 +135,9 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                         ) : (
                                                             <>
                                                                 Please{" "}
-                                                                <Link to="/account/login" reloadDocument={isInGame}>
+                                                                <u>
                                                                     login
-                                                                </Link>{" "}
+                                                                </u>{" "}
                                                                 to play
                                                             </>
                                                         )}
