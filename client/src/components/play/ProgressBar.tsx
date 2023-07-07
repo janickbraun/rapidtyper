@@ -45,7 +45,7 @@ const ProgressBar = (props: any) => {
         height: 20,
         borderRadius: "50rem",
         margin: "6rem 50px 2rem",
-        zIndex: 45 - key,
+        zIndex: 45 - (key + 1),
     }
 
     const fillerStyles: any = {
