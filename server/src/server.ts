@@ -54,7 +54,7 @@ let typists: Array<any> = []
 io.on("connection", (socket: any) => {
     socket.on("typing", (data: any) => {
         try {
-            socket.broadcast.to(String(data.code)).emit("typing", { username: data.username, completed: data.completed })
+            if (data.completed % 10 === 0) socket.broadcast.to(String(data.code)).emit("typing", { username: data.username, completed: data.completed })
         } catch {}
     })
 
