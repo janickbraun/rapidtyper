@@ -1493,3 +1493,6 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
 .usergame__comtop{
     overflow-x: hidden !important;
 }
+body{
+    overflow-x: hidden !important;
+}
