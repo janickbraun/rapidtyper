@@ -5,7 +5,6 @@ import useEventListener from "@use-it/event-listener"
 
 export default function CookieModal() {
     const [open, setOpen] = useState(false)
-    const [errMsg, setErrMsg] = useState("")
     const tab = useRef<any>(null)
     let location = useLocation()
 
@@ -13,7 +12,6 @@ export default function CookieModal() {
         let date = new Date()
         date.setFullYear(date.getFullYear() + 1)
         window.localStorage.setItem("cookies", JSON.stringify({ allow: true, expires: date }))
-        setErrMsg("")
         setOpen(false)
     }
 
