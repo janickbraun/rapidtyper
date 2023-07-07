@@ -215,6 +215,7 @@ export default function Singleplayer() {
         }
         temp[0].correct = null
         setTextArray(temp)
+        window.scrollTo(0, 0)
 
         e.currentTarget.blur()
     }
