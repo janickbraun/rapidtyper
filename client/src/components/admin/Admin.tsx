@@ -30,7 +30,7 @@ export default function Admin() {
                     <AddSkin />
                 </div>
             ) : (
-                <div>No permission</div>
+                <h1>Not Found</h1>
             )}
         </main>
     )

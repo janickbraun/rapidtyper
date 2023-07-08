@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
 import useIsInGame from "../../hooks/useIsInGame"
-import { useMutation } from "@tanstack/react-query"
+import { Mutation, useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useWindowSize } from "react-use"
 

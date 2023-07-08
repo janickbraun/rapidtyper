@@ -24,6 +24,7 @@ import Success from "./components/shop/Success"
 import Cancel from "./components/shop/Cancel"
 import Admin from "./components/admin/Admin"
 import Feedback from "./components/feedback/Feedback"
+import "./global_responsive.css"
 
 function App() {
     const queryClient = new QueryClient()

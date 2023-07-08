@@ -86,7 +86,7 @@ export default function Home() {
     }
 
     return (
-        <main>
+        <main id="component:home">
             {accountResponse !== "" && (
                 <div className="infopopup">
                     {accountResponse}
@@ -135,7 +135,7 @@ export default function Home() {
                                                         <p className="description_sd2">Race against others</p>
                                                     </div>
                                                 </button>
-                                                {mutationMultiplayer.isError && <div>{mutationMultiplayer.error.message}</div>}
+                                                {mutationMultiplayer.isError && <div className="cserror">{mutationMultiplayer.error.message}</div>}
                                             </>
                                             <Link tabIndex={-1} to="/singleplayer">
                                                 <button className="noscale">
@@ -215,7 +215,7 @@ export default function Home() {
                                 Copy to clipboard
                             </button>
                             <a
-                                href="https://twitter.com/intent/tweet?text=%F0%9F%9A%80%20Improve%20your%20typing%20skills%20and%20challenge%20friends%20with%20RapidTyper!%20%F0%9F%8E%AE%F0%9F%94%A5%20Enhance%20your%20speed,%20accuracy,%20and%20have%20fun%20racing%20against%20others.%20Check%20out%20rapidtyper.com%20and%20unlock%20your%20typing%20potential%20today!%20%F0%9F%92%AA%F0%9F%92%BB%20%23typing%20%23skills%20%23competition"
+                                href="//twitter.com/intent/tweet?text=%F0%9F%9A%80%20Improve%20your%20typing%20skills%20and%20challenge%20friends%20with%20RapidTyper!%20%F0%9F%8E%AE%F0%9F%94%A5%20Enhance%20your%20speed,%20accuracy,%20and%20have%20fun%20racing%20against%20others.%20Check%20out%20rapidtyper.com%20and%20unlock%20your%20typing%20potential%20today!%20%F0%9F%92%AA%F0%9F%92%BB%20%23typing%20%23skills%20%23competition"
                                 rel="noreferrer"
                                 target="_blank"
                                 tabIndex={-1}

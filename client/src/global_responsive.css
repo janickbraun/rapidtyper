@@ -1,0 +1,253 @@
+@media screen and (max-width: 750px) {
+    .src_logo{
+        height: 40px;
+    }
+    ._linklisting{
+        position: absolute;
+        top: 55px;
+        left: 0;
+        background-color: #202124;
+        backdrop-filter: blur(10px);
+        width: 100%;
+        z-index: 1000;
+    }
+    ._linklisting{
+        display: block;
+        padding-left: 1.4rem;
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+        border-bottom: 2px solid #292b2f6a;
+        border-top: 2px solid #292b2f6a;
+    }
+    .nav-link-item a, .noscale, .nav-link-item button{
+        font-size: 16px;
+    }
+    .nav-link-item a, .noscale, .nav-link-item button{
+        column-gap: .4rem;
+    }
+    .nav-link-item a, .noscale, .nav-link-item button{
+        padding: 5px 14px !important;
+    }
+    ._profile_nameset h1{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .home_{
+        height: 55px !important;
+    }
+    svg.ac__go{
+        width: 17px;
+    }
+    .__buttonset{
+        flex-direction: column;
+        row-gap: .5rem;
+    }
+    .pscfix{
+        padding: .7rem .6rem;
+        margin-top: 1rem;
+    }
+    .cnvsvg{
+        width: 2rem;
+    }
+    .h37{
+        height: auto !important;
+        width: 1.6rem !important;
+    }
+    .link_call.large {
+        font-size: 19px;
+        font-weight: 500;
+    }
+}
+@media screen and (max-width: 900px) {
+
+    .innerLDB{
+        max-width: 100%;
+        overflow: scroll;
+        border-radius: 0px !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    table{
+        font-size: 85%;
+    }
+
+    body{
+        overflow-x: hidden !important;
+    }
+
+    .copyrighttxt, .copyby, .footeritem a{
+        font-size: 12px;
+    }
+    .innerfooter{
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .ftext::after{
+        height: 13px;
+        width: 13px;
+    }
+    .linksfooter{
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .g_split-2{
+        position: sticky;
+        left: 0;
+    }
+    .ldbcaller{
+        font-size: 20px !important;
+        font-weight: 500 !important;
+    }
+    .sharebtn__c{
+        width: max-content !important;
+        font-size: .9rem;
+        white-space: nowrap !important;
+    }
+    .selector_container{
+        width: 96%;
+    }
+    .modalCallerHeader {
+        font-size: 1.562rem;
+    }
+    .__btnscontainer .wws{
+        font-size: .9rem;
+        word-break: keep-all !important;
+        white-space: nowrap !important;
+    }
+    .buttons_callercontainer{
+        flex-wrap: wrap;
+        row-gap: .9rem;
+    }
+    .buttons_callercontainer a button{
+        font-size: .9rem;
+    }
+    .clgoicon{
+        height: 13px !important;
+    }
+    .innerfooter{
+        margin-right: .4rem;
+    }
+    main {
+        min-height: calc(100vh - 80px - (25px * 2) - 8px);
+    }
+    .infopopup{
+        bottom: 20px !important;
+        right: 10px !important;
+        font-size: 15.8px !important;
+        padding: .6rem .8rem !important;
+        max-width: 64% !important;
+    }
+    .sndficon{
+        height: 19px !important;
+    }
+    .imprintReset{
+        font-size: .8rem;
+        margin: -2rem 1rem !important;
+        margin-bottom: 0 !important;
+    }
+    .terms____________csa,.disclaimer______________________________fix{
+        margin-top: 4.4rem !important;
+    }
+    .rt__default_input.textarea{
+        width: 85% !important;
+    }
+    .__feedbackbtn{
+        width: 50% !important;
+    }
+    .shopitemcontai{
+        gap: 20px;
+        margin: 0;
+    }
+    .contentflex{
+        margin-top: -1.8rem;
+    }
+    .shopheader{
+        font-size: 30px;
+    }
+    .shopsingleitem{
+        max-width: 180px ;
+        min-width: 180px;
+    }
+    .glowimg{
+        width: 82px !important;
+        height: 82px !important;
+    }
+    .skin_namecaller{
+        font-size: 17px;
+    }
+    .itemdsc{
+        font-size: 13px;
+    }
+    .shopimagedisplay{
+        height: 100px !important;
+    }
+    .mask_contentparent{
+        background-size: 25% !important;
+        height: 100px !important;
+    }
+    .conftext{
+        z-index: 200000;
+        font-size: 14px;
+    }
+    .copconfirmset button{
+        font-size: .9rem;
+    }
+    .cserror,.cssuccess{
+        font-size: 14px !important;
+    }
+    .itemprice{
+        opacity: 1;
+        font-size: 14px;
+
+        top: 14px;
+    }
+    .about__ht{
+        font-size: 28px;
+    }
+    .abt_{
+        margin-top: 4.8rem;
+    }
+    .__quote{
+        flex-direction: column;
+    }
+    .__quotetext_continer{
+        width: 100%;
+    }
+    .__quotetext_{
+        font-size: 28px;
+    }
+    .__wkk::before,.__wkk::after{
+        height: 35px !important;
+        width: 35px !important;
+    }
+    .__wkk::before{
+        left: -40px !important;
+        top: 0 !important;
+    }
+    .__wkk::after{
+        right: -40px !important;
+        bottom: -45px !important;
+    }
+    .about__ht{
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+    }
+    .__dcflexcontent{
+        flex-direction: column;
+    }
+    .displayreal,.about__text{
+        width: 100%;
+        max-width: 100%;
+    }
+    .__ffcmemecontainer .__quote:first-child{
+        margin-bottom: 2.5rem;
+    }
+    .abt_{
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+    .search__container button:not(.wws.btn) span{
+        display: none;
+    }
+}

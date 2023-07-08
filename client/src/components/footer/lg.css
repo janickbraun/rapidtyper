@@ -894,66 +894,6 @@ figure.__fndimg{
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
-@media screen and (max-width: 750px) {
-    .src_logo{
-        height: 40px;
-    }
-    ._linklisting{
-        position: absolute;
-        top: 55px;
-        left: 0;
-        background-color: #202124;
-        backdrop-filter: blur(10px);
-        width: 100%;
-        z-index: 1000;
-    }
-    ._linklisting{
-        display: block;
-        padding-left: 1.4rem;
-        padding-top: .8rem;
-        padding-bottom: .8rem;
-        border-bottom: 2px solid #292b2f6a;
-        border-top: 2px solid #292b2f6a;
-    }
-    .nav-link-item a, .noscale, .nav-link-item button{
-        font-size: 16px;
-    }
-    .nav-link-item a, .noscale, .nav-link-item button{
-        column-gap: .4rem;
-    }
-    .nav-link-item a, .noscale, .nav-link-item button{
-        padding: 5px 14px !important;
-    }
-    ._profile_nameset h1{
-        font-size: 20px;
-        font-weight: 500;
-    }
-    .home_{
-        height: 55px !important;
-    }
-    svg.ac__go{
-        width: 17px;
-    }
-    .__buttonset{
-        flex-direction: column;
-        row-gap: .5rem;
-    }
-    .pscfix{
-        padding: .7rem .6rem;
-        margin-top: 1rem;
-    }
-    .cnvsvg{
-        width: 2rem;
-    }
-    .h37{
-        height: auto !important;
-        width: 1.6rem !important;
-    }
-    .link_call.large {
-        font-size: 19px;
-        font-weight: 500;
-    }
-}
 .nvsvg{
     height: 19px;
     width: 19px;
@@ -1495,4 +1435,13 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
 }
 body{
     overflow-x: hidden !important;
+}
+.__feedbackbtn{
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 200px;
+}
+.clswd{
+    margin: 1.2rem 2rem;
 }

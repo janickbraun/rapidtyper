@@ -7,7 +7,7 @@ export default function Disclaimer() {
     }, [])
     return (
         <>
-            <div className="imprintReset" style={{ marginTop: "7rem" }}>
+            <div className="imprintReset disclaimer______________________________fix" style={{ marginTop: "7rem" }}>
                 <h1 id="en">Disclaimer</h1>
                 <p>Last update: Jun 12 2023</p>
                 <h2 id="m46">Website Disclaimer</h2>
