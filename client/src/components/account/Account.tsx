@@ -8,6 +8,7 @@ import ChangeCountry from "./ChangeCountry"
 import ChangePassword from "./ChangePassword"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import ChangeEmail from "./ChangeEmail"
 
 export default function Account() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -66,6 +67,7 @@ export default function Account() {
                                 <p className="cshandler">
                                     <span>{email}</span>
                                 </p>
+                                <ChangeEmail />
                                 <ChangeCountry />
                             </div>
                         </div>

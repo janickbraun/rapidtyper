@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
 import useIsInGame from "../../hooks/useIsInGame"
-import { Mutation, useMutation } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useWindowSize } from "react-use"
 
@@ -134,11 +134,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                             <>Compete against others</>
                                                         ) : (
                                                             <>
-                                                                Please{" "}
-                                                                <u>
-                                                                    login
-                                                                </u>{" "}
-                                                                to play
+                                                                Please <u>login</u> to play
                                                             </>
                                                         )}
                                                     </p>
