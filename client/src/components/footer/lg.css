@@ -459,7 +459,7 @@ a.imprintLink{
     transition: .3s ease, inset 0s;
     top: -1.8rem;
     transform: translateX(50%);
-    opacity: 0;
+    /* opacity: 0; */
 }
 .user_origincounty:hover::after{
     opacity: 1;

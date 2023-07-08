@@ -104,12 +104,20 @@ footer{
         border-right: none !important;
     }
 
+    table{
+        font-size: 85%;
+    }
+
+    body{
+        overflow-x: hidden !important;
+    }
+
     .copyrighttxt, .copyby, .footeritem a{
         font-size: 12px;
     }
     .innerfooter{
-        flex-direction: initial;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-end;
     }
     .ftext::after{
         height: 13px;
@@ -124,7 +132,39 @@ footer{
         left: 0;
     }
     .ldbcaller{
-        font-size: 24px !important;
+        font-size: 20px !important;
         font-weight: 500 !important;
+    }
+    .sharebtn__c{
+        width: max-content !important;
+        font-size: .9rem;
+        white-space: nowrap !important;
+    }
+    .selector_container{
+        width: 96%;
+    }
+    .modalCallerHeader {
+        font-size: 1.562rem;
+    }
+    .__btnscontainer .wws{
+        font-size: .9rem;
+        word-break: keep-all !important;
+        white-space: nowrap !important;
+    }
+    .buttons_callercontainer{
+        flex-wrap: wrap;
+        row-gap: .9rem;
+    }
+    .buttons_callercontainer a button{
+        font-size: .9rem;
+    }
+    .clgoicon{
+        height: 13px !important;
+    }
+    .innerfooter{
+        margin-right: .4rem;
+    }
+    main {
+        min-height: calc(100vh - 80px - (25px * 2) - 8px);
     }
 }
