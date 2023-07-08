@@ -1445,3 +1445,17 @@ body{
 .clswd{
     margin: 1.2rem 2rem;
 }
+td.loadingerror{
+    text-align: left !important;
+    background-color: #ff333317;
+    border-radius: 10px;
+    padding: 8px 16px;
+    display: flex;
+    column-gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+.loadercontent{
+    display: flex;
+    justify-content: center;
+}
