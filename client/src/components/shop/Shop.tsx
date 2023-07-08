@@ -6,6 +6,7 @@ import Overlay from "../modal/Overlay"
 import { unlockSkin } from "../../helpers/skinHelper"
 import useAuth from "../../hooks/useAuth"
 import { Link } from "react-router-dom"
+import CountDown from "./CountDown"
 
 export default function Shop() {
     const [skin, setSkin] = useState("")
@@ -14,6 +15,7 @@ export default function Shop() {
     const [loading, setLoading] = useState("")
     const [msg, setMsg] = useState("")
     const [error, setError] = useState("")
+    const [seconds, setSeconds] = useState(5000)
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [loggedin] = useAuth()
@@ -38,6 +40,7 @@ export default function Shop() {
         },
         onSuccess: ({ data }) => {
             setSkins(data.skins)
+            setSeconds(data.seconds)
         },
     })
 
@@ -79,6 +82,10 @@ export default function Shop() {
         <main>
             <div className="contentflex">
                 <h1 className="shopheader">Shop</h1>
+                <p>
+                    Shop updates daily. Next update in: <CountDown seconds={seconds} />
+                </p>
+
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
@@ -120,7 +127,7 @@ export default function Shop() {
                         <p className="conftext">
                             {skin === "jesus" ? (
                                 <>
-                                    In order to unlock the Jesus skin you need to praise the lord:
+                                    In order to unlock the Jesus skin, please take a minute:
                                     <br />
                                     <br />
                                     Our Father, Who is in heaven, holy is Your Name; <br />
