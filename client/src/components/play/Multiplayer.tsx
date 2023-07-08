@@ -49,7 +49,6 @@ export default function Multiplayer() {
 
     const [startStopwatch, setStopwatch] = useState<boolean>(false)
     const [resetStopwatch, setResetStopwatch] = useState<boolean>(false)
-    const [startDateTime, setStartDateTime] = useState(0)
 
     const textInput = useRef<any>(null)
     const { width, height } = useWindowSize()
@@ -247,7 +246,6 @@ export default function Multiplayer() {
 
         socket.on("start", () => {
             setHasStarted(true)
-            setStartDateTime(new Date().getTime())
             setResetStopwatch(false)
             setStopwatch(true)
         })
@@ -284,9 +282,11 @@ export default function Multiplayer() {
 
     const handler = (e: any) => {
         textInput.current.focus()
-        const noFire = ["Shift", "CapsLock", "Tab"]
+        const noFire = ["Shift", "CapsLock", "Tab", "Enter"]
 
         if (isCapsLocked !== e.getModifierState("CapsLock")) setIsCapsLocked(e.getModifierState("CapsLock"))
+
+        if (e.key === "Enter" && done) return mutationMultiplayer.mutate()
 
         if (!hasStarted) return
         if (noFire.includes(e.key)) return

@@ -97,7 +97,6 @@ io.on("connection", (socket: any) => {
             const username = data.username
             const token = data.token
             const code = data.code
-            const date = data.date
 
             const now = Number(new Date().getTime())
 
@@ -157,7 +156,7 @@ io.on("connection", (socket: any) => {
                     })
                 }
             } else {
-                await Lobby.findByIdAndUpdate(lobby.id, { $set: { finished: true } })
+                await Lobby.findByIdAndUpdate(lobby.id, { $set: { finished: true, finishedDate: new Date() } })
                 if (accuracy === 100) {
                     unlock("octopus", user, 0)
                 }

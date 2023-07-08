@@ -25,6 +25,10 @@ const LobbySchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        finishedDate: {
+            type: Date,
+            index: true,
+        },
         text: {
             type: mongoose.Types.ObjectId,
             ref: "texts",
