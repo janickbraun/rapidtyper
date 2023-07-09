@@ -10,17 +10,17 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const now = new Date()
 
+        let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+
+        let diff = tomorrow.getTime() - now.getTime()
+        let seconds = Math.round(diff / 1000)
+
         if (shop.lastRequest.getDay() === now.getDay() && shop.lastRequest.getMonth() === now.getMonth() && shop.lastRequest.getFullYear() === now.getFullYear()) {
             await Shop.findByIdAndUpdate(shop.id, {
                 $set: {
                     lastRequest: now,
                 },
             })
-
-            let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
-
-            let diff = tomorrow.getTime() - now.getTime() // difference in ms
-            let seconds = Math.round(diff / 1000) // convert to seconds
 
             return res.status(200).send({ skins: shop.skins, seconds })
         } else {
@@ -44,7 +44,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
                     skins,
                 },
             })
-            return res.status(200).send({ skins })
+
+            return res.status(200).send({ skins, seconds })
         }
     } catch {
         res.status(400).send("Something went wrong")
