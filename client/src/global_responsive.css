@@ -250,4 +250,13 @@
     .search__container button:not(.wws.btn) span{
         display: none;
     }
+    .trcaller{
+        font-size: 25px;
+    }
+    .complete{
+        font-size: 15px;
+    }
+    .loginhint_inner{
+        margin-top: 0;
+    }
 }
