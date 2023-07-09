@@ -46,7 +46,7 @@ Please note that you may need to set up a local MongoDB instance or update the d
 ## Contributing
 RapidTyper is being developed by Janick Braun and Luis Baumer
 
-Contributions to RapidTyper are always welcome! If you find a bug or have a suggestion for new features, please open an issue in the GitHub repository or report the issue on [feedback.rapidtyper.com](https://feedback.rapidtyper.com). If you'd like to contribute directly, feel free to fork the repository, make your changes, and submit a pull request.
+Contributions to RapidTyper are always welcome! If you find a bug or have a suggestion for new features, please open an issue in the GitHub repository or report the issue on [rapidtyper.com/feedback](https://rapidtyper.com/feedback). If you'd like to contribute directly, feel free to fork the repository, make your changes, and submit a pull request.
 
 Before submitting a pull request, please ensure that your code adheres to the existing code style and passes all the tests. Also, provide a clear and detailed description of the changes you've made.
 

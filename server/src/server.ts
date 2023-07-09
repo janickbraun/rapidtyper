@@ -313,6 +313,7 @@ import getShopRouter from "./routes/shop/getShop"
 import feedbackRouter from "./routes/feedback"
 import singleplayerRouter from "./routes/singleplayer"
 import singleplayerStatsRouter from "./routes/getSingleplayerStats"
+import changeEmailRouter from "./routes/account/changeemail"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -341,6 +342,7 @@ app.use("/api/shop/getshop", getShopRouter)
 app.use("/api/feedback", feedbackRouter)
 app.use("/api/singleplayer", singleplayerRouter)
 app.use("/api/singleplayer/stats", singleplayerStatsRouter)
+app.use("/api/account/changeemail", changeEmailRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))

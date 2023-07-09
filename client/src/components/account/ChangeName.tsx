@@ -18,7 +18,6 @@ export default function ChangeName() {
             <h3>Change username</h3>
             <div className="__nbflex">
                 <div className="_input_container">
-                    <label htmlFor="usernm">Username</label>
                     <input type="text" placeholder="Enter a new username" id="usernm" className="rt__default_input mwdt" autoComplete="off" onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <button onClick={() => mutation.mutate()}>Rename</button>

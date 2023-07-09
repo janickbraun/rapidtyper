@@ -41,7 +41,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             await transporter.sendMail({
                 from: '"RapidTyper" <rapidtyper@grovider.co>',
                 to: verifyUser.email,
-                subject: "Verify email",
+                subject: "Please verify your email on RapidTyper",
                 text: "Hey " + verifyUser.username + "!\nWelcome to RapidTyper. Please verify your email by clicking the following link: " + link + "\nYour RapidTyper-Team", // plain text body
                 //html: "<div></div>", // html body
             })
