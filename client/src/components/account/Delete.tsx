@@ -28,8 +28,8 @@ export default function Delete() {
             </div>
             <button onClick={() => mutation.mutate()}>Delete</button>
             </div>
-            {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
-            {mutation.isSuccess && <div>Successfully deleted account</div>}
+            {mutation.isError && <div className="cserror" style={{transform: "translate(0)", margin: 0}}>An error occurred: {mutation.error.response.data}</div>}
+            {mutation.isSuccess && <div className="cssuccess" style={{transform: "translate(0)", margin: 0}}>Successfully changed country</div>}
         </div>
     )
 }
