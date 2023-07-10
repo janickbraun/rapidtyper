@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useEffectOnce } from "react-use"
+import TextRequests from "./TextRequests"
 
 export default function Admin() {
     let navigate = useNavigate()
@@ -28,6 +29,7 @@ export default function Admin() {
                 <div>
                     <h1>Admin</h1>
                     <AddSkin />
+                    <TextRequests />
                 </div>
             ) : (
                 <h1>Not Found</h1>
