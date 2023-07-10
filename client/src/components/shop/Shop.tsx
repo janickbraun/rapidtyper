@@ -171,7 +171,7 @@ export default function Shop() {
                             <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
                                 <div className="imagecontainer">
                                     <div className="glowparent">
-                                        <img src={"/img/skins/" + item.filename + ".png"} className="glowimg i_loading" alt={item.name} width={100} height={100} draggable="false" />
+                                        <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
                                     </div>
                                 </div>
                                 <div className="textcontainer">
