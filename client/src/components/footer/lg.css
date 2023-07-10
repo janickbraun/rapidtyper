@@ -495,9 +495,9 @@ input.mwdt{
     margin-bottom: 1rem;
 }
 .css-b62m3t-container{
-    margin-bottom: 1rem;
     color: #000;
     max-width: 340px;
+    width: 400px;
 }
 .authform{
     margin: 1rem 0 .4rem 0;
@@ -1560,4 +1560,13 @@ td:not(.userTd, .date_exclude_monospace){
     color: transparent;
     user-select: none;
     margin-bottom: 5px;
+}
+.textonlybtn{
+    margin: 0;
+    padding: 0;
+    width: auto;
+    max-width: auto;
+    border-radius: 0;
+    background-color: transparent !important;
+    color: #2563eb;
 }
