@@ -81,7 +81,7 @@ const ProgressBar = (props: any) => {
         <div style={containerStyles} className="default_PGBAR">
             <div style={fillerStyles}>
                 <div style={labelStyles}>
-                    <div style={{ zIndex: "400", cursor: "help" }}>
+                    <div style={{ zIndex: "400" }}>
                         {done && online ? (
                             <Link className="wnc" to={"/user/" + name} reloadDocument={true} style={{ display: "flex" }}>
                                 <p style={{ width: "max-content" }}>
