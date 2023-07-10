@@ -27,7 +27,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const username = user.username
 
-        if (findLobby.finished) return res.status(300).json({ reason: "finished", username })
+        if (!findLobby.joinable) return res.status(300).json({ reason: "joinable", username })
 
         if (findLobby.participants.length > 4) return res.status(300).json({ reason: "full", username })
 

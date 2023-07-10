@@ -157,7 +157,7 @@ export default function Multiplayer() {
         },
         onError: ({ data }) => {
             if (data.reason === "full" && data.username === checkUsername) window.location.href = "/"
-            if (data.reason === "finished" && data.username === checkUsername) window.location.href = "/"
+            if (data.reason === "joinable" && data.username === checkUsername) window.location.href = "/"
             console.log(data)
         },
     })
