@@ -120,7 +120,7 @@ export default function Shop() {
                         </button>
                     </div>
                     <div className="contentdisplay">
-                        <div className="mask_contentparent" style={glowAssist}>
+                        <div className={skin === "jesus" ? "mask_contentparent jesus" : "mask_contentparent"} style={glowAssist}>
                             <div className="glowLayerassist"></div>
                             <img loading="eager" src={"/img/skins/" + skin + ".png"} alt={name} className="shopimagedisplay" draggable="false" />
                         </div>

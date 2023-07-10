@@ -656,13 +656,13 @@ label{
     font-weight: 600;
 }
 .monospace__important{
-    font-family: monospace;
+    font-family: monospace; /* 'Space Mono', */
     font-size: 22px;
 }
 ._sgchar{
     /* background-color: red; */
-    padding: 2px .2px;
-    margin: 0;
+    padding: 2px 0;
+    margin: 1px 0;
     border-radius: 2px;
     user-select: none;
     font-size: 26px;
@@ -1270,7 +1270,7 @@ a.wnc{
 }
 .absolutebottom_v2{
     width: 20%;
-    border-radius: 20rem !important;
+    border-radius: 10px !important;
     justify-content: center;
     margin: .4rem 0;
 }
@@ -1458,4 +1458,35 @@ td.loadingerror{
 .loadercontent{
     display: flex;
     justify-content: center;
+}
+.mask_contentparent.jesus{
+    background-size: 19%;
+}
+.statisitccontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.slg_txt{
+    font-size: 12px;
+    color: #ffffff8b;
+    max-width: 350px;
+    margin-top: 1rem;
+}
+.statistics_header{
+    font-size: 32px;
+    margin-bottom: 0.5rem;
+}
+.sttsvg{
+    transform: translateY(2px);
+}
+.c_hid{
+    text-align: center;
+    color: #ffffff8b;
+}
+@import url(https://cdn.grovider.co/fonts/space-mono.css);
+td:not(.userTd, .date_exclude_monospace){
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
 }

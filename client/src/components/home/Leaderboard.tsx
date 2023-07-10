@@ -97,7 +97,7 @@ export default function Leaderboard() {
                                         <td>{val.racesWon}</td>
                                         <td>{addZeroes(val.bestRace)}wpm</td>
                                         <td>{addZeroes(getAverage(val.accuracy))}%</td>
-                                        <td>{new Date(val.creationDate).toLocaleDateString()}</td>
+                                        <td className="date_exclude_monospace">{new Date(val.creationDate).toLocaleDateString()}</td>
                                     </tr>
                                 )
                             })}

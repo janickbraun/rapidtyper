@@ -186,6 +186,9 @@
         background-size: 25% !important;
         height: 100px !important;
     }
+    .mask_contentparent.jesus{
+        background-size: 32% !important;
+    }
     .conftext{
         z-index: 200000;
         font-size: 14px;

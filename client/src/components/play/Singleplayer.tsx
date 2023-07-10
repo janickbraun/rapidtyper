@@ -135,7 +135,7 @@ export default function Singleplayer() {
     }, [done, startStopwatch, startDateTime, currentIndex])
 
     const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} className="intent__container intent__sinle" key={i}>
+        <div style={{ display: "inline-flex" }} className="intent__container intent__single" key={i}>
             {element.character === " " ? (
                 <>
                     {element.correct === undefined && (
@@ -470,30 +470,34 @@ export default function Singleplayer() {
             )}
             {isCapsLocked && <div className="uw_attentioncolorbtn">WARNING: CapsLock is active</div>}
             {loggedin && done && (
-                <div>
-                    <h3>Statistic in Singleplayer</h3>
-                    <p>Please note that these stats are not public and will not appear in the leaderboard. Singleplayer is ment for practice.</p>
-                    <div>
-                        <span className="stat_giver">Speed:</span> <span className="stat_reader">{statsWpm}wpm</span>
-                    </div>
-                    <div>
-                        <span className="stat_giver">Accuracy:</span> <span className="stat_reader">{statsAccuracy}%</span>
-                    </div>
-                    <div>
-                        <span className="stat_giver">Practices completed:</span> <span className="stat_reader">{statsTotal}</span>
-                    </div>
-                    <div>
-                        <span className="stat_giver">Fastest practice:</span> <span className="stat_reader">{statsBest}wpm</span>
-                    </div>
-                    <div>
-                        <span className="stat_giver">Time spent practicing:</span> <span className="stat_reader">{new Date(statsTimeSpent * 1000).toISOString().substring(11, 19)}</span>
+                <div className="statisitccontainer">
+                    <div className="innerstats static_container">
+                        <h3 className="statistics_header">
+                            <svg className="sttsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><defs></defs><path className="fa-primary" d="M544 192h-32c-17.67 0-32 14.33-32 32v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C576 206.3 561.7 192 544 192zM224 192H192C174.3 192 160 206.3 160 224v256c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V224C256 206.3 241.7 192 224 192zM64 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-96C96 366.3 81.67 352 64 352zM384 320h-32c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-128C416 334.3 401.7 320 384 320z"></path><path className="fa-secondary" d="M576 48C576 74.5 554.5 96 528 96c-6.125 0-12-1.25-17.38-3.375l-95.38 76.25C415.6 171.3 416 173.6 416 176C416 202.5 394.5 224 368 224S320 202.5 320 176c0-2.375 .375-4.75 .75-7.125L225.4 92.63C220 94.75 214.1 96 208 96C203.8 96 199.6 95.25 195.8 94.25L94.25 195.8C95.25 199.6 96 203.8 96 208C96 234.5 74.5 256 48 256S0 234.5 0 208S21.5 160 48 160c4.25 0 8.375 .75 12.25 1.75l101.5-101.5C160.8 56.37 160 52.25 160 48C160 21.5 181.5 0 208 0S256 21.5 256 48c0 2.375-.375 4.75-.75 7.125l95.38 76.25C356 129.3 361.9 128 368 128s12 1.25 17.38 3.375l95.38-76.25C480.4 52.75 480 50.38 480 48C480 21.5 501.5 0 528 0S576 21.5 576 48z"></path></svg>
+                            Statistics</h3>
+                        <div>
+                            <span className="stat_giver">Speed:</span> <span className="stat_reader">{statsWpm}wpm</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Accuracy:</span> <span className="stat_reader">{statsAccuracy}%</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Practices completed:</span> <span className="stat_reader">{statsTotal}</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Fastest practice:</span> <span className="stat_reader">{statsBest}wpm</span>
+                        </div>
+                        <div>
+                            <span className="stat_giver">Time spent practicing:</span> <span className="stat_reader">{new Date(statsTimeSpent * 1000).toISOString().substring(11, 19)}</span>
+                        </div>
+                        <p className="slg_txt">Please note that statistics for singleplayer are not public and will not appear on the leaderboard.</p>
                     </div>
                 </div>
             )}
 
             {!loggedin && (
-                <div>
-                    If you want to safe your statistics, then please <Link to="/account/login">login</Link>.
+                <div className="c_hid">
+                    If you would like to see the detailed statistics, please <Link className="_userlink" to="/account/login">log in</Link>.
                 </div>
             )}
         </main>
