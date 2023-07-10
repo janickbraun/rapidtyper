@@ -155,7 +155,6 @@ const ProgressBar = (props: any) => {
                             )}
                         </div>
                     )}
-                    {/* end */}
                 </div>
             </div>
         </div>

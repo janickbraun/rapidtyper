@@ -95,7 +95,6 @@ export default function About() {
                     </h2>
                     <div className="__dcflexcontent">
                         <div className="__ffcmemecontainer">
-                            {/* rt_development.webp */}
                             <div className="__quote ">
                                 <figure className="__fndimg">
                                     <img src="/img/rt_development.gif" alt="Janick & Luis" className="_frg_founders" loading="lazy" />

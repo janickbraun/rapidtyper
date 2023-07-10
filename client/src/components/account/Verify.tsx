@@ -29,8 +29,8 @@ export default function Reset() {
         <main>
             {mutation.isError && <div className="cserror">{mutation.error.message}</div>}
             {mutation.isSuccess && (
-                <div className="cssuccess" style={{maxWidth: "max-content", marginLeft: "2rem"}}>
-                    Your email is now verified! Thank you for your efforts. We are going to reward you with a new skin. Check it out: {/* Bro Janick grammar frech */}
+                <div className="cssuccess" style={{ maxWidth: "max-content", marginLeft: "2rem" }}>
+                    Your email is now verified! Thank you for your efforts. We are going to reward you with a new skin. Check it out:
                     <Link to={"/user/" + username}>
                         <button>{username}'s profile</button>
                     </Link>

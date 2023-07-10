@@ -566,8 +566,6 @@ export default function Multiplayer() {
                 </div>
             )}
 
-            {/* !!!! */}
-
             <br />
         </main>
     )
