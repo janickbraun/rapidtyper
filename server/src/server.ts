@@ -104,7 +104,7 @@ io.on("connection", (socket: any) => {
             const loggedin = await User.exists({ _id: temporaryUser.id })
             const lobby = await Lobby.findOne({ code })
             const user = await User.findOne({ username })
-            if (!lobby || !user || !loggedin) return console.log("deleted")
+            if (!lobby || !user || !loggedin) return
             const text = await Text.findOne({ _id: lobby.text })
             if (!text) return
             const textLength = text.text.length

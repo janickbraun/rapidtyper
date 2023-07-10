@@ -27,7 +27,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const username = user.username
 
-        if (findLobby.participants.length > 3) return res.status(300).json({ reason: "full", username })
+        if (findLobby.participants.length > 4) return res.status(300).json({ reason: "full", username })
 
         if (!findLobby.participants.some((e) => e.username === username)) {
             await Lobby.updateOne(
@@ -47,10 +47,10 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const roomSize = finalLobby.participants.length
 
-        if (roomSize > 1) {
+        if (roomSize === 2) {
             io.to(String(finalLobby.code)).emit("waiting")
         }
-        if (roomSize >= 3) {
+        if (roomSize >= 4) {
             await Lobby.updateOne(
                 {
                     _id: findLobby._id,
