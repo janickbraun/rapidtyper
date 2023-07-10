@@ -19,11 +19,11 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             code,
         })
 
-        if (!findLobby) return res.status(300).send("No joinable lobby found") // HTTP 409?
+        if (!findLobby) return res.status(300).send("No joinable lobby found")
 
         const user = await User.findById(temporaryUser.id)
 
-        if (!loggedin || !user) return res.status(300).send("Invalid user") // HTTP 409?
+        if (!loggedin || !user) return res.status(300).send("Invalid user")
 
         const username = user.username
 

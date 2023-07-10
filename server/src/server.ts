@@ -213,7 +213,6 @@ io.on("connection", (socket: any) => {
             })
         }
 
-        //if (io.sockets.adapter.rooms.get(data.code)?.size > 2) return
         socket.join(String(data.code))
         if (data.code.length === 4) {
             typists.push({
@@ -260,7 +259,7 @@ io.on("connection", (socket: any) => {
 
     socket.on("error", function (err: any) {
         if (err.description) throw err.description
-        else throw err // Or whatever you want to do
+        else throw err
     })
 })
 
