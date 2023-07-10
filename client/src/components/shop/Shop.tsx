@@ -83,9 +83,91 @@ export default function Shop() {
             <div className="contentflex">
                 <h1 className="shopheader">Shop</h1>
                 <p>
-                    Shop updates daily. Next update in: <CountDown seconds={seconds} />
+                    Shop updates daily. Next update in: {mutation.isLoading ? <div className="skeleton__small"></div> : <CountDown seconds={seconds} />}
                 </p>
 
+                {mutation.isLoading ? 
+                    <div className="shopitemcontai">
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                        <div className="shopsingleitem _fitem paypal4 itemContainerParent">
+                            <div className="imagecontainer">
+                                <div className="glowparent">
+                                    <div className="skeleton_shop_img"/>
+                                </div>
+                            </div>
+                            <div className="textcontainer">
+                                <p className="skin_namecaller_skeleton">loading</p>
+                            </div>
+                            <div className="itemdescriptioncontainer">
+                                <p className="itemdsc_skeleton">loading</p>
+                            </div>
+                        </div>
+                    </div>
+                :
                 <div className="shopitemcontai">
                     {skins.map((item: any) => (
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
@@ -105,6 +187,7 @@ export default function Shop() {
                         </div>
                     ))}
                 </div>
+                }
             </div>
             <br />
             <br />
