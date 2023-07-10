@@ -314,6 +314,8 @@ import feedbackRouter from "./routes/feedback"
 import singleplayerRouter from "./routes/singleplayer"
 import singleplayerStatsRouter from "./routes/getSingleplayerStats"
 import changeEmailRouter from "./routes/account/changeemail"
+import textRequestRouter from "./routes/textRequest"
+import getTextRequestRouter from "./routes/admin/getTextRequests"
 
 app.use("/api", indexRouter)
 app.use("/api/signup", signUpRouter)
@@ -343,6 +345,8 @@ app.use("/api/feedback", feedbackRouter)
 app.use("/api/singleplayer", singleplayerRouter)
 app.use("/api/singleplayer/stats", singleplayerStatsRouter)
 app.use("/api/account/changeemail", changeEmailRouter)
+app.use("/api/textrequest", textRequestRouter)
+app.use("/api/admin/gettextrequests", getTextRequestRouter)
 
 const root = path.join(__dirname, "../build")
 app.use(express.static(root))

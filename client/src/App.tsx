@@ -24,6 +24,7 @@ import Success from "./components/shop/Success"
 import Cancel from "./components/shop/Cancel"
 import Admin from "./components/admin/Admin"
 import Feedback from "./components/feedback/Feedback"
+import TextRequest from "./components/feedback/TextRequest"
 import "./global_responsive.css"
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                             <Route path="/shop/cancel" element={<Cancel />} />
                             <Route path="/admin" element={<Admin />} />
                             <Route path="/feedback" element={<Feedback />} />
+                            <Route path="/text-request" element={<TextRequest />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
