@@ -13,7 +13,6 @@ import UserRaceContentOverlay from "../modal/UserRaceContentOverlay"
 import Overlay from "../modal/Overlay"
 import Stopwatch from "./Stopwatch"
 import useAuth from "../../hooks/useAuth"
-import { color } from "framer-motion"
 
 const socket: Socket = io(process.env.REACT_APP_BACKEND_URL as string)
 
@@ -490,7 +489,13 @@ export default function Multiplayer() {
                                 <h1 className="resultheading">Leaderboard</h1>
                                 {winners.map((item: any, key: any) => (
                                     <div className={key === 0 ? "firstplace" : key === 1 ? "secondplace" : key === 2 ? "thirdplace" : ""} key={key}>
-                                        {key + 1 + ". "} <span className="username"><Link style={{color: "inherit"}} to={"/user/"+item.username}>{item.username}</Link></span> {" | " + addZeroes(item.wpm) + "wpm"}
+                                        {key + 1 + ". "}{" "}
+                                        <span className="username">
+                                            <Link style={{ color: "inherit" }} to={"/user/" + item.username}>
+                                                {item.username}
+                                            </Link>
+                                        </span>{" "}
+                                        {" | " + addZeroes(item.wpm) + "wpm"}
                                     </div>
                                 ))}
                             </div>

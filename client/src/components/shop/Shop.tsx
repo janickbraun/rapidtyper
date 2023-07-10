@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { useEffectOnce } from "react-use"
 import Overlay from "../modal/Overlay"
 import { unlockSkin } from "../../helpers/skinHelper"
@@ -19,6 +19,7 @@ export default function Shop() {
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [loggedin] = useAuth()
+    const imageRef = useRef<any>()
 
     const token = localStorage.getItem("token")
     const mutationBuy: any = useMutation({
@@ -74,6 +75,10 @@ export default function Shop() {
         setConfirmOpen(false)
     }
 
+    const handleImageLoad = () => {
+        imageRef.current.className = ""
+    }
+
     const glowAssist: any = {
         backgroundImage: `url(/img/skins/${skin}.png)`,
     }
@@ -82,16 +87,14 @@ export default function Shop() {
         <main>
             <div className="contentflex">
                 <h1 className="shopheader">Shop</h1>
-                <p>
-                    Shop updates daily. Next update in: {mutation.isLoading ? <div className="skeleton__small"></div> : <CountDown seconds={seconds} />}
-                </p>
+                <p>Shop updates daily. Next update in: {mutation.isLoading ? <div className="skeleton__small"></div> : <CountDown seconds={seconds} />}</p>
 
-                {mutation.isLoading ? 
+                {mutation.isLoading ? (
                     <div className="shopitemcontai">
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -104,7 +107,7 @@ export default function Shop() {
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -117,7 +120,7 @@ export default function Shop() {
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -130,7 +133,7 @@ export default function Shop() {
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -143,7 +146,7 @@ export default function Shop() {
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -156,7 +159,7 @@ export default function Shop() {
                         <div className="shopsingleitem _fitem paypal4 itemContainerParent">
                             <div className="imagecontainer">
                                 <div className="glowparent">
-                                    <div className="skeleton_shop_img"/>
+                                    <div className="skeleton_shop_img" />
                                 </div>
                             </div>
                             <div className="textcontainer">
@@ -167,27 +170,36 @@ export default function Shop() {
                             </div>
                         </div>
                     </div>
-                :
-                <div className="shopitemcontai">
-                    {skins.map((item: any) => (
-                        <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
-                            <div className="imagecontainer">
-                                <div className="glowparent">
-                                    <img src={"/img/skins/" + item.filename + ".png"} className="glowimg" alt={item.name} width={100} height={100} draggable="false" />
+                ) : (
+                    <div className="shopitemcontai">
+                        {skins.map((item: any) => (
+                            <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
+                                <div className="imagecontainer">
+                                    <div className="glowparent">
+                                        <img
+                                            src={"/img/skins/" + item.filename + ".png"}
+                                            className="glowimg"
+                                            alt={item.name}
+                                            width={100}
+                                            height={100}
+                                            draggable="false"
+                                            onLoad={handleImageLoad}
+                                            ref={imageRef}
+                                        />
+                                    </div>
                                 </div>
+                                <div className="textcontainer">
+                                    <p className="skin_namecaller">{item.name}</p>
+                                </div>
+                                <div className="itemdescriptioncontainer">
+                                    <p className="itemdsc">{item.description}</p>
+                                </div>
+                                <div className="itemprice">${item.price}</div>
+                                <br />
                             </div>
-                            <div className="textcontainer">
-                                <p className="skin_namecaller">{item.name}</p>
-                            </div>
-                            <div className="itemdescriptioncontainer">
-                                <p className="itemdsc">{item.description}</p>
-                            </div>
-                            <div className="itemprice">${item.price}</div>
-                            <br />
-                        </div>
-                    ))}
-                </div>
-                }
+                        ))}
+                    </div>
+                )}
             </div>
             <br />
             <br />
