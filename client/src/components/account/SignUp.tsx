@@ -63,7 +63,7 @@ export default function SignUp() {
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" className="rt__default_input mwdt" placeholder="Enter your email" value={values.email} onChange={handleInputChange} name="email" />
                 </div>
-                <div className="_input_container">
+                <div className="_input_container" style={{marginBottom: "1rem"}}>
                     <label htmlFor="password">Country</label>
                     <Select options={options} placeholder="Select your country" value={country} onChange={changeHandler} />
                 </div>
