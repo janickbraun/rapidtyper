@@ -1484,12 +1484,12 @@ td.loadingerror{
     text-align: center;
     color: #ffffff8b;
 }
-@import url(https://cdn.grovider.co/fonts/space-mono.css);
+/* @import url(https://cdn.grovider.co/fonts/space-mono.css);
 td:not(.userTd, .date_exclude_monospace){
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     font-weight: 500;
-}
+} */
 .skeleton__small{
     background-image: linear-gradient(90deg, #515255 20%, #535457 28%, #57595C 35%, #535457 42%, #515255 50%);
     width: 75px;
@@ -1530,6 +1530,21 @@ td:not(.userTd, .date_exclude_monospace){
     height: 100px;
 }
 .skeleton_shop_img,.skin_namecaller_skeleton,.itemdsc_skeleton{
+    background-image: linear-gradient(90deg, #515255 20%, #535457 28%, #57595C 35%, #535457 42%, #515255 50%);
+    background-color: #17181a;
+    border-radius: 14px;
+    vertical-align: middle;
+    overflow: hidden;
+    background-size: 300% 100%;
+    will-change: background-position;
+    animation: sak 2s infinite linear;
+    color: transparent;
+    user-select: none;
+    margin-bottom: 5px;
+}
+.glowimg.i_loading{
+    width: 100px;
+    height: 100px;
     background-image: linear-gradient(90deg, #515255 20%, #535457 28%, #57595C 35%, #535457 42%, #515255 50%);
     background-color: #17181a;
     border-radius: 14px;

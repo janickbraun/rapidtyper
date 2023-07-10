@@ -76,7 +76,7 @@ export default function Shop() {
     }
 
     const handleImageLoad = () => {
-        imageRef.current.className = ""
+        imageRef.current.className = "glowimg"
     }
 
     const glowAssist: any = {
@@ -178,7 +178,7 @@ export default function Shop() {
                                     <div className="glowparent">
                                         <img
                                             src={"/img/skins/" + item.filename + ".png"}
-                                            className="glowimg"
+                                            className="glowimg i_loading"
                                             alt={item.name}
                                             width={100}
                                             height={100}
