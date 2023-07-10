@@ -2,6 +2,29 @@
     .src_logo{
         height: 40px;
     }
+    .hinttext{
+        display: none;
+    }
+    .dd_cflx{
+        width: max-content;
+        margin: 0;
+    }
+    .rt__buttonset__inrace_actionsbtns{
+        flex-wrap: nowrap;
+        margin-bottom: 1.5rem;
+    }
+    ._sgchar{
+        font-size: 22px;
+    }
+    .dd_cflx{
+        font-size: 15px;
+    }
+    .authorS{
+        font-size: 14px;
+    }
+    .dd_cflx{
+        display: none;
+    }
     ._linklisting{
         position: absolute;
         top: 55px;

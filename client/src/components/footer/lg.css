@@ -1165,8 +1165,12 @@ figure.__fndimg{
     column-gap: 1rem;
     margin: 5rem;
     margin-bottom: 2rem;
-    margin-left: 3.4rem;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 0;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .fwsvg{
     height: 24px;
@@ -1377,7 +1381,7 @@ nav,footer,.__completemodal,.hinttext,.onHoverContainer,.default_PGBAR,.usergame
 .dd_cflx{
     display: flex;
     margin-right: auto;
-    margin-left: 9rem;
+    margin-left: 1rem;
     font-size: 18px;
     color: #ffffffa7;
     transform: translateY(5px);
