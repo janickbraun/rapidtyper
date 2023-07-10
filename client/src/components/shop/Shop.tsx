@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import { useEffectOnce } from "react-use"
 import Overlay from "../modal/Overlay"
 import { unlockSkin } from "../../helpers/skinHelper"
@@ -19,7 +19,6 @@ export default function Shop() {
     const [price, setPrice] = useState<number>(0)
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [loggedin] = useAuth()
-    const imageRef = useRef<any>()
 
     const token = localStorage.getItem("token")
     const mutationBuy: any = useMutation({
@@ -73,10 +72,6 @@ export default function Shop() {
         setPrice(0)
         setLoading("")
         setConfirmOpen(false)
-    }
-
-    const handleImageLoad = () => {
-        imageRef.current.className = "glowimg"
     }
 
     const glowAssist: any = {
@@ -176,16 +171,7 @@ export default function Shop() {
                             <div className="shopsingleitem _fitem paypal4 itemContainerParent" onClick={() => handleClick(item.filename, item.price, item.name, item.filename)} key={item.name}>
                                 <div className="imagecontainer">
                                     <div className="glowparent">
-                                        <img
-                                            src={"/img/skins/" + item.filename + ".png"}
-                                            className="glowimg i_loading"
-                                            alt={item.name}
-                                            width={100}
-                                            height={100}
-                                            draggable="false"
-                                            onLoad={handleImageLoad}
-                                            ref={imageRef}
-                                        />
+                                        <img src={"/img/skins/" + item.filename + ".png"} className="glowimg i_loading" alt={item.name} width={100} height={100} draggable="false" />
                                     </div>
                                 </div>
                                 <div className="textcontainer">
