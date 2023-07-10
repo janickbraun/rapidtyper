@@ -23,10 +23,12 @@ export default function ChangeName() {
     return (
         <div>
             <h3>Change country</h3>
+            <div style={{display: "flex", alignItems: "center", columnGap: "2rem"}}>
             <Select options={options} value={country} onChange={changeHandler} />
             <button onClick={() => mutation.mutate()}>Change</button>
-            {mutation.isError && <div>An error occurred: {mutation.error.response.data}</div>}
-            {mutation.isSuccess && <div>Successfully changed country</div>}
+            </div>
+            {mutation.isError && <div className="cserror" style={{transform: "translate(0)", margin: 0}}>An error occurred: {mutation.error.response.data}</div>}
+            {mutation.isSuccess && <div className="cssuccess" style={{transform: "translate(0)", margin: 0}}>Successfully changed country</div>}
         </div>
     )
 }

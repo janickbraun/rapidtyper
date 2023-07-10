@@ -19,12 +19,11 @@ export default function ChangeEmail() {
     })
 
     return (
-        <div>
-            <h3>Change email</h3>
-            <div className="__nbflex">
+        <div style={{textAlign: "center"}}>
+            <div className="__nbflex" style={{margin: "1.2rem 2rem"}}>
                 <div className="_input_container">
-                    <input type="email" placeholder="Enter new email" autoComplete="off" onChange={(e) => setEmail(e.target.value)} value={email} />
-                    <input type="password" placeholder="Confirm with password" autoComplete="off" onChange={(e) => setPassword(e.target.value)} value={password} />
+                    <input type="email" placeholder="Enter new email" className="rt__default_input" autoComplete="off" onChange={(e) => setEmail(e.target.value)} value={email} />
+                    <input type="password" placeholder="Confirm with password" className="rt__default_input" autoComplete="off" onChange={(e) => setPassword(e.target.value)} value={password} />
                 </div>
                 <button onClick={() => mutation.mutate()}>Change email</button>
             </div>
