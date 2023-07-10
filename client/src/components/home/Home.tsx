@@ -123,7 +123,6 @@ export default function Home() {
                                     <div className="profile_actionset">
                                         <div className="__buttonset">
                                             <>
-                                                {/* <button  className="largebtn">Play multiplayer</button> */}
                                                 <button onClick={handleMultiplayer} className="noscale">
                                                     <div className="nv-groupsvg">
                                                         <svg className="cnvsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import "./header.css"
 import useIsInGame from "../../hooks/useIsInGame"
@@ -30,6 +30,12 @@ export default function Header({ children }: { children: React.ReactNode }) {
             window.removeEventListener("resize", handleResize)
         }
     }, [])
+
+    let location = useLocation()
+
+    useEffect(() => {
+        setShowNav(false)
+    }, [location])
 
     useEffect(() => {
         setShowNav(windowWidth > 750)
@@ -66,7 +72,6 @@ export default function Header({ children }: { children: React.ReactNode }) {
                     </Link>
                 </div>
                 <div className="navigation-link container-nav">
-                    {/**/}
                     {width <= 750 && (
                         <button onClick={handleClick} className="specialbtn toggleNav">
                             <svg xmlns="http://www.w3.org/2000/svg" className="nvsvg" viewBox="0 0 448 512">

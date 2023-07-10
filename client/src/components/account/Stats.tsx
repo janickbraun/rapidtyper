@@ -184,7 +184,6 @@ export default function Stats(props: any) {
                         </div>
                     )}
                     <div className="user_pfd_container">
-                        {/* */}
                         <div>
                             <div className="cf__imgc__flxc">
                                 <figure className="user__skincontainer">

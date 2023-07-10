@@ -82,7 +82,7 @@ export default function Shop() {
         <main>
             <div className="contentflex">
                 <h1 className="shopheader">Shop</h1>
-                <p>Shop updates daily. Next update in: {mutation.isLoading ? <div className="skeleton__small"></div> : <CountDown seconds={seconds} />}</p>
+                <p>Shop updates daily. Next update in: {mutation.isLoading ? <span className="skeleton__small"></span> : <CountDown seconds={seconds} />}</p>
 
                 {mutation.isLoading ? (
                     <div className="shopitemcontai">
