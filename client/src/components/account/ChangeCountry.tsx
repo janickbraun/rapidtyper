@@ -22,7 +22,7 @@ export default function ChangeName() {
 
     return (
         <div>
-            <h3>Change country</h3>
+            <h3 className="cshandler">Change country:</h3>
             <div style={{display: "flex", alignItems: "center", columnGap: "2rem"}}>
             <Select options={options} value={country} onChange={changeHandler} />
             <button onClick={() => mutation.mutate()}>Change</button>

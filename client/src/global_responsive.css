@@ -285,4 +285,11 @@
     .loginhint_inner{
         margin-top: 0;
     }
+    .__account__container{
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0;
+        border: none;
+        margin-top: 0 !important;
+    }
 }

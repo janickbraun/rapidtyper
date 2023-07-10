@@ -1561,7 +1561,7 @@ td:not(.userTd, .date_exclude_monospace){
     user-select: none;
     margin-bottom: 5px;
 }
-.textonlybtn{
+.textonlybtn, .textonlybtn a{
     margin: 0;
     padding: 0;
     width: auto;
@@ -1569,4 +1569,15 @@ td:not(.userTd, .date_exclude_monospace){
     border-radius: 0;
     background-color: transparent !important;
     color: #2563eb;
+    text-decoration: 2px solid underline;
+    margin-left: 1rem;
+}
+.textonlybtn:hover, .textonlybtn a:hover{
+    text-decoration: none;
+}
+h3.cshandler{
+    margin-bottom: 6px;
+}
+.__account__container{
+    margin-top: 7rem;
 }

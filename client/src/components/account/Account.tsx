@@ -63,7 +63,7 @@ export default function Account() {
                                 <p className="cshandler">
                                     <span>{username}</span>
                                     <button className="textonlybtn" onClick={() => setChangeNameOpen(!changeNameOpen)}>Change</button>
-                                    <button className="textonlybtn">
+                                    <button className="textonlybtn" style={{marginLeft: 0}}>
                                         <Link tabIndex={-1} to={"/user/" + username}>View your profile</Link>
                                     </button>
                                 </p>
@@ -101,22 +101,19 @@ export default function Account() {
                                     <ChangeEmail />
                                 </div>
                                 }
-                                <br/>
+                                <br />
                                 <ChangeCountry />
                                 <br />
                                 <ChangePassword />
+                                <br />
+                                <Delete />
+                                <br />
                             </div>
-                        </div>
-
-                        
-                        <div className="dangerzone">
-                            <h2 className="dzh">Danger zone</h2>
-                            <Delete />
                         </div>
                     </>
                 ) : (
                     <>
-                        <h1>Error 403 - You need to sign in!</h1>
+                        <h1>You need to sign in!</h1>
                     </>
                 )}
             </div>
