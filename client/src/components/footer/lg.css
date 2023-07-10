@@ -1170,7 +1170,6 @@ figure.__fndimg{
     margin-top: 0;
     width: 80%;
     flex-wrap: wrap;
-    justify-content: center;
 }
 .fwsvg{
     height: 24px;
