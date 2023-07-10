@@ -92,7 +92,6 @@ io.on("connection", (socket: any) => {
 
     socket.on("finish", async (data: any) => {
         try {
-            console.log("server finsih1")
             const accuracy = data.accuracy
             const username = data.username
             const token = data.token
@@ -110,7 +109,6 @@ io.on("connection", (socket: any) => {
             const textLength = text.text.length
             const time = Number(Math.abs((now - Number(lobby.startTime)) / 1000).toFixed(2))
             const wpm = Number((textLength / 5 / (time / 60)).toFixed(2))
-            console.log("server finsih2")
             io.sockets.in(String(code)).emit("finish", { username, wpm, time })
             let tempAcc = user.accuracy
             let tempWpm = user.wpm

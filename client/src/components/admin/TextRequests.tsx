@@ -14,7 +14,6 @@ export default function AddSkin() {
         },
         onSuccess: ({ data }) => {
             setRequests(data.requests)
-            console.log(data.requests)
         },
         onError: (e) => {
             console.log(e)

@@ -390,7 +390,6 @@ export default function Multiplayer() {
                 const accuracy = Number((((splitted.length - mistakes) / splitted.length) * 100).toFixed(2))
 
                 socket.emit("finish", { username, code, accuracy, token, date: new Date() })
-                console.log("finish emit ")
                 socket.emit("typing", { completed: splitted.length - 1, code, username })
 
                 setStopwatch(false)

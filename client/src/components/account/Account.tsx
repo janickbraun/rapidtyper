@@ -25,9 +25,6 @@ export default function Account() {
         mutationFn: async () => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verifyanother", { token })
         },
-        onSuccess: ({ data }) => {
-            console.log(data)
-        },
     })
 
     useEffect(() => {
@@ -62,45 +59,51 @@ export default function Account() {
                                 <h3 className="cshandler">Your username: </h3>
                                 <p className="cshandler">
                                     <span>{username}</span>
-                                    <button className="textonlybtn" onClick={() => setChangeNameOpen(!changeNameOpen)}>Change</button>
-                                    <button className="textonlybtn" style={{marginLeft: 0}}>
-                                        <Link tabIndex={-1} to={"/user/" + username}>View your profile</Link>
+                                    <button className="textonlybtn" onClick={() => setChangeNameOpen(!changeNameOpen)}>
+                                        Change
+                                    </button>
+                                    <button className="textonlybtn" style={{ marginLeft: 0 }}>
+                                        <Link tabIndex={-1} to={"/user/" + username}>
+                                            View your profile
+                                        </Link>
                                     </button>
                                 </p>
                                 {changeNameOpen ? <Overlay /> : ""}
-                                {changeNameOpen && 
-                                <div className="share__modal selector_container">
-                                    <h1 className="modalCallerHeader kpbb">Change username</h1>
-                                    <div className="close_container">
-                                        <button className="close-modal-button" onClick={() => setChangeNameOpen(false)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
-                                                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                                            </svg>
-                                        </button>
+                                {changeNameOpen && (
+                                    <div className="share__modal selector_container">
+                                        <h1 className="modalCallerHeader kpbb">Change username</h1>
+                                        <div className="close_container">
+                                            <button className="close-modal-button" onClick={() => setChangeNameOpen(false)}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
+                                                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <ChangeName />
                                     </div>
-                                    <ChangeName/>
-                                </div>
-                                }
+                                )}
                                 <br />
                                 <h3 className="cshandler">Your email: </h3>
                                 <p className="cshandler">
                                     <span>{email}</span>
-                                    <button className="textonlybtn" onClick={() => setChangeEmailOpen(!changeEmailOpen)}>Change</button>
+                                    <button className="textonlybtn" onClick={() => setChangeEmailOpen(!changeEmailOpen)}>
+                                        Change
+                                    </button>
                                 </p>
                                 {changeEmailOpen ? <Overlay /> : ""}
-                                {changeEmailOpen && 
-                                <div className="share__modal selector_container">
-                                    <h1 className="modalCallerHeader kpbb">Change email</h1>
-                                    <div className="close_container">
-                                        <button className="close-modal-button" onClick={() => setChangeEmailOpen(false)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
-                                                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                                            </svg>
-                                        </button>
+                                {changeEmailOpen && (
+                                    <div className="share__modal selector_container">
+                                        <h1 className="modalCallerHeader kpbb">Change email</h1>
+                                        <div className="close_container">
+                                            <button className="close-modal-button" onClick={() => setChangeEmailOpen(false)}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="csvg" viewBox="0 0 320 512">
+                                                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <ChangeEmail />
                                     </div>
-                                    <ChangeEmail />
-                                </div>
-                                }
+                                )}
                                 <br />
                                 <ChangeCountry />
                                 <br />

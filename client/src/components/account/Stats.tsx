@@ -55,9 +55,6 @@ export default function Stats(props: any) {
         mutationFn: async () => {
             return await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/account/verifyanother", { token })
         },
-        onSuccess: ({ data }) => {
-            console.log(data)
-        },
     })
 
     const mutationSkin: any = useMutation({

@@ -21,8 +21,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const author = req.body.author
     const url = req.body.url
 
-    console.log(text, author, url)
-
     try {
         const temporaryUser: any = jwt.verify(token, process.env.JWT_SECRET as string)
 
