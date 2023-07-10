@@ -47,7 +47,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
         const roomSize = finalLobby.participants.length
 
-        if (roomSize === 2) {
+        if (roomSize > 1) {
             io.to(String(finalLobby.code)).emit("waiting")
         }
         if (roomSize >= 4) {
