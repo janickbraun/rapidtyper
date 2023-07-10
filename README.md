@@ -1,4 +1,4 @@
-![RapidTyper](https://favicon.grovider.co/rapidtyper/apple-touch-icon.png)
+![RapidTyper](https://rapidtyper.com/img/rapidtyper-logo.png)
 
 # RapidTyper
 
