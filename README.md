@@ -1,4 +1,4 @@
-![RapidTyper](https://rapidtyper.com/img/rapidtyper-logo.png)
+![RapidTyper](https://groviderstatic.net/branding/logos/RapidTyper.svg)
 
 # RapidTyper
 
