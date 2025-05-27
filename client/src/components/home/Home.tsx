@@ -169,7 +169,7 @@ export default function Home() {
                             <p className="complete">Unlock skins, play multiplayer, and discover other amazing features exclusively for registered users.</p>
                         </div>
                         <div className="buttons_callercontainer">
-                            <Link to={"/account/signup"} tabIndex={-1}>
+                            <Link to={"/account/login"} tabIndex={-1}>
                                 <button className="primary_action largebtn" style={{gap: ".5em"}}>
                                     <span className="btninspan">Log in</span>
                                     <figure className="clcionct">

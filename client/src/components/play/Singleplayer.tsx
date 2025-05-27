@@ -134,57 +134,123 @@ export default function Singleplayer() {
         }
     }, [done, startStopwatch, startDateTime, currentIndex])
 
-    const listItems = textArray.map((element: any, i: number) => (
-        <div style={{ display: "inline-flex" }} className="intent__container intent__single" key={i}>
-            {element.character === " " ? (
-                <>
-                    {element.correct === undefined && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>
-                            &nbsp;
-                        </div>
+    const groupIntoWords = (textArray: any[]) => {
+        const words: any[] = [];
+        let currentWord: any[] = [];
+
+        textArray.forEach((element, index) => {
+            if (element.character === " ") {
+                if (currentWord.length > 0) {
+                    words.push({ characters: currentWord, isSpace: false });
+                    currentWord = [];
+                }
+                words.push({ characters: [element], isSpace: true });
+            } else {
+                currentWord.push(element);
+            }
+            if (index === textArray.length - 1 && currentWord.length > 0) {
+                words.push({ characters: currentWord, isSpace: false });
+            }
+        });
+
+        return words;
+    };
+
+    const listItems = groupIntoWords(textArray).map((word: any, wordIndex: number) => (
+        <div
+            key={wordIndex}
+            style={{ display: "inline-flex", whiteSpace: "nowrap" }}
+            className="intent__container intent__single"
+        >
+            {word.characters.map((element: any, charIndex: number) => (
+                <div key={`${wordIndex}-${charIndex}`}>
+                    {element.character === " " ? (
+                        <>
+                            {element.correct === undefined && (
+                                <div className="_sgchar _sgchar__space" style={{ display: "inline" }}>
+                                    &nbsp;
+                                </div>
+                            )}
+                            {element.correct && (
+                                <div
+                                    className="_sgchar _sgchar__space"
+                                    style={{
+                                        backgroundColor: "#5bba6f26",
+                                        verticalAlign: "text-bottom",
+                                    }}
+                                >
+                                    &nbsp;
+                                </div>
+                            )}
+                            {element.correct === false && (
+                                <div
+                                    className="_sgchar _sgchar__space"
+                                    style={{
+                                        backgroundColor: "#ff333326",
+                                        verticalAlign: "text-bottom",
+                                    }}
+                                >
+                                    &nbsp;
+                                </div>
+                            )}
+                            {element.correct === null && (
+                                <div
+                                    className="_sgchar _sgchar__space underline__advanced"
+                                    style={{
+                                        backgroundColor: "#3a3c436a",
+                                        verticalAlign: "text-bottom",
+                                    }}
+                                >
+                                    &nbsp;
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            {element.correct === undefined && (
+                                <div className="_sgchar _sgchar__charR" style={{ display: "inline-block" }}>
+                                    {element.character}
+                                </div>
+                            )}
+                            {element.correct && (
+                                <div
+                                    className="_sgchar _sgchar__charR"
+                                    style={{
+                                        color: "#5bba6f",
+                                        backgroundColor: "#5bba6f26",
+                                    }}
+                                >
+                                    {element.character}
+                                </div>
+                            )}
+                            {element.correct === false && (
+                                <div
+                                    className="_sgchar _sgchar__charR"
+                                    style={{
+                                        color: "#ff3333",
+                                        backgroundColor: "#ff333326",
+                                    }}
+                                >
+                                    {element.character}
+                                </div>
+                            )}
+                            {element.correct === null && (
+                                <div
+                                    className="_sgchar _sgchar__space underline__advanced"
+                                    style={{
+                                        backgroundColor: "#3a3c436a",
+                                        verticalAlign: "text-bottom",
+                                    }}
+                                >
+                                    {element.character}
+                                </div>
+                            )}
+                        </>
                     )}
-                    {element.correct && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#5bba6f26", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div className="_sgchar _sgchar__space" style={{ display: "inline", backgroundColor: "#ff333326", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                    {element.correct === null && (
-                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
-                            &nbsp;
-                        </div>
-                    )}
-                </>
-            ) : (
-                <>
-                    {element.correct === undefined && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline-block" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#5bba6f", backgroundColor: "#5bba6f26" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct === false && (
-                        <div className="_sgchar _sgchar__charR" style={{ display: "inline", color: "#ff3333", backgroundColor: "#ff333326" }}>
-                            {element.character}
-                        </div>
-                    )}
-                    {element.correct === null && (
-                        <div className="_sgchar _sgchar__space underline__advanced" style={{ display: "inline", backgroundColor: "#3a3c436a", verticalAlign: "text-bottom" }}>
-                            {element.character}
-                        </div>
-                    )}
-                </>
-            )}
+                </div>
+            ))}
         </div>
-    ))
+    ));
 
     const touchDisclaimer = (e: any) => {
         const store = JSON.parse(window.localStorage.getItem("cookies") as string)
@@ -366,7 +432,7 @@ export default function Singleplayer() {
                         &nbsp;| {currentWpm}wpm
                     </div>
                 )}
-                <p className="hinttext">Playing in Singleplayer does not affect your stats</p>
+                <p className="hinttext">Playing in Singleplayer does not affect your stats.</p>
                 <button className="sortBtn cs_profilebtn muterswitch restart" onClick={handleRestart}>
                     <svg className="fwsvg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.8387 42.2989C18.7759 42.2989 14.4825 40.513 10.9584 36.9411C7.43434 33.3692 5.6779 29.0389 5.6891 23.95H9.09565C9.10485 28.0872 10.5302 31.6119 13.3718 34.5241C16.2134 37.4363 19.7022 38.8924 23.8381 38.8924C28.0315 38.8924 31.587 37.4197 34.5044 34.4744C37.4218 31.5291 38.8805 27.955 38.8805 23.7521C38.8805 19.6493 37.4076 16.1828 34.4619 13.3527C31.5161 10.5226 27.9749 9.1076 23.8381 9.1076C21.6352 9.1076 19.566 9.59837 17.6305 10.5799C15.695 11.5614 14.0058 12.8663 12.5631 14.4945H17.562V17.65H6.8728V7.0228H10.0044V12.1913C11.7616 10.1739 13.8359 8.58585 16.2272 7.42715C18.6185 6.26845 21.1555 5.6891 23.8381 5.6891C26.3779 5.6891 28.7658 6.16573 31.0017 7.119C33.2375 8.07227 35.1954 9.37123 36.8752 11.0159C38.555 12.6605 39.8769 14.5841 40.8409 16.7866C41.8049 18.989 42.287 21.3601 42.287 23.9C42.287 26.4399 41.8049 28.8277 40.8409 31.0634C39.8769 33.2992 38.555 35.2478 36.8752 36.9091C35.1954 38.5704 33.2375 39.8841 31.0017 40.85C28.7658 41.8159 26.3781 42.2989 23.8387 42.2989Z" />
