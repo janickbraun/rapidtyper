@@ -11,7 +11,7 @@ export default function Terms() {
                 <h1 id="en">Terms of Use</h1>
                 <p>Last update: Jun 12 2023</p>
                 <h2 id="m46">Agreement to our Terms</h2>
-                <p>We are RapidTyper by Grovider Ltda. ("Company," "we," "us," "our"), a company registered in Costa Rica at Naranjal, 1km Al Sur De La Iglesia Catolica, Nosara, Guanacaste 50207.</p>
+                <p>We are RapidTyper by Grovider Agency. ("Company," "we," "us," "our").</p>
                 <p>
                     We operate the website https://rapidtyper.com (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms")
                     (collectively, the "Services").
@@ -21,9 +21,9 @@ export default function Terms() {
                     efficient communication and productivity go hand in hand. Our goal is to create an engaging and user-friendly platform that not only improves typing abilities but also makes the
                     learning process enjoyable and rewarding.
                 </p>
-                <p>You can contact us by email at legal@grovider.co or by mail to Naranjal, 1km Al Sur De La Iglesia Catolica, Nosara, Guanacaste 50207, Costa Rica.</p>
+                <p>You can contact us by email at rechtliches@grovider.de.</p>
                 <p>
-                    These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and Grovider Ltda, concerning your access to and
+                    These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and Grovider Agency, concerning your access to and
                     use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE
                     LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
                 </p>
@@ -169,12 +169,10 @@ export default function Terms() {
                     </p>
                     <h2 id="m46">Privacy Policy</h2>
                     <p>
-                        We care about data privacy and security. Please review our Privacy Policy: <a href="https://grovider.co/privacy-policy">https://grovider.co/privacy-policy</a>. By using the
-                        Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in Germany, Costa Rica, United
-                        States and United Kingdom. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure
-                        that differ from applicable laws in Germany, Costa Rica, United States and United Kingdom, then through your continued use of the Services, you are transferring your data to
-                        Germany, Costa Rica, United States and United Kingdom, and you expressly consent to have your data transferred to and processed in Germany, Costa Rica, United States and United
-                        Kingdom. Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the U.S. Children’s
+                        We care about data privacy and security. Please review our Privacy Policy: <a href="/privacy">https://rapidtyper.com/privacy</a>. By using the
+                        Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in Germany. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure
+                        that differ from applicable laws in Germany, United States and United Kingdom, then through your continued use of the Services, you are transferring your data to
+                        Germany, and you expressly consent to have your data transferred to and processed in Germany. Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the U.S. Children’s
                         Online Privacy Protection Act, if we receive actual knowledge that anyone under the age of 13 has provided personal information to us without the requisite and verifiable
                         parental consent, we will delete that information from the Services as quickly as is reasonably practical.
                     </p>
@@ -205,7 +203,7 @@ export default function Terms() {
                     </p>
                     <h2 id="m46">Governing Law</h2>
                     <p>
-                        These Legal Terms shall be governed by and defined following the laws of Costa Rica. Grovider Ltda and yourself irrevocably consent that the courts of Costa Rica shall have
+                        These Legal Terms shall be governed by and defined following the laws of Germany. Grovider Agency and yourself irrevocably consent that the courts of Germany shall have
                         exclusive jurisdiction to resolve any dispute which may arise in connection with these Legal Terms.
                     </p>
                     <h2 id="m46">Dispute Resolution</h2>
@@ -221,7 +219,7 @@ export default function Terms() {
                         Any dispute arising out of or in connection with these Legal Terms, including any question regarding its existence, validity, or termination, shall be referred to and finally
                         resolved by the International Commercial Arbitration Court under the European Arbitration Chamber (Belgium, Brussels, Avenue Louise, 146) according to the Rules of this ICAC,
                         which, as a result of referring to it, is considered as the part of this clause. The number of arbitrators shall be three (3). The seat, or legal place, or arbitration shall be
-                        San José, Costa Rica. The language of the proceedings shall be Spanish. The governing law of these Legal Terms shall be substantive law of Costa Rica.
+                        Munich, Germany. The language of the proceedings shall be Spanish. The governing law of these Legal Terms shall be substantive law of Germany.
                     </p>
                     <h5>Restrictions</h5>
                     <p>

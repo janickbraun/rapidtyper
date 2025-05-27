@@ -12,7 +12,7 @@ export default function Disclaimer() {
                 <p>Last update: Jun 12 2023</p>
                 <h2 id="m46">Website Disclaimer</h2>
                 <p>
-                    The information provided by Grovider Ltda ("we," "us," or "our") on{" "}
+                    The information provided by Grovider Agency ("we," "us," or "our") on{" "}
                     <a className="imprintLink " href="https://rapidtyper.com">
                         https://rapidtyper.com
                     </a>{" "}
