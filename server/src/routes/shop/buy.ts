@@ -17,26 +17,26 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             _id: temporaryUser.id,
         })
 
-        if (!verifyUser) return res.status(400).send("Not authenticated")
-        if (!verifyUser.verified) return res.status(400).send("Please verify your email adress first")
+        if (!verifyUser) return res.status(401).send("Unathorized")
+        if (!verifyUser.verified) return res.status(400).send("Please verify your email adress first.")
 
         const validSkins = await Skin.find({ price: { $gt: 0 } })
 
-        if (!validSkins.some((e) => e.filename === skin)) return res.status(400).send("Skin is not valid")
+        if (!validSkins.some((e) => e.filename === skin)) return res.status(400).send("Skin is not valid.")
 
         const skins = verifyUser.skins
 
-        if (skins.includes(skin)) return res.status(400).send("You already own this skin")
+        if (skins.includes(skin)) return res.status(400).send("You already own this skin.")
 
         const buyingSkin = await Skin.findOne({ filename: skin })
 
-        if (!buyingSkin) return res.status(400).send("Skin was not found")
+        if (!buyingSkin) return res.status(400).send("Skin was not found.")
 
         const clientId = process.env.CLIENT_ID_PAYPAL
         const clientSecret = process.env.CLIENT_SECRET_PAYPAL
         const paypalStatus = process.env.PAYPAL_STATUS
 
-        if (!clientId || !clientSecret || !paypalStatus) return res.status(400).send("No valid client-id or client-secret")
+        if (!clientId || !clientSecret || !paypalStatus) return res.status(400).send("No valid client-id or client-secret.")
 
         paypal.configure({
             mode: paypalStatus,
@@ -88,7 +88,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
             }
         })
     } catch {
-        return res.status(400).send("Something went wrong")
+        return res.status(500).send("Something went wrong.")
     }
 })
 
