@@ -25,7 +25,7 @@ export default function About() {
                         <small>A quote from the founders:</small>
                         <p className="__quotetext_">
                             <span className="__wkk">
-                                This image is loaded lazy&nbsp;<span className="emoji">🍻</span>
+                                This image loads lazy.&nbsp;<span className="emoji">🍻</span>
                             </span>
                         </p>
                     </div>
@@ -81,48 +81,15 @@ export default function About() {
                     <div className="__dcflexcontent">
                         <p className="about__text">
                             If you have any questions, suggestions, or feedback, we'd love to hear from you! Contact us at{" "}
-                            <a className="c" href="mailto:rapidtyper@grovider.co">
-                                rapidtyper@grovider.co
+                            <a className="c" href="mailto:rapidtyper@grovider.de">
+                                rapidtyper@grovider.de
                             </a>
                             . Thank you for choosing RapidTyper as your partner in improving your typing skills!
                         </p>
                     </div>
                 </div>
-                <div className="ucv">
-                    <h2>
-                        🗿🗣️🗣️🔥❗‼️⁉️🤣💀😭
-                        <img src="/img/skullrotate.gif" height={42} style={{ position: "absolute" }} alt="" />
-                    </h2>
-                    <div className="__dcflexcontent">
-                        <div className="__ffcmemecontainer">
-                            <div className="__quote ">
-                                <figure className="__fndimg">
-                                    <img src="/img/rt_development.gif" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
-                                    <span className="img_subtxt" hidden></span>
-                                </figure>
-                                <div className="__quotetext_continer _qs3">
-                                    <small>Some other quote from a random individual:</small>
-                                    <p className="__quotetext_">
-                                        <span className="__wkk rdefault">← Us after the application successfully built</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="__quote ">
-                                <figure className="__fndimg">
-                                    <img src="/img/gtaxesc.gif" alt="Janick & Luis" className="_frg_founders" loading="lazy" />
-                                    <span className="img_subtxt" hidden></span>
-                                </figure>
-                                <div className="__quotetext_continer _qs3">
-                                    <small>Janick just made that sh*t up:</small>
-                                    <p className="__quotetext_">
-                                        <span className="__wkk rdefault">← Us running from German Finanzamt </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <br />
         </main>
     )
 }

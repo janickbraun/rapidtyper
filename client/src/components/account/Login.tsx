@@ -49,7 +49,7 @@ export default function SignUp() {
     const handleLogin = () => {
         const wait = localStorage.getItem("wait")
         if (!wait || new Date().getTime() - new Date(wait).getTime() > 10 * 1000) return mutation.mutate()
-        setMsg("You tried to many times. Please wait 10 seconds")
+        setMsg("Too many attempts. Please wait 10 seconds.")
     }
 
     return (
@@ -83,7 +83,7 @@ export default function SignUp() {
                     </div>
                     {mutation.isError && <div className="cserror">An error occurred: {mutation.error.response.data}</div>}
                     {msg !== "" && <div className="cserror">{msg}</div>}
-                    {mutation.isSuccess && <div className="cssuccess">Successfully logged in</div>}
+                    {mutation.isSuccess && <div className="cssuccess">Successfully logged in.</div>}
                 </form>
                 <div className="hint__container">
                     <p className="fgp">

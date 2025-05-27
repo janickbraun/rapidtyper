@@ -39,15 +39,19 @@ export default function TextRequest() {
 
     return (
         <main>
-            <h1 style={{ textAlign: "center", marginTop: "5rem" }}>Text Request</h1>
+            <h1 style={{ textAlign: "center", marginTop: "1em" }}>Text Request</h1>
             <p style={{ textAlign: "center" }}>
-                If you want to add some texts for typing, please submit the following. Please keep the text short an typable. Also send proof where this text is coming from.
+                If you would like to add text to type, please submit the following.<br />Please keep the text short and readable. Also, please send proof of where the text is coming from.
             </p>
+            <div className="cos_center">
+                <input type="text" className="rt__default_input mwdt" placeholder="Author" onChange={(e) => setAuthor(e.target.value)} value={author} />
+            </div>
+            <div className="cos_center">
+                <input type="text" className="rt__default_input mwdt" placeholder="URL for proof" onChange={(e) => setProofUrl(e.target.value)} value={proofUrl} />
+            </div>
             <div className="cos_center">
                 <textarea className="rt__default_input textarea" onChange={(e) => setText(e.target.value)} value={text} placeholder="Text" />
             </div>
-            <input type="text" placeholder="Author" onChange={(e) => setAuthor(e.target.value)} value={author} />
-            <input type="text" placeholder="URL for proof" onChange={(e) => setProofUrl(e.target.value)} value={proofUrl} />
             <br />
             {loggedin ? (
                 <div style={{ textAlign: "center" }}>
@@ -62,7 +66,7 @@ export default function TextRequest() {
                 <div style={{ textAlign: "center" }}>
                     In order submit a text request you need to{" "}
                     <Link className="_userlink" to="/account/login">
-                        login
+                        log in
                     </Link>
                     .
                 </div>

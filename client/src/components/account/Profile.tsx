@@ -28,11 +28,6 @@ export default function Profile() {
                         <span>Back</span>
                     </button>
                 </Link>
-                {username !== myusername && loggedin && (
-                    <Link to={"/user/" + myusername} reloadDocument={true} tabIndex={-1} style={{ marginRight: "1rem" }}>
-                        <button className="wws btn comwidth">Back to {myusername}</button>
-                    </Link>
-                )}
                 <input
                     className="rt__default_input"
                     type="text"

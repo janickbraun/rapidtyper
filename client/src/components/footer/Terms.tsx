@@ -47,36 +47,6 @@ export default function Terms() {
                     (FISMA), etc.), so if your interactions would be subjected to such laws, you may not use the Services. You may not use the Services in a way that would violate the
                     Gramm-Leach-Bliley Act (GLBA).
                 </p>
-                <h2 id="m46">Intellectual Property Rights</h2>
-                <h5>Our intellectual property</h5>
-                <p>
-                    We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video,
-                    text, photographs, and graphics in the Services (collectively, the "Content"), as well as the trademarks, service marks, and logos contained therein (the "Marks").
-                </p>
-                <p>
-                    Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in the United States
-                    and around the world.
-                </p>
-                <p>The Content and Marks are provided in or through the Services "AS IS" for your personal, non-commercial use only.</p>
-                <h5>Your use of our Services</h5>
-                <p>Subject to your compliance with these Legal Terms, including the "PROHIBITED ACTIVITIES" section below, we grant you a non-exclusive, non-transferable, revocable license to:</p>
-                <ul>
-                    <li>access the Services; and</li>
-                    <li>download or print a copy of any portion of the Content to which you have properly gained access.</li>
-                </ul>
-                <p>solely for your personal, non-commercial use.</p>
-                <p>
-                    Except as set out in this section or elsewhere in our Legal Terms, no part of the Services and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded,
-                    posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior
-                    written permission.
-                </p>
-                <p>
-                    If you wish to make any use of the Services, Content, or Marks other than as set out in this section or elsewhere in our Legal Terms, please address your request to:
-                    legal@grovider.co. If we ever grant you the permission to post, reproduce, or publicly display any part of our Services or Content, you must identify us as the owners or licensors
-                    of the Services, Content, or Marks and ensure that any copyright or proprietary notice appears or is visible on posting, reproducing, or displaying our Content.
-                </p>
-                <p>We reserve all rights not expressly granted to you in and to the Services, Content, and Marks.</p>
-                <p>Any breach of these Intellectual Property Rights will constitute a material breach of our Legal Terms and your right to use our Services will terminate immediately.</p>
                 <h2 id="m46">User Representations</h2>
                 <p>
                     By using the Services, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy
@@ -97,10 +67,6 @@ export default function Terms() {
                 <h2 id="m46">Purchases and Payment</h2>
                 <p>We accept the following forms of payment:</p>
                 <ul>
-                    <li>Visa</li>
-                    <li>Mastercard</li>
-                    <li>American Express</li>
-                    <li>Discover</li>
                     <li>PayPal</li>
                 </ul>
                 <p>
@@ -116,13 +82,6 @@ export default function Terms() {
                     We reserve the right to refuse any order placed through the Services. We may, in our sole discretion, limit or cancel quantities purchased per person, per household, or per order.
                     These restrictions may include orders placed by or under the same customer account, the same payment method, and/or orders that use the same billing or shipping address. We reserve
                     the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers, or distributors.
-                </p>
-                <h2 id="m46">Cancellation</h2>
-                <p>
-                    You can cancel your subscription at any time by contacting us using the contact information provided below. Your cancellation will take effect at the end of the current paid term.
-                </p>
-                <p>
-                    If you are unsatisfied with our Services, please email us at <a href="mailto:legal@grovider.co">legal@grovider.co</a>.
                 </p>
                 <h2 id="m46">Prohibited Activities</h2>
                 <p>
@@ -337,27 +296,6 @@ export default function Terms() {
                         agree that these Legal Terms will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form
                         of these Legal Terms and the lack of signing by the parties hereto to execute these Legal Terms.
                     </p>
-                    <h2 id="m46">Contact Us</h2>
-                    <p>In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:</p>
-                    <ul>
-                        <li>
-                            <strong>Grovider Ltda.</strong>
-                        </li>
-                        <li>
-                            <strong>Naranjal, 1km Al Sur De La Iglesia Catolica</strong>
-                        </li>
-                        <li>
-                            <strong>Nosara, Guanacaste 50207</strong>
-                        </li>
-                        <li>
-                            <strong>Costa Rica</strong>
-                        </li>
-                        <li>
-                            <strong>
-                                <a href="mailto:legal@grovider.co">legal@grovider.co</a>
-                            </strong>
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </>

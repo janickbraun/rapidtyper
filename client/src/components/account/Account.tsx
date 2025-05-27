@@ -62,11 +62,6 @@ export default function Account() {
                                     <button className="textonlybtn" onClick={() => setChangeNameOpen(!changeNameOpen)}>
                                         Change
                                     </button>
-                                    <button className="textonlybtn" style={{ marginLeft: 0 }}>
-                                        <Link tabIndex={-1} to={"/user/" + username}>
-                                            View your profile
-                                        </Link>
-                                    </button>
                                 </p>
                                 {changeNameOpen ? <Overlay /> : ""}
                                 {changeNameOpen && (

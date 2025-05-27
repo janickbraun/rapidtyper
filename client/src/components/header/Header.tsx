@@ -92,7 +92,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                 </Link>
                             </li>
                             <li className="nav-link-item">
-                                <button onClick={() => focus(open)} style={{ padding: "9px 14px" }}>
+                                <button onClick={() => focus(open)} className="noBorderBtn" >
                                     <span className="link_call">Play</span>
                                     <span className="navicon">
                                         <svg className="d-svg " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -139,7 +139,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                                                             <>Compete against others</>
                                                         ) : (
                                                             <>
-                                                                Please <u>login</u> to play
+                                                                Please <u>log in</u> to play
                                                             </>
                                                         )}
                                                     </p>

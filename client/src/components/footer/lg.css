@@ -73,7 +73,6 @@ a.imprintLink{
 }
 .rt__default_input{
     font-size: 1rem;
-    line-height: 1.5rem;
     padding: 4px 10px;
     border-radius: 3px;
     border: 3px solid transparent;
@@ -170,7 +169,7 @@ a.imprintLink{
     display: inline-block;
     width: max-content;
     height: fit-content;
-    padding: 0px 8px;
+    padding: 2px 6px;
     border-radius: 3px;
     position: absolute;
     font-size: 12px;
@@ -178,12 +177,33 @@ a.imprintLink{
     background-color: #494949;
     pointer-events: none;
     transition: .3s ease, inset 0s;
-    top: -2.4rem;
+    top: -2.6rem;
     opacity: 1;
-    right: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.extended_tooltip._LOWER{
+    top: -1.8rem;
 }
 .extended_tooltip.down{
     bottom: -2.1rem !important;
+    top: unset;
+    z-index: 2000;
+}
+.ttp_lower{
+    font-size: 10px;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    opacity: .8;
+}
+.ttp_upper{
+    font-weight: 500;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
 }
 .shareprofilebtn{
     background-color: #494949;
@@ -212,10 +232,10 @@ a.imprintLink{
     pointer-events: none;
     transition: .3s ease, inset 0s;
     top: -2rem;
-    transform: translateX(50%);
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
     content: 'Share this profile';
-    left: -100px;
 }
 .shareprofilebtn:hover::after{
     opacity: 1;
@@ -233,16 +253,15 @@ a.imprintLink{
     pointer-events: none;
     transition: .3s ease, inset 0s;
     top: -1.8rem;
-    transform: translateX(50%);
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
 }
 .cpp_fg::after{
     content: 'Change Skin';
-    left: -79px;
 }
 .cpp_cl::after{
     content: 'Close';
-    left: -37px;
 }
 .cs_profilebtn:hover::after{
     opacity: 1;
@@ -414,27 +433,25 @@ a.imprintLink{
     position: fixed;
     bottom: 3.5rem;
     right: 1.8rem;
-    color: #71c562;
+    color: #289640;
     background-color: #71c5622a;
-    /* border: 2px solid #71c562; */
-    /* color: #fff;
-    background-color: #1c1d206a; */
+    border: 2px solid #292b2f6a;
+    background-color: #1c1d206a;
     backdrop-filter: blur(6px);
     width: 20rem;
     display: inline-flex;
     justify-content: flex-start;
-    padding: .8rem 1rem;
-    border-radius: 12px;
-    font-size: 18px;
+    align-items: center;
+    gap: .5rem;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: 500;
     z-index: 1500;
 }
 .sndficon{
-    position: absolute;
-    right: 1.2rem;
-    height: 24px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;
+    height: 14px;
     fill: currentColor;
 }
 .rt_navigation{
@@ -566,7 +583,7 @@ label{
     justify-content: center;
     align-items: center;
     column-gap: 1.4rem;
-    margin-top: 3.5rem;
+    margin-top: 2.5em;
 }
 .share__modal{
     position: fixed;
@@ -1130,8 +1147,8 @@ figure.__fndimg{
 }
 .muterswitch::after{
     content: attr(data-mutetool);
-    left: -.5rem;
-    transform: translateX(-0%);
+    left: 50%;
+    transform: translateX(-50%);
     bottom: -1.9rem !important;
     top: auto;
 }
@@ -1182,16 +1199,11 @@ figure.__fndimg{
 .muterswitch{
     position: static;
 }
-.newleft::after{
-    left: -70%;
-}
 .newtext::after{
     content: "New text";
-    left: -45%;
 }
 .restart::after{
     content: "Restart";
-    left: -30%;
 }
 .marginhelper{
     margin: 5rem 0;

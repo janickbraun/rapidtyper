@@ -59,7 +59,7 @@ export default function Feedback() {
                 <div style={{ textAlign: "center" }}>
                     In order to leave feedback please{" "}
                     <Link className="_userlink" to="/account/login">
-                        login
+                        log in
                     </Link>
                     .
                 </div>

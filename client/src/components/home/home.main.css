@@ -118,9 +118,13 @@ tr{
     font-weight: 500;
     padding: 0 4px;
     border-radius: 4px;
+    background-color: transparent;
 }
 ._userlink:hover{
     background-color: #292b2f8d;
+}
+._userlink:active{
+    background-color: #292b2fd2;
 }
 .profile_split,._profileinfinner{
     display: flex;

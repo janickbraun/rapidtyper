@@ -7,6 +7,8 @@ import { unlockSkin } from "../../helpers/skinHelper"
 export default function Footer() {
     const [isInGame] = useIsInGame()
 
+    const year = new Date().getFullYear()
+
     const handleSkin = (skin: string) => {
         unlockSkin(skin)
     }
@@ -17,7 +19,7 @@ export default function Footer() {
                 <ul className="linksfooter">
                     <li className="footeritem">
                         <Link reloadDocument={isInGame} to="/feedback">
-                            Leave Feedback
+                            Feedback
                         </Link>
                     </li>
                     <span>•</span>
@@ -34,7 +36,7 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <Link to="//grovider.co/privacy-policy" className="ftext" reloadDocument={isInGame}>
+                        <Link to="/privacy" reloadDocument={isInGame}>
                             Privacy Policy
                         </Link>
                     </li>
@@ -46,14 +48,14 @@ export default function Footer() {
                     </li>
                     <span>•</span>
                     <li className="footeritem">
-                        <Link to="/imprint" reloadDocument={isInGame}>
+                        <a className="ftext" target="_blank" href="https://grovider.de/impressum">
                             Imprint
-                        </Link>
+                        </a>
                     </li>
                 </ul>
                 <div className="copyright">
                     <p className="copyrighttxt">
-                        &copy;2023 RapidTyper - by{" "}
+                        &copy;2023 - {year} RapidTyper - by{" "}
                         <a style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noreferrer" href="https://www.instagram.com/baum062/" onClick={() => handleSkin("capybara")}>
                             Luis
                         </a>{" "}

@@ -29,11 +29,6 @@ export default function Disclaimer() {
                     WEBSITE OR FEATURE LINKED IN ANY BANNER OR OTHER ADVERTISING. WE WILL NOT BE A PARTY TO OR IN ANY WAY BE RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN YOU AND THIRD-PARTY
                     PROVIDERS OF PRODUCTS OR SERVICES.
                 </p>
-                <h2 id="m46">Affiliates Disclaimer</h2>
-                <p>
-                    The Site may contain links to affiliate websites, and we receive an affiliate commission for any purchases made by you on the affiliate website using such links. Our affiliates
-                    include the following: Digistore24
-                </p>
             </div>
         </>
     )

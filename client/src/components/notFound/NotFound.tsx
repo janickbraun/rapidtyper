@@ -5,8 +5,8 @@ export default function NotFound() {
     document.title = '404 Page Not Found | RapidTyper'
   }, [])
   return (
-    <main>
-      <h1>Not Found</h1>
+    <main style={{textAlign: "center", paddingTop: "1em"}}>
+      <h2>404 Not Found</h2>
     </main>
   )
 }

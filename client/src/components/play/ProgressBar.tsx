@@ -120,7 +120,7 @@ const ProgressBar = (props: any) => {
                                         {name}
                                         <img
                                             className="user_origincounty uoc_wbd flxd34"
-                                            src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"}
+                                            src={"https://raw.githubusercontent.com/catamphetamine/country-flag-icons/4b622299857a30dddc538c48340b6f611f4f5b1e/flags/1x1/" + country.toUpperCase() + ".svg"}
                                             loading="lazy"
                                             draggable="false"
                                             alt={country}

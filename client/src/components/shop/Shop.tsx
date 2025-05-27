@@ -259,7 +259,7 @@ export default function Shop() {
                                 <p>
                                     To purchase this skin you need to{" "}
                                     <Link to="/account/login" className="_userlink">
-                                        login
+                                        log in
                                     </Link>
                                     .
                                 </p>

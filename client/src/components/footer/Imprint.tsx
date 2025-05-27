@@ -2,8 +2,10 @@ import React, { useEffect } from "react"
 import "./lg.css"
 
 export default function Imprint() {
+    
     useEffect(() => {
         document.title = "Imprint | RapidTyper"
+        window.location.href = 'https://grovider.de/impressum';
     }, [])
 
     return (

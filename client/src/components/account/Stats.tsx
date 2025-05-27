@@ -83,6 +83,15 @@ export default function Stats(props: any) {
         await timeout(3000)
         setShareResponse("")
     }
+    
+    useEffect(() => {
+        if(loggedin && username === props.username && !verified){
+            setShareResponse(
+                `Your email address has not yet been verified.
+                <button className="inlinebutton" onClick={() => mutationAnother.mutate()}>Resend email</button>`
+            )
+        }
+    })
 
     const handleShare = (msg: string) => {
         if (msg === "Successfully copied to clipboard") {
@@ -105,10 +114,10 @@ export default function Stats(props: any) {
         <div>
             {shareResponse !== "" && (
                 <div className="infopopup">
-                    {shareResponse}
                     <svg xmlns="http://www.w3.org/2000/svg" className="sndficon" viewBox="0 0 512 512">
                         <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM296 336h-16V248C280 234.8 269.3 224 256 224H224C210.8 224 200 234.8 200 248S210.8 272 224 272h8v64h-16C202.8 336 192 346.8 192 360S202.8 384 216 384h80c13.25 0 24-10.75 24-24S309.3 336 296 336zM256 192c17.67 0 32-14.33 32-32c0-17.67-14.33-32-32-32S224 142.3 224 160C224 177.7 238.3 192 256 192z" />
                     </svg>
+                    {shareResponse}
                 </div>
             )}
             {mutation.isError && <div>Profile was not found</div>}
@@ -126,10 +135,12 @@ export default function Stats(props: any) {
                                 </button>
                             </div>
                             <div className="skin_div">
-                                {skins.map((val) => {
+                                {skins.map((val, id) => {
+                                    id++
                                     return (
                                         <div
                                             className="cpos"
+                                            data-id={id}
                                             key={val.filename}
                                             onClick={() => handleSkinChange(val.filename)}
                                             onMouseEnter={() => setHover(val.filename)}
@@ -137,10 +148,19 @@ export default function Stats(props: any) {
                                         >
                                             <img src={"/img/skins/" + val.filename + ".png"} alt={val.name} tabIndex={0} draggable="false" className="user_default_skinimg skin_changeIMG" />
                                             {hover === val.filename && (
+                                                <>
+                                                {id >= 1 && id <= 4 ? (
                                                 <div className="extended_tooltip down">
-                                                    <div>{val.name}</div>
-                                                    <div>{val.description}</div>
+                                                    <div className="ttp_upper">{val.name}</div>
+                                                    <div className="ttp_lower">{val.description}</div>
                                                 </div>
+                                                ) : (
+                                                    <div className="extended_tooltip">
+                                                        <div className="ttp_upper">{val.name}</div>
+                                                        <div className="ttp_lower">{val.description}</div>
+                                                    </div>
+                                                )}
+                                                </>
                                             )}
                                         </div>
                                     )
@@ -164,9 +184,9 @@ export default function Stats(props: any) {
                                                 className="user_default_skinimg skin_changeIMG"
                                             />
                                             {hover === val.filename && (
-                                                <div className="extended_tooltip">
-                                                    <div>{val.name}</div>
-                                                    <div>{val.description}</div>
+                                                <div className="extended_tooltip _LOWER">
+                                                    <div className="ttp_upper">{val.name}</div>
+                                                    <div className="ttp_lower">{val.description}</div>
                                                 </div>
                                             )}
                                         </div>
@@ -211,21 +231,10 @@ export default function Stats(props: any) {
                         <div className="_usc">
                             <h1>
                                 {props.username} &nbsp;
-                                <img className="user_origincounty uoc_wbd" src={"https://flagicons.lipis.dev/flags/1x1/" + country + ".svg"} loading="lazy" draggable="false" alt="" />
+                                <img className="user_origincounty uoc_wbd" src={"https://raw.githubusercontent.com/catamphetamine/country-flag-icons/4b622299857a30dddc538c48340b6f611f4f5b1e/flags/1x1/" + country.toUpperCase() + ".svg"} loading="lazy" draggable="false" alt="" />
                             </h1>
                             <div>Racing since: {date}</div>
                         </div>
-                        {loggedin && username === props.username && !verified && (
-                            <div style={{ textAlign: "right" }}>
-                                <p>
-                                    <span>Your email address has not been verified. Please check your email.</span>
-                                    <span>&nbsp;</span>{" "}
-                                    <button className="inlinebutton" onClick={() => mutationAnother.mutate()}>
-                                        Resend email
-                                    </button>
-                                </p>
-                            </div>
-                        )}
                         <button className="shareprofilebtn" onClick={() => setShareOpen(true)}>
                             <svg className="btbsvg" style={{ height: 20 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"></path>

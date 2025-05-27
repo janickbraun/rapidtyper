@@ -1,4 +1,3 @@
-/* copyright (c) 2023 RapidTyper by Janick & Luis */
 .rt_navigation{
     display: flex;
     justify-content: space-between;
@@ -16,8 +15,7 @@
     z-index: 1999!important;
 }
 .src_logo{
-    /* outline: 2px solid red; */
-    height: 56px;
+    height: 50px;
 }
 .logoContainer,.navigation-logo{
     display: inline-flex;
@@ -49,7 +47,6 @@
     transition: .19s ease;
     background-color: transparent;
     justify-content: flex-start;
-    column-gap: 1rem;
     text-align: left;
 }
 .nav-link-item .noscale::before,.noscale::before{
@@ -158,4 +155,8 @@ ul{
     height: 100vh;
     width: 100%;
     z-index: 1990;
-  }
+}
+.noBorderBtn{
+    outline: none;
+    border: none !important;
+}
